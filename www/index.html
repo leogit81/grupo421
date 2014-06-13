@@ -1,43 +1,91 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+<head>
+    <title>SISA Móvil</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!--App Framework includes start-->
+    <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+	<script type="text/javascript" charset="utf-8" src="libraries/appframework-2.1.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui-2.1.0.js"></script>
+    <!--App Framework includes end-->
+	
+	<!--Backbone.js-->
+	<script type="text/javascript" charset="utf-8" src="libraries/jquery-2.1.1.js"></script>
+	<script type="text/javascript" charset="utf-8" src="libraries/underscore-1.6.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="libraries/backbone-1.1.2.js"></script>
+</head>
+<body>
+<div class="app">
+    <div id="afui">
+        <div id="header">
+            <a id='menubadge' onclick='af.ui.toggleSideMenu()' class='menuButton'></a>
+        </div>
+        <div id="content">
+            <!--Paneles usados para navegar por la aplicación-->
+            <div id="home" class="panel" data-title="Inicio" selected="true">
+                <h1>
+                    Bienvenidos al SISA Móvil!
+                </h1>
+            </div>
+            <div id="consultas" class="panel" data-title="Consultas" data-nav="consultas_nav">
+                <div id="consultaMinisterio" class="panel" data-title="Consulta nominal de Ministerio" data-nav="consultas_nav">
+                    <div class="formGroupHead">Filtros</div>
+                    <form>
+                        <input id="numeroMinisterio" type="text" placeholder="Número de Ministerio"/>
+                        <a id="submit" class="button" onclick="consultaMinisterio($('#numeroMinisterio')[0])">Enviar</a>
+                    </form>
+                </div>
+				<div id="consultaTelefono" class="panel" data-title="Consulta telefono" data-nav="consultas_nav">
+                    <h1>test</h1>
+                </div>
             </div>
         </div>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+		<!--BottomBar: Barra que se muestra abajo de la página-->
+        <div id="navbar">
+            <a class="icon home" href="#home" data-transition="slide">Inicio</a>
+            <a class="icon info" href="#consultas" data-transition="slide">Consultas</a>
+        </div>
+        <nav id="home_nav"></nav>
+        <nav id="consultas_nav">
+            <ul class="list">
+                <li>
+                    <a class="icon" href="#consultaMinisterio">Ministerio</a>
+                </li>
+				<li>
+                    <a class="icon" href="#consultaTelefono" onclick="onclickTelefono();">Telefono</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!--<script type="text/javascript" src="./libraries/cordova.js"></script>-->
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/Models/Telefono.js"></script>
+<script type="text/javascript" src="js/Views/TelefonoView.js"></script>
+<script type="text/javascript">
+	/*Setea jQuery para que pueda operar con AppFramework sin conflictos*/
+	jQuery.noConflict();
+	
+    /*Inicialización de App framework*/
+    $.ui.splitview=true;
+    $.ui.toggleLeftSideMenu(true);
+    $.ui.isAjaxApp=true;
+    /*Fin de Inicialización de App framework*/
+
+    app.initialize();
+	
+	var onclickTelefono = function(){
+		var telefono = new Telefono({"numero": "4657-1243", "tipo": "trabajo"});
+		var telefonoView = new TelefonoView({"model": telefono});
+		$("#consultaTelefono").html(telefonoView.render().$el.html());
+	};
+</script>
+</body>
 </html>
