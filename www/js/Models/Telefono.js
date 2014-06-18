@@ -1,9 +1,16 @@
-/**
- * Created by Leo on 6/12/2014.
- */
-var Telefono = Backbone.Model.extend({
+define(function(require){
+	"use strict";
+	
+	var Backbone = require('backbone');
+		
+	var telefono = Backbone.Model.extend({
 		defaults : {
 			"numero" : null,
 			"tipo" : null
 		}
 	});
+	
+	return{
+		Telefono: telefono
+	};
+});

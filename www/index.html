@@ -11,14 +11,15 @@
     <!--App Framework includes start-->
     <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
     <link rel="stylesheet" type="text/css" href="css/icons.css" />
-	<script type="text/javascript" charset="utf-8" src="libraries/appframework-2.1.0.js"></script>
-	<script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui-2.1.0.js"></script>
+	<script data-main="	main" src="libraries/require.js"></script>
+	<!-- <script type="text/javascript" charset="utf-8" src="libraries/appframework-2.1.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui-2.1.0.js"></script> -->
     <!--App Framework includes end-->
 	
 	<!--Backbone.js-->
-	<script type="text/javascript" charset="utf-8" src="libraries/jquery-2.1.1.js"></script>
+	<!-- <script type="text/javascript" charset="utf-8" src="libraries/jquery-2.1.1.js"></script>
 	<script type="text/javascript" charset="utf-8" src="libraries/underscore-1.6.0.js"></script>
-	<script type="text/javascript" charset="utf-8" src="libraries/backbone-1.1.2.js"></script>
+	<script type="text/javascript" charset="utf-8" src="libraries/backbone-1.1.2.js"></script> -->
 </head>
 <body>
 <div class="app">
@@ -41,8 +42,8 @@
                         <a id="submit" class="button" onclick="consultaMinisterio($('#numeroMinisterio')[0])">Enviar</a>
                     </form>
                 </div>
+				
 				<div id="consultaTelefono" class="panel" data-title="Consulta telefono" data-nav="consultas_nav">
-                    <h1>test</h1>
                 </div>
             </div>
         </div>
@@ -56,31 +57,18 @@
             <ul class="list">
                 <li>
                     <a class="icon" href="#consultaMinisterio">Ministerio</a>
-                </li>
-				<li>
-                    <a class="icon" href="#consultaTelefono" onclick="onclickTelefono();">Telefono</a>
+					<a class="icon" href="#consultaTelefono" onclick="onclickTelefono();">Telefono</a>
                 </li>
             </ul>
         </nav>
     </div>
 </div>
 <!--<script type="text/javascript" src="./libraries/cordova.js"></script>-->
-<script type="text/javascript" src="js/index.js"></script>
+<!-- <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/Models/Telefono.js"></script>
-<script type="text/javascript" src="js/Views/TelefonoView.js"></script>
+<script type="text/javascript" src="js/Views/TelefonoView.js"></script>-->
 <script type="text/javascript">
-	/*Setea jQuery para que pueda operar con AppFramework sin conflictos*/
-	jQuery.noConflict();
-	
-    /*Inicialización de App framework*/
-    $.ui.splitview=true;
-    $.ui.toggleLeftSideMenu(true);
-    $.ui.isAjaxApp=true;
-    /*Fin de Inicialización de App framework*/
-
-    app.initialize();
-	
 	var onclickTelefono = function(){
 		var telefono = new Telefono({"numero": "4657-1243", "tipo": "trabajo"});
 		var telefonoView = new TelefonoView({"model": telefono});
