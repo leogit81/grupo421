@@ -22,7 +22,7 @@ requirejs.config({
 	shim : {
 		'appui': {
 			deps: ['appframework'],
-			exports: 'af'
+			exports: 'af.ui'
 		}
 	}
 });

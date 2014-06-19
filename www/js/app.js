@@ -7,6 +7,7 @@ define(function (require) {
 		$.ui.splitview = true;
 		$.ui.toggleLeftSideMenu(true);
 		$.ui.isAjaxApp = true;
+		$.ui.launch();
 	}
 
 	return {
