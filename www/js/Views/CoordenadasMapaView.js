@@ -1,10 +1,7 @@
-/**
- * Created by Leo on 6/12/2014.
- */
-var CoordenadasMapa = Backbone.Model.extend({
-		defaults : {
-			"latitud" : null,
-			"longitud" : null,
-			"nivelZoom" : null
-		}
-	});
+define(['require', 'Base/BaseView', 'Models/CoordenadasMapa'], function(require, BaseView, CoordenadasMapa){
+    CoordenadasMapaView = BaseView.extend({
+        model: CoordenadasMapa,
+    });
+    
+    return CoordenadasMapaView;
+});

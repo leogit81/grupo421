@@ -51,18 +51,11 @@
             <ul class="list">
                 <li>
                     <a class="icon" href="#consultaMinisterio">Ministerio</a>
-					<a class="icon" href="#consultaTelefono" onclick="onclickTelefono();">Telefono</a>
+					<a class="icon" href="#consultaTelefono">Telefono</a>
                 </li>
             </ul>
         </nav>
     </div>
 </div>
-<script type="text/javascript">
-	var onclickTelefono = function(){
-		var telefono = new Telefono({"numero": "4657-1243", "tipo": "trabajo"});
-		var telefonoView = new TelefonoView({"model": telefono});
-		$("#consultaTelefono").html(telefonoView.render().$el.html());
-	};
-</script>
 </body>
 </html>

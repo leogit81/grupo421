@@ -8,6 +8,7 @@ requirejs.config({
 		appframework: '../libraries/appframework',
 		appui: '../libraries/ui/appframework.ui',
 		'jquery-private': '../libraries/jquery-private',
+		xmltojson: '../libraries/xmltojson',
 	},
 	map: {
       // '*' means all modules will get 'jquery-private'
@@ -23,11 +24,13 @@ requirejs.config({
 		'appui': {
 			deps: ['appframework'],
 			exports: 'af.ui'
-		}
+		},
+		'xmltojson': {
+            deps: [],
+        }
 	}
 });
 
-//define(['appframework', 'underscore', 'backbone', 'jquery', 'appui'], function($,_,Backbone, jQuery, appui){
 define(function(require){
 	
 	var app = require('app');

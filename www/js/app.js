@@ -5,7 +5,7 @@ define(function (require) {
 	
 	function initialize() {
 		$.ui.splitview = true;
-		$.ui.toggleLeftSideMenu(true);
+		$.ui.toggleLeftSideMenu(false);
 		$.ui.isAjaxApp = true;
 		$.ui.launch();
 	}

@@ -1,16 +1,12 @@
-define(function(require){
+define(['Base/BaseModel'], function(BaseModel){
 	"use strict";
 	
-	var Backbone = require('backbone');
-		
-	var telefono = Backbone.Model.extend({
+	var telefono = BaseModel.extend({
 		defaults : {
 			"numero" : null,
 			"tipo" : null
 		}
 	});
 	
-	return{
-		Telefono: telefono
-	};
+	return telefono;
 });
