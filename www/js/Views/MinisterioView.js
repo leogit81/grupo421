@@ -1,13 +1,19 @@
 define(['require', 'Base/MasterView', 'Views/CoordenadasMapaView', 'Views/DomicilioView', 'Views/TelefonoView'], 
 function(require, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView){
     
-    Ministerio = MasterView.extend({
-		
+    MinisterioView = MasterView.extend({
+		initialize: function() {
+            this.listenTo(this.model, 'change', this.render);
+          
+            MinisterioView.addView(CoordenadasMapaView);
+            MinisterioView.addView(DomicilioView);
+            MinisterioView.addView(TelefonoView);
+        },
+        
+        setIdMinisterio: function(e){
+            
+        }
 	});
 	
-	Ministerio.addView(CoordenadasMapaView);
-	Ministerio.addView(DomicilioView);
-	Ministerio.addView(TelefonoView);
-	
-	return Ministerio;
+	return MinisterioView;
 });

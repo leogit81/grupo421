@@ -1,4 +1,4 @@
-define(['backbone', 'XmlToJsonConverter', 'Services/AjaxRestService'], function(Backbone, converter, service){
+define(['backbone', 'xmltojson', 'Services/AjaxRestService'], function(Backbone, converter, service){
     "use strict";
     
     var BaseModel = Backbone.Model.extend({

@@ -1,4 +1,4 @@
-requirejs.config({
+requirejs.config({  
 	enforceDefine: true,
 	baseUrl: './js',
 	paths : {
@@ -8,7 +8,8 @@ requirejs.config({
 		appframework: '../libraries/appframework',
 		appui: '../libraries/ui/appframework.ui',
 		'jquery-private': '../libraries/jquery-private',
-		xmltojson: '../libraries/xmltojson',
+		xmltojson: '../libraries/XmlToJsonConverter',
+		cordova: '../libraries/cordova',
 	},
 	map: {
       // '*' means all modules will get 'jquery-private'
@@ -27,12 +28,19 @@ requirejs.config({
 		},
 		'xmltojson': {
             deps: [],
+        },
+        'cordova': {
+            deps: [],
         }
 	}
 });
 
 define(function(require){
 	
-	var app = require('app');
+	//var app = require('app');
+	
+	//solamente para debug
+	var app = require('app-debug');
+	
 	app.initialize();
 });

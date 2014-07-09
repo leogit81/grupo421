@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/icons.css" />
 	<!--App Framework includes end-->
 	
-	<script data-main="	main" src="libraries/require.js"></script>
+	<script data-main="main" src="libraries/require.js"></script>
 </head>
 <body>
 <div class="app">
@@ -31,14 +31,11 @@
             <div id="consultas" class="panel" data-title="Consultas" data-nav="consultas_nav">
                 <div id="consultaMinisterio" class="panel" data-title="Consulta nominal de Ministerio" data-nav="consultas_nav">
                     <div class="formGroupHead">Filtros</div>
-                    <form>
-                        <input id="numeroMinisterio" type="text" placeholder="Número de Ministerio"/>
-                        <a id="submit" class="button" onclick="consultaMinisterio($('#numeroMinisterio')[0])">Enviar</a>
-                    </form>
-                </div>
-				
-				<div id="consultaTelefono" class="panel" data-title="Consulta telefono" data-nav="consultas_nav">
-                </div>
+                        <form>
+                            <input id="numeroMinisterio" type="text" placeholder="Número de Ministerio"/>
+                            <a id="submitConsultaMinisterio" class="button" onclick="ejecutarConsultaMinisterio();">Enviar</a>
+                        </form>
+                    </div>
             </div>
         </div>
 		<!--BottomBar: Barra que se muestra abajo de la página-->
@@ -50,12 +47,32 @@
         <nav id="consultas_nav">
             <ul class="list">
                 <li>
-                    <a class="icon" href="#consultaMinisterio">Ministerio</a>
-					<a class="icon" href="#consultaTelefono">Telefono</a>
+                    <a class="icon" href="#consultaMinisterio" onclick="showConsultaMinisterio().defer(500);">Ministerio</a>
                 </li>
             </ul>
         </nav>
     </div>
 </div>
 </body>
+<script>
+    var showConsultaMinisterio = function(){
+        //alert("vista ministerio");
+        
+        require(['Views/FiltroConsultaMinisterioView']);
+        var FiltroConsultaMinisterioView = require('Views/FiltroConsultaMinisterioView');
+        var filtroConsultaMinisterioView = new FiltroConsultaMinisterioView();
+        //filtroConsultaMinisterioView.render();
+    };
+    
+    var ejecutarConsultaMinisterio = function(){
+        var numeroMinisterio = $('#numeroMinisterio').val();
+        var url = "https://sisa.msal.gov.ar/sisa/services/rest/ministerio/";
+        jQuery.get(url+numeroMinisterio, function(data){
+                alert(data);
+            })
+            .fail(function(){
+                alert("fallo la consulta al ministerio");}
+            );
+    };
+</script>
 </html>
