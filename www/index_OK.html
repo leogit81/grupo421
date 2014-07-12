@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SISA Móvil</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!--App Framework includes start-->
+    <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+	
+	<!-- [LUCAS]Agregué las siguientes 2 líneas y volvió a funcionar el layout -->
+	<script type="text/javascript" charset="utf-8" src="libraries/appframework.js"></script>
+	<script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui.js"></script>
+	<!--App Framework includes end-->
+	
+	<script data-main="main" src="libraries/require.js"></script>
+</head>
+<body>
+<div class="app">
+    <div id="afui">
+        <div id="header">
+            <a id='menubadge' onclick='af.ui.toggleSideMenu()' class='menuButton'></a>
+        </div>
+        <div id="content">
+            <!--Paneles usados para navegar por la aplicación-->
+            <div id="home" class="panel" data-title="Inicio" selected="true">
+                <h1>
+                    Bienvenidos al SISA Móvil!
+                </h1>
+            </div>
+            <div id="consultas" class="panel" data-title="Consultas" data-nav="consultas_nav">
+                <div id="consultaMinisterio" class="panel" data-title="Consulta nominal de Ministerio" data-nav="consultas_nav">
+                    <div class="formGroupHead">Filtros</div>
+                        <form>
+                            <input id="numeroMinisterio" type="text" placeholder="Número de Ministerio"/>
+                            <a id="submitConsultaMinisterio" class="button" onclick="ejecutarConsultaMinisterio();">Enviar</a>
+                        </form>
+                    </div>
+            </div>
+        </div>
+		<!--BottomBar: Barra que se muestra abajo de la página-->
+        <div id="navbar">
+            <a class="icon home" href="#home" data-transition="slide">Inicio</a>
+            <a class="icon info" href="#consultas" data-transition="slide">Consultas</a>
+        </div>
+        <nav id="home_nav"></nav>
+        <nav id="consultas_nav">
+            <ul class="list">
+                <li>
+                    <a class="icon" href="#consultaMinisterio" onclick="showConsultaMinisterio().defer(500);">Ministerio</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+<script>
+    var showConsultaMinisterio = function(){
+        //alert("vista ministerio");
+        
+        require(['Views/FiltroConsultaMinisterioView']);
+        var FiltroConsultaMinisterioView = require('Views/FiltroConsultaMinisterioView');
+        var filtroConsultaMinisterioView = new FiltroConsultaMinisterioView();
+        //filtroConsultaMinisterioView.render();
+    };
+    
+    var ejecutarConsultaMinisterio = function(){
+        jQuery.ajax({
+			url: "https://sisa.msal.gov.ar/sisa/services/rest/ministerio/1",
+			dataType: 'xml',
+			//jsonp: 'jsoncallback',
+			timeout: 5000,
+			success: function(myXML, status){
+				var updatedData = myXML;
+				alert(jQuery(updatedData).find('ministerio').text());
+				//mlDoc = jQuery.parseXML(data);
+				//$xml = $( xmlDoc );
+				//$title = $xml.find("localidad");
+				//alert($title.text());
+				//data loaded
+				//alert("Exito" + data);
+			},
+			error: function(){
+				//error loading data
+				alert("Error");
+			}
+		});
+    };
+</script>
+</html>
