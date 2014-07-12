@@ -74,15 +74,8 @@
 			dataType: 'xml',
 			//jsonp: 'jsoncallback',
 			timeout: 5000,
-			success: function(myXML, status){
-				var updatedData = myXML;
-				alert(jQuery(updatedData).find('ministerio').text());
-				//mlDoc = jQuery.parseXML(data);
-				//$xml = $( xmlDoc );
-				//$title = $xml.find("localidad");
-				//alert($title.text());
-				//data loaded
-				//alert("Exito" + data);
+			success: function(myXML){				
+				alert(jQuery(myXML).find('ministerio').text());				
 			},
 			error: function(){
 				//error loading data
