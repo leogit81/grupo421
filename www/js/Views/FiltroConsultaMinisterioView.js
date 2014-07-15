@@ -1,23 +1,28 @@
-define(['require', 'appframework', 'Base/MasterView', 'Models/Ministerio'], 
-function(require, $, MasterView, Ministerio){
+define(['require', 'appframework', 'Base/BaseView', 'Models/Ministerio'], 
+function(require, $, BaseView, Ministerio){
     
-    FiltroConsultaMinisterioView = MasterView.extend({
+    FiltroConsultaMinisterioView = BaseView.extend({
         events: {
             "click #submitConsultaMinisterio": "ejecutarConsultaMinisterio",
             "change #numeroMinisterio": "setNumeroMinisterio",
         },
   
 		initialize: function() {
+            var element = $("div.panel#consultaMinisterio");
+            if (element.length > 0){
+                this.setElement(element[0]);
+            }
             
+            this.model = new Ministerio();
         },
         
         setNumeroMinisterio: function(e){
-            Ministerio.set("id", e.value);
+            this.model.set("id", e.target.value);
         },
         
         ejecutarConsultaMinisterio: function(){
-            Ministerio.sync();
-        }
+            this.model.load();
+        },
 	});
 	
 	return FiltroConsultaMinisterioView;

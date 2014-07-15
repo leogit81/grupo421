@@ -17,7 +17,12 @@ define(['require', 'common', 'Services/ServiceConfig'], function(require, common
      * }
      */
     function AjaxService(config){
-        baseUrl = ServerConfig.baseUrl;
+        this.loadConfig(config);
+    }
+    
+    AjaxService.prototype.loadConfig = function(config){
+        baseUrl = ServiceConfig.baseUrl;
+        config = config || {};
         url = config.url;
         enableCors = config.enableCors || ServiceConfig.enableCors || enableCors;
         
@@ -27,12 +32,10 @@ define(['require', 'common', 'Services/ServiceConfig'], function(require, common
             this.errorCallback = config.error || this.errorCallback;
         }
         
-        this.get = get;
-        
         if (enableCors){
-            enableProxy();
+            this.enableProxy();
         }
-    }
+    };
     
     AjaxService.prototype.constructor = AjaxService;
     
@@ -85,7 +88,7 @@ define(['require', 'common', 'Services/ServiceConfig'], function(require, common
     };
     
     AjaxService.prototype.successCallback = function(data){
-        console.log(data.responseXML);
+        console.log(data.target.responseText);
     };
     
     AjaxService.prototype.errorCallback = function(){
@@ -98,19 +101,18 @@ define(['require', 'common', 'Services/ServiceConfig'], function(require, common
      * @param {Object} data, data que será enviada como parámetro del servicio
      */
     AjaxService.prototype.get = function(data, otraUrl){
-        var urlAux = '';
+        var requestedUrl = '';
         
         if (!common.isEmpty(otraUrl)){
-            urlAux = common.combineUrl(otraUrl, data);
+            requestedUrl = common.combineUrl(otraUrl, data);
         }
         else{
-            urlAux = common.combineUrl(baseUrl, url, data);
+            requestedUrl = common.combineUrl(baseUrl, url, data);
         }
         
-        var requestedUrl = common.combineUrl(urlAux, data);
-        var xhr = createCORSRequest(method, requestedUrl);
-        xhr.onload = successCallback;
-        xhr.onerror = errorCallback;
+        var xhr = this.createCORSRequest(method, requestedUrl);
+        xhr.onload = this.successCallback;
+        xhr.onerror = this.errorCallback;
         xhr.send();
     };
     

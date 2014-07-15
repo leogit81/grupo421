@@ -9,6 +9,10 @@ function(require, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView){
             MinisterioView.addView(DomicilioView);
             MinisterioView.addView(TelefonoView);
         },
+        
+        setIdMinisterio: function(e){
+            
+        }
 	});
 	
 	return MinisterioView;

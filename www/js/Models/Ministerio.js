@@ -16,7 +16,18 @@ function(BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
             "telefono2" : new Telefono(),
             "telefono3" : new Telefono(),
             "telefono4" : new Telefono()
-        }
+        },
+        
+        initialize: function(attributes, options){
+            BaseModel.prototype.initialize.call(this, attributes, options);
+            this.service.loadConfig({
+                url: 'ministerio',
+            });
+        },
+        
+        load: function(){
+            this.sync('create');  
+        },
     });
     
     return ministerio;

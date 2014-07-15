@@ -20,6 +20,7 @@ C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\icon.png \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\img \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\index.html \
+C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\index2.html \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\libraries \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\main.js \
@@ -47,6 +48,7 @@ C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\css\tizen.css \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\css\win8.css \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\img\logo.png \
+C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\app-debug.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\app.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Base \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\common.js \
@@ -54,6 +56,7 @@ C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Models \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Services \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Views \
+C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\XmlToJsonConverter.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Base\BaseModel.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Base\BaseView.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Base\MasterView.js \
@@ -66,6 +69,7 @@ C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Services\ServiceConfig.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Views\CoordenadasMapaView.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Views\DomicilioView.js \
+C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Views\FiltroConsultaMinisterioView.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Views\MinisterioView.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\js\Views\TelefonoView.js \
 C:\Users\Leo\PhoneGap\Projects\gov.msal.siisamovil\platforms\android\assets\www\libraries\appframework.js \

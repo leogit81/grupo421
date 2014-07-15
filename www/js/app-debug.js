@@ -1,7 +1,7 @@
-define(function (require) {
+define(['require', 'appui', 'Views/MenuConsultasView'], function (require, appui, MenuConsultasView) {
 	"use strict";
 
-	require('appui');
+	//require('appui');
 	
 	function initialize() {
 	    $.ui.splitview = true;
@@ -10,7 +10,10 @@ define(function (require) {
         $.ui.launch();
 	};
 
+    var menuConsultasView = new MenuConsultasView();
+    
 	return {
-		initialize: initialize
+	   menuConsultasView: menuConsultasView, 
+	   initialize: initialize
 	};
 });

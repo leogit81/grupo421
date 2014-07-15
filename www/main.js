@@ -1,5 +1,5 @@
 requirejs.config({  
-	enforceDefine: true,
+	enforceDefine: false,
 	baseUrl: './js',
 	paths : {
 		underscore: '../libraries/underscore',
@@ -8,7 +8,8 @@ requirejs.config({
 		appframework: '../libraries/appframework',
 		appui: '../libraries/ui/appframework.ui',
 		'jquery-private': '../libraries/jquery-private',
-		xmltojson: '../libraries/XmlToJsonConverter',
+		xmltojson: '../libraries/xmltojson',
+		xmlToJsonConverter: '../libraries/XmlToJsonConverter',
 		cordova: '../libraries/cordova',
 	},
 	map: {
@@ -28,6 +29,7 @@ requirejs.config({
 		},
 		'xmltojson': {
             deps: [],
+            exports: 'xmlToJSON',
         },
         'cordova': {
             deps: [],

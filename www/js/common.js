@@ -29,12 +29,12 @@ define(['require', 'underscore'], function(require, _){
         relativeUrl = this.trim(relativeUrl, ['/']);
         
         if (this.isEmpty(data)){
-            return baseUrlArray + '/' + relativeUrl;
+            return baseUrl + '/' + relativeUrl;
         }
         
         data = this.trim(data.toString(), ['/']);
         
-        return baseUrlArray + '/' + relativeUrl + '/' + data;
+        return baseUrl + '/' + relativeUrl + '/' + data;
     };
     
     /**
@@ -43,7 +43,7 @@ define(['require', 'underscore'], function(require, _){
      * @param {Object} charArray array con los caracteres que se quieren remover
      */
     common.trimLeft = function(aString, charArray){
-        var stringArray = stringToArray(aString);
+        var stringArray = this.stringToArray(aString);
         
         for(var i = 0; i < stringArray.length; i++){
             if(charArray.indexOf(stringArray[i]) < 0){
@@ -51,7 +51,7 @@ define(['require', 'underscore'], function(require, _){
             }
         }
         
-        return _.rest(stringArray, i);
+        return _.rest(stringArray, i).join("");
     };
     
     /**
@@ -60,18 +60,19 @@ define(['require', 'underscore'], function(require, _){
      * @param {Object} charArray array con los caracteres que se quieren remover
      */
     common.trimRight = function(aString, charArray){
-        var stringArray = stringToArray(aString);
-        return this.trimLeft(stringArray.reverse().toString(), charArray);
+        var stringArray = this.stringToArray(aString);
+        var reverseArray = this.stringToArray(this.trimLeft(stringArray.reverse().join(""), charArray));
+        return reverseArray.reverse().join("");
     };
     
     common.trim = function(aString, charArray){
-        return this.trimRight(this.trimLeft(stringArray, charArray), charArray);
+        return this.trimRight(this.trimLeft(aString, charArray), charArray);
     };
     
     common.stringToArray = function(aString){
         var aArray = [];
-        for (var i = 0; i < baseUrl.length; i++){
-            urlArray.push(baseUrl[i]);
+        for (var i = 0; i < aString.length; i++){
+            aArray.push(aString[i]);
         }
         
         return aArray;

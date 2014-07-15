@@ -33,7 +33,7 @@
                     <div class="formGroupHead">Filtros</div>
                         <form>
                             <input id="numeroMinisterio" type="text" placeholder="Número de Ministerio"/>
-                            <a id="submitConsultaMinisterio" class="button" onclick="ejecutarConsultaMinisterio();">Enviar</a>
+                            <a id="submitConsultaMinisterio" class="button">Enviar</a>
                         </form>
                     </div>
             </div>
@@ -47,7 +47,7 @@
         <nav id="consultas_nav">
             <ul class="list">
                 <li>
-                    <a class="icon" href="#consultaMinisterio" onclick="showConsultaMinisterio().defer(500);">Ministerio</a>
+                    <a id="linkConsultaMinisterio" class="icon" href="#consultaMinisterio">Ministerio</a>
                 </li>
             </ul>
         </nav>
@@ -55,13 +55,11 @@
 </div>
 </body>
 <script>
-    var showConsultaMinisterio = function(){
-        //alert("vista ministerio");
-        
+/*    var showConsultaMinisterio = function(){
         require(['Views/FiltroConsultaMinisterioView']);
         var FiltroConsultaMinisterioView = require('Views/FiltroConsultaMinisterioView');
         var filtroConsultaMinisterioView = new FiltroConsultaMinisterioView();
-        //filtroConsultaMinisterioView.render();
+        filtroConsultaMinisterioView.render();
     };
     
     var ejecutarConsultaMinisterio = function(){
@@ -73,6 +71,6 @@
             .fail(function(){
                 alert("fallo la consulta al ministerio");}
             );
-    };
+    };*/
 </script>
 </html>
