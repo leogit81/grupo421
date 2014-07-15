@@ -1,10 +1,13 @@
-define(['require', 'common', 'Services/ServiceConfig'], function(require, common, ServiceConfig){
+define(['require', 'common', 'Services/ServiceConfig', 'jquery'], function(require, common, ServiceConfig, jQuery){
     "use strict";
 
     var baseUrl = null;
     var url = null;
     var method = 'GET';
     var enableCors = null;
+    var serviceProvider = null;
+    var timeout = 30000;
+    var dataType = 'xml';
         
     /**
      * Constructor 
@@ -21,15 +24,21 @@ define(['require', 'common', 'Services/ServiceConfig'], function(require, common
     }
     
     AjaxService.prototype.loadConfig = function(config){
+        //Configuración del servicio que se toma por default del archivo ServiceConfig, puede ser modificado pasando el parámetro config
         baseUrl = ServiceConfig.baseUrl;
         config = config || {};
         url = config.url;
         enableCors = config.enableCors || ServiceConfig.enableCors || enableCors;
+        serviceProvider = config.serviceProvider || ServiceConfig.serviceProvider || serviceProvider;
+        timeout = config.timeout || ServiceConfig.timeout || timeout;
         
+        //Configuración que NO se encuentra en el archivo ServiceConfig, que se configura con el parámetro config
         if (!common.isEmpty(config)){
             this.method = config.method || this.method;
             this.successCallback = config.success || this.successCallback;
             this.errorCallback = config.error || this.errorCallback;
+            this.beforeSendCallback = config.beforeSend || this.beforeSendCallback;
+            this.dataType = config.dataType || this.dataType;
         }
         
         if (enableCors){
@@ -87,11 +96,21 @@ define(['require', 'common', 'Services/ServiceConfig'], function(require, common
         return xhr;
     };
     
+    AjaxService.prototype.beforeSendCallback = function(data){
+        //TODO: MOSTRAR UNA VENTANA MODAL CON UNA MÁSCARA DE CARGANDO
+    };
+    
     AjaxService.prototype.successCallback = function(data){
         console.log(data.target.responseText);
     };
     
-    AjaxService.prototype.errorCallback = function(){
+    AjaxService.prototype.errorCallback = function(response){
+        //TODO: PENDIENTE HACER MANEJO DE ERRORES DE LAS LLAMADAS A LOS WEB SERVICES.
+        if (response.statusText === 'timeout')
+        {
+            console.log('Se ha agotado el tiempo de espera del servidor.');
+            return;
+        }
         console.log('error processing ajax request');
     };
     
@@ -109,11 +128,22 @@ define(['require', 'common', 'Services/ServiceConfig'], function(require, common
         else{
             requestedUrl = common.combineUrl(baseUrl, url, data);
         }
-        
-        var xhr = this.createCORSRequest(method, requestedUrl);
-        xhr.onload = this.successCallback;
-        xhr.onerror = this.errorCallback;
-        xhr.send();
+      
+        if (serviceProvider === 'jquery'){
+            jQuery.ajax({
+                url: requestedUrl,
+                dataType: this.dataType,
+                timeout: this.timeout,
+                beforeSend: this.beforeSendCallback,
+                success: this.successCallback,
+                error:this.errorCallback,
+            });
+        }else if (serviceProvider === 'custom'){
+            var xhr = this.createCORSRequest(method, requestedUrl);
+            xhr.onload = this.successCallback;
+            xhr.onerror = this.errorCallback;
+            xhr.send();
+        }
     };
     
     return AjaxService;

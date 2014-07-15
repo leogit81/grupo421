@@ -12,6 +12,10 @@ function(require, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView){
         
         setIdMinisterio: function(e){
             
+        },
+        render: function(){
+            this.getEl().html(this.template(this.model.toJSON()));
+            return this;
         }
 	});
 	

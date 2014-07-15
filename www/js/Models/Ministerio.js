@@ -22,11 +22,16 @@ function(BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
             BaseModel.prototype.initialize.call(this, attributes, options);
             this.service.loadConfig({
                 url: 'ministerio',
+                success: this.processData,
             });
         },
         
         load: function(){
             this.sync('create');  
+        },
+        processData: function(data){
+            var jsonData = this.converter.convertToJson(data);
+            this.set(jsonData);
         },
     });
     

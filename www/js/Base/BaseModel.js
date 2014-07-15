@@ -2,6 +2,8 @@ define(['backbone', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(
     "use strict";
     
     var BaseModel = Backbone.Model.extend({
+        converter: converter,
+        
         initialize: function(attributes, options){
             this.service = new Service({
                 success: this.processData,
@@ -21,8 +23,12 @@ define(['backbone', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(
         },
         
         processData: function(data){
-            var jsonData = converter.convertToJson(data.target.responseText);
-            console.log(JSON.stringify(jsonData));
+            var jsonData = this.convertDataToJson(data); 
+            this.set(jsonData);
+        },
+        
+        convertDataToJson: function(data){
+            return converter.convertToJson(data.target.responseText);
         }
     });
     

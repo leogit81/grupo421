@@ -1,5 +1,5 @@
-define(['require', 'appframework', 'Base/BaseView', 'Models/Ministerio'], 
-function(require, $, BaseView, Ministerio){
+define(['require', 'appframework', 'Base/BaseView', 'Models/Ministerio', 'Views/MinisterioView'], 
+function(require, $, BaseView, Ministerio, MinisterioView){
     
     FiltroConsultaMinisterioView = BaseView.extend({
         events: {

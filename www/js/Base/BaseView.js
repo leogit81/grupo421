@@ -4,6 +4,7 @@ define(['require', 'common', 'Base/BaseModel'], function(require, common, BaseMo
         className: "panel",
         
         model: BaseModel,
+        
     });
     
     BaseView.render = function () {
