@@ -25,7 +25,7 @@ define(['backbone', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(
         },
         
         processData: function(data){
-            var jsonData = self.converter.convertToJson(data);
+            var jsonData = self.converter.convert(data);
             self.setJsonData(jsonData);
         },
     });

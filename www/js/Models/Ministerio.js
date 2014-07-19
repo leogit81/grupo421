@@ -1,4 +1,4 @@
-define(['Base/BaseModel', 'Models/Telefono', 'Models/CoordenadasMapa', 'Models/Domicilio', 'Services/MinisterioService'], 
+define(['Base/BaseModel', 'Models/Telefono', 'Models/CoordenadasMapa', 'Models/Domicilio', 'Services/AjaxRestService'], 
 function(BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
     "use strict";
     
@@ -26,7 +26,6 @@ function(BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
             BaseModel.prototype.initialize.call(this, attributes, options);
             this.service.loadConfig({
                 url: 'ministerio',
-                success: this.processData,
             });
         },
         

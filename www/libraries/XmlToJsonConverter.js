@@ -3,7 +3,7 @@ define(['require', 'xmltojson', 'underscore'], function(require, xmltojson, _){
     
     converter.jsonAux = {};
     
-    converter.convertToJson = function(xml){
+    converter.convert = function(xml){
         var primerJson = xmltojson.parseString(xml);
         return this.parsePrimerJson(primerJson);
     };
