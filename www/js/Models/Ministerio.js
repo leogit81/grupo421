@@ -3,6 +3,8 @@ function(BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
     "use strict";
     
     var ministerio = BaseModel.extend({
+        self: null,
+        
         defaults : {
             "coordenadasDeMapa" : new CoordenadasMapa(),
             "domicilio" : new Domicilio(),
@@ -19,6 +21,8 @@ function(BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
         },
         
         initialize: function(attributes, options){
+            self = this;
+            
             BaseModel.prototype.initialize.call(this, attributes, options);
             this.service.loadConfig({
                 url: 'ministerio',
@@ -27,12 +31,12 @@ function(BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
         },
         
         load: function(){
-            this.sync('create');  
+            this.sync('read');  
         },
-        processData: function(data){
-            var jsonData = this.converter.convertToJson(data);
-            this.set(jsonData);
-        },
+        
+        setJsonData: function(jsonData){
+            self.set(jsonData.ministerio);
+        }
     });
     
     return ministerio;

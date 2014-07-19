@@ -1,19 +1,21 @@
-define(['require', 'appui', 'Views/MenuConsultasView'], function (require, appui, MenuConsultasView) {
-	"use strict";
-
-	//require('appui');
-	
-	function initialize() {
-	    $.ui.splitview = true;
+define(['require', 'appui', 'Views/ConsultasView'], function (require, appui, ConsultasView) {
+    "use strict";
+    
+    var consultasView = null;
+    
+    function initialize() {
+        consultasView = new ConsultasView();
+        
+        $.ui.splitview = true;
         $.ui.toggleLeftSideMenu(false);
         $.ui.isAjaxApp = true;
         $.ui.launch();
-	};
-
-    var menuConsultasView = new MenuConsultasView();
+        
+        consultasView.render();
+    };
     
-	return {
-	   menuConsultasView: menuConsultasView, 
-	   initialize: initialize
-	};
+    return {
+       consultasView: consultasView, 
+       initialize: initialize
+    };
 });

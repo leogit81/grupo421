@@ -2,12 +2,14 @@ define(['backbone', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(
     "use strict";
     
     var BaseModel = Backbone.Model.extend({
-        converter: converter,
+        self: null,
         
         initialize: function(attributes, options){
             this.service = new Service({
                 success: this.processData,
             });
+            
+            self = this;
         },
         
         /**
@@ -17,20 +19,22 @@ define(['backbone', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(
          * @param {Object} options
          */
         sync: function(method, model, options){
-            if (method === 'create'){
+            if (method === 'read'){
                 this.service.get(this.id);
             }  
         },
         
         processData: function(data){
-            var jsonData = this.convertDataToJson(data); 
-            this.set(jsonData);
+            var jsonData = self.converter.convertToJson(data);
+            self.setJsonData(jsonData);
         },
-        
-        convertDataToJson: function(data){
-            return converter.convertToJson(data.target.responseText);
-        }
     });
+    
+    BaseModel.prototype.converter = converter;
+    
+    BaseModel.prototype.setJsonData = function(jsonData){
+        //template method para que sobreescriban los que heredan de BaseModel
+    };
     
     return BaseModel;
 });
