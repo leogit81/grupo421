@@ -11,10 +11,10 @@ define(['require', 'underscore'], function(require, _){
     };
     
     /**
-     * Devuelve una url combinando las pasadas por parámetro
+     * Devuelve una url combinando las parámetros pasados
      * @param {Object} baseUrl
-     * @param {Object} relativeUrl or data to pass to the service
-     * @param {Object} number or string, data to pass to the service
+     * @param {Object} relativeUrl
+     * @param {Object} number, string o un objeto literal con los datos para pasar al servicio
      */
     common.combineUrl = function(baseUrl, relativeUrl, data){
         if (this.isEmpty(baseUrl) || typeof (baseUrl) !== 'string')
@@ -32,9 +32,29 @@ define(['require', 'underscore'], function(require, _){
             return baseUrl + '/' + relativeUrl;
         }
         
-        data = this.trim(data.toString(), ['/']);
+        var parametrosGet = this.obtenerParametrosGet(data);
+         
+        return baseUrl + '/' + relativeUrl + parametrosGet;
+    };
+    
+    /**
+     * Obtiene un string con los parámetros que se enviaran en la petición HTTP GET 
+     */
+    common.obtenerParametrosGet = function(data){
+        var parametrosGet = "";
         
-        return baseUrl + '/' + relativeUrl + '/' + data;
+        if (_.isObject(data)){
+            parametrosGet += '?';
+            for(var property in data){
+                parametrosGet += property + '=' + data[property] + '&';
+            }
+            parametrosGet = this.trimRight(parametrosGet, ['&']);
+        }else{
+            data = this.trim(data, ['/']);
+            parametrosGet = '/' + data;
+        }
+        
+        return parametrosGet;
     };
     
     /**

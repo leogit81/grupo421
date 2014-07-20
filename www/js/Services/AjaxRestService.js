@@ -1,4 +1,4 @@
-define(['require', 'common', 'Services/ServiceConfig', 'jquery'], function(require, common, ServiceConfig, jQuery){
+define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], function(require, common, _, ServiceConfig, jQuery){
     "use strict";
 
     var baseUrl = null;
