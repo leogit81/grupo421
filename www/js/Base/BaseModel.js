@@ -1,15 +1,11 @@
-define(['backbone', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(Backbone, converter, Service){
+define(['backbone', 'underscore', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(Backbone, _, converter, Service){
     "use strict";
     
     var BaseModel = Backbone.Model.extend({
-        self: null,
-        
         initialize: function(attributes, options){
             this.service = new Service({
-                success: this.processData,
+                success: _.bind(this.processData, this),
             });
-            
-            self = this;
         },
         
         /**
@@ -20,13 +16,14 @@ define(['backbone', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(
          */
         sync: function(method, model, options){
             if (method === 'read'){
-                this.service.get(this.id);
+                this.service.get(options);
             }  
         },
         
         processData: function(data){
-            var jsonData = self.converter.convert(data);
-            self.setJsonData(jsonData);
+            var jsonData = this.converter.convert(data);
+            this.trigger('beforeChange');
+            this.setJsonData(jsonData);
         },
     });
     

@@ -17,6 +17,7 @@ define(['require', 'common', 'backbone'], function(require, common, Backbone){
     
     BaseView.prototype.model = null;
     BaseView.prototype.scroller = null;
+    BaseView.prototype.elAux = null;
     
     BaseView.prototype.render = function () {
         this.getEl().append(this.template(this.model.toJSON()));
@@ -25,7 +26,7 @@ define(['require', 'common', 'backbone'], function(require, common, Backbone){
     
     BaseView.prototype.getEl = function(){
         if(!common.isEmpty(this.parent)){
-            return this.parent.$el;
+            return this.elAux;
         }
         
         return this.$el;
@@ -38,7 +39,8 @@ define(['require', 'common', 'backbone'], function(require, common, Backbone){
      * @param {Backbone.View} the parent view
      */
     BaseView.prototype.setParent = function(parent){
-        this.parent = parent;    
+        this.parent = parent;
+        this.elAux = _.clone(this.parent.$el); 
     };
     
     return BaseView;

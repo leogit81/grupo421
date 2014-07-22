@@ -21,7 +21,7 @@ function(require, jquery, $, BaseView, Ministerio, MinisterioView){
 
         events: {
             "click #submitConsultaMinisterio": "ejecutarConsultaMinisterio",
-            "change #numeroMinisterio": "setNumeroMinisterio",
+            /*"change #numeroMinisterio": "setNumeroMinisterio",*/
         },
   
 		initialize: function() {
@@ -36,7 +36,8 @@ function(require, jquery, $, BaseView, Ministerio, MinisterioView){
             var ministerioView = new MinisterioView({
                 model: this.model,
             });
-            this.model.load();
+            var numeroMinisterio = $("#numeroMinisterio").val();
+            this.model.fetch(numeroMinisterio);
         },
         render: function(){
             $.ui.addContentDiv("consultaMinisterio", this.template());
@@ -51,7 +52,7 @@ function(require, jquery, $, BaseView, Ministerio, MinisterioView){
         attachEvents: function(){
             //this.delegateEvents();
             jquery("#submitConsultaMinisterio").on("click", _.bind(this.ejecutarConsultaMinisterio, this));
-            jquery("#numeroMinisterio").on("change", _.bind(this.setNumeroMinisterio, this));
+            //jquery("#numeroMinisterio").on("change", _.bind(this.setNumeroMinisterio, this));
         }
 	});
 	

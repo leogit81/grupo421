@@ -1,6 +1,10 @@
 define(['require', 'appui', 'Views/ConsultasView'], function (require, appui, ConsultasView) {
     "use strict";
     
+    /*vod = function(atributo){
+        return common.obtenerValorODefault(atributo);
+    };*/
+    
     var consultasView = null;
     
     function initialize() {

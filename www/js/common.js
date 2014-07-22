@@ -98,5 +98,17 @@ define(['require', 'underscore'], function(require, _){
         return aArray;
     };
     
+    /**
+     * Devuelve el valor del atributo o un valor por default si el valor del atributo es nulo.
+     * @param {Object} atributo
+     */
+    common.obtenerValorODefault = function(atributo){
+        if (this.isEmpty(atributo))
+        {
+            return "No definido";
+        }
+        return atributo;
+    };
+    
     return common;
 });

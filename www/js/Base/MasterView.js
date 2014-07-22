@@ -18,9 +18,10 @@ define(['require', 'common', 'Base/BaseView'], function(require, common){
     
     MasterView.prototype.render = function () {
         BaseView.prototype.render.call(this);
-        for(view in this.nestedViews){
+        /*for(view in this.nestedViews){
             this.nestedViews[view].render();
-        }
+        }*/
+       this.getEl().append(this.elAux.html());
         return this;
     };
     

@@ -3,24 +3,22 @@ function(require, $, MasterView, CoordenadasMapaView, DomicilioView, TelefonoVie
     
     MinisterioView = MasterView.extend({
         tagName: 'div',
+        className: 'panel consulta-detallada',
         
         attributes: {
             'id': 'resultadoConsultaMinisterio',
-            'class': 'panel',
             'data-title':'Consulta nominal de Ministerio',
             'data-nav':"consultas_nav",    
         },
         
-        template : _.template("<div><label>Localidad</label><span><%=localidad%></span></div>" +
-                      "<div><label>EMail</label><span><%=mail1%></span></div>" +
-                      "<div><label>Ministro de Salud</label><span><%=ministroDeSalud%></span></div>" +
-                      "<div><label>Nombre</label><span><%=nombre%></span></div>" +
-                      "<div><label>Provincia</label><span><%=provincia%></span></div>" +
-                      "<div><label>Sitio Web</label><span><%=sitioWeb%></span></div>"),
+        template : _.template("<div><label>Localidad</label><span><%=localidad%></span></div></br>" +
+                      "<div><label>EMail</label><span><%=mail1%></span></div></br>" +
+                      "<div><label>Ministro de Salud</label><span><%=ministroDeSalud%></span></div></br>" +
+                      "<div><label>Nombre</label><span><%=nombre%></span></div></br>" +
+                      "<div><label>Provincia</label><span><%=provincia%></span></div></br>" +
+                      "<div><label>Sitio Web</label><span><%=sitioWeb%></span></div></br>"),
                               
 		initialize: function(attributes, options) {
-		    //this.$el = $("#consultaMinisterio");
-		    
 		    MasterView.prototype.initialize.call(this, attributes, options);
 		    
             var coordenadaView = new CoordenadasMapaView({
@@ -61,10 +59,10 @@ function(require, $, MasterView, CoordenadasMapaView, DomicilioView, TelefonoVie
         },
         
         render: function(){
-            this.$el.html("");
             MasterView.prototype.render.call(this);
-            $.ui.addContentDiv("resultadoConsultaMinisterio", this.$el.html());
+            $.ui.addContentDiv("resultadoConsultaMinisterio", this.$el[0].outerHTML);
             $.ui.loadContent("resultadoConsultaMinisterio", false, false, "slide");
+            $("#resultadoConsultaMinisterio").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
             return this;
         },
         

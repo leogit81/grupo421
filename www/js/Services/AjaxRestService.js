@@ -1,14 +1,6 @@
 define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], function(require, common, _, ServiceConfig, jQuery){
     "use strict";
 
-    var baseUrl = null;
-    var url = null;
-    var method = 'GET';
-    var enableCors = null;
-    var serviceProvider = null;
-    var timeout = 30000;
-    var dataType = 'xml';
-        
     /**
      * Constructor 
      * @param {Object} config, objeto literal
@@ -20,17 +12,25 @@ define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], 
      * }
      */
     function AjaxService(config){
+        this.baseUrl = null;
+        this.url = null;
+        this.method = 'GET';
+        this.enableCors = null;
+        this.serviceProvider = null;
+        this.timeout = 30000;
+        this.dataType = 'xml';
+        
         this.loadConfig(config);
     }
     
     AjaxService.prototype.loadConfig = function(config){
         //Configuración del servicio que se toma por default del archivo ServiceConfig, puede ser modificado pasando el parámetro config
-        baseUrl = ServiceConfig.baseUrl;
-        config = config || {};
-        url = config.url;
-        enableCors = config.enableCors || ServiceConfig.enableCors || enableCors;
-        serviceProvider = config.serviceProvider || ServiceConfig.serviceProvider || serviceProvider;
-        timeout = config.timeout || ServiceConfig.timeout || timeout;
+        this.baseUrl = ServiceConfig.baseUrl;
+        this.config = config || {};
+        this.url = config.url;
+        this.enableCors = config.enableCors || ServiceConfig.enableCors || enableCors;
+        this.serviceProvider = config.serviceProvider || ServiceConfig.serviceProvider || serviceProvider;
+        this.timeout = config.timeout || ServiceConfig.timeout || timeout;
         
         //Configuración que NO se encuentra en el archivo ServiceConfig, que se configura con el parámetro config
         if (!common.isEmpty(config)){
@@ -41,7 +41,7 @@ define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], 
             this.dataType = config.dataType || this.dataType;
         }
         
-        if (enableCors){
+        if (this.enableCors){
             this.enableProxy();
         }
     };
@@ -126,10 +126,10 @@ define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], 
             requestedUrl = common.combineUrl(otraUrl, data);
         }
         else{
-            requestedUrl = common.combineUrl(baseUrl, url, data);
+            requestedUrl = common.combineUrl(this.baseUrl, this.url, data);
         }
       
-        if (serviceProvider === 'jquery'){
+        if (this.serviceProvider === 'jquery'){
             jQuery.ajax({
                 url: requestedUrl,
                 dataType: this.dataType,

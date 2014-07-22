@@ -4,7 +4,14 @@ define(['require', 'xmltojson', 'underscore'], function(require, xmltojson, _){
     converter.jsonAux = {};
     
     converter.convert = function(xml){
-        var primerJson = xmltojson.parseString(xml);
+        var primerJson = {};
+        
+        if(_.isString(xml)){
+            primerJson = xmltojson.parseString(xml);
+        }
+        else{
+            primerJson = xmltojson.parseXML(xml);
+        }
         return this.parsePrimerJson(primerJson);
     };
     
