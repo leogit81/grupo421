@@ -1,0 +1,564 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProductVersion>10.0.20506</ProductVersion>
+        <SchemaVersion>2.0</SchemaVersion>
+        <ProjectGuid>{3677C1B7-D68B-4CF9-BF8A-E869D437A6DF}</ProjectGuid>
+        <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>gov.msal.sisamovil</RootNamespace>
+        <AssemblyName>gov.msal.sisamovil</AssemblyName>
+        <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+        <SilverlightVersion>
+        </SilverlightVersion>
+        <TargetFrameworkProfile>
+        </TargetFrameworkProfile>
+        <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+        <SilverlightApplication>true</SilverlightApplication>
+        <SupportedCultures>en-US</SupportedCultures>
+        <XapOutputs>true</XapOutputs>
+        <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+        <XapFilename>CordovaAppProj_$(Configuration)_$(Platform).xap</XapFilename>
+        <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+        <SilverlightAppEntry>gov.msal.sisamovil.App</SilverlightAppEntry>
+        <ValidateXaml>true</ValidateXaml>
+        <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+        <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+        <BackgroundAgentType />
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>Bin\Debug</OutputPath>
+        <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+        <NoStdLib>true</NoStdLib>
+        <NoConfig>true</NoConfig>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <Prefer32Bit>false</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>Bin\Release</OutputPath>
+        <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;WP8</DefineConstants>
+        <NoStdLib>true</NoStdLib>
+        <NoConfig>true</NoConfig>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <Prefer32Bit>false</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+        <DebugSymbols>true</DebugSymbols>
+        <OutputPath>Bin\x86\Debug</OutputPath>
+        <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+        <NoStdLib>true</NoStdLib>
+        <DebugType>full</DebugType>
+        <PlatformTarget>
+        </PlatformTarget>
+        <ErrorReport>prompt</ErrorReport>
+        <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+        <Optimize>false</Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+        <OutputPath>Bin\x86\Release</OutputPath>
+        <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+        <Optimize>true</Optimize>
+        <NoStdLib>true</NoStdLib>
+        <DebugType>pdbonly</DebugType>
+        <PlatformTarget>
+        </PlatformTarget>
+        <ErrorReport>prompt</ErrorReport>
+        <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+        <Prefer32Bit>false</Prefer32Bit>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+        <DebugSymbols>true</DebugSymbols>
+        <OutputPath>Bin\ARM\Debug</OutputPath>
+        <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+        <NoStdLib>true</NoStdLib>
+        <DebugType>full</DebugType>
+        <PlatformTarget>
+        </PlatformTarget>
+        <ErrorReport>prompt</ErrorReport>
+        <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+        <Prefer32Bit>false</Prefer32Bit>
+        <Optimize>false</Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+        <OutputPath>Bin\ARM\Release</OutputPath>
+        <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+        <Optimize>true</Optimize>
+        <NoStdLib>true</NoStdLib>
+        <DebugType>pdbonly</DebugType>
+        <PlatformTarget>
+        </PlatformTarget>
+        <ErrorReport>prompt</ErrorReport>
+        <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+        <Prefer32Bit>false</Prefer32Bit>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="App.xaml.cs">
+            <DependentUpon>App.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="cordovalib\Commands\BaseCommand.cs" />
+        <Compile Include="cordovalib\JSON\JsonHelper.cs" />
+        <Compile Include="cordovalib\BrowserMouseHelper.cs" />
+        <Compile Include="cordovalib\CommandFactory.cs" />
+        <Compile Include="cordovalib\ConfigHandler.cs" />
+        <Compile Include="cordovalib\ConsoleHelper.cs" />
+        <Compile Include="cordovalib\CordovaCommandCall.cs" />
+        <Compile Include="cordovalib\CordovaView.xaml.cs">
+            <DependentUpon>CordovaView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="cordovalib\IBrowserDecorator.cs" />
+        <Compile Include="cordovalib\ImageExifHelper.cs" />
+        <Compile Include="cordovalib\MimeTypeMapper.cs" />
+        <Compile Include="cordovalib\NativeExecution.cs" />
+        <Compile Include="cordovalib\OrientationHelper.cs" />
+        <Compile Include="cordovalib\PluginResult.cs" />
+        <Compile Include="cordovalib\ScriptCallback.cs" />
+        <Compile Include="cordovalib\XHRHelper.cs" />
+        <Compile Include="MainPage.xaml.cs">
+            <DependentUpon>MainPage.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <ApplicationDefinition Include="App.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </ApplicationDefinition>
+        <Page Include="cordovalib\CordovaView.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Include="MainPage.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="config.xml" />
+        <Content Include="Images\appbar.back.rest.png" />
+        <Content Include="Images\appbar.close.rest.png" />
+        <Content Include="Images\appbar.feature.video.rest.png" />
+        <Content Include="Images\appbar.next.rest.png" />
+        <Content Include="Images\appbar.save.rest.png" />
+        <Content Include="Images\appbar.stop.rest.png" />
+        <None Include="cordova\lib\build.js" />
+        <None Include="cordova\lib\clean.js" />
+        <None Include="cordova\lib\deploy.js" />
+        <None Include="cordova\lib\log.js" />
+        <None Include="cordova\lib\target-list.js" />
+        <None Include="cordova\build.bat" />
+        <None Include="cordova\clean.bat" />
+        <None Include="cordova\lib\install-device.bat" />
+        <None Include="cordova\lib\install-emulator.bat" />
+        <None Include="cordova\lib\list-devices.bat" />
+        <None Include="cordova\lib\list-emulator-images.bat" />
+        <None Include="cordova\lib\list-started-emulators.bat" />
+        <None Include="cordova\lib\start-emulator.bat" />
+        <None Include="cordova\log.bat" />
+        <None Include="cordova\run.bat" />
+        <None Include="cordova\version.bat" />
+        <None Include="VERSION" />
+        <None Include="Properties\AppManifest.xml">
+            <SubType>Designer</SubType>
+        </None>
+        <None Include="Properties\WMAppManifest.xml">
+            <SubType>Designer</SubType>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="ApplicationIcon.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Background.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SplashScreenImage.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <WCFMetadata Include="Service References\" />
+    </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    </ItemGroup>
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+    <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+    <ProjectExtensions />
+    <PropertyGroup>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PostBuildEvent>
+        </PostBuildEvent>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="www\config.xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\cordova.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\cordova_plugins.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\af.ui.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\afui.less" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\android.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\appframework.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\badges.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\bb.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\buttons.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\docs.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\flex.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\forms.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\grid.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\icons.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\index.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\ios.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\ios7.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\lists.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\main.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\tizen.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\appframework\win8.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\sisa.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\icon.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\img\logo.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\index2.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\index_OK.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\app-debug.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\app.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Base\BaseModel.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Base\BaseView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Base\MasterView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\common.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\index.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Models\CoordenadasMapa.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Models\Domicilio.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Models\Ministerio.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Models\Telefono.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Services\AjaxRestService.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Services\ServiceConfig.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Views\ConsultaMinisterioView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Views\ConsultasView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Views\CoordenadasMapaView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Views\DomicilioView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Views\MenuConsultasView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Views\MinisterioView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\Views\TelefonoView.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\appframework.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\backbone.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\cordova.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\jquery-private.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\jquery.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\require.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\ui\appframework.ui.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\ui\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\ui\transitions\fade.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\ui\transitions\flip.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\ui\transitions\pop.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\ui\transitions\slide.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\ui\transitions\slideDown.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\ui\transitions\slideUp.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\underscore.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\versions\appframework-2.1.0.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\versions\backbone-1.1.2.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\versions\jquery-2.1.1.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\versions\ui\appframework.ui-2.1.0.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\versions\underscore-1.6.0.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\xmltojson.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\libraries\XmlToJsonConverter.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\main.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\android\icon-36-ldpi.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\android\icon-48-mdpi.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\android\icon-72-hdpi.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\android\icon-96-xhdpi.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\bada\icon-128.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\bada-wac\icon-48-type5.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\bada-wac\icon-50-type3.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\bada-wac\icon-80-type4.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\blackberry\icon-80.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\ios\icon-57-2x.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\ios\icon-57.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\ios\icon-72-2x.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\ios\icon-72.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\tizen\icon-128.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\webos\icon-64.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\windows-phone\icon-173-tile.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\windows-phone\icon-48.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\icon\windows-phone\icon-62-tile.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\android\screen-hdpi-landscape.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\android\screen-hdpi-portrait.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\android\screen-ldpi-landscape.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\android\screen-ldpi-portrait.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\android\screen-mdpi-landscape.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\android\screen-mdpi-portrait.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\android\screen-xhdpi-landscape.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\android\screen-xhdpi-portrait.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\bada\screen-portrait.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\bada-wac\screen-type3.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\bada-wac\screen-type4.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\bada-wac\screen-type5.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\blackberry\screen-225.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-ipad-landscape-2x.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-ipad-landscape.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-ipad-portrait-2x.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-ipad-portrait.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-iphone-landscape-2x.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-iphone-landscape.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-iphone-portrait-2x.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-iphone-portrait-568h-2x.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\ios\screen-iphone-portrait.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\tizen\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\webos\screen-64.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\res\screen\windows-phone\screen-portrait.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\spec\helper.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\spec\index.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\spec\lib\jasmine-1.2.0\jasmine-html.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\spec\lib\jasmine-1.2.0\jasmine.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\spec\lib\jasmine-1.2.0\MIT.LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\spec.html" />
+    </ItemGroup>
+</Project>

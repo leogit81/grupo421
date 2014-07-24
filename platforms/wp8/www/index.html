@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SISA Móvil</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!--App Framework includes start-->
+    <link rel="stylesheet" type="text/css" href="css/appframework/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/appframework/icons.css" />
+	<!--App Framework includes end-->
+	
+	<!--SISA Móvil-->
+	<link rel="stylesheet" type="text/css" href="css/sisa.css" />
+	<script data-main="main" src="libraries/require.js"></script>
+</head>
+<body>
+<div class="app">
+    <div id="afui">
+        <div id="header">
+            <a id='menubadge' onclick='af.ui.toggleSideMenu()' class='menuButton'></a>  
+        </div>
+        <div id="content">
+            <!--Paneles usados para navegar por la aplicación-->
+            <div id="home" class="panel" data-title="Inicio" selected="true">
+                <h1>
+                    Bienvenidos al SISA Móvil!
+                </h1>
+            </div>
+        </div>
+		<!--BottomBar: Barra que se muestra abajo de la página-->
+        <div id="navbar">
+            <a class="icon home" href="#home" data-transition="slide">Inicio</a>
+            <a class="icon info" href="#consultas" data-transition="slide">Consultas</a>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+</script>
+</html>

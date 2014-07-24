@@ -1,0 +1,14 @@
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\Bin\Debug\ApplicationIcon.png
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\Bin\Debug\Background.png
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\Bin\Debug\gov.msal.sisamovil.dll
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\Bin\Debug\gov.msal.sisamovil.pdb
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\Bin\Debug\AppManifest.xaml
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\Bin\Debug\Properties\WMAppManifest.xml
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\Bin\Debug\CordovaAppProj_Debug_AnyCPU.xap
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\obj\Debug\App.g.cs
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\obj\Debug\cordovalib\CordovaView.g.cs
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\obj\Debug\MainPage.g.cs
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\obj\Debug\gov.msal.sisamovil.g.resources
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\obj\Debug\gov.msal.sisamovil.dll
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\obj\Debug\gov.msal.sisamovil.pdb
+C:\Users\Cropp\Documents\PhoneGap\Projects\SISAMovil\platforms\wp8\obj\Debug\XapCacheFile.xml
