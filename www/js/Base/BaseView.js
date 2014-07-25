@@ -1,3 +1,8 @@
+/**
+ * Vista base de la cual se pueden extender nuevas vistas. A su vez este extiende de la vista de Backbone.
+ * Cuando se construye la misma (initialize()) si se pasa el model en los attributes, la misma guarda una referencia a este.
+ * Además, se atacha la función render al evento 'change' del model, de forma que cada vez que cambie este se actualice la vista. 
+ */
 define(['require', 'common', 'backbone'], function(require, common, Backbone){
     BaseView = Backbone.View.extend({
         tagName : "div",
@@ -17,19 +22,17 @@ define(['require', 'common', 'backbone'], function(require, common, Backbone){
     
     BaseView.prototype.model = null;
     BaseView.prototype.scroller = null;
-    BaseView.prototype.elAux = null;
+    BaseView.prototype.renderedHtml = null;
     
     BaseView.prototype.render = function () {
-        this.getEl().append(this.template(this.model.toJSON()));
-        return this;
-    };
-    
-    BaseView.prototype.getEl = function(){
+        this.$el.empty();
         if(!common.isEmpty(this.parent)){
-            return this.elAux;
+            this.renderedHtml = this.template(this.model.toJSON());
+        }else
+        {
+            this.renderedHtml = this.$el.append(this.template(this.model.toJSON()))[0].outerHTML;   
         }
-        
-        return this.$el;
+        return this;
     };
     
     BaseView.prototype.parent = null;
@@ -39,8 +42,7 @@ define(['require', 'common', 'backbone'], function(require, common, Backbone){
      * @param {Backbone.View} the parent view
      */
     BaseView.prototype.setParent = function(parent){
-        this.parent = parent;
-        this.elAux = _.clone(this.parent.$el); 
+        this.parent = parent; 
     };
     
     return BaseView;

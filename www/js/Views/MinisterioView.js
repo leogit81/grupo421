@@ -60,19 +60,17 @@ function(require, $, MasterView, CoordenadasMapaView, DomicilioView, TelefonoVie
         
         render: function(){
             MasterView.prototype.render.call(this);
-            $.ui.addContentDiv("resultadoConsultaMinisterio", this.$el[0].outerHTML);
+            //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
+            if ($("#resultadoConsultaMinisterio").length <= 0){
+                $.ui.addContentDiv("resultadoConsultaMinisterio", this.$el[0].outerHTML);//div panel + contenido
+            }else
+            {
+                $.ui.updatePanel("resultadoConsultaMinisterio", this.$el.html());//solo contenido para actualizar
+            }
             $.ui.loadContent("resultadoConsultaMinisterio", false, false, "slide");
             $("#resultadoConsultaMinisterio").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
             return this;
         },
-        
-        createScroller: function(){
-            this.scroller = $("#resultadoConsultaMinisterio").scroller({
-               verticalScroll:true,
-               horizontalScroll:false,
-               autoEnable:true
-            });
-        }
 	});
 	
 	return MinisterioView;

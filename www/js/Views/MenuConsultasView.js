@@ -1,6 +1,9 @@
 define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Views/ConsultaMinisterioView'], 
 function(require, jquery, $, BaseView, ConsultaMinisterioView){
     
+    /**
+     * Menú de las consultas que se carga a la aplicación cuando la misma se lanza por primera vez, en vez de agregarlo en el HTML. 
+     */
     MenuConsultasView = BaseView.extend({
         tagName: 'nav',
         id: 'consultas_nav',
@@ -18,17 +21,11 @@ function(require, jquery, $, BaseView, ConsultaMinisterioView){
         initialize: function(){
             var appEl = $("#afui");
             this.$el.removeAttr("class");
-            var menuConsultaElement = this.getEl().append(this.template())[0];
+            var menuConsultaElement = this.$el.append(this.template())[0];
             appEl.append(menuConsultaElement);
-            
-            /*if (element.length > 0){
-                this.setElement(element[0]);
-            }*/
         },
         
         showConsultaMinisterio: function(e){
-            /*require(['Views/ConsultaMinisterioView']);
-            var ConsultaMinisterioView = require('Views/ConsultaMinisterioView');*/
             var consultaMinisterioView = new ConsultaMinisterioView();
             consultaMinisterioView.render();
         },

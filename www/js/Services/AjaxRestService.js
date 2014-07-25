@@ -28,9 +28,9 @@ define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], 
         this.baseUrl = ServiceConfig.baseUrl;
         this.config = config || {};
         this.url = config.url;
-        this.enableCors = config.enableCors || ServiceConfig.enableCors || enableCors;
-        this.serviceProvider = config.serviceProvider || ServiceConfig.serviceProvider || serviceProvider;
-        this.timeout = config.timeout || ServiceConfig.timeout || timeout;
+        this.enableCors = config.enableCors || ServiceConfig.enableCors || this.enableCors;
+        this.serviceProvider = config.serviceProvider || ServiceConfig.serviceProvider || this.serviceProvider;
+        this.timeout = config.timeout || ServiceConfig.timeout || this.timeout;
         
         //Configuración que NO se encuentra en el archivo ServiceConfig, que se configura con el parámetro config
         if (!common.isEmpty(config)){

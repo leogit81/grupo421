@@ -10,7 +10,6 @@ requirejs.config({
 		'jquery-private': '../libraries/jquery-private',
 		xmltojson: '../libraries/xmltojson',
 		xmlToJsonConverter: '../libraries/XmlToJsonConverter',
-		cordova: '../libraries/cordova',
 	},
 	map: {
       // '*' means all modules will get 'jquery-private'
@@ -31,18 +30,11 @@ requirejs.config({
             deps: [],
             exports: 'xmlToJSON',
         },
-        'cordova': {
-            deps: [],
-        }
 	}
 });
 
-define(function(require){
-	
-	//var app = require('app');
-	
-	//solamente para debug
-	var app = require('app-debug');
-	
-	app.initialize();
+//solamente para debug
+require(['app-debug'], function (app) {
+//require(['app'], function (app) {
+    app.initialize();   
 });
