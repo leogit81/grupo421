@@ -1,5 +1,5 @@
-define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Views/ConsultaMinisterioView'], 
-function(require, jquery, $, BaseView, ConsultaMinisterioView){
+define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Views/ConsultaMinisterioView', 'Views/ConsultaEstablecimientoView'], 
+function(require, jquery, $, BaseView, ConsultaMinisterioView, ConsultaEstablecimientoView){
     
     /**
      * Menú de las consultas que se carga a la aplicación cuando la misma se lanza por primera vez, en vez de agregarlo en el HTML. 
@@ -12,10 +12,14 @@ function(require, jquery, $, BaseView, ConsultaMinisterioView){
                                 '<li>' + 
                                     '<a id="linkConsultaMinisterio" class="icon" href="">Ministerio</a>' +
                                 '</li>' +
+								'<li>' + 
+                                    '<a id="linkConsultaEstablecimiento" class="icon" href="">Establecimiento</a>' +
+                                '</li>' +
                             '</ul>'),
         
         events:{
             'click a#linkConsultaMinisterio': 'showConsultaMinisterio',
+			'click a#linkConsultaEstablecimiento': 'showConsultaEstablecimiento',
         },
         
         initialize: function(){
@@ -28,6 +32,10 @@ function(require, jquery, $, BaseView, ConsultaMinisterioView){
         showConsultaMinisterio: function(e){
             var consultaMinisterioView = new ConsultaMinisterioView();
             consultaMinisterioView.render();
+        },
+		showConsultaEstablecimiento: function(e){
+            var consultaEstablecimientoView = new ConsultaEstablecimientoView();
+            consultaEstablecimientoView.render();
         },
 	});
 	
