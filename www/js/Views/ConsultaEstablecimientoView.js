@@ -43,12 +43,13 @@ function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
             var provinciaEstablecimiento = $("#provinciaEstablecimiento").val();
             var departamentoEstablecimiento = $("#departamentoEstablecimiento").val();
             var localidadEstablecimiento = $("#localidadEstablecimiento").val();
-            this.model.fetch({
-                "provincia": provinciaEstablecimiento,
-                "nombre": nombreEstablecimiento,
-                "departamento": departamentoEstablecimiento,
-                "localidad": localidadEstablecimiento,
-            });
+            //this.model.fetch(nombreEstablecimiento);
+			this.model.fetch({
+               "provincia": provinciaEstablecimiento,
+               "nombre": nombreEstablecimiento,
+               "departamento": departamentoEstablecimiento,
+               "localidad": localidadEstablecimiento,
+           });
         },
         render: function(){
             $.ui.addContentDiv("consultaEstablecimiento", this.template());
@@ -58,7 +59,7 @@ function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
         },
         
         /**
-         * Usado para bindear eventos a los controles del formulario. Se ejecuta despuï¿½s del render cuando los controles se encuentran cargados en la pï¿½gina. 
+         * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
          */
         attachEvents: function(){
             //this.delegateEvents();
