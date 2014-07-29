@@ -1,4 +1,4 @@
-define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Models/Establecimiento', 'Views/Establecimiento'], 
+define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Models/Establecimiento', 'Views/EstablecimientoView'], 
 function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
     
     ConsultaEstablecimientoView = BaseView.extend({
@@ -43,7 +43,13 @@ function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
             var provinciaEstablecimiento = $("#provinciaEstablecimiento").val();
             var departamentoEstablecimiento = $("#departamentoEstablecimiento").val();
             var localidadEstablecimiento = $("#localidadEstablecimiento").val();
-            this.model.fetch(nombreEstablecimiento);
+            //this.model.fetch(nombreEstablecimiento);
+			this.model.fetch({
+               "provincia": provinciaEstablecimiento,
+               "nombre": nombreEstablecimiento,
+               "departamento": departamentoEstablecimiento,
+               "localidad": localidadEstablecimiento,
+           });
         },
         render: function(){
             $.ui.addContentDiv("consultaEstablecimiento", this.template());
