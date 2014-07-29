@@ -18,7 +18,7 @@ function(require, jquery, $, BaseView, MenuConsultasView){
         
         render: function(){
             var contentEl = $("#afui div#content");
-            var consultaElement = this.getEl().append(this.template())[0];
+            var consultaElement = this.$el.append(this.template())[0];
             contentEl.append(consultaElement);
         }
 	});
