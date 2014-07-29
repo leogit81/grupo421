@@ -1,7 +1,7 @@
 /**
  * Biblioteca de funciones comunes 
  */
-define(['require', 'underscore'], function(require, _){
+define(['underscore'], function(_){
     var common = {};
     
     common.isEmpty = function(value){

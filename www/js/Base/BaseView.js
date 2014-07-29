@@ -3,7 +3,7 @@
  * Cuando se construye la misma (initialize()) si se pasa el model en los attributes, la misma guarda una referencia a este.
  * Además, se atacha la función render al evento 'change' del model, de forma que cada vez que cambie este se actualice la vista. 
  */
-define(['require', 'common', 'backbone'], function(require, common, Backbone){
+define(['common', 'backbone'], function(common, Backbone){
     BaseView = Backbone.View.extend({
         tagName : "div",
         className: "panel",

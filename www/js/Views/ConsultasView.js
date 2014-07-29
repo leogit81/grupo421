@@ -1,5 +1,5 @@
-define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Views/MenuConsultasView'], 
-function(require, jquery, $, BaseView, MenuConsultasView){
+define(['appframework', 'Base/BaseView'], 
+function($, BaseView){
     
     ConsultasView = BaseView.extend({
         tagName: 'div',
@@ -9,17 +9,27 @@ function(require, jquery, $, BaseView, MenuConsultasView){
             'id': 'consultas',
             'class': 'panel',
             'data-title':'Consultas',
-            'data-nav':"consultas_nav",    
+            'data-nav':"consultas_nav",
         },
 
-		initialize: function() {
-            this.asideMenu = new MenuConsultasView();
-        },
+		/*initialize: function() {
+            
+        },*/
         
         render: function(){
+<<<<<<< Updated upstream
             var contentEl = $("#afui div#content");
             var consultaElement = this.$el.append(this.template())[0];
             contentEl.append(consultaElement);
+=======
+            define(['Views/MenuConsultasView'], function(MenuConsultasView){
+                this.asideMenu = new MenuConsultasView();
+                
+                var contentEl = $("#afui div#content");
+                var consultaElement = this.$el.append(this.template())[0];
+                contentEl.append(consultaElement);
+            });
+>>>>>>> Stashed changes
         }
 	});
 	

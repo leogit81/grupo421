@@ -1,5 +1,5 @@
 requirejs.config({  
-	enforceDefine: false,
+	enforceDefine: true,
 	baseUrl: './js',
 	paths : {
 		underscore: '../libraries/underscore',
@@ -34,7 +34,8 @@ requirejs.config({
 });
 
 //solamente para debug
-require(['app-debug'], function (app) {
-//require(['app'], function (app) {
+//require(['app-debug'], function (app) {
+require(['app'], function (app) {
     app.initialize();   
 });
+//define(['app']);
