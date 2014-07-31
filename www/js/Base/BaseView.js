@@ -36,6 +36,7 @@ define(['common', 'backbone'], function(common, Backbone){
     };
     
     BaseView.prototype.parent = null;
+    BaseView.prototype.self = BaseView;
     
     /**
      * Set the parent for this view

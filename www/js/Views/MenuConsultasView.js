@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Views/ConsultaMinisterioView', 'Views/ConsultaEstablecimientoView'], 
-function(require, jquery, $, BaseView, ConsultaMinisterioView, ConsultaEstablecimientoView){
-=======
 define(['appframework', 'Base/BaseView'], 
-function(require, jquery, $, BaseView){
->>>>>>> Stashed changes
+function($, BaseView){
     
     /**
      * Menú de las consultas que se carga a la aplicación cuando la misma se lanza por primera vez, en vez de agregarlo en el HTML. 
@@ -28,21 +23,28 @@ function(require, jquery, $, BaseView){
         },
         
         render: function(){
-            var appEl = $("#afui");
+            $.ui.enableSideMenu();
+            /*var appEl = $("#afui");
             this.$el.removeAttr("class");
             var menuConsultaElement = this.$el.append(this.template())[0];
-            appEl.append(menuConsultaElement);
+            appEl.append(menuConsultaElement);*/
+            //$.ui.updateSideMenu(this.$el.append(this.template()).html());
+            this.$el.removeAttr("class");
+            var menuConsulta = $(this.$el.append(this.template())[0]);
+            $.ui.updateSideMenuElements(menuConsulta);
         },
         
         showConsultaMinisterio: function(e){
-            define(['Views/ConsultaMinisterioView'], function(ConsultaMinisterioView){
+            require(['Views/ConsultaMinisterioView'], function(ConsultaMinisterioView){
                 var consultaMinisterioView = new ConsultaMinisterioView();
                 consultaMinisterioView.render();
             });
         },
 		showConsultaEstablecimiento: function(e){
-            var consultaEstablecimientoView = new ConsultaEstablecimientoView();
-            consultaEstablecimientoView.render();
+            require(['Views/ConsultaEstablecimientoView'], function(ConsultaEstablecimientoView){
+                var consultaEstablecimientoView = new ConsultaEstablecimientoView();
+                consultaEstablecimientoView.render();
+            });
         },
 	});
 	

@@ -24,16 +24,14 @@ define(function () {
     }());*/
         
 	function initialize() {
-	    console.log("app.initialize");
+	    //console.log("app.initialize");
 	    bindEvents();
 	};
     
-    // Bind Event Listeners
-    //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     function bindEvents(){
-        console.log("bind events");
+        //console.log("bind events");
         document.addEventListener('deviceready', onDeviceReady, false);
     };
     
@@ -41,24 +39,31 @@ define(function () {
     //
     // The scope of 'this' is the event.
     function onDeviceReady(){
-        console.log("onDeviceReady");
-        require(['appui', 'Views/ConsultasView'], function(appui, ConsultasView){
-            consultasView = new ConsultasView();
-            
+        //console.log("onDeviceReady");
+        require(['jquery', 'appui', 'Views/ConsultasView'], function(jquery, appui, ConsultasView){
             launchAppFramework();
-            
+            consultasView = new ConsultasView();
             consultasView.render();
+            jquery("#menubadge").on("click", _.bind(onClickMenuBadge, this));
         });
+    };
+    
+    /**
+     * Se ejecuta al hacer click en el icono de las tres rayitas que muestra el menú lateral.  
+     */
+    function onClickMenuBadge(){
+        af.ui.toggleSideMenu();
     };
 
     function launchAppFramework(){
-        $.ui.splitview = true;
-        $.ui.toggleLeftSideMenu(false);
+        $.ui.splitview = false;
+        //$.ui.toggleLeftSideMenu(false);
         $.ui.isAjaxApp = true;
         $.ui.launch();
     };
     
 	return {
-		initialize: initialize
+        onDeviceReady: onDeviceReady,
+        initialize: initialize,
 	};
 });

@@ -12,24 +12,19 @@ function($, BaseView){
             'data-nav':"consultas_nav",
         },
 
-		/*initialize: function() {
-            
-        },*/
+		initialize: function() {
+            self = this;
+        },
         
         render: function(){
-<<<<<<< Updated upstream
-            var contentEl = $("#afui div#content");
-            var consultaElement = this.$el.append(this.template())[0];
-            contentEl.append(consultaElement);
-=======
-            define(['Views/MenuConsultasView'], function(MenuConsultasView){
-                this.asideMenu = new MenuConsultasView();
-                
+            require(['Views/MenuConsultasView'], function(MenuConsultasView){
                 var contentEl = $("#afui div#content");
-                var consultaElement = this.$el.append(this.template())[0];
+                var consultaElement = self.$el.append(self.template())[0];
                 contentEl.append(consultaElement);
+                
+                self.asideMenu = new MenuConsultasView();
+                self.asideMenu.render();
             });
->>>>>>> Stashed changes
         }
 	});
 	

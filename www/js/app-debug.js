@@ -1,21 +1,11 @@
-define(['require', 'appui', 'Views/ConsultasView'], function (require, appui, ConsultasView) {
+define(['app'], function (app) {
     "use strict";
     
-    var consultasView = null;
-    
     function initialize() {
-        consultasView = new ConsultasView();
-        
-        $.ui.splitview = true;
-        $.ui.toggleLeftSideMenu(false);
-        $.ui.isAjaxApp = true;
-        $.ui.launch();
-        
-        consultasView.render();
+       app.onDeviceReady();
     };
     
     return {
-       consultasView: consultasView, 
        initialize: initialize
     };
 });
