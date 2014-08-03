@@ -11,11 +11,11 @@ function(require, $, MasterView){
             'data-nav':"consultas_nav",    
         },
         
-        template : _.template("<div><label>codIndecProvincia</label><span><%=codindecprovincia%></span></div></br>" +
+        template : _.template("<div><label>codIndecProvincia</label><span><%=codIndecProvincia%></span></div></br>" +
                       "<div><label>Codigo</label><span><%=codigo%></span></div></br>" +
                       "<div><label>Dependencia</label><span><%=dependencia%></span></div></br>" +
-                      "<div><label>fechaModificacion</label><span><%=fechamodificacion%></span></div></br>" +
-                      "<div><label>fechaRegistro</label><span><%=fecharegistro%></span></div></br>" +
+                      "<div><label>fechaModificacion</label><span><%=fechaModificacion%></span></div></br>" +
+                      "<div><label>fechaRegistro</label><span><%=fechaRegistro%></span></div></br>" +
                       "<div><label>Nombre</label><span><%=nombre%></span></div></br>" +
 					  "<div><label>Provincia</label><span><%=provincia%></span></div></br>" +
 					  "<div><label>Tipologia</label><span><%=tipologia%></span></div></br>" ),
