@@ -10,10 +10,10 @@ function($, BaseView){
         
         template: _.template('<ul class="list">' +
                                 '<li>' + 
-                                    '<a id="linkConsultaMinisterio" class="icon" href="">Ministerio</a>' +
+                                    '<a id="linkConsultaMinisterio" class="icon" href="#">Ministerio</a>' +
                                 '</li>' +
 								'<li>' + 
-                                    '<a id="linkConsultaEstablecimiento" class="icon" href="">Establecimiento</a>' +
+                                    '<a id="linkConsultaEstablecimiento" class="icon" href="#">Establecimiento</a>' +
                                 '</li>' +
                             '</ul>'),
         

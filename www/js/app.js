@@ -56,10 +56,24 @@ define(function () {
     };
 
     function launchAppFramework(){
+        resolverConflictos();
         $.ui.splitview = false;
         //$.ui.toggleLeftSideMenu(false);
-        $.ui.isAjaxApp = true;
+        $.ui.isAjaxApp = false;
         $.ui.launch();
+    };
+    
+    /**
+     * Resuelve conflictos que pudiera haber entre el appframework y jQuery con la variable $ en el espacio de nombres global. 
+     */
+    function resolverConflictos(){
+        if (jQuery != undefined){
+            jQuery.noConflict();
+            
+            if ($ != af){
+                $ = af;
+            }
+        }
     };
     
 	return {
