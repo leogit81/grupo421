@@ -1,5 +1,0 @@
-﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="gov.msal.sisamovil" EntryPointType="gov.msal.sisamovil.App" RuntimeVersion="4.7.50308.0">
-  <Deployment.Parts>
-    <AssemblyPart x:Name="gov.msal.sisamovil" Source="gov.msal.sisamovil.dll" />
-  </Deployment.Parts>
-</Deployment>
