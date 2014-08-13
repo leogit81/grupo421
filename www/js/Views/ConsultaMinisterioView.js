@@ -18,11 +18,6 @@ function(require, jquery, $, BaseView, Ministerio, MinisterioView){
                 '<a id="submitConsultaMinisterio" class="button">Enviar</a>' +
             '</form>'
         ),
-
-        events: {
-            "click #submitConsultaMinisterio": "ejecutarConsultaMinisterio",
-            /*"change #numeroMinisterio": "setNumeroMinisterio",*/
-        },
   
 		initialize: function() {
             this.model = new Ministerio();
@@ -50,9 +45,7 @@ function(require, jquery, $, BaseView, Ministerio, MinisterioView){
          * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
          */
         attachEvents: function(){
-            //this.delegateEvents();
             jquery("#submitConsultaMinisterio").on("click", _.bind(this.ejecutarConsultaMinisterio, this));
-            //jquery("#numeroMinisterio").on("change", _.bind(this.setNumeroMinisterio, this));
         }
 	});
 	

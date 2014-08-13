@@ -24,14 +24,12 @@ define(function () {
     }());*/
         
 	function initialize() {
-	    //console.log("app.initialize");
 	    bindEvents();
 	};
     
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     function bindEvents(){
-        //console.log("bind events");
         document.addEventListener('deviceready', onDeviceReady, false);
     };
     
@@ -39,7 +37,6 @@ define(function () {
     //
     // The scope of 'this' is the event.
     function onDeviceReady(){
-        //console.log("onDeviceReady");
         require(['jquery', 'appui', 'Views/ConsultasView'], function(jquery, appui, ConsultasView){
             launchAppFramework();
             consultasView = new ConsultasView();
@@ -58,7 +55,6 @@ define(function () {
     function launchAppFramework(){
         resolverConflictos();
         $.ui.splitview = false;
-        //$.ui.toggleLeftSideMenu(false);
         $.ui.isAjaxApp = false;
         $.ui.launch();
     };

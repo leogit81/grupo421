@@ -22,6 +22,10 @@ define(['require', 'xmltojson', 'underscore'], function(require, xmltojson, _){
     converter.parsePrimerJson = function(primerJson){
         var auxObject = {};
         
+        if (_.isArray(primerJson)){
+            auxObject = [];
+        }
+        
         for(var property in primerJson){
             if(primerJson.hasOwnProperty(property)){
                 if (_.isArray(primerJson[property]) && primerJson[property].length == 1){
@@ -31,6 +35,10 @@ define(['require', 'xmltojson', 'underscore'], function(require, xmltojson, _){
                     else{
                         auxObject[property] = this.parsePrimerJson(primerJson[property][0]);
                     }
+                }
+                else if((_.isArray(primerJson[property]) && primerJson[property].length > 1) || _.isObject(primerJson[property]))
+                {
+                    auxObject[property] = this.parsePrimerJson(primerJson[property]);                    
                 }
             }
         }

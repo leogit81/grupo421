@@ -8,7 +8,7 @@
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-	<script src="http://192.168.0.2:8080/target/target-script-min.js#anonymous"></script>
+	<!--<script src="http://192.168.0.3:8080/target/target-script-min.js#anonymous"></script>-->
 	    
     <!--App Framework includes start-->
     <link rel="stylesheet" type="text/css" href="css/appframework/af.ui.css" />
@@ -39,6 +39,15 @@
             <a class="icon home" href="#home" data-transition="slide">Inicio</a>
             <a class="icon info" href="#consultas" data-transition="slide">Consultas</a>
         </footer>
+        <nav id="home_nav"></nav>
+        <nav id="consultas_nav">
+            <ul class="list">
+                <li>
+                    <a id="linkConsultaMinisterio" class="icon" href="#consultaMinisterio">Ministerio</a>
+                    <a id="linkConsultaEstablecimiento" class="icon" href="#consultaEstablecimiento">Establecimiento</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
 </body>

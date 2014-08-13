@@ -1,5 +1,5 @@
-define(['appframework', 'Base/BaseView'], 
-function($, BaseView){
+define(['appframework', 'jquery', 'Base/BaseView'], 
+function($, jquery, BaseView){
     
     /**
      * Menú de las consultas que se carga a la aplicación cuando la misma se lanza por primera vez, en vez de agregarlo en el HTML. 
@@ -17,21 +17,16 @@ function($, BaseView){
                                 '</li>' +
                             '</ul>'),
         
-        events:{
-            'click a#linkConsultaMinisterio': 'showConsultaMinisterio',
-			'click a#linkConsultaEstablecimiento': 'showConsultaEstablecimiento',
+        render: function(){
+            this.attachEvents();
         },
         
-        render: function(){
-            $.ui.enableSideMenu();
-            /*var appEl = $("#afui");
-            this.$el.removeAttr("class");
-            var menuConsultaElement = this.$el.append(this.template())[0];
-            appEl.append(menuConsultaElement);*/
-            //$.ui.updateSideMenu(this.$el.append(this.template()).html());
-            this.$el.removeAttr("class");
-            var menuConsulta = $(this.$el.append(this.template())[0]);
-            $.ui.updateSideMenuElements(menuConsulta);
+        /**
+         * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
+         */
+        attachEvents: function(){
+            jquery("#linkConsultaMinisterio").on("click", _.bind(this.showConsultaMinisterio, this));
+            jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
         },
         
         showConsultaMinisterio: function(e){

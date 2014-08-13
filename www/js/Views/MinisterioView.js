@@ -1,5 +1,5 @@
-define(['require', 'appframework', 'Base/MasterView', 'Views/CoordenadasMapaView', 'Views/DomicilioView', 'Views/TelefonoView'], 
-function(require, $, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView){
+define(['appframework', 'Base/MasterView', 'Views/CoordenadasMapaView', 'Views/DomicilioView', 'Views/TelefonoView'], 
+function($, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView){
     
     MinisterioView = MasterView.extend({
         tagName: 'div',

@@ -1,7 +1,7 @@
-define(['require', 'appframework', 'Base/MasterView'], 
-function(require, $, MasterView){
+define(['appframework', 'Base/BaseView'], 
+function($, BaseView){
     
-    EstablecimientoView = MasterView.extend({
+    EstablecimientoView = BaseView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
         
@@ -21,47 +21,11 @@ function(require, $, MasterView){
 					  "<div><label>Tipologia</label><span><%=tipologia%></span></div></br>" ),
                               
 		initialize: function(attributes, options) {
-		    MasterView.prototype.initialize.call(this, attributes, options);
-		    
-            /*var coordenadaView = new CoordenadasMapaView({
-                model: this.model.get("coordenadasDeMapa"), 
-            });
-            
-            this.addView(coordenadaView);
-            
-            var domicilioView = new DomicilioView({
-                model: this.model.get("domicilio"), 
-            });
-            
-            this.addView(domicilioView);
-            
-            var telefonoView1 = new TelefonoView({
-                model: this.model.get("telefono1"), 
-            });
-            
-            this.addView(telefonoView1);
-            
-            var telefonoView2 = new TelefonoView({
-                model: this.model.get("telefono2"), 
-            });
-            
-            this.addView(telefonoView2);
-            
-            var telefonoView3 = new TelefonoView({
-                model: this.model.get("telefono3"), 
-            });
-            
-            this.addView(telefonoView3);
-            
-            var telefonoView4 = new TelefonoView({
-                model: this.model.get("telefono4"), 
-            });
-            
-            this.addView(telefonoView4);*/
+		    BaseView.prototype.initialize.call(this, attributes, options);
         },
         
         render: function(){
-            MasterView.prototype.render.call(this);
+            BaseView.prototype.render.call(this);
             //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
             if ($("#resultadoConsultaEstablecimiento").length <= 0){
                 $.ui.addContentDiv("resultadoConsultaEstablecimiento", this.$el[0].outerHTML);//div panel + contenido

@@ -30,27 +30,13 @@ function(common, BaseModel, service){
         },
         
         setJsonData: function(jsonData){
-            var establecimientoData = this.parse(jsonData.establecimiento);
+            var establecimientoData = this.parse(jsonData);
             self.set(establecimientoData);
         },
 
-        /*parse: function(response){
-            for(var key in this.nestedModels)
-            {
-                var nestedModel = this.nestedModels[key];
-                var modelData = response[key];
-                
-                var modelExistente = this.get(key); 
-                if(common.isEmpty(modelExistente))
-                {
-                    response[key] = new nestedModel(modelData);
-                }
-                else{
-                    response[key] = modelExistente.set(modelData);
-                }
-            }
-            return response;
-        }*/
+        parse: function(response){
+            return response.EstablecimientoSearchResponse.establecimientos.establecimientoReducido;
+        }
     });
     
     return establecimiento;

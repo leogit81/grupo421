@@ -24,7 +24,6 @@ function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
 
         events: {
             "click #submitConsultaEstablecimiento": "ejecutarConsultaEstablecimiento",
-            /*"change #numeroMinisterio": "setNumeroMinisterio",*/
         },
   
 		initialize: function() {
@@ -43,8 +42,8 @@ function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
             var provinciaEstablecimiento = $("#provinciaEstablecimiento").val();
             var departamentoEstablecimiento = $("#departamentoEstablecimiento").val();
             var localidadEstablecimiento = $("#localidadEstablecimiento").val();
-            //this.model.fetch(nombreEstablecimiento);
-			this.model.fetch({
+            
+            this.model.fetch({
                "provincia": provinciaEstablecimiento,
                "nombre": nombreEstablecimiento,
                "departamento": departamentoEstablecimiento,
@@ -59,12 +58,10 @@ function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
         },
         
         /**
-         * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
+         * Usado para bindear eventos a los controles del formulario. Se ejecuta despuï¿½s del render cuando los controles se encuentran cargados en la pï¿½gina. 
          */
         attachEvents: function(){
-            //this.delegateEvents();
             jquery("#submitConsultaEstablecimiento").on("click", _.bind(this.ejecutarConsultaEstablecimiento, this));
-            //jquery("#numeroMinisterio").on("change", _.bind(this.setNumeroMinisterio, this));
         }
 	});
 	
