@@ -137,6 +137,7 @@ define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], 
                 beforeSend: this.beforeSendCallback,
                 success: this.successCallback,
                 error:this.errorCallback,
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
             });
         }else if (serviceProvider === 'custom'){
             var xhr = this.createCORSRequest(method, requestedUrl);

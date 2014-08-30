@@ -1,5 +1,5 @@
-define(['common', 'Base/BaseModel', 'Models/Telefono', 'Models/CoordenadasMapa', 'Models/Domicilio', 'Services/AjaxRestService'], 
-function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
+define(['common', 'Base/BaseModel', 'Models/Telefono', 'Models/CoordenadasMapa', 'Models/Domicilio'], 
+function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio){
     "use strict";
     
     var ministerio = BaseModel.extend({
@@ -36,10 +36,6 @@ function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio, service){
             this.service.loadConfig({
                 url: 'ministerio',
             });
-        },
-        
-        load: function(data){
-            this.sync('read', this, data);  
         },
         
         setJsonData: function(jsonData){

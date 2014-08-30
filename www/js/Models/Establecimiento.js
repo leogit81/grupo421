@@ -1,4 +1,4 @@
-define(['common', 'Base/BaseModel', 'Services/AjaxRestService'], 
+define(['common', 'Base/BaseModel'], 
 function(common, BaseModel, service){
     "use strict";
     
@@ -23,10 +23,6 @@ function(common, BaseModel, service){
             this.service.loadConfig({
                 url: 'establecimiento/buscar',
             });
-        },
-        
-        load: function(data){
-            this.sync('read', this, data);  
         },
         
         setJsonData: function(jsonData){

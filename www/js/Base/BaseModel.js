@@ -33,5 +33,9 @@ define(['backbone', 'underscore', 'xmlToJsonConverter', 'Services/AjaxRestServic
         //template method para que sobreescriban los que heredan de BaseModel
     };
     
+    BaseModel.prototype.load = function(data){
+        this.sync('read', this, data);  
+    };
+    
     return BaseModel;
 });

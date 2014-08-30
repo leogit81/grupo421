@@ -34,7 +34,7 @@ requirejs.config({
 });
 
 //solamente para debug
-define(['app-debug'], function (app) {
-//define(['app'], function (app) {
+//define(['app-debug'], function (app) {
+define(['app'], function (app) {
     app.initialize();   
 });

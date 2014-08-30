@@ -1,5 +1,5 @@
-define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Models/Establecimiento', 'Views/EstablecimientoView'], 
-function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
+define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Models/EstablecimientoCollection', 'Views/EstablecimientoCollectionView'], 
+function(require, jquery, $, BaseView, EstablecimientoCollection, EstablecimientoCollectionView){
     
     ConsultaEstablecimientoView = BaseView.extend({
         tagName: 'div',
@@ -27,7 +27,8 @@ function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
         },
   
 		initialize: function() {
-            this.model = new Establecimiento();
+            //this.model = new Establecimiento();
+            this.model = new EstablecimientoCollection();
         },
         
         setNombreEstablecimiento: function(e){
@@ -35,15 +36,21 @@ function(require, jquery, $, BaseView, Establecimiento, EstablecimientoView){
         },
         
         ejecutarConsultaEstablecimiento: function(){
-            var establecimientoView = new EstablecimientoView({
+            /*var establecimientoView = new EstablecimientoView({
+                
+                model: this.model,
+            });*/
+           
+           var establecimientoColleccionView = new EstablecimientoCollectionView({
                 model: this.model,
             });
+            
             var nombreEstablecimiento = $("#nombreEstablecimiento").val();
             var provinciaEstablecimiento = $("#provinciaEstablecimiento").val();
             var departamentoEstablecimiento = $("#departamentoEstablecimiento").val();
             var localidadEstablecimiento = $("#localidadEstablecimiento").val();
             
-            this.model.fetch({
+            this.model.load({
                "provincia": provinciaEstablecimiento,
                "nombre": nombreEstablecimiento,
                "departamento": departamentoEstablecimiento,

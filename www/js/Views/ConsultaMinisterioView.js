@@ -32,7 +32,7 @@ function(require, jquery, $, BaseView, Ministerio, MinisterioView){
                 model: this.model,
             });
             var numeroMinisterio = $("#numeroMinisterio").val();
-            this.model.fetch(numeroMinisterio);
+            this.model.load(numeroMinisterio);
         },
         render: function(){
             $.ui.addContentDiv("consultaMinisterio", this.template());
