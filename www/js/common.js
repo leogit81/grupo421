@@ -1,8 +1,8 @@
 /**
  * Biblioteca de funciones comunes 
  */
-define(['underscore'], function(_){
-    var common = {};
+(function(_){
+    common = {};
     
     common.isEmpty = function(value){
         return value === undefined
@@ -111,4 +111,4 @@ define(['underscore'], function(_){
     };
     
     return common;
-});
+})(_);

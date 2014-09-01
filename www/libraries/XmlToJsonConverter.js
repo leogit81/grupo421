@@ -1,4 +1,4 @@
-define(['require', 'xmltojson', 'underscore'], function(require, xmltojson, _){
+var XmlToJSONConverter = (function(xmltojson, _){
     var converter = {};
     
     converter.jsonAux = {};
@@ -47,4 +47,4 @@ define(['require', 'xmltojson', 'underscore'], function(require, xmltojson, _){
     };
     
     return converter;
-});
+})(xmlToJSON, _);

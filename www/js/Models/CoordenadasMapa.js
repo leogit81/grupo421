@@ -1,4 +1,4 @@
-define(['Base/BaseModel'], function(BaseModel){
+var CoordenadasMapa = (function(BaseModel){
     "use strict";
     
     var coordenadasMapa = BaseModel.extend({
@@ -10,4 +10,4 @@ define(['Base/BaseModel'], function(BaseModel){
     });
     
     return coordenadasMapa;
-});
+})(BaseModel);

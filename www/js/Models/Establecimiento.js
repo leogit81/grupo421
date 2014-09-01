@@ -1,5 +1,5 @@
-define(['common', 'Base/BaseModel'], 
-function(common, BaseModel, service){
+var Establecimiento = ( 
+function(common, BaseModel){
     "use strict";
     
     var establecimiento = BaseModel.extend({
@@ -36,4 +36,4 @@ function(common, BaseModel, service){
     });
     
     return establecimiento;
-});
+})(common, BaseModel);

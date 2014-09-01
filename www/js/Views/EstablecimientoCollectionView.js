@@ -1,7 +1,6 @@
-define(['appframework', 'Base/BaseView'], 
-function($, BaseView){
+var EstablecimientoCollectionView = (function($, BaseView){
     
-    EstablecimientoCollectionView = BaseView.extend({
+    var establecimientoCollectionView = BaseView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
         
@@ -19,7 +18,7 @@ function($, BaseView){
         
         armarHtml: function(establecimientos){
             this.renderedHtml = "";            
-            _.each(establecimientos, this.itemTemplate);
+            _.each(establecimientos, this.itemTemplate, this);
         },
                                    
         itemTemplate: function(establecimiento){
@@ -38,13 +37,25 @@ function($, BaseView){
             }
         },
         
-        render: function(){
+        cantidadDeEstablecimientos: 0,
+        
+        render: function(model, collection, options){
+            //TODO: esto hay que corregirlo, es un parche para evitar que me haga un render para cada establecimiento que se agrega a la colección.
+            this.cantidadDeEstablecimientos++;
+            if (this.cantidadDeEstablecimientos < collection.length){
+                return;
+            }
+            else{
+                this.cantidadDeEstablecimientos = 0;
+            }
+            //fin del parche
+            
             this.$el.empty();
             /*this.$el.append(this.template(
                 {"establecimientos": this.model.toJSON(),
                 "itemTemplate": this.itemTemplate}));*/
            this.armarHtml(this.model.toJSON());
-           this.$el.append(this.template());
+           this.$el.append(this.template({"renderedHtml": this.renderedHtml}));
             
             //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
             if ($("#resultadoConsultaEstablecimiento").length <= 0){
@@ -59,5 +70,5 @@ function($, BaseView){
         },
 	});
 	
-	return EstablecimientoCollectionView;
-});
+	return establecimientoCollectionView;
+})(af, BaseView);

@@ -1,7 +1,6 @@
-define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Models/Ministerio', 'Views/MinisterioView'], 
-function(require, jquery, $, BaseView, Ministerio, MinisterioView){
+var ConsultaMinisterioView = (function(jquery, $, BaseView, Ministerio, MinisterioView){
     
-    ConsultaMinisterioView = BaseView.extend({
+    var consultaMinisterioView = BaseView.extend({
         tagName: 'div',
         
         attributes: {
@@ -28,7 +27,7 @@ function(require, jquery, $, BaseView, Ministerio, MinisterioView){
         },
         
         ejecutarConsultaMinisterio: function(){
-            var ministerioView = new MinisterioView({
+            var ministerioView = MinisterioView.getInstance({
                 model: this.model,
             });
             var numeroMinisterio = $("#numeroMinisterio").val();
@@ -49,5 +48,5 @@ function(require, jquery, $, BaseView, Ministerio, MinisterioView){
         }
 	});
 	
-	return ConsultaMinisterioView;
-});
+	return consultaMinisterioView;
+})(jQuery, af, BaseView, Ministerio, MinisterioView);

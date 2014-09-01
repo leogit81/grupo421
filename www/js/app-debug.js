@@ -1,11 +1,11 @@
-define(['app'], function (app) {
+var app_debug = (function (app, jQuery) {
     "use strict";
     
     function initialize() {
-       app.onDeviceReady();
+       jQuery(document).ready(function(){app.onDeviceReady()});
     };
     
     return {
        initialize: initialize
     };
-});
+})(app, jQuery);

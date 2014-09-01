@@ -1,4 +1,4 @@
-define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], function(require, common, _, ServiceConfig, jQuery){
+var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
     "use strict";
 
     /**
@@ -148,4 +148,4 @@ define(['require', 'common', 'underscore', 'Services/ServiceConfig', 'jquery'], 
     };
     
     return AjaxService;
-});
+})(common, _, ServiceConfig, jQuery);

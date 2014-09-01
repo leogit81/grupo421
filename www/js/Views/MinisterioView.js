@@ -1,7 +1,6 @@
-define(['appframework', 'Base/MasterView', 'Views/CoordenadasMapaView', 'Views/DomicilioView', 'Views/TelefonoView'], 
-function($, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView){
+var MinisterioView = (function($, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView){
     
-    MinisterioView = MasterView.extend({
+    var ministerioView = MasterView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
         
@@ -73,5 +72,5 @@ function($, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView){
         },
 	});
 	
-	return MinisterioView;
-});
+	return ministerioView;
+})(af, MasterView, CoordenadasMapaView, DomicilioView, TelefonoView);

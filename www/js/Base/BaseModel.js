@@ -1,7 +1,7 @@
-define(['backbone', 'underscore', 'xmlToJsonConverter', 'Services/AjaxRestService'], function(Backbone, _, converter, Service){
+var BaseModel = (function(Backbone, _, converter, Service){
     "use strict";
     
-    var BaseModel = Backbone.Model.extend({
+    var baseModel = Backbone.Model.extend({
         initialize: function(attributes, options){
             this.service = new Service({
                 success: _.bind(this.processData, this),
@@ -27,15 +27,17 @@ define(['backbone', 'underscore', 'xmlToJsonConverter', 'Services/AjaxRestServic
         },
     });
     
-    BaseModel.prototype.converter = converter;
+    baseModel.prototype.converter = converter;
     
-    BaseModel.prototype.setJsonData = function(jsonData){
+    baseModel.prototype.setJsonData = function(jsonData){
         //template method para que sobreescriban los que heredan de BaseModel
     };
     
-    BaseModel.prototype.load = function(data){
+    baseModel.prototype.load = function(data){
         this.sync('read', this, data);  
     };
     
-    return BaseModel;
-});
+    _.extend(baseModel, Backbone.Singleton);
+    
+    return baseModel;
+})(Backbone, _, XmlToJSONConverter, AjaxRestService);

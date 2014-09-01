@@ -3,8 +3,8 @@
  * Cuando se construye la misma (initialize()) si se pasa el model en los attributes, la misma guarda una referencia a este.
  * Además, se atacha la función render al evento 'change' del model, de forma que cada vez que cambie este se actualice la vista. 
  */
-define(['common', 'backbone'], function(common, Backbone){
-    BaseView = Backbone.View.extend({
+var BaseView = (function(Backbone){
+    var baseView = Backbone.View.extend({
         tagName : "div",
         className: "panel",
         
@@ -20,11 +20,11 @@ define(['common', 'backbone'], function(common, Backbone){
         }    
     });
     
-    BaseView.prototype.model = null;
-    BaseView.prototype.scroller = null;
-    BaseView.prototype.renderedHtml = null;
+    baseView.prototype.model = null;
+    baseView.prototype.scroller = null;
+    baseView.prototype.renderedHtml = null;
     
-    BaseView.prototype.render = function () {
+    baseView.prototype.render = function () {
         this.$el.empty();
         if(!common.isEmpty(this.parent)){
             this.renderedHtml = this.template(this.model.toJSON());
@@ -35,16 +35,21 @@ define(['common', 'backbone'], function(common, Backbone){
         return this;
     };
     
-    BaseView.prototype.parent = null;
-    BaseView.prototype.self = BaseView;
+    baseView.prototype.parent = null;
+    //baseView.prototype.self = baseView;
+    baseView.prototype.setModel = function(model){
+        this.model = model;
+    };
     
     /**
      * Set the parent for this view
      * @param {Backbone.View} the parent view
      */
-    BaseView.prototype.setParent = function(parent){
+    baseView.prototype.setParent = function(parent){
         this.parent = parent; 
     };
     
-    return BaseView;
-});
+    _.extend(baseView, Backbone.Singleton);
+    
+    return baseView;
+})(Backbone);

@@ -1,0 +1,8 @@
+{
+    "jscodehints.detectedExclusions": [
+        "../libraries/xmltojson.js",
+        "C:/Users/Leo/PhoneGap/Projects/gov.msal.siisamovil/www/js/app.js",
+        "C:/Users/Leo/PhoneGap/Projects/gov.msal.siisamovil/platforms/android/cordova/lib/appinfo.js",
+        "C:/Users/Leo/PhoneGap/Projects/gov.msal.siisamovil/www/js/Services/ServiceConfig.js"
+    ]
+}

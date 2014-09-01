@@ -1,4 +1,4 @@
-define(['common', 'backbone', 'xmlToJsonConverter', 'Services/AjaxRestService'], 
+var EstablecimientoCollection = ( 
 function(common, Backbone, converter, Service){
     "use strict";
     
@@ -48,5 +48,7 @@ function(common, Backbone, converter, Service){
         //template method para que sobreescriban los que heredan
     };*/
     
+    _.extend(establecimientoCollection, Backbone.Singleton);
+    
     return establecimientoCollection;
-});
+})(common, Backbone, XmlToJSONConverter, AjaxRestService);

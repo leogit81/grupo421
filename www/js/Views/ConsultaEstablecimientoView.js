@@ -1,7 +1,6 @@
-define(['require', 'jquery', 'appframework', 'Base/BaseView', 'Models/EstablecimientoCollection', 'Views/EstablecimientoCollectionView'], 
-function(require, jquery, $, BaseView, EstablecimientoCollection, EstablecimientoCollectionView){
+var ConsultaEstablecimientoView = (function(jquery, $, BaseView, EstablecimientoCollection, EstablecimientoCollectionView){
     
-    ConsultaEstablecimientoView = BaseView.extend({
+    var consultaEstablecimientoView = BaseView.extend({
         tagName: 'div',
         
         attributes: {
@@ -41,7 +40,7 @@ function(require, jquery, $, BaseView, EstablecimientoCollection, Establecimient
                 model: this.model,
             });*/
            
-           var establecimientoColleccionView = new EstablecimientoCollectionView({
+           var establecimientoColleccionView = EstablecimientoCollectionView.getInstance({
                 model: this.model,
             });
             
@@ -54,7 +53,7 @@ function(require, jquery, $, BaseView, EstablecimientoCollection, Establecimient
                "provincia": provinciaEstablecimiento,
                "nombre": nombreEstablecimiento,
                "departamento": departamentoEstablecimiento,
-               "localidad": localidadEstablecimiento,
+               "localidad": localidadEstablecimiento
            });
         },
         render: function(){
@@ -72,5 +71,5 @@ function(require, jquery, $, BaseView, EstablecimientoCollection, Establecimient
         }
 	});
 	
-	return ConsultaEstablecimientoView;
-});
+	return consultaEstablecimientoView;
+})(jQuery, af, BaseView, EstablecimientoCollection, EstablecimientoCollectionView);

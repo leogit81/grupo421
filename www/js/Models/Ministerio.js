@@ -1,4 +1,4 @@
-define(['common', 'Base/BaseModel', 'Models/Telefono', 'Models/CoordenadasMapa', 'Models/Domicilio'], 
+var Ministerio = ( 
 function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio){
     "use strict";
     
@@ -63,4 +63,4 @@ function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio){
     });
     
     return ministerio;
-});
+})(common, BaseModel, Telefono, CoordenadasMapa, Domicilio);

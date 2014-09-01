@@ -1,10 +1,8 @@
-define(['appframework', 'Base/BaseView'], 
-function($, BaseView){
-    
-    ConsultasView = BaseView.extend({
+var ConsultasView = (function($, BaseView, MenuConsultasView){
+    var consultasView = BaseView.extend({
         tagName: 'div',
         asideMenu: null,
-        
+
         attributes: {
             'id': 'consultas',
             'class': 'panel',
@@ -12,21 +10,15 @@ function($, BaseView){
             'data-nav':"consultas_nav",
         },
 
-		initialize: function() {
-            self = this;
-        },
-        
         render: function(){
-            require(['Views/MenuConsultasView'], function(MenuConsultasView){
-                var contentEl = $("#afui div#content");
-                var consultaElement = self.$el.append(self.template())[0];
-                contentEl.append(consultaElement);
-                
-                self.asideMenu = new MenuConsultasView();
-                self.asideMenu.render();
-            });
+            var contentEl = $("#afui div#content");
+            var consultaElement = this.$el.append(this.template())[0];
+            contentEl.append(consultaElement);
+
+            this.asideMenu = MenuConsultasView.getInstance();
+            this.asideMenu.render();
         }
-	});
-	
-	return ConsultasView;
-});
+    });
+    
+    return consultasView;
+})(af, BaseView, MenuConsultasView);

@@ -1,10 +1,8 @@
-define(['appframework', 'jquery', 'Base/BaseView'], 
-function($, jquery, BaseView){
-    
+var MenuConsultasView = (function(BaseView, jquery){
     /**
      * Menú de las consultas que se carga a la aplicación cuando la misma se lanza por primera vez, en vez de agregarlo en el HTML. 
      */
-    MenuConsultasView = BaseView.extend({
+    menuConsultasView = BaseView.extend({
         tagName: 'nav',
         id: 'consultas_nav',
         
@@ -30,18 +28,14 @@ function($, jquery, BaseView){
         },
         
         showConsultaMinisterio: function(e){
-            require(['Views/ConsultaMinisterioView'], function(ConsultaMinisterioView){
-                var consultaMinisterioView = new ConsultaMinisterioView();
-                consultaMinisterioView.render();
-            });
+            var consultaMinisterioView = ConsultaMinisterioView.getInstance();
+            consultaMinisterioView.render();
         },
 		showConsultaEstablecimiento: function(e){
-            require(['Views/ConsultaEstablecimientoView'], function(ConsultaEstablecimientoView){
-                var consultaEstablecimientoView = new ConsultaEstablecimientoView();
-                consultaEstablecimientoView.render();
-            });
+            var consultaEstablecimientoView = ConsultaEstablecimientoView.getInstance();
+            consultaEstablecimientoView.render();
         },
 	});
-	
-	return MenuConsultasView;
-});
+    
+    return menuConsultasView;
+})(BaseView, jQuery);

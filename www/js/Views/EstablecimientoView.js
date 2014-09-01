@@ -1,7 +1,6 @@
-define(['appframework', 'Base/BaseView'], 
-function($, BaseView){
+var EstablecimientoView = (function($, BaseView){
     
-    EstablecimientoView = BaseView.extend({
+    var establecimientoView = BaseView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
         
@@ -39,5 +38,5 @@ function($, BaseView){
         },
 	});
 	
-	return EstablecimientoView;
-});
+	return establecimientoView;
+})(af, BaseView);

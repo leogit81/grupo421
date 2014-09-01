@@ -1,18 +1,18 @@
 /**
  * Representa una vista que tiene subvistas contenidas en ella. 
  */
-define(['require', 'common', 'Base/BaseView'], function(require, common){
+var MasterView = (function(BaseView){
     //TODO: refactor del nombre, podría llamarse vista compuesta
-    MasterView = BaseView.extend({
+    var masterView = BaseView.extend({
     });
     
-    MasterView.prototype.nestedViews = [];
+    masterView.prototype.nestedViews = [];
     
     /**
      * Agrega una vista a la colección de vistas.
      *  @param {BaseView} view 
      */
-    MasterView.prototype.addView = function(view){
+    masterView.prototype.addView = function(view){
         view.setParent(this);
         this.nestedViews.push(view);
     };
@@ -21,7 +21,7 @@ define(['require', 'common', 'Base/BaseView'], function(require, common){
      * Cada una de las vistas anidadas cuando se renderiza guarda el resultado en la propiedad renderedHTML
      * La vista compuesta obtiene su valor de cada una de sus subvistas y lo agrega a su contenido.  
      */
-    MasterView.prototype.render = function () {
+    masterView.prototype.render = function () {
         //vacía el elemento HTML donde se muestra el contenido, antes de volver a renderizarlo.
         this.$el.empty();
         BaseView.prototype.render.call(this);
@@ -31,5 +31,5 @@ define(['require', 'common', 'Base/BaseView'], function(require, common){
         return this;
     };
     
-    return MasterView;
-});
+    return masterView;
+})(BaseView);
