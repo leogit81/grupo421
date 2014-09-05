@@ -37,6 +37,7 @@ var app = (function ($, jquery) {
         $.ui.splitview = false;
         $.ui.isAjaxApp = false;
         $.ui.launch();
+        $.ui.removeFooterMenu();
     };
     
     /**
