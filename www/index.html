@@ -32,18 +32,21 @@
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/MasterView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseModel.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoCollection.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/EstablecimientoCollectionView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/EstablecimientoView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/ConsultaEstablecimientoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Imagen.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Participaciones.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/CoordenadasMapa.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Domicilio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Telefono.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Models/Ministerio.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoNominal.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/CoordenadasMapaView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/DomicilioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/TelefonoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ParticipacionesView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/EstablecimientoCollectionView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/EstablecimientoNominalView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ConsultaEstablecimientoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Ministerio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MinisterioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultaMinisterioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MenuConsultasView.js"></script>
@@ -67,22 +70,22 @@ Bienvenidos al SISA Móvil!
                             <ul class="list">
                                 <li>
                                     <a>                                        
-                                        <img class="list-image" src="/img/iconos/tab_11.png">
+                                        <img class="list-image" src="./img/iconos/tab_11.png">
                                         <div class="list-text">Localizar establecimientos más cercanos</div>                                 
                                     </a>
                                 </li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_2.png">Establecimientos de la salud</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_3.png">Profesionales de la salud</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_4.png">Vacunación</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_5.png">Farmacias</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_6.png">Droguerías</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_7.png">Programa REMEDIAR</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_8.png">Registro nacional de donantes de sangre</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_9.png">Ministerio</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_12.png">Mensajes</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_13.png">SISA Mobile</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_17.png">Referentes</a></li>
-                                <li><a class="item_menu"><img src="/img/iconos/tab_16.png">Iniciar sesión</a></li>
+                                <li><a id="linkConsultaEstablecimiento" class="item_menu" href="linkConsultaEstablecimiento"><img src="./img/iconos/tab_2.png">Establecimientos de la salud</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_3.png">Profesionales de la salud</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_4.png">Vacunación</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_5.png">Farmacias</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_6.png">Droguerías</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_7.png">Programa REMEDIAR</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_8.png">Registro nacional de donantes de sangre</a></li>
+                                <li><a id="linkConsultaMinisterio" class="item_menu" href="linkConsultaMinisterio"><img src="./img/iconos/tab_9.png">Ministerio</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_12.png">Mensajes</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_13.png">SISA Mobile</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_17.png">Referentes</a></li>
+                                <li><a class="item_menu"><img src="./img/iconos/tab_16.png">Iniciar sesión</a></li>
                             </ul>
                         </div>
                     </div>
@@ -98,14 +101,14 @@ Bienvenidos al SISA Móvil!
 
                         <ul class="list">
                             <li class="item_menu"><a><img src="/img/iconos/tab_11.png">Localizar establecimientos más cercanos</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_2.png">Establecimientos de la salud</a></li>
+                            <li><a id="linkConsultaEstablecimiento2" class="item_menu" href="linkConsultaEstablecimiento"><img src="./img/iconos/tab_2.png">Establecimientos de la salud</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_3.png">Profesionales de la salud</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_4.png">Vacunación</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_5.png">Farmacias</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_6.png">Droguerías</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_7.png">Programa REMEDIAR</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_8.png">Registro nacional de donantes de sangre</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_9.png">Ministerio</a></li>
+                            <li><a id="linkConsultaMinisterio2" class="item_menu" href="linkConsultaMinisterio"><img src="./img/iconos/tab_9.png">Ministerio</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_12.png">Mensajes</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_13.png">SISA Mobile</a></li>
                             <li><a class="item_menu"><img src="/img/iconos/tab_17.png">Referentes</a></li>

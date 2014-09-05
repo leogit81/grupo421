@@ -22,9 +22,11 @@ var EstablecimientoCollectionView = (function($, BaseView){
         },
                                    
         itemTemplate: function(establecimiento){
-            var temp = "<li><a><%=nombre%></br><%=codigo%> - <%=provincia%></a></li>";
+            var temp = "<li><a><%=nombre%></br><span class='codigoEstablecimiento'> <%=codigo%> </span> - <%=provincia%></a></li>";
             this.renderedHtml += _.template(temp, establecimiento);
         },
+        
+        self: this,
         
 		initialize: function(attributes, options) {
 		    Backbone.View.prototype.initialize.call(this, attributes, options);
@@ -66,8 +68,28 @@ var EstablecimientoCollectionView = (function($, BaseView){
             }
             $.ui.loadContent("resultadoConsultaEstablecimiento", false, false, "slide");
             $("#resultadoConsultaEstablecimiento").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
+            
+            jQuery("#resultadoConsultaEstablecimiento ul li a").on("click", _.bind(this.busquedaNominalEstablecimiento, this));
             return this;
         },
+        
+        busquedaNominalEstablecimiento: function(eventData){
+            //realizar búsqueda posta
+            
+            var establecimientoNominalModel = new EstablecimientoNominal({});
+            
+            EstablecimientoNominalView.getInstance({
+                model: establecimientoNominalModel
+            }).render();
+            
+            var codigoEstablecimiento = this.getCodigoEstablecimientoFromSelectedItem(eventData.currentTarget.outerHTML);
+            establecimientoNominalModel.load(codigoEstablecimiento);
+        },
+        
+        getCodigoEstablecimientoFromSelectedItem: function(selectedItem){
+            return common.trim(jQuery(selectedItem).find("span.codigoEstablecimiento").html());
+        }
+        
 	});
 	
 	return establecimientoCollectionView;

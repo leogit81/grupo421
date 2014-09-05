@@ -36,7 +36,7 @@ var BaseView = (function(Backbone){
     };
     
     baseView.prototype.parent = null;
-    //baseView.prototype.self = baseView;
+    baseView.prototype.self = baseView;
     baseView.prototype.setModel = function(model){
         this.model = model;
     };

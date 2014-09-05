@@ -86,6 +86,10 @@
     };
     
     common.trim = function(aString, charArray){
+        if(this.isEmpty(charArray))
+        {
+            charArray = [" "];
+        }
         return this.trimRight(this.trimLeft(aString, charArray), charArray);
     };
     

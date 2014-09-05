@@ -25,6 +25,9 @@ var MenuConsultasView = (function(BaseView, jquery){
         attachEvents: function(){
             jquery("#linkConsultaMinisterio").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
+            //esto es para el menú lateral
+            jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
+            jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
         },
         
         showConsultaMinisterio: function(e){
