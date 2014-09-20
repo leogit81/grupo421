@@ -43,7 +43,7 @@ function(common, BaseModel){
         },
         
         initialize: function(attributes, options){
-            self = this;
+            //self = this;
 				
             BaseModel.prototype.initialize.call(this, attributes, options);
             this.service.loadConfig({
@@ -53,7 +53,7 @@ function(common, BaseModel){
             
         setJsonData: function(jsonData){
             var ministerioData = this.parse(jsonData.Establecimiento);
-            self.set(ministerioData);
+            this.set(ministerioData);
         },
 
         parse: function(response){

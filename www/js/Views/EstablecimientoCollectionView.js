@@ -53,9 +53,6 @@ var EstablecimientoCollectionView = (function($, BaseView){
             //fin del parche
             
             this.$el.empty();
-            /*this.$el.append(this.template(
-                {"establecimientos": this.model.toJSON(),
-                "itemTemplate": this.itemTemplate}));*/
            this.armarHtml(this.model.toJSON());
            this.$el.append(this.template({"renderedHtml": this.renderedHtml}));
             
@@ -69,20 +66,20 @@ var EstablecimientoCollectionView = (function($, BaseView){
             $.ui.loadContent("resultadoConsultaEstablecimiento", false, false, "slide");
             $("#resultadoConsultaEstablecimiento").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
             
-            jQuery("#resultadoConsultaEstablecimiento ul li a").on("click", _.bind(this.busquedaNominalEstablecimiento, this));
+            $("#resultadoConsultaEstablecimiento").delegate("ul li a", "click", _.bind(this.busquedaNominalEstablecimiento, this));
             return this;
         },
         
         busquedaNominalEstablecimiento: function(eventData){
             //realizar búsqueda posta
             
-            var establecimientoNominalModel = new EstablecimientoNominal({});
+            var codigoEstablecimiento = this.getCodigoEstablecimientoFromSelectedItem(eventData.currentTarget.outerHTML);
             
+            var establecimientoNominalModel = new EstablecimientoNominal({});
             EstablecimientoNominalView.getInstance({
                 model: establecimientoNominalModel
             }).render();
             
-            var codigoEstablecimiento = this.getCodigoEstablecimientoFromSelectedItem(eventData.currentTarget.outerHTML);
             establecimientoNominalModel.load(codigoEstablecimiento);
         },
         
