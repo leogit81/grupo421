@@ -1,10 +1,7 @@
-var Establecimiento = ( 
-function(common, BaseModel){
+var Establecimiento = (function (common, BaseModel) {
     "use strict";
     
     var establecimiento = BaseModel.extend({
-        self: null,
-        
         defaults : {
             "codIndecProvincia" : null,
             "codigo" : null,
@@ -13,27 +10,25 @@ function(common, BaseModel){
             "fechaRegistro" : null,
             "nombre" : null,
             "provincia" : null,
-            "tipologia" : null,          
+            "tipologia" : null
         },
         
-        initialize: function(attributes, options){
-            self = this;
-				
+        initialize: function (attributes, options) {
             BaseModel.prototype.initialize.call(this, attributes, options);
             this.service.loadConfig({
-                url: 'establecimiento/buscar',
+                url: 'establecimiento/buscar'
             });
         },
         
-        setJsonData: function(jsonData){
+        setJsonData: function (jsonData) {
             var establecimientoData = this.parse(jsonData);
-            self.set(establecimientoData);
+            this.set(establecimientoData);
         },
 
-        parse: function(response){
+        parse: function (response) {
             return response.EstablecimientoSearchResponse.establecimientos.establecimientoReducido;
         }
     });
     
     return establecimiento;
-})(common, BaseModel);
+}(common, BaseModel));

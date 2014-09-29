@@ -1,93 +1,95 @@
-var EstablecimientoCollectionView = (function($, BaseView){
+var EstablecimientoCollectionView = (function ($, common, Backbone, _, renderer, BaseView, EstablecimientoNominal, EstablecimientoNominalView) {
+    "use strict";
     
     var establecimientoCollectionView = BaseView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
         
         attributes: {
-            'id': 'resultadoConsultaEstablecimiento',
-            'data-title':'Consulta general de Establecimiento',
-            'data-nav':"consultas_nav",    
+            'id': 'resultadoConsultaGeneralEstablecimiento',
+            'data-title': 'Consulta General de Establecimientos',
+            'data-nav': "consultas_nav"
         },
         
-        template : _.template(
-                        "<ul class='list'><%= renderedHtml %></ul>"
-                      ),
+        template : _.template("<ul class='list'><%= renderedHtml %></ul>"),
 
         renderedHtml: null,
         
-        armarHtml: function(establecimientos){
-            this.renderedHtml = "";            
+        armarHtml: function (establecimientos) {
+            this.renderedHtml = "";
             _.each(establecimientos, this.itemTemplate, this);
         },
                                    
-        itemTemplate: function(establecimiento){
+        itemTemplate: function (establecimiento) {
             var temp = "<li><a><%=nombre%></br><span class='codigoEstablecimiento'> <%=codigo%> </span> - <%=provincia%></a></li>";
             this.renderedHtml += _.template(temp, establecimiento);
         },
         
         self: this,
         
-		initialize: function(attributes, options) {
-		    Backbone.View.prototype.initialize.call(this, attributes, options);
-            
-            if(attributes !== undefined && attributes.model !== undefined){
-                this.model = attributes.model;
-                /*this.model.on('change', this.render, this);
-                this.model.on('remove', this.render, this);*/
-                this.model.on('add', this.render, this);
-            }
+		initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+            BaseView.prototype.initialize.call(this, attributes, options);
+            this.setModel(attributes);
         },
         
         cantidadDeEstablecimientos: 0,
         
-        render: function(model, collection, options){
+        render: function (model, collection, options) {
             //TODO: esto hay que corregirlo, es un parche para evitar que me haga un render para cada establecimiento que se agrega a la colección.
             this.cantidadDeEstablecimientos++;
-            if (this.cantidadDeEstablecimientos < collection.length){
+            if (this.cantidadDeEstablecimientos < collection.length) {
                 return;
-            }
-            else{
+            } else {
                 this.cantidadDeEstablecimientos = 0;
             }
             //fin del parche
             
             this.$el.empty();
-           this.armarHtml(this.model.toJSON());
-           this.$el.append(this.template({"renderedHtml": this.renderedHtml}));
+            this.armarHtml(this.model.toJSON());
+            this.$el.append(this.template({"renderedHtml": this.renderedHtml}));
             
-            //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
-            if ($("#resultadoConsultaEstablecimiento").length <= 0){
-                $.ui.addContentDiv("resultadoConsultaEstablecimiento", this.$el[0].outerHTML);//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("resultadoConsultaEstablecimiento", this.$el.html());//solo contenido para actualizar
+            if (!common.isEmpty(this.renderer)) {
+                this.renderer.render(this);
             }
-            $.ui.loadContent("resultadoConsultaEstablecimiento", false, false, "slide");
-            $("#resultadoConsultaEstablecimiento").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
             
-            $("#resultadoConsultaEstablecimiento").delegate("ul li a", "click", _.bind(this.busquedaNominalEstablecimiento, this));
+            //agrego esta clase para poder aplicar estilos CSS
+            $("#resultadoConsultaGeneralEstablecimiento").addClass("consulta-detallada");
+            
             return this;
         },
         
-        busquedaNominalEstablecimiento: function(eventData){
-            //realizar búsqueda posta
-            
+        busquedaNominalEstablecimiento: function (eventData) {
             var codigoEstablecimiento = this.getCodigoEstablecimientoFromSelectedItem(eventData.currentTarget.outerHTML);
             
-            var establecimientoNominalModel = new EstablecimientoNominal({});
-            EstablecimientoNominalView.getInstance({
-                model: establecimientoNominalModel
-            }).render();
-            
+            var establecimientoNominalModel = new EstablecimientoNominal();
+            EstablecimientoNominalView.getInstance().renderEmptyView();
+            EstablecimientoNominalView.getInstance().setModel(establecimientoNominalModel);
             establecimientoNominalModel.load(codigoEstablecimiento);
         },
         
-        getCodigoEstablecimientoFromSelectedItem: function(selectedItem){
-            return common.trim(jQuery(selectedItem).find("span.codigoEstablecimiento").html());
+        getCodigoEstablecimientoFromSelectedItem: function (selectedItem) {
+            return common.trim($(selectedItem).find("span.codigoEstablecimiento").html());
+        },
+        
+        attachEvents: function() {
+            $("#afui").delegate("#resultadoConsultaGeneralEstablecimiento ul li a", "click", _.bind(this.busquedaNominalEstablecimiento, this));
         }
         
 	});
+    
+    establecimientoCollectionView.prototype.setModel = function (attributes) {
+        if (attributes !== undefined && attributes.model !== undefined) {
+            this.model = attributes.model;
+        } else {
+            return;
+        }
+        
+        //this.model.on('change', this.render, this);
+        this.model.on('remove', this.render, this);
+        this.model.on('add', this.render, this);
+    };
 	
 	return establecimientoCollectionView;
-})(af, BaseView);
+}(af, common, Backbone, _, AppFrameworkRenderer, BaseView, EstablecimientoNominal, EstablecimientoNominalGeneralView));

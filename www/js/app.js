@@ -27,7 +27,7 @@ var app = (function ($, jquery) {
     
     /**
      * Se ejecuta al hacer click en el icono de las tres rayitas que muestra el menú lateral.  
-     */
+     */ 
     function onClickMenuBadge(){
         af.ui.toggleSideMenu();
     };
@@ -38,6 +38,8 @@ var app = (function ($, jquery) {
         $.ui.isAjaxApp = false;
         $.ui.launch();
         $.ui.removeFooterMenu();
+        //esto cambia el texto del backbutton para todos los paneles de la aplicación
+        $.ui.backButtonText = "Atrás"
     };
     
     /**

@@ -1,10 +1,7 @@
-var EstablecimientoNominal = ( 
-function(common, BaseModel){
+var EstablecimientoNominal = (function (common, BaseModel, CoordenadasMapa, Domicilio, Participaciones, Telefono) {
     "use strict";
     
     var establecimientoNominal = BaseModel.extend({
-        self: null,
-        
         nestedModels: {
             coordenadasDeMapa : CoordenadasMapa,
             domicilio : Domicilio,
@@ -12,62 +9,62 @@ function(common, BaseModel){
             telefono1 : Telefono,
             telefono2 : Telefono,
             telefono3 : Telefono,
-            telefono4 : Telefono,
+            telefono4 : Telefono
         },
         
-        defaults : {
-            "codIndecProvincia" : null,
-            "codigo" : null,
-            "dependencia" : null,
-            "fechaModificacion" : null,
-            "fechaRegistro" : null,
-            "nombre" : null,
-            "provincia" : null,
-            "tipologia" : null,
-            "categoriaDeLaTipologia" : null,
-            "codIndecDepto" : null,
-            "codIndecLocalidad" : null,
-            "codigoSISA" : null,
-            "coordenadasDeMapa" : new CoordenadasMapa(),
-            "depto": null,
-            "domicilio" : new Domicilio(),
-            "imagenes": null,
-            "internacion" : null,
-            "localidad" : null,
-            "origenDelFinanciamiento" : null,
-            "participaciones" : new Participaciones(),
-            "telefono1" : new Telefono(),
-            "telefono2" : new Telefono(),
-            "telefono3" : new Telefono(),
-            "telefono4" : new Telefono()
+        defaults : function () {
+            var myDefault = function () {
+                return {
+                    "codIndecProvincia" : null,
+                    "codigo" : null,
+                    "dependencia" : null,
+                    "fechaModificacion" : null,
+                    "fechaRegistro" : null,
+                    "nombre" : null,
+                    "provincia" : null,
+                    "tipologia" : null,
+                    "categoriaDeLaTipologia" : null,
+                    "codIndecDepto" : null,
+                    "codIndecLocalidad" : null,
+                    "codigoSISA" : null,
+                    "coordenadasDeMapa" : CoordenadasMapa,
+                    "depto": null,
+                    "domicilio" : Domicilio,
+                    "imagenes": null,
+                    "internacion" : null,
+                    "localidad" : null,
+                    "origenDelFinanciamiento" : null,
+                    "participaciones" : Participaciones,
+                    "telefono1" : Telefono,
+                    "telefono2" : Telefono,
+                    "telefono3" : Telefono,
+                    "telefono4" : Telefono
+                };
+            };
+            
+            return new myDefault();
         },
         
-        initialize: function(attributes, options){
-            //self = this;
-				
+        initialize: function (attributes, options) {
             BaseModel.prototype.initialize.call(this, attributes, options);
-            this.service.loadConfig({
-                url: 'establecimiento',
-            });
+            this.service.loadConfig(this.getServiceConfig());
         },
             
-        setJsonData: function(jsonData){
-            var ministerioData = this.parse(jsonData.Establecimiento);
-            this.set(ministerioData);
+        setJsonData: function (jsonData) {
+            var establecimientoData = this.parse(jsonData.Establecimiento);
+            this.set(establecimientoData);
         },
 
-        parse: function(response){
-            for(var key in this.nestedModels)
+        parse: function (response) {
+            for (var key in this.nestedModels)
             {
                 var nestedModel = this.nestedModels[key];
                 var modelData = response[key];
                 
                 var modelExistente = this.get(key); 
-                if(common.isEmpty(modelExistente))
-                {
+                if (common.isEmpty(modelExistente)) {
                     response[key] = new nestedModel(modelData);
-                }
-                else{
+                } else {
                     response[key] = modelExistente.set(modelData);
                 }
             }
@@ -75,5 +72,11 @@ function(common, BaseModel){
         }
     });
     
+    establecimientoNominal.prototype.getServiceConfig = function () {
+        return {
+            url: 'establecimiento'
+        };
+    };
+    
     return establecimientoNominal;
-})(common, BaseModel);
+}(common, BaseModel, CoordenadasMapa, Domicilio, Participaciones, Telefono));

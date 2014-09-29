@@ -1,4 +1,4 @@
-var ConsultasView = (function($, BaseView, MenuConsultasView){
+var ConsultasView = (function($, BaseView, MenuConsultasView, renderer){
     var consultasView = BaseView.extend({
         tagName: 'div',
         asideMenu: null,
@@ -21,4 +21,4 @@ var ConsultasView = (function($, BaseView, MenuConsultasView){
     });
     
     return consultasView;
-})(af, BaseView, MenuConsultasView);
+})(af, BaseView, MenuConsultasView, AppFrameworkRenderer);

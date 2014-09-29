@@ -20,3 +20,54 @@ ul li a div.ztexto-lista {
 #afui .list > li > a {
     padding: 2% 2% 2% 2% !important;
 }
+
+.tabs ul li{
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tabs ul {
+    display: table;
+    width: 100%;
+}
+
+.tabs ul li a{
+    background-color: #f6f6f6;
+    border-color: #ddd;
+    color: #333;
+    text-shadow: 0 1px 0 #f3f3f3;
+    position: relative;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none!important;
+    border-width: 1px;
+    border-style: solid;
+    display: block;
+    font-weight: bold;
+}
+
+.tabs {
+    position: relative;
+    padding: .2em;
+    line-height: 2;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.tabs #selectedTab div{
+    display: block;
+    position: relative;
+}
+
+.tabs .activeTab{
+    background-color: #38c;
+    border-color: #38c;
+    color: #fff;
+    text-shadow: 0 1px 0 #059;
+}

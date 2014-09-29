@@ -16,7 +16,7 @@ var MenuConsultasView = (function(BaseView, jquery){
                             '</ul>'),
         
         render: function(){
-            this.attachEvents();
+            BaseView.prototype.render.call(this);
         },
         
         /**

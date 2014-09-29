@@ -21,12 +21,12 @@ function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio){
             "nombre" : null,
             "provincia" : null,
             "sitioWeb" : null,
-            "coordenadasDeMapa" : new CoordenadasMapa(),
-            "domicilio" : new Domicilio(),
-            "telefono1" : new Telefono(),
-            "telefono2" : new Telefono(),
-            "telefono3" : new Telefono(),
-            "telefono4" : new Telefono(),
+            "coordenadasDeMapa" : CoordenadasMapa,
+            "domicilio" : Domicilio,
+            "telefono1" : Telefono,
+            "telefono2" : Telefono,
+            "telefono3" : Telefono,
+            "telefono4" : Telefono,
         },
         
         initialize: function(attributes, options){

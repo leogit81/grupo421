@@ -1,10 +1,12 @@
 /**
  * Biblioteca de funciones comunes 
  */
-(function(_){
-    common = {};
+var common = (function (_) {
+    "use strict";
     
-    common.isEmpty = function(value){
+    var common = {};
+    
+    common.isEmpty = function (value) {
         return value === undefined
                 || value === null
                 || value === '';
@@ -16,19 +18,20 @@
      * @param {Object} relativeUrl
      * @param {Object} number, string o un objeto literal con los datos para pasar al servicio
      */
-    common.combineUrl = function(baseUrl, relativeUrl, data){
-        if (this.isEmpty(baseUrl) || typeof (baseUrl) !== 'string')
+    common.combineUrl = function (baseUrl, relativeUrl, data) {
+        if (this.isEmpty(baseUrl) || typeof (baseUrl) !== 'string') {
             return '';
+        }
             
         baseUrl = this.trimRight(baseUrl, ['/']);
         
-        if (this.isEmpty(relativeUrl) || typeof (relativeUrl) !== 'string'){
+        if (this.isEmpty(relativeUrl) || typeof (relativeUrl) !== 'string') {
             return baseUrl;
         }
         
         relativeUrl = this.trim(relativeUrl, ['/']);
         
-        if (this.isEmpty(data)){
+        if (this.isEmpty(data)) {
             return baseUrl + '/' + relativeUrl;
         }
         
@@ -40,16 +43,16 @@
     /**
      * Obtiene un string con los parámetros que se enviaran en la petición HTTP GET 
      */
-    common.obtenerParametrosGet = function(data){
+    common.obtenerParametrosGet = function (data) {
         var parametrosGet = "";
         
-        if (_.isObject(data)){
+        if (_.isObject(data)) {
             parametrosGet += '?';
-            for(var property in data){
+            for (var property in data) {
                 parametrosGet += property + '=' + data[property] + '&';
             }
             parametrosGet = this.trimRight(parametrosGet, ['&']);
-        }else{
+        } else {
             data = this.trim(data, ['/']);
             parametrosGet = '/' + data;
         }
@@ -62,7 +65,7 @@
      * @param {Object} aString
      * @param {Object} charArray array con los caracteres que se quieren remover
      */
-    common.trimLeft = function(aString, charArray){
+    common.trimLeft = function (aString, charArray) {
         var stringArray = this.stringToArray(aString);
         
         for(var i = 0; i < stringArray.length; i++){
@@ -106,7 +109,7 @@
      * Devuelve el valor del atributo o un valor por default si el valor del atributo es nulo.
      * @param {Object} atributo
      */
-    common.obtenerValorODefault = function(atributo){
+    common.obtenerValorODefault = function(atributo) {
         if (this.isEmpty(atributo))
         {
             return "No definido";
@@ -114,5 +117,35 @@
         return atributo;
     };
     
+    /**
+    * Igual que el extend de underscore, pero se agrega un flag que si es false, no sobreescribe la propiedad de objeto
+    * que se quiere extender.
+    * @param {Object} obj, objeto que se quiere extender.
+    * @param {boolean} override, si el argumento pasado vale true, entonces, funciona igual que underscore.
+    * Esto quiere decir que se copian las propiedades de los objetos origen al objeto destino.
+    * Si la propiedad existe se sobreescribe con el valor que tiene en el objeto origen.
+    * Si es false, entonces, si la propiedad evaluada existe en el objeto destino, se conserva, no se sobreescribe.
+    */
+    common.extendSinPisar = function (obj, override) {
+        var argsAux = [],
+                i;
+        
+        for (i = 2; i < arguments.length; i++) {
+            argsAux[i - 2] = arguments[i];
+        };
+        
+        _.each(argsAux, function(source) {
+          if (source) {
+            for (var prop in source) {
+                if (!override && !common.isEmpty(obj[prop])){
+                    continue;
+                }
+                obj[prop] = source[prop];
+            }
+          }
+        });
+        return obj;
+    };
+    
     return common;
-})(_);
+}(_));
