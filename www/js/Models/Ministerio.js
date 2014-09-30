@@ -1,20 +1,17 @@
-var Ministerio = ( 
-function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio){
+var Ministerio = (function (common, BaseModel, Telefono, CoordenadasMapa, Domicilio) {
     "use strict";
     
     var ministerio = BaseModel.extend({
-        self: null,
-
         nestedModels: {
             coordenadasDeMapa : CoordenadasMapa,
             domicilio : Domicilio,
             telefono1 : Telefono,
             telefono2 : Telefono,
             telefono3 : Telefono,
-            telefono4 : Telefono,
+            telefono4 : Telefono
         },
             
-        defaults : {
+        defaults: {
             "localidad" : null,
             "mail1" : null,
             "ministroDeSalud" : null,
@@ -26,26 +23,21 @@ function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio){
             "telefono1" : Telefono,
             "telefono2" : Telefono,
             "telefono3" : Telefono,
-            "telefono4" : Telefono,
+            "telefono4" : Telefono
         },
         
-        initialize: function(attributes, options){
-            self = this;
-            
+        initialize: function (attributes, options) {
             BaseModel.prototype.initialize.call(this, attributes, options);
-            this.service.loadConfig({
-                url: 'ministerio',
-            });
+            this.service.loadConfig(this.getServiceConfig());
         },
         
-        setJsonData: function(jsonData){
+        setJsonData: function (jsonData) {
             var ministerioData = this.parse(jsonData.ministerio);
-            self.set(ministerioData);
+            this.set(ministerioData);
         },
 
-        parse: function(response){
-            for(var key in this.nestedModels)
-            {
+        parse: function (response) {
+            for (var key in this.nestedModels) {
                 var nestedModel = this.nestedModels[key];
                 var modelData = response[key];
                 
@@ -61,6 +53,12 @@ function(common, BaseModel, Telefono, CoordenadasMapa, Domicilio){
             return response;
         }
     });
+    
+    ministerio.prototype.getServiceConfig = function() {
+        return {
+            url: 'ministerio'
+        };
+    };
     
     return ministerio;
 })(common, BaseModel, Telefono, CoordenadasMapa, Domicilio);

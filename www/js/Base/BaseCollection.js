@@ -12,7 +12,6 @@ var BaseCollection = (function (common, Backbone, converter, Service, BaseModel)
     });
     
     _.extend(baseCollection, Backbone.Singleton);
-    //_.extend(baseCollection, BaseModel);
     common.extendSinPisar(baseCollection.prototype , false, BaseModel.prototype);
     
     baseCollection.prototype.setJsonData = function (jsonData) {

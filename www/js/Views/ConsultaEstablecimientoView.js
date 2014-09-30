@@ -35,21 +35,10 @@ var ConsultaEstablecimientoView = (function ($, renderer, BaseView, Establecimie
         },
         
         ejecutarConsultaEstablecimiento: function () {
-           /*var establecimientoColleccionView = EstablecimientoCollectionView.getInstance({
-                model: this.model,
-            });*/
-            
             var nombreEstablecimiento = $("#nombreEstablecimiento").val();
             var provinciaEstablecimiento = $("#provinciaEstablecimiento").val();
             var departamentoEstablecimiento = $("#departamentoEstablecimiento").val();
             var localidadEstablecimiento = $("#localidadEstablecimiento").val();
-            
-            /*this.model.load({
-               "provincia": provinciaEstablecimiento,
-               "nombre": nombreEstablecimiento,
-               "departamento": departamentoEstablecimiento,
-               "localidad": localidadEstablecimiento
-           });*/
             
             this.modelDataSource.getModelData(EstablecimientoCollection, {
                 "provincia": provinciaEstablecimiento,

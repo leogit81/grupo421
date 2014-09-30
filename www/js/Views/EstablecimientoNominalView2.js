@@ -1,4 +1,5 @@
-var EstablecimientoNominalView2 = (function($, BaseView, EstablecimientoNominalGeneralView){
+var EstablecimientoNominalView2 = (function ($, renderer, BaseView, EstablecimientoNominalGeneralView) {
+    "use strict";
     
     var establecimientoNominalView = TabPanelView.extend({
         tagName: 'div',
@@ -6,57 +7,92 @@ var EstablecimientoNominalView2 = (function($, BaseView, EstablecimientoNominalG
         
         attributes: {
             'id': 'resultadoConsultaNominalEstablecimiento',
-            'data-title':'Consulta Nominal de Establecimiento',
-            'data-nav':"consultas_nav",    
+            'data-title': 'Consulta Nominal de Establecimiento',
+            'data-nav': 'consultas_nav'
         },
         
         tabs: [
             {
                 tabName: "General",
                 panelId: "establecimientoGeneral",
-                view: EstablecimientoNominalGeneralView
+                viewClass: EstablecimientoNominalGeneralView,
+                modelClass: EstablecimientoNominal
             },
             {
                 tabName: "Prestaciones",
                 panelId: "establecimientoPrestaciones",
-                view: new BaseView()
+                viewClass: BaseView,
+                modelClass: BaseModel
             },
             {
                 tabName: "Imágenes",
                 panelId: "establecimientoImagenes",
-                view: new BaseView()
+                viewClass: BaseView,
+                modelClass: BaseModel
             },
             {
                 tabName: "Mapas",
                 panelId: "establecimientoMapas",
-                view: new BaseView()
+                viewClass: BaseView,
+                modelClass: BaseModel
             }
         ],
                               
-		initialize: function(attributes, options) {
+		initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
             TabPanelView.prototype.initialize.call(this, attributes, options);
-            
-            var tabGeneral = this.findTab("General");
-            tabGeneral.view = tabGeneral.view.getInstance({
-                model: this.model
-            });
         },
         
-        render: function(){
-            TabPanelView.prototype.render.call(this);
-
-            //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
-            if ($("#resultadoConsultaNominalEstablecimiento").length <= 0){
-                $.ui.addContentDiv("resultadoConsultaNominalEstablecimiento", this.$el[0].outerHTML);//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("resultadoConsultaNominalEstablecimiento", this.$el.html());//solo contenido para actualizar
-            }
-            $.ui.loadContent("resultadoConsultaNominalEstablecimiento", false, false, "slide");
-            $("#resultadoConsultaNominalEstablecimiento").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
-            return this;
+        /**
+        * Setea el modelo para la vista y también actualiza los modelos de las vistas de los tabs.
+        */
+        setModel: function (model) {
+            TabPanelView.prototype.setModel.call(this, model);
+            
+            //var establecimientoModel = this.getModelOrDefault("General");
+            this.getViewByName("General").setModel(model);
+            
+            /*var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
+            this.getViewByName("coordenadasDeMapa").setModel(coordenadasModel);
+            
+            var domicilioModel = this.getModelOrDefault("domicilio");
+            this.getViewByName("domicilio").setModel(domicilioModel);
+            
+            var participacionesModel = this.getModelOrDefault("participaciones");
+            this.getViewByName("participaciones").setModel(participacionesModel);
+            
+            var telefonoModel1 = this.getModelOrDefault("telefono1");
+            this.getViewByName("telefono1").setModel(telefonoModel1);
+            
+            var telefonoModel2 = this.getModelOrDefault("telefono2");
+            this.getViewByName("telefono2").setModel(telefonoModel2);
+            
+            var telefonoModel3 = this.getModelOrDefault("telefono3");
+            this.getViewByName("telefono3").setModel(telefonoModel3);
+            
+            var telefonoModel4 = this.getModelOrDefault("telefono4");
+            this.getViewByName("telefono4").setModel(telefonoModel4);*/
+        },
+        
+        /**
+        * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
+        * @param {String} tabName, nombre del tab, a partir de este se obtiene el modelo
+        */
+        getModelOrDefault: function (tabName) {
+            var tab = this.findTab("tabName", tabName);
+            return tab.view.model;
         },
 	});
+    
+    /**
+     * Devuelve una vista por nombre.
+     *  @param {String} , el nombre de la vista, si se quiere poder acceder a la misma mediante nombre. 
+     */
+    establecimientoNominalView.prototype.getViewByName = function (viewName) {
+        var tab = this.findTab("tabName", viewName);
+        return tab.view;
+    };
 	
 	return establecimientoNominalView;
-})(af, BaseView, EstablecimientoNominalGeneralView);
+}(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView));

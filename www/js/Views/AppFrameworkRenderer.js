@@ -19,11 +19,9 @@ var AppFrameworkRenderer = (function (_, $, BaseView) {
         if ($("#"+view.attributes.id).length == 0) {
             //div panel + contenido
             $.ui.addContentDiv(view.attributes.id, view.$el[0].outerHTML);
-            //$.ui.addContentDiv(view.attributes.id, view.renderedHtml);
         } else {
             //solo contenido para actualizar
             $.ui.updatePanel(view.attributes.id, view.$el.html());
-            //$.ui.updatePanel(view.attributes.id, view.renderedHtml);
         }
         
         $.ui.loadContent(view.attributes.id, false, false, animation);

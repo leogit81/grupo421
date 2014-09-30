@@ -46,11 +46,7 @@ var BaseView = (function ($, common, Backbone) {
     baseView.prototype.render = function () {
         var jsonData = this.getModelData();
         
-        this.clearViewData();
-        
-        this.armarHtmlConData(jsonData);
-        
-        return this.renderHtml();
+        return this.renderFromData(jsonData);
     };
     
     /**
@@ -83,7 +79,7 @@ var BaseView = (function ($, common, Backbone) {
     /**
     * Arma el html con la información del modelo, para después hacer el render de la vista.
     */
-    baseView.prototype.armarHtmlConData = function (data) {        
+    baseView.prototype.armarHtmlConData = function (data) {
         if (!common.isEmpty(this.parent)) {
             this.renderedHtml = this.replaceTemplateWithData(data);
         } else {
@@ -92,9 +88,11 @@ var BaseView = (function ($, common, Backbone) {
     };
     
     /**
-    * Delega el render de la vista al renderer, que se utiliza en el render() y renderEmptyView()
+    * Delega el render de la vista al renderer. El renderer agrega el panel en el DOM.
+    * La implementación del renderer tiene lógica particular del framework de UI usado.
+    * Este método se utiliza en el render() y renderEmptyView()
     */
-    baseView.prototype.renderHtml = function () {        
+    baseView.prototype.renderHtml = function () {
         if (!common.isEmpty(this.renderer)) {
             this.renderer.render(this);
         }

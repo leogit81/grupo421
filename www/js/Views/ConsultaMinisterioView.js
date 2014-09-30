@@ -1,4 +1,4 @@
-var ConsultaMinisterioView = (function(jquery, $, BaseView, Ministerio, MinisterioView){
+var ConsultaMinisterioView = (function(jquery, $, renderer, BaseView, Ministerio, MinisterioView){
     
     var consultaMinisterioView = BaseView.extend({
         tagName: 'div',
@@ -18,21 +18,37 @@ var ConsultaMinisterioView = (function(jquery, $, BaseView, Ministerio, Minister
             '</form>'
         ),
   
-		initialize: function() {
-            this.model = new Ministerio();
+		initialize: function(attributes, options) {
+            //this.model = new Ministerio();
+            options = options || {};
+            options.renderer = renderer;
+            BaseView.prototype.initialize.call(this, attributes, options);
+            
+            this.initializeModelDataSource();
         },
         
-        setNumeroMinisterio: function(e){
-            this.model.set("id", e.target.value);
+        initializeModelDataSource: function () {
+            this.modelDataSource = new ModelDataSource ({view: this});
+            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
+        },
+        
+        /**
+        * Hace el render de la vista que muestra los datos del modelo que se obtuvieron a partir de la consulta
+        * aplicando los filtros.
+        * @param {Object} data, información del modelo obtenida del servicio.
+        */
+        renderVistaDeDatos: function (data) {
+            var ministerioModel = new Ministerio();
+            var ministerioView = MinisterioView.getInstance();
+            ministerioView.setModel({model: ministerioModel});
+            ministerioModel.processData(data);
         },
         
         ejecutarConsultaMinisterio: function(){
-            var ministerioView = MinisterioView.getInstance({
-                model: this.model,
-            });
             var numeroMinisterio = $("#numeroMinisterio").val();
-            this.model.load(numeroMinisterio);
+            this.modelDataSource.getModelData(Ministerio, numeroMinisterio);
         },
+        
         render: function(){
             $.ui.addContentDiv("consultaMinisterio", this.template());
             $.ui.loadContent("consultaMinisterio", false, false, "slide");
@@ -41,7 +57,8 @@ var ConsultaMinisterioView = (function(jquery, $, BaseView, Ministerio, Minister
         },
         
         /**
-         * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
+         * Usado para bindear eventos a los controles del formulario.
+         * Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
          */
         attachEvents: function(){
             jquery("#submitConsultaMinisterio").on("click", _.bind(this.ejecutarConsultaMinisterio, this));
@@ -49,4 +66,4 @@ var ConsultaMinisterioView = (function(jquery, $, BaseView, Ministerio, Minister
 	});
 	
 	return consultaMinisterioView;
-})(jQuery, af, BaseView, Ministerio, MinisterioView);
+})(jQuery, af, AppFrameworkRenderer, BaseView, Ministerio, MinisterioView);

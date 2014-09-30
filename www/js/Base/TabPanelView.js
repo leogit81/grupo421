@@ -6,42 +6,30 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
         className: "panel",
         
         template : _.template("<div class='tabs'><ul></ul>" +
-                              "<div id='selectedTab'></div>" +
+                              "<div id='selectedTab' class='consulta-detallada'></div>" +
                               "</div>"),
         /**
         * Array con la configuración de cada tab.
         * {
-        *     tabName: 'General',
-        *     tabIndex: 0,
-        *     view: Instancia de la vista que se renderea cuando se selecciona el panel,
-        *     panelId: "general" //id. del panel que contiene la información, debería ser el mismo que tiene la vista.
+        *   tabName: 'General',
+        *   tabIndex: 0,
+        *   view: Instancia de la vista que se renderea cuando se selecciona el panel,
+        *   viewClass: Constructor de la vista.  
+        *   panelId: "general" //id. del panel que contiene la información, debería ser el mismo que tiene la vista.
         * }
         */
         tabs: [],
         
         initialize: function (attributes, options) {
-            Backbone.View.prototype.initialize.call(this, attributes, options);
-            
-            if (attributes !== undefined && attributes.model !== undefined) {
-                this.model = attributes.model;
-                this.model.on('change', this.render, this);
-                
-                if (this.tabs !== undefined) {
-                    this.addTabRange(this.tabs);
-                }
-            }
-            
-            //bindea un handler para el click de cada tab de la vista
-            $(this.el).delegate("ul li", "click", _.bind(this.renderSelectedTab, this));
-            
-            if (!common.isEmpty(this.tabs) && this.tabs.length > 0) {
-                this.selectedTab = this.tabs[0];
-            }
+            BaseView.prototype.initialize.call(this, attributes, options);
+            this.initializeTabs();
         },
         
         renderSelectedTab: function (args) {
-            this.selectedTab = args;
-            this.render();
+            //obtiene del current target el id del panel
+            var selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
+            this.selectedTab = this.findTab("panelId", selectedTabPanelId);
+            this.renderFromData();
         }
     });
     
@@ -50,15 +38,27 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
         return $("#selectedTab", this.el);
     };
     
-    tabPanel.prototype.render = function () {
-        BaseView.prototype.render.call(this);
-        
+    tabPanel.prototype.clearViewData = function () {
+        this.selectedTabEl().empty();
+    };
+    
+    /**
+    * Arma el html con la información del modelo, para después hacer el render de la vista.
+    */
+    tabPanel.prototype.armarHtmlConData = function (data) {        
+        this.insertTabDivInDOM();
         this.loadTabs();
         this.setTabWidth();
-        
-        this.selectedTab.view.render();
-        this.selectedTabEl().empty();
-        this.selectedTabEl().append(this.selectedTab.view.renderedHtml);
+        this.armarHtmlSelectedTab();
+    };
+    
+    /**
+    * Hace un render del panel seleccionado.
+    */
+    tabPanel.prototype.armarHtmlSelectedTab = function () {
+        if (!common.isEmpty(this.selectedTab)) {
+            this.insertHTMLSubVista(this.selectedTab);
+        }
     };
     
     tabPanel.prototype.loadTabs = function () {
@@ -67,6 +67,18 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
             if (!this.existeTabHtml(tab.tabName)) {
                 $(".tabs ul", this.el).append("<li id='tab" + tab.tabIndex + "'><a href='#" + tab.panelId + "'>" + tab.tabName + "</a></li>");
             }   
+        }
+    };
+    
+    /**
+    * Inserta el div class='tabs' en el DOM. Lo hace una sola vez cuando se carga la tab panel view la primera vez.
+    * @param {Object} data, es la data que se utiliza para reemplazar el template
+    */
+    tabPanel.prototype.insertTabDivInDOM = function (data) {
+        var tabsDiv = $("#afui div#" + this.attributes.id + " div.tabs");
+        //Existe el div class='tabs'
+        if (tabsDiv.length === 0) {
+            BaseView.prototype.armarHtmlConData.call(this, data);
         }
     };
     
@@ -85,12 +97,13 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     /**
     * Agrega un tab
     * @param {Object} tab un objeto que contiene un nombre y el id del panel que se mostrará en cada tab
+    * @param {int} index, índice del tab, se utiliza para darle un id al tab que se agrega
     */
-    tabPanel.prototype.addTab = function (tab) {
+    tabPanel.prototype.addTab = function (tab, index) {
         if (!common.isEmpty(tab.tabName)) {
             if (!this.existeTab(tab.tabName)) {
                 this.tabs.push(tab);
-                tab.view.setParent(this);
+                this.initializeTab(tab, index);
             }
         }
     };
@@ -100,7 +113,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     * @param {String} tabName, el nombre del tab que se desea buscar.
     */
     tabPanel.prototype.existeTab = function (tabName) {
-        var tabBuscado = this.findTab(tabName);
+        var tabBuscado = this.findTab("tabName", tabName);
         
         return (tabBuscado !== undefined);
     };
@@ -115,7 +128,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
                 return $(item).html() === tabName;
             });
         
-        return !common.isEmpty(tabBuscado) && tabBuscado.length > 0;
+        return $(tabBuscado).length > 0;
     };
     
     /**
@@ -125,35 +138,59 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     tabPanel.prototype.addTabRange = function (tabs) {
         var i;
         for (i = 0; i < tabs.length; i++) {
-            if (common.isEmpty(tabs[i].tabIndex)) {
-                tabs[i].tabIndex = i;
-            }
-            
-            this.addTab(tabs[i]);
+            this.addTab(tabs[i], i);
         }
     };
     
     /**
-    * Busca un tab por su nombre
-    * @param {String} tabName, nombre del tab que se quiere buscar.
+    * Busca un tab por una de sus propiedades
+    * @param {String} prop, el nombre de la propiedad del tab.
+    * @param {String} value, valor de la propiedad.
     */
-    tabPanel.prototype.findTab = function (tabName) {
+    tabPanel.prototype.findTab = function (prop, value) {
         return _.find(this.tabs, function (item) {
-            return item.tabName === tabName;
+            return item[prop] === value;
         }, this);
+    };
+    
+    tabPanel.prototype.attachEvents = function() {
+        //bindea un handler para el click de cada tab de la vista
+        $("#afui").delegate("#" + this.attributes.id + " ul li a", "click", _.bind(this.renderSelectedTab, this));
     };
     
     /**
-    * Busca un tab por su índice
-    * @param {String} tabIndex, índice del tab que se quiere buscar.
+    * Recorre la lista de los tabs que se encuentran configurados y los inicializa.
+    * @param {Array} tabs, un array con objetos que contienen la configuración de un tab
     */
-    tabPanel.prototype.findTabByName = function (tabIndex) {
-        return _.find(this.tabs, function (item) {
-            return item.tabIndex === tabIndex;
+    tabPanel.prototype.initializeTabs = function (tabs) {
+        _.each(this.tabs, function (tab, index) {
+            this.initializeTab(tab, index);
         }, this);
+        
+        if (tabs !== undefined) {
+            this.addTabRange(tabs);
+        }
+
+        if (!common.isEmpty(this.tabs) && this.tabs.length > 0) {
+            this.selectedTab = this.tabs[0];
+        }
+    };
+    
+    /**
+    * Inicializa un tab. Se usa cuando se construye el objeto o cuando se agrega un nuevo tab.
+    * @param {Object} tab, un objeto que contiene la configuración de un tab
+    * @param {int} index, índice del tab, se utiliza para darle un id al tab que se agrega
+    */
+    tabPanel.prototype.initializeTab = function (tab, index) {
+        tab.view = common.constructorResult(tab, "viewClass");
+        tab.view.setParent(this);
+        tab.view.setModel(common.constructorResult(tab, "modelClass"));
+        tab.insertElID = 'selectedTab';
+        tab.tabIndex = index;
     };
     
     _.extend(tabPanel, Backbone.Singleton);
+    common.extendSinPisar(tabPanel.prototype , false, MasterView.prototype);
     
     return tabPanel;
 }(af, Backbone, common, _, BaseView));

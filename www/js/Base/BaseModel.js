@@ -49,7 +49,7 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
         getDefaults: function () {
             var defaultAux = {};
             _.each(_.result(this, 'defaults'), function (value, prop, defaultsList) {
-                defaultAux[prop] = this.constructorResult(defaultsList, prop);
+                defaultAux[prop] = common.constructorResult(defaultsList, prop);
             }, this);
             
             return defaultAux;
@@ -67,7 +67,7 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
                 i;
             for (i = 2; i < arguments.length; i++) {
                 argsAux[i - 2] = arguments[i];
-            };
+            }
             
             _.each(argsAux, function (source) {
                 if (source) {
@@ -77,16 +77,6 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
                 }
             });
             return obj;
-        },
-        
-        //Se modifica la función de underscore para que si la propiedad es una función asume que es un constructor,
-        // y de esta forma lo instancia .
-        // If the value of the named `property` is a function then invoke it with the
-        // `object` as context; otherwise, return it.
-        constructorResult: function (object, property) {
-            if (object == null) return void 0;
-            var value = object[property];
-            return _.isFunction(value) ? new value() : value;
         },
         
         /**

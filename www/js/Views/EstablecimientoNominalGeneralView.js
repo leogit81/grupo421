@@ -20,7 +20,6 @@ var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, BaseV
                 "<div><label>Tipología</label><span><%=tipologia%></span></div></br>" +
                 "<div><label>Categoría de la Tipología</label><span><%=categoriaDeLaTipologia%></span></div></br>" +
                 "<div><label>Origen del Financiamiento</label><span><%=origenDelFinanciamiento%></span></div></br>" +
-                "<div id='coordenadasDeMapa'></div></br>" +
                 "<div id='coordenadasDeMapaEstablecimiento'></div></br>" +
                 "<div id='domicilioEstablecimiento'></div></br>" +
                 "<div id='participacionesEstablecimiento'></div></br>" +
@@ -56,25 +55,6 @@ var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, BaseV
             this.addView(telefonoView4, "telefono4", "telefono4Establecimiento");
             
             MasterView.prototype.initialize.call(this, attributes, options);
-        },
-        
-        /**
-        * Devuelve un objeto literal con el sub model o un objeto literal vacío.
-        * @param {String} submodelName, nombre que tiene la propiedad que contiene el sub model
-        */
-        getModelOrDefault: function (submodelName) {
-            if (!common.isEmpty(this.model)) {
-                var submodel = this.model.get(submodelName);
-                if (!common.isEmpty(submodel)) {
-                    if (_.isFunction(submodel)) {
-                        return {model: new submodel()};
-                    }
-                    
-                    return {model: submodel};
-                }
-            }
-            
-            return {};
         },
         
         /**

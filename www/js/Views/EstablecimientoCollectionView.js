@@ -92,4 +92,4 @@ var EstablecimientoCollectionView = (function ($, common, Backbone, _, renderer,
     };
 	
 	return establecimientoCollectionView;
-}(af, common, Backbone, _, AppFrameworkRenderer, BaseView, EstablecimientoNominal, EstablecimientoNominalGeneralView));
+}(af, common, Backbone, _, AppFrameworkRenderer, BaseView, EstablecimientoNominal, EstablecimientoNominalView2));

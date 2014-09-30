@@ -7,7 +7,6 @@ var MasterView = (function ($, common, BaseView) {
     var masterView = BaseView.extend({
     });
     
-    //masterView.prototype.nestedViews = [];
     masterView.prototype.nestedViewsDictionary = {};
     
     /**
@@ -19,7 +18,6 @@ var MasterView = (function ($, common, BaseView) {
      */
     masterView.prototype.addView = function (view, viewName, insertionElementId) {
         view.setParent(this);
-        //this.nestedViews.push(view);
         if (!common.isEmpty(viewName)) {
             this.nestedViewsDictionary[viewName] = {    view: view,
                                                         insertElID: insertionElementId
@@ -40,12 +38,6 @@ var MasterView = (function ($, common, BaseView) {
      */
     masterView.prototype.armarHtmlConData = function (data) {
         BaseView.prototype.armarHtmlConData.call(this, data);
-        
-        var i;
-        
-        /*for (i = 0; i < this.nestedViews.length; i++) {
-            this.insertHTMLSubVista(this.nestedViews[i]);
-        }*/
         
         for (var nestedView in this.nestedViewsDictionary) {
             if (this.nestedViewsDictionary.hasOwnProperty(nestedView)) {
@@ -68,6 +60,36 @@ var MasterView = (function ($, common, BaseView) {
         } else {
             this.$el.append(viewObject.view.renderedHtml);
         }
+    };
+    
+    /**
+    * En la master view el render se hace solamente para la vista maestra, no para cada una 
+    */
+    masterView.prototype.renderHtml = function () {        
+        if (common.isEmpty(this.parent)) {
+            BaseView.prototype.renderHtml.call(this);
+        }
+
+        return this;
+    };
+    
+    /**
+    * Devuelve un objeto literal con el sub model o un objeto literal vacío.
+    * @param {String} submodelName, nombre que tiene la propiedad que contiene el sub model
+    */
+    masterView.prototype.getModelOrDefault = function (submodelName) {
+        if (!common.isEmpty(this.model)) {
+            var submodel = this.model.get(submodelName);
+            if (!common.isEmpty(submodel)) {
+                if (_.isFunction(submodel)) {
+                    return {model: new submodel()};
+                }
+
+                return {model: submodel};
+            }
+        }
+
+        return {};
     };
     
     return masterView;
