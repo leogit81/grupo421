@@ -36,7 +36,10 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
                 tabName: "Mapas",
                 panelId: "establecimientoMapas",
                 viewClass: GoogleMapView,
-                modelClass: BaseModel
+                modelClass: function (scope) {
+                    var tabGeneral = scope.findTab("panelId", "establecimientoGeneral");
+                    return tabGeneral.view.model.get("coordenadasDeMapa");
+                }
             }
         ],
         
@@ -113,6 +116,20 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
         TabPanelView.prototype.render.call(this);
         this.mostrarTabEstablecimientoGeneral();
     };*/
+    
+    establecimientoNominalView.prototype.renderSelectedTab = function (args) {
+        //Si se hizo clic en el tab de mapas, se carga el mapa
+        if (!common.isEmpty(args)) {
+            var selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
+            if (selectedTabPanelId === "establecimientoMapas") {
+                var tabMapa = this.findTab("panelId", selectedTabPanelId);
+                $.ui.loadContent(tabMapa.view.attributes.id, false, false, "pop");
+            }
+        } else {
+            //Cuando se carga el tab panel view por primera vez, después de inicializar el mapa, viene por este laod.
+            TabPanelView.prototype.renderSelectedTab.call(this, args);
+        }
+    };
 	
 	return establecimientoNominalView;
 }(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView));

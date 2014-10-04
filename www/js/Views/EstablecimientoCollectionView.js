@@ -66,7 +66,9 @@ var EstablecimientoCollectionView = (function ($, common, Backbone, _, renderer,
             //var establecimientoNominalModel = new EstablecimientoNominal();
             //EstablecimientoNominalView.getInstance().setModel(establecimientoNominalModel);
             //establecimientoNominalModel.load(codigoEstablecimiento);
-            EstablecimientoNominalView.getInstance().ejecutarConsultaEstablecimiento(codigoEstablecimiento);
+            //EstablecimientoNominalView.getInstance().ejecutarConsultaEstablecimiento(codigoEstablecimiento);
+            var establecimientoNominalView = new EstablecimientoNominalView();
+            establecimientoNominalView.ejecutarConsultaEstablecimiento(codigoEstablecimiento);
         },
         
         getCodigoEstablecimientoFromSelectedItem: function (selectedItem) {

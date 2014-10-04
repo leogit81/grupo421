@@ -1,6 +1,6 @@
 function GoogleMap(listaEstablecimiento) {
     'use strict';
-
+    
     this.initialize = function () {
         var posicion = getPosicion();
 
@@ -34,29 +34,14 @@ function GoogleMap(listaEstablecimiento) {
                     map.setZoom(16);
                 };
             });
-            af.trigger(this,"mapa_listo");
+            //af.trigger(this,"mapa_listo");
         },
 
         onErrorPosicion = function (error) {
             alert('code: '    + error.code    + '\n' +
                   'message: ' + error.message + '\n');
         },
-
-        showMap = function (posicion) {
-            var mapOptions = {
-                zoom: 14,
-                center: posicion,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: true,
-                mapTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-                }
-            },
-                map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-            return map;
-        },
-
+        
         addMarkersToMap = function (map, latLong) {
 
 
@@ -78,5 +63,52 @@ function GoogleMap(listaEstablecimiento) {
                 infowindow.open(map, markerOne);
             });
 
+        };
+    
+        /**
+        * Muestra el mapa en el elemento html proporcionado.
+        * @param {google.maps.LatLng} posicion, posición donde se centrará el mapa.
+        * @param {HTMLElement} htmlElement, elemento del DOM donde insertar el mapa.
+        */    
+        this.showMap = function (posicion, htmlElement) {
+            var mapOptions = {
+                zoom: 14,
+                center: posicion,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: true,
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                }
+            },
+            //map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+            map = new google.maps.Map(htmlElement, mapOptions);
+
+            return map;
+        };
+    
+        /**
+        * Muestra el mapa en el elemento html proporcionado.
+        * @param {HTMLElement} htmlElement, elemento del DOM donde insertar el mapa.
+        */
+        this.mostrarMapaEstablecimiento = function (model, htmlElement) {
+            if ((listaEstablecimiento !== undefined || listaEstablecimiento !== null) && listaEstablecimiento.length > 0) {
+                var establecimiento = listaEstablecimiento[0],
+                    latLong = new google.maps.LatLng(establecimiento.latitud, establecimiento.longitud),
+                    mapBounds = new google.maps.LatLngBounds();
+                
+                var map = this.showMap(latLong, htmlElement);
+                mapBounds.extend(latLong);
+                addMarkersToMap(map, latLong);
+                
+                map.fitBounds(mapBounds);
+                //map.center(miPosicion.B, miPosicion.k);
+                var listener = google.maps.event.addListenerOnce(map, "idle", function () {
+                    if (map.getZoom() > 16) {
+                        map.setZoom(16);
+                    };
+                });
+            }
+            
+            model.trigger("mapaFinalizado");
         };
 }

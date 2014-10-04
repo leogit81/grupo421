@@ -186,7 +186,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
         tab.view = common.constructorResult(tab, "viewClass");
         tab.view.setParent(this);
         tab.view.on("viewRendered", _.bind(this.renderSelectedTab, this));
-        var model = common.constructorResult(tab, "modelClass");
+        var model = common.constructorResult(tab, "modelClass", this);
         if (!common.isEmpty(model)) {
             tab.view.setModel(model);
         }
