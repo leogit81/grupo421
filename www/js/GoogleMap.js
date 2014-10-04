@@ -28,12 +28,13 @@ function GoogleMap(listaEstablecimiento) {
                 mapBounds.extend(latLong);
             }
             map.fitBounds(mapBounds);
-            map.center(miPosicion.latitude, miPosicion.longitude);
+            //map.center(miPosicion.B, miPosicion.k);
             var listener = google.maps.event.addListenerOnce(map, "idle", function () {
                 if (map.getZoom() > 16) {
                     map.setZoom(16);
                 };
             });
+            af.trigger(this,"mapa_listo");
         },
 
         onErrorPosicion = function (error) {

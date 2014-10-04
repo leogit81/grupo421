@@ -1,4 +1,4 @@
-var EstablecimientoNominalView2 = (function ($, renderer, BaseView, EstablecimientoNominalGeneralView) {
+var EstablecimientoNominalView2 = (function ($, renderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView) {
     "use strict";
     
     var establecimientoNominalView = TabPanelView.extend({
@@ -33,7 +33,7 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
             {
                 tabName: "Mapas",
                 panelId: "establecimientoMapas",
-                viewClass: BaseView,
+                viewClass: GoogleMapView,
                 modelClass: BaseModel
             }
         ],
@@ -52,6 +52,8 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
             
             //var establecimientoModel = this.getModelOrDefault("General");
             this.getViewByName("General").setModel(model);
+            
+            this.getViewByName("Mapas").setModel(model.get("coordenadasDeMapa"));
             
             /*var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
             this.getViewByName("coordenadasDeMapa").setModel(coordenadasModel);
@@ -95,4 +97,4 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
     };
 	
 	return establecimientoNominalView;
-}(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView));
+}(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView));

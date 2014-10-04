@@ -17,12 +17,13 @@
 
             <!--SISA Móvil-->
             <link rel="stylesheet" type="text/css" href="css/sisa.css" />
+            <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBz43FjcTt7PYeUpxk-RzVR__kSyooWcBg&sensor=false"></script>
             <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/jquery.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/underscore.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/backbone.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/appframework.js"></script>
-            <<script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui.js"></script>
+            <script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/xmltojson.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/XmlToJsonConverter.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/common.js"></script>
@@ -32,6 +33,8 @@
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/MasterView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/TabPanelView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/GoogleMap.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/GoogleMapView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseModel.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/ModelDataSource.js"></script>
@@ -60,9 +63,9 @@
             <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/app-debug.js"></script>
             <script type="text/javascript" charset="utf-8" src="main.js"></script>
-        
-            <script type="text/javascript" charset="utf-8" src="js/GoogleMap.js"></script>
-        
+
+            
+
             </head>
         <body>
             <div class="app">
@@ -71,6 +74,7 @@
                         <a id='menubadge' class='menuButton'></a>
                     </div>
                     <div id="content">
+                        <div id='map_canvas'></div>
                         <!--Paneles usados para navegar por la aplicación-->
                         <div id="home" class="panel" data-title="SISA Móvil" selected="true" data-nav="consultas_nav">
                             <!--<h1>
@@ -139,8 +143,8 @@ Bienvenidos al SISA Móvil!
                                 </li>
                                 <li>
                                     <a class="item_menu">
-                                    <img src="./img/iconos/tab_13.png">
-                                    <div class="ztexto-lista">SISA Mobile</div>
+                                        <img src="./img/iconos/tab_13.png">
+                                        <div class="ztexto-lista">SISA Mobile</div>
                                     </a>
                                 </li>
                                 <li>
@@ -157,79 +161,79 @@ Bienvenidos al SISA Móvil!
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <!--<div id="tab_panel" class="panel" data-title="Prueba tab" selected="false" data-nav="consultas_nav">
-                                <div class="tabs">
-                                    <ul>
-                                      <li><a href="#fragment-1">One</a></li>
-                                      <li><a href="#fragment-2">Two</a></li>
-                                      <li><a href="#fragment-3">Three</a></li>
-                                    </ul>
-                                  </div>
-                          <div id="fragment-1">
-                            <p>This is the content of the tab 'One', with the id fragment-1.</p>
-                          </div>
-                          <div id="fragment-2">
-                            <p>This is the content of the tab 'Two', with the id fragment-2.</p>
-                          </div>
-                          <div id="fragment-3">
-                            <p>This is the content of the tab 'Three', with the id fragment-3.</p>
-                          </div>
-                        </div>
-                    </div>-->
-                    <!--BottomBar: Barra que se muestra abajo de la página-->
-                    <!--<footer id="navbar">
+<div class="tabs">
+<ul>
+<li><a href="#fragment-1">One</a></li>
+<li><a href="#fragment-2">Two</a></li>
+<li><a href="#fragment-3">Three</a></li>
+</ul>
+</div>
+<div id="fragment-1">
+<p>This is the content of the tab 'One', with the id fragment-1.</p>
+</div>
+<div id="fragment-2">
+<p>This is the content of the tab 'Two', with the id fragment-2.</p>
+</div>
+<div id="fragment-3">
+<p>This is the content of the tab 'Three', with the id fragment-3.</p>
+</div>
+</div>
+</div>-->
+                        <!--BottomBar: Barra que se muestra abajo de la página-->
+                        <!--<footer id="navbar">
 <a class="icon home" href="#home" data-transition="slide">Inicio</a>
 <a class="icon info" href="#consultas" data-transition="slide">Consultas</a>
 </footer>-->
-                    <!--<footer id="navbar">
-                        <a class="icon home" href="#tab_panel" onclick="mostrarTabs();" data-transition="slide">Tab panel</a>
-                    </footer>-->
-                    
-                    <nav id="home_nav"></nav>
-                    <nav id="consultas_nav">
+                        <!--<footer id="navbar">
+<a class="icon home" href="#tab_panel" onclick="mostrarTabs();" data-transition="slide">Tab panel</a>
+</footer>-->
+
+                        <nav id="home_nav"></nav>
+                        <nav id="consultas_nav">
 
 
 
-                        <ul class="list">
-                            <li class="item_menu">
-                                <a>
-                                    <img src="/img/iconos/tab_11.png">
-                                    <div class="ztexto-slider">Localizar establecimientos más cercanos</div>
-                                </a>
-                            </li>
-                            <li><a id="linkConsultaEstablecimiento2" class="item_menu" href="#"><img src="./img/iconos/tab_2.png">Establecimientos de la salud</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_3.png">Profesionales de la salud</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_4.png">Vacunación</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_5.png">Farmacias</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_6.png">Droguerías</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_7.png">Programa REMEDIAR</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_8.png">Registro nacional de donantes de sangre</a></li>
-                            <li><a id="linkConsultaMinisterio2" class="item_menu" href="#"><img src="./img/iconos/tab_9.png">Ministerio</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_12.png">Mensajes</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_13.png">SISA Mobile</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_17.png">Referentes</a></li>
-                            <li><a class="item_menu"><img src="/img/iconos/tab_16.png">Iniciar sesión</a></li>
-                        </ul>
+                            <ul class="list">
+                                <li class="item_menu">
+                                    <a>
+                                        <img src="/img/iconos/tab_11.png">
+                                        <div class="ztexto-slider">Localizar establecimientos más cercanos</div>
+                                    </a>
+                                </li>
+                                <li><a id="linkConsultaEstablecimiento2" class="item_menu" href="#"><img src="./img/iconos/tab_2.png">Establecimientos de la salud</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_3.png">Profesionales de la salud</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_4.png">Vacunación</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_5.png">Farmacias</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_6.png">Droguerías</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_7.png">Programa REMEDIAR</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_8.png">Registro nacional de donantes de sangre</a></li>
+                                <li><a id="linkConsultaMinisterio2" class="item_menu" href="#"><img src="./img/iconos/tab_9.png">Ministerio</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_12.png">Mensajes</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_13.png">SISA Mobile</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_17.png">Referentes</a></li>
+                                <li><a class="item_menu"><img src="/img/iconos/tab_16.png">Iniciar sesión</a></li>
+                            </ul>
 
 
 
 
 
-                        <!--<ul class="list">
+                            <!--<ul class="list">
 <li>
 <a id="linkConsultaMinisterio" class="icon" href="#consultaMinisterio">Ministerio</a>
 <a id="linkConsultaEstablecimiento" class="icon" href="#consultaEstablecimiento">Establecimiento</a>
 </li>
 </ul>-->
-                    </nav>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </body>
-        </html>
-<script type="text/javascript">
-    function mostrarTabs(){
-        var tabPanelControl = EstablecimientoNominalView2.getInstance();
-        tabPanelControl.render();
-    }
-</script>
+                </body>
+            </html>
+        <script type="text/javascript">
+            function mostrarTabs(){
+                var tabPanelControl = EstablecimientoNominalView2.getInstance();
+                tabPanelControl.render();
+            }
+        </script>

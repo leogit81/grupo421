@@ -1,3 +1,3 @@
 (function (app) {
     app.initialize();   
-})(app);
+})(app_debug);
