@@ -11,6 +11,8 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
             'data-nav': 'consultas_nav'
         },
         
+        codigoEstablecimiento: null,
+        
         tabs: [
             {
                 tabName: "General",
@@ -37,18 +39,29 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
                 modelClass: BaseModel
             }
         ],
-                              
+        
+        ejecutarConsultaEstablecimiento: function (codigoEstablecimiento) {
+            this.codigoEstablecimiento = codigoEstablecimiento;
+            var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
+            tabGeneral.view.model.load(this.codigoEstablecimiento);
+        },
+        
 		initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
             TabPanelView.prototype.initialize.call(this, attributes, options);
         },
         
+        /*mostrarTabEstablecimientoGeneral: function () {
+            var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
+            tabGeneral.view.model.load(this.codigoEstablecimiento);
+        },*/
+        
         /**
         * Setea el modelo para la vista y también actualiza los modelos de las vistas de los tabs.
         */
         setModel: function (model) {
-            TabPanelView.prototype.setModel.call(this, model);
+            //TabPanelView.prototype.setModel.call(this, model);
             
             //var establecimientoModel = this.getModelOrDefault("General");
             this.getViewByName("General").setModel(model);
@@ -82,7 +95,7 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
         getModelOrDefault: function (tabName) {
             var tab = this.findTab("tabName", tabName);
             return tab.view.model;
-        },
+        }
 	});
     
     /**
@@ -93,6 +106,11 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
         var tab = this.findTab("tabName", viewName);
         return tab.view;
     };
+    
+    /*establecimientoNominalView.prototype.render = function (viewName) {
+        TabPanelView.prototype.render.call(this);
+        this.mostrarTabEstablecimientoGeneral();
+    };*/
 	
 	return establecimientoNominalView;
 }(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView));

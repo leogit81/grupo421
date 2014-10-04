@@ -53,14 +53,25 @@ var BaseView = (function ($, common, Backbone) {
     * Encapsula la lógica del render de la vista en la página.
     */
     baseView.prototype.renderFromData = function (data) {
-        this.clearViewData();
+        this.clearView();
         
         this.armarHtmlConData(data);
         
+        this.trigger("viewRendered");
         return this.renderHtml();
     };
     
-    baseView.prototype.clearViewData = function () {
+    baseView.prototype.clearView = function () {
+        /*var domElement;
+        
+        if (!common.isEmpty(this.attributes)) {
+            domElement = $("#" + this.attributes.id);
+        }
+        
+        if (!common.isEmpty(domElement)) {
+            domElement.empty();
+        }*/
+        
         this.$el.empty();
     };
     

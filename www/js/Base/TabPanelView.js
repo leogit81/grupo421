@@ -5,9 +5,8 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
         tagName : "div",
         className: "panel",
         
-        template : _.template("<div class='tabs'><ul></ul>" +
-                              "<div id='selectedTab' class='consulta-detallada'></div>" +
-                              "</div>"),
+        template : _.template("<div class='tabs'><ul></ul></div>" +
+                              "<div id='selectedTab' class='consulta-detallada'></div>"),
         /**
         * Array con la configuración de cada tab.
         * {
@@ -27,25 +26,27 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
         
         renderSelectedTab: function (args) {
             //obtiene del current target el id del panel
-            var selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
-            this.selectedTab = this.findTab("panelId", selectedTabPanelId);
+            if (!common.isEmpty(args)) {
+                var selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
+                this.selectedTab = this.findTab("panelId", selectedTabPanelId);
+            }
             this.renderFromData();
         }
     });
     
     tabPanel.prototype.selectedTab = null;
     tabPanel.prototype.selectedTabEl = function () {
-        return $("#selectedTab", this.el);
+        return $("#selectedTab");
     };
     
-    tabPanel.prototype.clearViewData = function () {
+    tabPanel.prototype.clearView = function () {
         this.selectedTabEl().empty();
     };
     
     /**
     * Arma el html con la información del modelo, para después hacer el render de la vista.
     */
-    tabPanel.prototype.armarHtmlConData = function (data) {        
+    tabPanel.prototype.armarHtmlConData = function (data) {
         this.insertTabDivInDOM();
         this.loadTabs();
         this.setTabWidth();
@@ -184,7 +185,11 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     tabPanel.prototype.initializeTab = function (tab, index) {
         tab.view = common.constructorResult(tab, "viewClass");
         tab.view.setParent(this);
-        tab.view.setModel(common.constructorResult(tab, "modelClass"));
+        tab.view.on("viewRendered", _.bind(this.renderSelectedTab, this));
+        var model = common.constructorResult(tab, "modelClass");
+        if (!common.isEmpty(model)) {
+            tab.view.setModel(model);
+        }
         tab.insertElID = 'selectedTab';
         tab.tabIndex = index;
     };
