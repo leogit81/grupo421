@@ -13,7 +13,8 @@ var ConsultaMinisterioView = (function(jquery, $, renderer, BaseView, Ministerio
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
             '<form>' +
-                '<input id="numeroMinisterio" type="text" placeholder="Número de Ministerio"/>' +
+//                '<input id="numeroMinisterio" type="text" placeholder="Número de Ministerio"/>' +
+                '<select id="numeroMinisterio" required="true"></select>' +
                 '<a id="submitConsultaMinisterio" class="button">Enviar</a>' +
             '</form>'
         ),
@@ -53,6 +54,8 @@ var ConsultaMinisterioView = (function(jquery, $, renderer, BaseView, Ministerio
             $.ui.addContentDiv("consultaMinisterio", this.template());
             $.ui.loadContent("consultaMinisterio", false, false, "slide");
             this.attachEvents();
+            var prov = new Provincias();
+            setTimeout( function () {document.getElementById("numeroMinisterio").innerHTML = prov.listaProvinciasHTML();}, 300);
             return this;
         },
         

@@ -6,8 +6,8 @@
 }
 
 /*.item_menu {
-    padding-bottom: 0px !important;
-    padding-top: 0px !important;
+padding-bottom: 0px !important;
+padding-top: 0px !important;
 }*/
 
 ul li a div.ztexto-lista {
@@ -35,10 +35,14 @@ ul li a div.ztexto-lista {
 }
 
 .tabs ul li a{
-    background-color: #f6f6f6;
-    border-color: #ddd;
-    color: #333;
-    text-shadow: 0 1px 0 #f3f3f3;
+    /*    background-color: #f6f6f6;*/
+    background-color: rgba(0, 128, 247, 0.81);
+    /*    border-color: #ddd;*/
+    border-color: #FFF;
+    /*    color: #333;*/
+    color: #FFF;
+    /*    text-shadow: 0 1px 0 #f3f3f3;*/
+    text-shadow: 0 1px 0 #000000;
     position: relative;
     text-align: center;
     text-overflow: ellipsis;
@@ -70,4 +74,9 @@ ul li a div.ztexto-lista {
     border-color: #38c;
     color: #fff;
     text-shadow: 0 1px 0 #059;
+}
+
+#afui .header h1 {
+    width: 60%;
+    left: 20%;
 }
