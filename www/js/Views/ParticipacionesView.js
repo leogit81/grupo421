@@ -1,17 +1,21 @@
-var ParticipacionesView = (function(BaseView){
+var ParticipacionesView = (function (_, BaseView) {
+    "use strict";
+    
     var participacionesView = BaseView.extend({
         template : _.template(
-                            "<div><h1>PARTICIPACIONES</h1></div></br></br>" +
-                            "<div><label>Plan Nacer</label><span><%=planNacer%></span></div><br>" +
-                            "<div><label>Programa Médicos Comunitarios</label><span><%=programaMedicosComunitarios%></span></div><br>" +
-                            "<div><label>Programa Remediar</label><span><%=programaRemediar%></span></div><br>" +
-                            "<div><label>Red Directores de Hospitales</label><span><%=redDirectoresHospitales%></span></div><br>" +
-                            "<div><label>Red Establecimientos CCC</label><span><%=redEstablecimientosCCC%></span></div><br>" +
-                            "<div><label>Red NOMIVAC</label><span><%=redNOMIVAC%></span></div><br>" +
-                            "<div><label>Registro HPGD</label><span><%=registroHPGD%></span></div><br>" +
-                            "<div><label>Sistema Nacional de Vigilancia de Salud</label><span><%=sistemaNacionalVigilanciaSalud%></span></div><br>"
-                            ),
+            "<div><h2>PARTICIPACIONES</h2></div>" +
+                "<div><label>Registro de hospital público de gestión descentralizada (HPGD)</label><span><%=registroHPGD%></span></div>" +
+                "<div><label>Programa Remediar</label><span><%=programaRemediar%></span></div>" +
+                "<div><label>Plan Nacer</label><span><%=planNacer%></span></div>" +
+                "<div><label>Programa Médicos Comunitarios</label><span><%=programaMedicosComunitarios%></span></div>" +
+                "<div><label>Sistema Nacional de Vigilancia de la Salud</label><span><%=sistemaNacionalVigilanciaSalud%></span></div>" +
+                "<div><label>Red Directores de Hospitales</label><span><%=redDirectoresHospitales%></span></div>" +
+                "<div><label>Red vacunatorios NOMIVAC</label><span><%=redNOMIVAC%></span></div>" +
+                "<div><label>Red de establecimientos de cardiopatías congénitas</label><span><%=redEstablecimientosCCC%></span></div>" +
+                "<div><label>Sistema Nacional de Sangre</label><span><%=sistemaNacionalSangre%></span></div>" +
+                "<div><label>Unidad centinela registro SIVILE</label><span><%=registroSIVILE%></span></div>"
+        )
     });
     
     return participacionesView;
-})(BaseView);
+}(_, BaseView));

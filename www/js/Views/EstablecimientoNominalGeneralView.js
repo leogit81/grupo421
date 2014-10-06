@@ -13,46 +13,26 @@ var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, Maste
         },
         
         template : _.template(
-                "<div><span><%=nombre%></span></div></br>" +
-                "<div><span><%=depto%> - <%=provincia%></span></div></br></br>" +
-                "<div><h1>DATOS GENERALES</h1></div></br></br>" +
-                "<div><label>Código</label><span><%=codigo%></span></div></br>" +
-                "<div><label>Tipología</label><span><%=tipologia%></span></div></br>" +
-                "<div><label>Categorización</label><span><%=categoriaDeLaTipologia%></span></div></br>" +
-                "<div><label>Origen del Financiamiento</label><span><%=origenDelFinanciamiento%></span></div></br>" +
-                "<div id='coordenadasDeMapaEstablecimiento'></div></br>" +
-                "<div id='domicilioEstablecimiento'></div></br>" +
-                "<div id='participacionesEstablecimiento'></div></br>" +
-                "<div id='telefono1Establecimiento'></div></br>" +
-                "<div id='telefono2Establecimiento'></div></br>" +
-                "<div id='telefono3Establecimiento'></div></br>" +
-                "<div id='telefono4Establecimiento'></div></br>"
+                "<div><span class='titulosNominalEstablecimiento'><%=nombre%></span></div>" +
+                "<div><span><%=depto%> - <%=provincia%></span></div>" +
+                "<div><h2>DATOS GENERALES</h2></div>" +
+                "<div><label>Código</label><span><%=codigo%></span></div>" +
+                "<div><label>Tipología</label><span><%=tipologia%></span></div>" +
+                "<div><label>Categorización</label><span><%=categoriaDeLaTipologia%></span></div>" +
+                "<div><label>Origen del Financiamiento</label><span><%=origenDelFinanciamiento%></span></div>" +
+                "<div id='ubicacionEstablecimiento'></div>" +
+                "<div id='participacionesEstablecimiento'></div>"
         ),
                               
 		initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
             
-            var coordenadaView = new CoordenadasMapaView(this.getModelOrDefault("coordenadasDeMapa"));
-            this.addView(coordenadaView, "coordenadasDeMapa", "coordenadasDeMapaEstablecimiento");
-            
-            var domicilioView = new DomicilioView(this.getModelOrDefault("domicilio"));
-            this.addView(domicilioView, "domicilio", "domicilioEstablecimiento");
+            var ubicacionView = new UbicacionEstablecimientoView(this.getModelOrDefault("participaciones"));
+            this.addView(ubicacionView, "ubicacion", "ubicacionEstablecimiento");
             
             var participacionesView = new ParticipacionesView(this.getModelOrDefault("participaciones"));
             this.addView(participacionesView, "participaciones", "participacionesEstablecimiento");
-            
-            var telefonoView1 = new TelefonoView(this.getModelOrDefault("telefono1"));
-            this.addView(telefonoView1, "telefono1", "telefono1Establecimiento");
-            
-            var telefonoView2 = new TelefonoView(this.getModelOrDefault("telefono2"));
-            this.addView(telefonoView2, "telefono2", "telefono2Establecimiento");
-            
-            var telefonoView3 = new TelefonoView(this.getModelOrDefault("telefono3"));
-            this.addView(telefonoView3, "telefono3", "telefono3Establecimiento");
-            
-            var telefonoView4 = new TelefonoView(this.getModelOrDefault("telefono4"));
-            this.addView(telefonoView4, "telefono4", "telefono4Establecimiento");
             
             MasterView.prototype.initialize.call(this, attributes, options);
         },
@@ -63,26 +43,10 @@ var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, Maste
         setModel: function (model) {
             MasterView.prototype.setModel.call(this, model);
             
-            var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
-            this.getViewByName("coordenadasDeMapa").setModel(coordenadasModel);
-            
-            var domicilioModel = this.getModelOrDefault("domicilio");
-            this.getViewByName("domicilio").setModel(domicilioModel);
+            this.getViewByName("ubicacion").setModel(model);
             
             var participacionesModel = this.getModelOrDefault("participaciones");
             this.getViewByName("participaciones").setModel(participacionesModel);
-            
-            var telefonoModel1 = this.getModelOrDefault("telefono1");
-            this.getViewByName("telefono1").setModel(telefonoModel1);
-            
-            var telefonoModel2 = this.getModelOrDefault("telefono2");
-            this.getViewByName("telefono2").setModel(telefonoModel2);
-            
-            var telefonoModel3 = this.getModelOrDefault("telefono3");
-            this.getViewByName("telefono3").setModel(telefonoModel3);
-            
-            var telefonoModel4 = this.getModelOrDefault("telefono4");
-            this.getViewByName("telefono4").setModel(telefonoModel4);
         }
 	});
     
