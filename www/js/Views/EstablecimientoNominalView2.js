@@ -43,7 +43,7 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
             }
         ],
         
-        ejecutarConsultaEstablecimiento: function (codigoEstablecimiento) {
+        ejecutarConsultaNominalEstablecimiento: function (codigoEstablecimiento) {
             this.codigoEstablecimiento = codigoEstablecimiento;
             var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
             tabGeneral.view.model.load(this.codigoEstablecimiento);

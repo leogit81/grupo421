@@ -25,6 +25,8 @@ var AppFrameworkRenderer = (function (_, $, BaseView) {
         }
         
         $.ui.loadContent(view.attributes.id, false, false, animation);
+        //agrego esta clase para poder aplicar estilos CSS
+        $("#" + view.attributes.id).addClass("consulta-detallada");
         return this;
     };
     

@@ -1,7 +1,7 @@
 /**
 * Es la vista que se muestra en el tab "General" de la consulta Nominal de Establecimientos.
 */
-var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, BaseView) {
+var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, MasterView) {
     "use strict";
     
     var establecimientoNominalGeneralView = MasterView.extend({
@@ -13,12 +13,12 @@ var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, BaseV
         },
         
         template : _.template(
-            "<div><span><%=nombre%></span></div></br>" +
+                "<div><span><%=nombre%></span></div></br>" +
                 "<div><span><%=depto%> - <%=provincia%></span></div></br></br>" +
                 "<div><h1>DATOS GENERALES</h1></div></br></br>" +
-                "<div><label>Codigo</label><span><%=codigo%></span></div></br>" +
+                "<div><label>Código</label><span><%=codigo%></span></div></br>" +
                 "<div><label>Tipología</label><span><%=tipologia%></span></div></br>" +
-                "<div><label>Categoría de la Tipología</label><span><%=categoriaDeLaTipologia%></span></div></br>" +
+                "<div><label>Categorización</label><span><%=categoriaDeLaTipologia%></span></div></br>" +
                 "<div><label>Origen del Financiamiento</label><span><%=origenDelFinanciamiento%></span></div></br>" +
                 "<div id='coordenadasDeMapaEstablecimiento'></div></br>" +
                 "<div id='domicilioEstablecimiento'></div></br>" +
@@ -103,4 +103,4 @@ var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, BaseV
     };
 	
 	return establecimientoNominalGeneralView;
-}(af, common, _, AppFrameworkRenderer, BaseView));
+}(af, common, _, AppFrameworkRenderer, MasterView));

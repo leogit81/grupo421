@@ -52,13 +52,14 @@ var MasterView = (function ($, common, BaseView) {
     * donde se tiene que insertar.
     */
     masterView.prototype.insertHTMLSubVista = function (viewObject) {
-        var insertElement = $(this.$el[0]).find("#" + viewObject.insertElID);
+        var insertElement = $(this.$el[0]).find("#" + viewObject.insertElID),
+            htmlSubvista = viewObject.view.$el[0].innerHTML;
         
         if (insertElement.length > 0) {
             insertElement.empty();
-            insertElement.append(common.isEmpty(viewObject.view.renderedHtml)?"":viewObject.view.renderedHtml);
+            insertElement.append(common.isEmpty(htmlSubvista)?"":htmlSubvista);
         } else {
-            this.$el.append(viewObject.view.renderedHtml);
+            this.$el.append(htmlSubvista);
         }
     };
     

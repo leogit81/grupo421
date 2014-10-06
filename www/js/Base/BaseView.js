@@ -62,16 +62,6 @@ var BaseView = (function ($, common, Backbone) {
     };
     
     baseView.prototype.clearView = function () {
-        /*var domElement;
-        
-        if (!common.isEmpty(this.attributes)) {
-            domElement = $("#" + this.attributes.id);
-        }
-        
-        if (!common.isEmpty(domElement)) {
-            domElement.empty();
-        }*/
-        
         this.$el.empty();
     };
     
@@ -92,7 +82,7 @@ var BaseView = (function ($, common, Backbone) {
     */
     baseView.prototype.armarHtmlConData = function (data) {
         if (!common.isEmpty(this.parent)) {
-            this.renderedHtml = this.replaceTemplateWithData(data);
+            this.renderedHtml = this.$el.append(this.replaceTemplateWithData(data))[0].innerHTML;
         } else {
             this.renderedHtml = this.$el.append(this.replaceTemplateWithData(data))[0].outerHTML;
         }
