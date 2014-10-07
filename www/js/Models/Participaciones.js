@@ -11,6 +11,11 @@ var Participaciones = (function(BaseModel){
             "redNOMIVAC": null,
             "registroHPGD": null,
             "sistemaNacionalVigilanciaSalud": null,
+            "sistemaNacionalSangre": null,
+            "registroSIVILE": null,
+            "ERC": null,
+            "PNT": null,
+            "RESAM": null
         }
     });
     
