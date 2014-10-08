@@ -15,22 +15,21 @@ var ConsultaEstablecimientoView = (function ($, renderer, BaseView, Establecimie
             '<div class="formGroupHead">Filtros</div>' +
             '<form>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
-            //                    '<input id="provinciaEstablecimiento" type="text" placeholder="Provincia de Establecimiento"/>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
-            //                    '<input id="departamentoEstablecimiento" type="text" placeholder="Departamento de Establecimiento"/>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
-            '<input id="localidadEstablecimiento" type="text" placeholder="Localidad de establecimiento"/>' +
+            '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
             '<a id="submitConsultaEstablecimiento" class="button">Enviar</a>' +
             '</form>'
         ),
 
+
         render: function() {
-            BaseView.prototype.render.call(this);
-            //var prov = new Provincias();
+            BaseView.prototype.render.call(this);            
             document.getElementById("provinciaEstablecimiento").innerHTML = prov.listaProvinciasHTML();
             document.getElementById("departamentoEstablecimiento").innerHTML = deptos.listaDptosHTML();
+            document.getElementById("localidadEstablecimiento").innerHTML = localidades.listaLocalidadesHTML();
             jQuery("#departamentoEstablecimiento").chainedTo("#provinciaEstablecimiento");
-
+            jQuery("#localidadEstablecimiento").chainedTo("#departamentoEstablecimiento");
         },
 
         initialize: function (attributes, options) {
