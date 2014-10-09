@@ -514,19 +514,20 @@ function Departamentos() {
                       {idProv: "24", idDpto: "512", departamento: "Trancas"},
                       {idProv: "24", idDpto: "513", departamento: "Yerba Buena"}
                      ];
-    //    this.listaDptosHTML = function (idProvincia) {
-    this.listaDptosHTML = function (idProvincia) {
+    
+    this.actualizar = function () {
         var i;
-        var respuesta;
-        respuesta += "<option value =''>Seleccione un departamento...</option>";
-        //        for (i = 0; (i < listaDptos.length) && (listaDptos[i].idProv !== idProvincia); i++) {
-        for (i = 0; i < listaDptos.length; i++) {
-            respuesta += "<option value='" + listaDptos[i].idDpto +
-                "' class='" + listaDptos[i].idProv + "'>" +
-                listaDptos[i].departamento + "</option>";
-
-        }
-        return respuesta;
+        var dptosHTML;
+        var len = listaDptos.length;
+        var idProvinciaSeleccionada = jQuery("#provinciaEstablecimiento").val();
+        dptosHTML += "<option value =''>Seleccione un departamento...</option>";
+        for (i = 0; i < len; i++) {
+            if ( listaDptos[i].idProv == idProvinciaSeleccionada ) {
+                dptosHTML += "<option value='" + listaDptos[i].idDpto + "'>" + listaDptos[i].departamento + "</option>";
+            };
+        };
+        document.getElementById("departamentoEstablecimiento").innerHTML = dptosHTML;
+        document.getElementById("localidadEstablecimiento").innerHTML = "<option value =''>Seleccione una localidad...</option>";
     };
 };
 

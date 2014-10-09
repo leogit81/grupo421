@@ -37,5 +37,5 @@ function Provincias () {
     };
 
 };
-
 var prov = new Provincias();
+var listaCompletaProvincias = prov.listaProvinciasHTML();

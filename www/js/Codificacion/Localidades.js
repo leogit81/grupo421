@@ -5260,18 +5260,21 @@ function Localidades() {
                             {idProvincia: "24", idDepto: "513", idLocalidad: "9011903002", localidad: "Yerba Buena - Marcos Paz (Yerba Buena - Marcos Paz)"}
                            ];
 
-    this.listaLocalidadesHTML = function () {
-        var i;
-        var respuesta;
-        respuesta += "<option value =''>Seleccione una localidad...</option>";
-        //        for (i = 0; (i < listaDptos.length) && (listaDptos[i].idProv !== idProvincia); i++) {
-        for (i = 0; i < listaLocalidades.length; i++) {
-            respuesta += "<option value='" + listaLocalidades[i].idLocalidad +
-                "' class='" + listaLocalidades[i].idDepto + "'>" +
-                listaLocalidades[i].localidad + "</option>";
 
-        }
-        return respuesta;
+    this.actualizar = function () {
+        var i;
+        var localidadesHTML;
+        var len = listaLocalidades.length;
+        var idProvinciaSeleccionada = jQuery("#provinciaEstablecimiento").val();
+        var idDepartamentoSeleccionado = jQuery("#departamentoEstablecimiento").val();
+        localidadesHTML += "<option value =''>Seleccione una localidad...</option>";
+        for (i = 0; i < len; i++) {
+            if ( ( listaLocalidades[i].idProvincia == idProvinciaSeleccionada ) &&
+                 ( listaLocalidades[i].idDepto == idDepartamentoSeleccionado ) ) {
+                localidadesHTML += "<option value='" + listaLocalidades[i].idLocalidad + "'>" + listaLocalidades[i].localidad + "</option>";
+            };
+        };
+        document.getElementById("localidadEstablecimiento").innerHTML = localidadesHTML;
     };
 };
 
