@@ -21,25 +21,24 @@ var app = (function ($, jquery) {
     //
     // The scope of 'this' is the event.
     function onDeviceReady(){
-        launchAppFramework();
-        jquery("div#header").on("click", "a#menubadge", onClickMenuBadge);
-        var consultasView = ConsultasView.getInstance();
-        consultasView.render();
-        
         //Se agrega este "parche" para evitar que se duplique el evento click/tap al hacer un click.
         var last_click_time = new Date().getTime();
         var click_time;
         document.addEventListener('click', function (e) {
             click_time = e['timeStamp'];
-            if (click_time && (click_time - last_click_time) < 550) {
+            if (click_time && (click_time - last_click_time) < 1000) {
                 e.stopImmediatePropagation();
                 e.preventDefault();
                 return false;
             }
             last_click_time = click_time;
         }, true);
+        ////////////////
         
-        
+        launchAppFramework();
+        jquery("div#header").on("click", "a#menubadge", onClickMenuBadge);
+        var consultasView = ConsultasView.getInstance();
+        consultasView.render();
     };
 
     /**

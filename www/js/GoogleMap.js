@@ -1,6 +1,6 @@
 function GoogleMap(listaEstablecimiento) {
     'use strict';
-    
+
     this.initialize = function () {
         var posicion = getPosicion();
 
@@ -41,7 +41,7 @@ function GoogleMap(listaEstablecimiento) {
             alert('code: '    + error.code    + '\n' +
                   'message: ' + error.message + '\n');
         },
-        
+
         addMarkersToMap = function (map, latLong) {
 
 
@@ -64,51 +64,56 @@ function GoogleMap(listaEstablecimiento) {
             });
 
         };
-    
-        /**
+
+    /**
         * Muestra el mapa en el elemento html proporcionado.
         * @param {google.maps.LatLng} posicion, posición donde se centrará el mapa.
         * @param {HTMLElement} htmlElement, elemento del DOM donde insertar el mapa.
         */    
-        this.showMap = function (posicion, htmlElement) {
-            var mapOptions = {
-                zoom: 14,
-                center: posicion,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: true,
-                mapTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-                }
-            },
+    this.showMap = function (posicion, htmlElement) {
+        var mapOptions = {
+            zoom: 14,
+            center: posicion,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+            }
+        },
             //map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
             map = new google.maps.Map(htmlElement, mapOptions);
 
-            return map;
-        };
-    
-        /**
+        return map;
+    };
+
+    /**
         * Muestra el mapa en el elemento html proporcionado.
         * @param {HTMLElement} htmlElement, elemento del DOM donde insertar el mapa.
         */
-        this.mostrarMapaEstablecimiento = function (model, htmlElement) {
-            if ((listaEstablecimiento !== undefined || listaEstablecimiento !== null) && listaEstablecimiento.length > 0) {
-                var establecimiento = listaEstablecimiento[0],
-                    latLong = new google.maps.LatLng(establecimiento.latitud, establecimiento.longitud),
-                    mapBounds = new google.maps.LatLngBounds();
-                
-                var map = this.showMap(latLong, htmlElement);
-                mapBounds.extend(latLong);
-                addMarkersToMap(map, latLong);
-                
-                map.fitBounds(mapBounds);
-                //map.center(miPosicion.B, miPosicion.k);
-                var listener = google.maps.event.addListenerOnce(map, "idle", function () {
-                    if (map.getZoom() > 16) {
-                        map.setZoom(16);
-                    };
-                });
-            }
-            
-            model.trigger("mapaFinalizado");
-        };
+    this.mostrarMapaEstablecimiento = function (model, htmlElement) {
+        if ((listaEstablecimiento !== undefined || listaEstablecimiento !== null) && listaEstablecimiento.length > 0) {
+            var establecimiento = listaEstablecimiento[0],
+                latLong = new google.maps.LatLng(establecimiento.latitud, establecimiento.longitud),
+                mapBounds = new google.maps.LatLngBounds();
+
+            var map = this.showMap(latLong, htmlElement);
+            mapBounds.extend(latLong);
+            addMarkersToMap(map, latLong);
+
+            map.fitBounds(mapBounds);
+            //map.center(miPosicion.B, miPosicion.k);
+            var listener = google.maps.event.addListenerOnce(map, "idle", function () {
+                if (map.getZoom() > 16) {
+                    map.setZoom(16);
+                };
+            });
+        }
+
+        model.trigger("mapaFinalizado");
+        setTimeout( function () { 
+            google.maps.event.trigger(map, 'resize');
+            map.setCenter(latLong);
+            map.setZoom(16);
+        }, 2500 );
+    };
 }
