@@ -11,10 +11,19 @@ padding-top: 0px !important;
 }*/
 
 ul li a div.ztexto-lista {
-    padding: 0px 0px 0px 25% !important;
+    padding: 0px 11% 0px 25% !important;
     position: absolute !important;
-    top: 35% !important;
+    top: 15% !important;
     text-shadow: 0 -1px 0 rgba(0,0,0,.2) !important;
+}
+
+ul li a div {
+    font-size: 10pt;
+}
+
+ul li a div h3 {
+    color: cornflowerblue;
+    font-size: 15pt;
 }
 
 #afui .list > li > a {
@@ -88,4 +97,8 @@ ul li a div.ztexto-lista {
 
 .titulosNominalEstablecimiento {
     margin-bottom: 10px;
+}
+
+#afui > #menu.tabletMenu {
+width: 120px;
 }
