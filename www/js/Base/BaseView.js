@@ -3,7 +3,7 @@
  * Cuando se construye la misma (initialize()) si se pasa el model en los attributes, la misma guarda una referencia a este.
  * Además, se atacha la función render al evento 'change' del model, de forma que cada vez que cambie este se actualice la vista. 
  */
-var BaseView = (function ($, common, Backbone) {
+var BaseView = (function ($, common, _, jquery, Backbone) {
     "use strict";
     
     var baseView = Backbone.View.extend({
@@ -45,6 +45,9 @@ var BaseView = (function ($, common, Backbone) {
     */
     baseView.prototype.render = function () {
         var jsonData = this.getModelData();
+        
+        //después del render se oculta la máscara de "Cargando..."
+        this.hideLoadingMask();
         
         return this.renderFromData(jsonData);
     };
@@ -119,6 +122,23 @@ var BaseView = (function ($, common, Backbone) {
     * Bindea los handlers para los eventos de la vista.
     */
     baseView.prototype.attachEvents = function () {
+        //jquery(AjaxRestService).bind("beforeCallRestService", _.bind(this.showLoadingMask, this));
+        //jquery(AjaxRestService).bind("callRestServiceError", _.bind(this.logError, this));
+    };
+    
+    baseView.prototype.showLoadingMask = function (loadingMessage) {
+        loadingMessage = {} || "Cargando...";
+        $.ui.showMask(loadingMessage);
+    };
+    
+    
+    baseView.prototype.hideLoadingMask = function () {
+        $.ui.hideMask();
+    };
+    
+    baseView.prototype.logError = function (response) {
+        this.hideLoadingMask();
+        //TODO: implementar la lógica para mostrar errores que se produjeron durante la llamada del servicio
     };
     
     /**
@@ -159,4 +179,4 @@ var BaseView = (function ($, common, Backbone) {
     _.extend(baseView, Backbone.Singleton);
     
     return baseView;
-}(af, common, Backbone));
+}(af, common, _, jQuery, Backbone));

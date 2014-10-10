@@ -67,7 +67,7 @@ ul li a div h3 {
 
 .tabs {
     position: relative;
-    padding: .2em;
+    padding: 0px;
     line-height: 2;
     display: block;
     margin-bottom: 10px;
@@ -100,5 +100,15 @@ ul li a div h3 {
 }
 
 #afui > #menu.tabletMenu {
-width: 120px;
+    width: 120px;
+}
+
+#afui div#content .consultaNominalEstablecimiento {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.selectedTab {
+    padding-left: 10px;
+    padding-right: 10px;
 }

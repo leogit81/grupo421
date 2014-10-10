@@ -64,6 +64,7 @@ var ConsultaMinisterioView = (function(jquery, $, renderer, BaseView, Ministerio
          * Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
          */
         attachEvents: function(){
+            BaseView.prototype.attachEvents.call(this);
             jquery("#submitConsultaMinisterio").on("click", _.bind(this.ejecutarConsultaMinisterio, this));
         }
 	});

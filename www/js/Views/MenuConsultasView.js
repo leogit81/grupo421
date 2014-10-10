@@ -23,6 +23,7 @@ var MenuConsultasView = (function(BaseView, jquery){
          * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
          */
         attachEvents: function(){
+            BaseView.prototype.attachEvents.call(this);
             jquery("#linkConsultaMinisterio").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
             //esto es para el menú lateral

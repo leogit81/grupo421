@@ -114,7 +114,7 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
     
     /*establecimientoNominalView.prototype.render = function (viewName) {
         TabPanelView.prototype.render.call(this);
-        this.mostrarTabEstablecimientoGeneral();
+        $("#" + this.attributes.id).addClass("consultaNominalEstablecimiento");
     };*/
     
     establecimientoNominalView.prototype.renderSelectedTab = function (args) {
@@ -129,6 +129,7 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
             //Cuando se carga el tab panel view por primera vez, después de inicializar el mapa, viene por este laod.
             TabPanelView.prototype.renderSelectedTab.call(this, args);
         }
+        $("#" + this.attributes.id).addClass("consultaNominalEstablecimiento");
     };
 	
 	return establecimientoNominalView;

@@ -1,4 +1,4 @@
-var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
+var AjaxRestService = (function (common, _, ServiceConfig, jQuery) {
     "use strict";
 
     /**
@@ -11,7 +11,7 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
      *  errorCallback: función que será invocada al obtenerser un error durante la invocación del servicio. 
      * }
      */
-    function AjaxService(config){
+    function AjaxService(config) {
         this.baseUrl = null;
         this.url = null;
         this.method = 'GET';
@@ -23,7 +23,7 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
         this.loadConfig(config);
     }
     
-    AjaxService.prototype.loadConfig = function(config){
+    AjaxService.prototype.loadConfig = function (config) {
         //Configuración del servicio que se toma por default del archivo ServiceConfig, puede ser modificado pasando el parámetro config
         this.baseUrl = ServiceConfig.baseUrl;
         this.config = config || {};
@@ -33,7 +33,7 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
         this.timeout = config.timeout || ServiceConfig.timeout || this.timeout;
         
         //Configuración que NO se encuentra en el archivo ServiceConfig, que se configura con el parámetro config
-        if (!common.isEmpty(config)){
+        if (!common.isEmpty(config)) {
             this.method = config.method || this.method;
             this.successCallback = config.success || this.successCallback;
             this.errorCallback = config.error || this.errorCallback;
@@ -41,7 +41,7 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
             this.dataType = config.dataType || this.dataType;
         }
         
-        if (this.enableCors){
+        if (this.enableCors) {
             this.enableProxy();
         }
     };
@@ -51,14 +51,14 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
     /**
      * Habilita el proxy para soportar CORS en los casos que el servidor al que se quiere acceder no lo implemente.
      */
-    AjaxService.prototype.enableProxy = function(){
+    AjaxService.prototype.enableProxy = function () {
         var cors_api_host = 'cors-anywhere.herokuapp.com';
         var cors_api_url = (window.location.protocol === 'http:' ? 'http://' : 'https://') + cors_api_host + '/';
         var slice = [].slice;
         var origin = window.location.protocol + '//' + window.location.host;
         var open = XMLHttpRequest.prototype.open;
         
-        XMLHttpRequest.prototype.open = function() {
+        XMLHttpRequest.prototype.open = function () {
             var args = slice.call(arguments);
             var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
             if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
@@ -68,24 +68,24 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
             return open.apply(this, args);
         };
         
-        if (typeof XDomainRequest != "undefined") {
+        if (typeof XDomainRequest !== "undefined") {
             // XDomainRequest for IE.
             //TODO: CONFIGURE PROXY FOR XDomainRequest object
+            return;
         }
-        
     };
     
     /**
      * Create the XHR object.
      * @param {string} método HTTP
      * @param {url} url a la que se quiere acceder
-     */ 
-    AjaxService.prototype.createCORSRequest =  function(method, url) {
+     */
+    AjaxService.prototype.createCORSRequest =  function (method, url) {
         var xhr = new XMLHttpRequest();
         if ("withCredentials" in xhr) {
             // XHR for Chrome/Firefox/Opera/Safari.
             xhr.open(method, url, true);
-        } else if (typeof XDomainRequest != "undefined") {
+        } else if (typeof XDomainRequest !== "undefined") {
             // XDomainRequest for IE.
             xhr = new XDomainRequest();
             xhr.open(method, url);
@@ -96,22 +96,44 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
         return xhr;
     };
     
-    AjaxService.prototype.beforeSendCallback = function(data){
-        //TODO: MOSTRAR UNA VENTANA MODAL CON UNA MÁSCARA DE CARGANDO
+    AjaxService.prototype.beforeSendCallback = function (data) {
+        //jQuery(this).trigger("beforeCallRestService");
+        //TODO: ESTO HAY QUE MODIFICARLOS POR UN EVENTO, O BUSCAR UNA MANERA DE NO INVOCAR COSAS DE LA VISTA EN EL SERVICIO
+        af.ui.showMask("Cargando...");
     };
     
-    AjaxService.prototype.successCallback = function(data){
+    AjaxService.prototype.successCallback = function (data) {
         console.log(data.target.responseText);
     };
     
-    AjaxService.prototype.errorCallback = function(response){
+    AjaxService.prototype.errorCallback = function (response) {
         //TODO: PENDIENTE HACER MANEJO DE ERRORES DE LAS LLAMADAS A LOS WEB SERVICES.
-        if (response.statusText === 'timeout')
-        {
-            console.log('Se ha agotado el tiempo de espera del servidor.');
-            return;
+        try {
+            if (response.statusText === 'timeout') {
+                throw "Se ha agotado el tiempo de espera del servidor.";
+            }
+            
+            throw "Se produjo un error al realizar la llamada al servicio web.";
         }
-        console.log('error processing ajax request');
+        catch (err) {
+            this.processServiceError(err);
+        }
+    };
+    
+    //TODO: SACAR ESTE MÉTODO FUERA DEL SERVICIO
+    AjaxService.prototype.processServiceError = function (errorMessage) {
+        //jQuery(this).trigger("callRestServiceError");
+        af.ui.hideMask();
+        console.log(errorMessage);
+        af.ui.popup( {
+           title:"Mensaje de error",
+           message:errorMessage,
+           cancelText:"Cancelar",
+           cancelOnly:true
+         });
+        //alert(errorMessage);
+        //af("#modalErrores").html(errorMessage);
+        //af.ui.showModal("modalErrores");
     };
     
     /**
@@ -119,27 +141,26 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
      * @param {Object} newUrl, una url del servicio que reemplace a la que se seteo previamente
      * @param {Object} data, data que será enviada como parámetro del servicio
      */
-    AjaxService.prototype.get = function(data, otraUrl){
+    AjaxService.prototype.get = function (data, otraUrl) {
         var requestedUrl = '';
         
-        if (!common.isEmpty(otraUrl)){
+        if (!common.isEmpty(otraUrl)) {
             requestedUrl = common.combineUrl(otraUrl, data);
-        }
-        else{
+        } else {
             requestedUrl = common.combineUrl(this.baseUrl, this.url, data);
         }
       
-        if (this.serviceProvider === 'jquery'){
+        if (this.serviceProvider === 'jquery') {
             jQuery.ajax({
                 url: requestedUrl,
                 dataType: this.dataType,
                 timeout: this.timeout,
-                beforeSend: this.beforeSendCallback,
-                success: this.successCallback,
-                error:this.errorCallback,
-                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                beforeSend: _.bind(this.beforeSendCallback, this),
+                success: _.bind(this.successCallback, this),
+                error: _.bind(this.errorCallback, this),
+                headers: {'X-Requested-With': 'XMLHttpRequest'}
             });
-        }else if (serviceProvider === 'custom'){
+        } else if (serviceProvider === 'custom') {
             var xhr = this.createCORSRequest(method, requestedUrl);
             xhr.onload = this.successCallback;
             xhr.onerror = this.errorCallback;
@@ -148,4 +169,4 @@ var AjaxRestService = (function(common, _, ServiceConfig, jQuery){
     };
     
     return AjaxService;
-})(common, _, ServiceConfig, jQuery);
+}(common, _, ServiceConfig, jQuery));

@@ -57,6 +57,9 @@ var EstablecimientoCollectionView = (function ($, common, Backbone, _, renderer,
             //agrego esta clase para poder aplicar estilos CSS
             $("#resultadoConsultaGeneralEstablecimiento").addClass("consulta-detallada");
             
+            //TODO: ESTO NO TIENE QUE ESTAR ACÁ PORQUE YA ESTÁ EN LA CLASE BaseView
+            $.ui.hideMask();
+            
             return this;
         },
         
@@ -78,6 +81,7 @@ var EstablecimientoCollectionView = (function ($, common, Backbone, _, renderer,
         },
         
         attachEvents: function() {
+            BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate("#resultadoConsultaGeneralEstablecimiento ul li a", "click", _.bind(this.busquedaNominalEstablecimiento, this));
         }
         

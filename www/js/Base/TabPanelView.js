@@ -6,7 +6,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
         className: "panel",
         
         template : _.template("<div class='tabs'><ul></ul></div>" +
-                              "<div id='selectedTab' class='consulta-detallada'></div>"),
+                              "<div id='selectedTab' class='selectedTab consulta-detallada'></div>"),
         /**
         * Array con la configuración de cada tab.
         * {
@@ -84,14 +84,18 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     };
     
     tabPanel.prototype.setTabWidth = function () {
-        //var tabList = this.$(".tabs ul li");
         var tabList = $(".tabs ul li", this.el),
-        //el ancho porcentual de cada tab dentro del panel
+            //el ancho porcentual de cada tab dentro del panel
             porcAnchoTab = Number((100 / tabList.length).toFixed(2)),
+        //el ancho porcentual de cada tab dentro del afui
+            /*afuiEl = $("#afui"),
+            afuiWidth = Number(common.trimRight(afuiEl.css("width"), "px")),
+            porcAnchoTab = Number((afuiWidth / tabList.length).toFixed(0)),*/
             i;
         
         for (i = 0; i < tabList.length; i++) {
             $(tabList[i]).css("width", porcAnchoTab + "%");
+            //$(tabList[i]).css("width", porcAnchoTab + "px");
         }
     };
     
@@ -155,6 +159,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     };
     
     tabPanel.prototype.attachEvents = function() {
+        BaseView.prototype.attachEvents.call(this);
         //bindea un handler para el click de cada tab de la vista
         $("#afui").delegate("#" + this.attributes.id + " ul li a", "click", _.bind(this.renderSelectedTab, this));
     };

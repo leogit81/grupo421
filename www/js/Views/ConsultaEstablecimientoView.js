@@ -78,6 +78,7 @@ var ConsultaEstablecimientoView = (function ($, renderer, BaseView, Establecimie
          * se encuentran cargados en la página. 
          */
         attachEvents: function() {
+            BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate("#submitConsultaEstablecimiento", "click", _.bind(this.ejecutarConsultaEstablecimiento, this));
         }
     });
