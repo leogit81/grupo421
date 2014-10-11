@@ -24,6 +24,8 @@
             <script type="text/javascript" charset="utf-8" src="libraries/backbone.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/appframework.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui.js"></script>
+            <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.8tiles.js"></script>
+            <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.touchLayer.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/xmltojson.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/XmlToJsonConverter.js"></script>
             
@@ -51,6 +53,8 @@
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Provincias.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Departamentos.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Localidades.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Codificacion/TipoFormacionProfesional.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Codificacion/FormacionProfesional.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoNominal.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/CoordenadasMapaView.js"></script>
@@ -66,6 +70,9 @@
             <script type="text/javascript" charset="utf-8" src="js/Models/Ministerio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MinisterioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultaMinisterioView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ReportesProfesionalesView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/BusquedaProfesionalesView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ConsultaProfesionalesView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MenuConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
@@ -96,7 +103,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="item_menu">
+                                    <a id="linkConsultaProfHome" class="item_menu" href="#">
                                         <img src="./img/iconos/tab_3.png">
                                         <div class="ztexto-lista"><h3>REFEPS</h3>Profesionales de la salud</div>
                                     </a>
@@ -169,7 +176,7 @@
                             <ul class="list">
                                 <li class="item_menu"><a><img src="./img/iconos/con_ref/GEOREFES_48.png"></a></li>
                                 <li><a id="linkConsultaEstablecimiento2" class="item_menu" href="#"><img src="./img/iconos/con_ref/REFES_48.png"></a></li>
-                                <li><a class="item_menu"><img src="./img/iconos/con_ref/REFEPS_48.png"></a></li>
+                                <li><a id="linkConsultaProfSideMenu" class="item_menu"><img src="./img/iconos/con_ref/REFEPS_48.png"></a></li>
                                 <li><a class="item_menu"><img src="./img/iconos/con_ref/NomiVac_48.png"></a></li>
                                 <li><a class="item_menu"><img src="./img/iconos/con_ref/REFAR_48.png"></a></li>
                                 <li><a class="item_menu"><img src="./img/iconos/con_ref/REDRO_48.png"></a></li>

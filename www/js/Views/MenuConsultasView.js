@@ -26,9 +26,11 @@ var MenuConsultasView = (function(BaseView, jquery){
             BaseView.prototype.attachEvents.call(this);
             jquery("#linkConsultaMinisterio").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
+            jquery("#linkConsultaProfHome").on("click", _.bind(this.showConsultaProfesionales, this));
             //esto es para el menú lateral
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
+            jquery("#linkConsultaProfSideMenu").on("click", _.bind(this.showConsultaProfesionales, this));
         },
         
         showConsultaMinisterio: function(e){
@@ -39,6 +41,10 @@ var MenuConsultasView = (function(BaseView, jquery){
             var consultaEstablecimientoView = ConsultaEstablecimientoView.getInstance();
             consultaEstablecimientoView.render();
         },
+        showConsultaProfesionales: function(e){
+            var consultaProfesionalesView = ConsultaProfesionalesView.getInstance();
+            consultaProfesionalesView.render();
+        }
 	});
     
     return menuConsultasView;

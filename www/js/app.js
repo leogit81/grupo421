@@ -21,10 +21,17 @@ var app = (function ($, jquery) {
     //
     // The scope of 'this' is the event.
     function onDeviceReady(){
+        loadApp();
+    };
+    
+    function loadApp () {
         launchAppFramework();
-        jquery("div#header").on("click", "a#menubadge", onClickMenuBadge);
+        $("div#header").on("click", "a#menubadge", onClickMenuBadge);
         var consultasView = ConsultasView.getInstance();
         consultasView.render();
+        
+        //es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
+        $("#afui").delegate("a.backButton", "click", function(e) { af.ui.hideMask();});
         
         //Se agrega este "parche" para evitar que se duplique el evento click/tap al hacer un click.
         var last_click_time = new Date().getTime();
@@ -38,8 +45,6 @@ var app = (function ($, jquery) {
             }
             last_click_time = click_time;
         }, true);
-        
-        
     };
 
     /**
@@ -56,7 +61,14 @@ var app = (function ($, jquery) {
         $.ui.launch();
         $.ui.removeFooterMenu();
         //esto cambia el texto del backbutton para todos los paneles de la aplicación
-        $.ui.backButtonText = "Atrás"
+        $.ui.backButtonText = "Atrás";
+        //Esta línea es para ocultar un div footer que contiene al menu, y que a pesar de moverlo
+        //con el método removeFooterMenu, seguía mostrandose.
+        $("div#navbar.footer").css("display", "none");
+        //soluciona problemas con el scroll en WP8
+        $.feat.nativeTouchScroll = false;
+        //$.ui.scrollingDivs.menu_scroller.disable();
+        //$.touchLayer($("#afui").get(0));
     };
 
     /**

@@ -1,11 +1,11 @@
-var app_debug = (function (app, jQuery) {
+var app_debug = (function (app) {
     "use strict";
     
     function initialize() {
-       jQuery(document).ready(function(){app.onDeviceReady()});
+       app.onDeviceReady();
     };
     
     return {
        initialize: initialize
     };
-})(app, jQuery);
+})(app);
