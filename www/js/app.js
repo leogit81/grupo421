@@ -38,7 +38,7 @@ var app = (function ($, jquery) {
         var click_time;
         document.addEventListener('click', function (e) {
             click_time = e['timeStamp'];
-            if (click_time && (click_time - last_click_time) < 550) {
+            if (click_time && (click_time - last_click_time) < 1000) {
                 e.stopImmediatePropagation();
                 e.preventDefault();
                 return false;
