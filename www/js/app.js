@@ -9,18 +9,18 @@ var app = (function ($, jquery) {
 
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    function bindEvents(){
+    function bindEvents() {
         document.addEventListener('deviceready', onDeviceReady, false);
     };
 
-    function initialize() {
+    function initialize () {
         bindEvents();
     };
 
     // deviceready Event Handler
     //
     // The scope of 'this' is the event.
-    function onDeviceReady(){
+    function onDeviceRead y(){
         loadApp();
     };
     
