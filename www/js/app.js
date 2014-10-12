@@ -21,6 +21,10 @@ var app = (function ($, jquery) {
     //
     // The scope of 'this' is the event.
     function onDeviceReady(){
+        loadApp();
+    };
+    
+    function loadApp () {
         launchAppFramework();
         $("div#header").on("click", "a#menubadge", onClickMenuBadge);
         var consultasView = ConsultasView.getInstance();
@@ -41,8 +45,6 @@ var app = (function ($, jquery) {
             }
             last_click_time = click_time;
         }, true);
-        
-        
     };
 
     /**
@@ -63,8 +65,10 @@ var app = (function ($, jquery) {
         //Esta línea es para ocultar un div footer que contiene al menu, y que a pesar de moverlo
         //con el método removeFooterMenu, seguía mostrandose.
         $("div#navbar.footer").css("display", "none");
-        //habilita el scroll nativo, lo hacemos porque en WP8 no funcionaba bien el scroll
+        //soluciona problemas con el scroll en WP8
         $.feat.nativeTouchScroll = false;
+        //$.ui.scrollingDivs.menu_scroller.disable();
+        //$.touchLayer($("#afui").get(0));
     };
 
     /**
