@@ -21,24 +21,28 @@ var app = (function ($, jquery) {
     //
     // The scope of 'this' is the event.
     function onDeviceReady(){
+        launchAppFramework();
+        $("div#header").on("click", "a#menubadge", onClickMenuBadge);
+        var consultasView = ConsultasView.getInstance();
+        consultasView.render();
+        
+        //es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
+        $("#afui").delegate("a.backButton", "click", function(e) { af.ui.hideMask();});
+        
         //Se agrega este "parche" para evitar que se duplique el evento click/tap al hacer un click.
         var last_click_time = new Date().getTime();
         var click_time;
         document.addEventListener('click', function (e) {
             click_time = e['timeStamp'];
-            if (click_time && (click_time - last_click_time) < 1000) {
+            if (click_time && (click_time - last_click_time) < 550) {
                 e.stopImmediatePropagation();
                 e.preventDefault();
                 return false;
             }
             last_click_time = click_time;
         }, true);
-        ////////////////
         
-        launchAppFramework();
-        jquery("div#header").on("click", "a#menubadge", onClickMenuBadge);
-        var consultasView = ConsultasView.getInstance();
-        consultasView.render();
+        
     };
 
     /**
@@ -55,7 +59,12 @@ var app = (function ($, jquery) {
         $.ui.launch();
         $.ui.removeFooterMenu();
         //esto cambia el texto del backbutton para todos los paneles de la aplicación
-        $.ui.backButtonText = "Atrás"
+        $.ui.backButtonText = "Atrás";
+        //Esta línea es para ocultar un div footer que contiene al menu, y que a pesar de moverlo
+        //con el método removeFooterMenu, seguía mostrandose.
+        $("div#navbar.footer").css("display", "none");
+        //habilita el scroll nativo, lo hacemos porque en WP8 no funcionaba bien el scroll
+        $.feat.nativeTouchScroll = false;
     };
 
     /**
