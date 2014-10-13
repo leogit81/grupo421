@@ -56,18 +56,16 @@ var app = (function ($, jquery) {
 
     function launchAppFramework(){
         resolverConflictos();
-        $.ui.splitview = false;
-        $.ui.isAjaxApp = false;
+        $.ui.scrollingDivs.menu_scroller.disable();
+        $.ui.disableNativeScrolling()
         $.ui.launch();
+        $.ui.disableSplitView()
         $.ui.removeFooterMenu();
-        //esto cambia el texto del backbutton para todos los paneles de la aplicación
-        $.ui.backButtonText = "Atrás";
         //Esta línea es para ocultar un div footer que contiene al menu, y que a pesar de moverlo
         //con el método removeFooterMenu, seguía mostrandose.
         $("div#navbar.footer").css("display", "none");
-        //soluciona problemas con el scroll en WP8
-        $.feat.nativeTouchScroll = false;
-        //$.ui.scrollingDivs.menu_scroller.disable();
+        //esto cambia el texto del backbutton para todos los paneles de la aplicación
+        $.ui.backButtonText = "Atrás";
         //$.touchLayer($("#afui").get(0));
     };
 
