@@ -20,7 +20,7 @@ var app = (function ($, jquery) {
     // deviceready Event Handler
     //
     // The scope of 'this' is the event.
-    function onDeviceRead y(){
+    function onDeviceReady(){
         loadApp();
     };
     
