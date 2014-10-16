@@ -65,8 +65,21 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
         },
 
         render: function(){
-            $.ui.addContentDiv("listadoFarmacias", this.template());
+//            $.ui.addContentDiv("listadoFarmacias", this.template());
+//            $.ui.loadContent("listadoFarmacias", false, false, "slide");
+            
+            
+            if ($("#listadoFarmacias").length <= 0){
+                $.ui.addContentDiv("listadoFarmacias", this.template());//div panel + contenido
+            }else
+            {
+                $.ui.updatePanel("listadoFarmacias", this.template());//solo contenido para actualizar
+            }
             $.ui.loadContent("listadoFarmacias", false, false, "slide");
+            $("#listadoFarmacias").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
+            
+            
+            
             this.attachEvents();
             document.getElementById("provinciaFarmacia").innerHTML = listaCompletaProvincias;
             document.getElementById("dependenciaFarmacia").innerHTML = listaCompletaDependencias;

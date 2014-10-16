@@ -20,18 +20,18 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
                 viewClass: FarmaciaNominalGeneralView,
                 modelClass: FarmaciaNominal
             },
-            {
-                tabName: "Prestaciones",
-                panelId: "establecimientoPrestaciones",
-                viewClass: BaseView,
-                modelClass: BaseModel
-            },
-            {
-                tabName: "Imágenes",
-                panelId: "establecimientoImagenes",
-                viewClass: BaseView,
-                modelClass: BaseModel
-            },
+//            {
+//                tabName: "Prestaciones",
+//                panelId: "establecimientoPrestaciones",
+//                viewClass: BaseView,
+//                modelClass: BaseModel
+//            },
+//            {
+//                tabName: "Imágenes",
+//                panelId: "establecimientoImagenes",
+//                viewClass: BaseView,
+//                modelClass: BaseModel
+//            },
             {
                 tabName: "Mapas",
                 panelId: "farmaciaMapas",

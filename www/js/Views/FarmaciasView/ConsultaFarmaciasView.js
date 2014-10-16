@@ -1,4 +1,4 @@
-var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFarmaciasView) {
+var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFarmaciasView, BusquedaFarmaciaView) {
     "use strict";
 
     var consultaFarmaciasView = BaseView.extend({
@@ -47,8 +47,8 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
         },*/
 
         ejecutarBuscarFarmacia: function(){
-            //            var busquedaProfesionalesView = new BusquedaProfesionalesView();
-            //            busquedaProfesionalesView.render();
+                        var busquedaFarmaciaView = new BusquedaFarmaciaView();
+                        busquedaFarmaciaView.render();
         },
 
         ejecutarListadoFarmacias: function(){
@@ -75,4 +75,4 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
     });
 
     return consultaFarmaciasView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoFarmaciasView);
+})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoFarmaciasView, BusquedaFarmaciaView);

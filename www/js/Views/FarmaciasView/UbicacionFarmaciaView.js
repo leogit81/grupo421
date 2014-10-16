@@ -12,6 +12,7 @@ var UbicacionFarmaciaView = (function (_, common, BaseView) {
         template : _.template(
             "<div><h2>UBICACIÓN</h2></div>" +
                 "<div><label>Dirección</label><span><%=direccion%></span></div>" +
+                "<div><label>Código Postal</label><span><%=codigoPostal%></span></div>" +
                 "<div><label>Localidad</label><span><%=localidad%></span></div>" +
                 "<div><label>Departamento</label><span><%=departamento%></span></div>" +
                 "<div><label>Provincia</label><span><%=provincia%></span></div>" +
