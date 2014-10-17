@@ -4,7 +4,7 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
     var baseModel = Backbone.Model.extend({
         initialize: function (attributes, options) {
             this.wrapDefaultsInFunction();
-            this.loadDefault(attributes);
+            this.loadDefault(attributes, true);
             this.service = new Service({
                 success: _.bind(this.processData, this)
             });
@@ -39,7 +39,8 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
         loadDefault: function (attributes, force) {
             var attrs = attributes || {},
                 defaultAux = this.getDefaults();
-            this.forceDefaults(true, this.attributes, attrs, defaultAux);
+            force = force || true;
+            this.forceDefaults(force, this.attributes, defaultAux, attrs);
         },
         
         /**

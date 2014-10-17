@@ -1,3 +1,4 @@
+
 /**
 * Utilizado para obtener modelos para vistas que no tienen un modelo asociado, como las que muestran filtros
 * y después ejecutan la consulta aplicando los mismos, para obtener uno o varios modelos.

@@ -24,15 +24,36 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
             this.initializeTabs();
         },
         
-        renderSelectedTab: function (args) {
+        onSelectedTab: function (args) {
             //obtiene del current target el id del panel
             if (!common.isEmpty(args)) {
                 var selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
                 this.selectedTab = this.findTab("panelId", selectedTabPanelId);
+                this.loadSelectedTab();
             }
+        },
+        
+        loadSelectedTab: function () {
+            if (common.isEmpty(this.selectedTab.isLoaded) || !this.selectedTab.isLoaded) {
+                this.selectedTab.view.model.load(_.result(this.selectedTab, "filtroConsulta"));
+                this.selectedTab.isLoaded = true;
+            } else {
+                this.renderFromData();
+            }
+        },
+        
+        /**
+        * Handler del evento viewRendered que se dispará luego de que una de las vistas de los tabs termina de cargarse.
+        */
+        onViewRendered: function () {
             this.renderFromData();
         }
     });
+    
+    tabPanel.prototype.renderFromData = function () {
+        BaseView.prototype.renderFromData.call(this);
+        $("#" + this.attributes.id).addClass("tabPanelViewClass");
+    };
     
     tabPanel.prototype.selectedTab = null;
     tabPanel.prototype.selectedTabEl = function () {
@@ -54,6 +75,13 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     };
     
     /**
+    * Muestra la vista con el tab seleccionado.
+    */
+    tabPanel.prototype.loadDefaultView = function () {
+        this.loadSelectedTab();
+    };
+    
+    /**
     * Hace un render del panel seleccionado.
     */
     tabPanel.prototype.armarHtmlSelectedTab = function () {
@@ -65,8 +93,15 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     tabPanel.prototype.loadTabs = function () {
         for (var i = 0; i < this.tabs.length; i++) {
             var tab = this.tabs[i];
+            
+            if (common.isEmpty(tab.titleClass)) {
+                tab.titleClass = "";
+            }
+            
             if (!this.existeTabHtml(tab.tabName)) {
-                $(".tabs ul", this.el).append("<li id='tab" + tab.tabIndex + "'><a href='#" + tab.panelId + "'>" + tab.tabName + "</a></li>");
+                $(".tabs ul", this.el).append("<li id='tab" + tab.tabIndex + "'><a href='#" 
+                                              + tab.panelId + "'><span class='" + tab.titleClass + "'>" 
+                                              + tab.tabName + "</span></a></li>");
             }   
         }
     };
@@ -161,7 +196,8 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     tabPanel.prototype.attachEvents = function() {
         BaseView.prototype.attachEvents.call(this);
         //bindea un handler para el click de cada tab de la vista
-        $("#afui").delegate("#" + this.attributes.id + " ul li a", "click", _.bind(this.renderSelectedTab, this));
+        //$("#afui").delegate("#" + this.attributes.id + " ul li a", "click", _.bind(this.renderSelectedTab, this));
+        $("#afui").delegate("#" + this.attributes.id + " ul li a", "click", _.bind(this.onSelectedTab, this));
     };
     
     /**
@@ -190,7 +226,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     tabPanel.prototype.initializeTab = function (tab, index) {
         tab.view = common.constructorResult(tab, "viewClass");
         tab.view.setParent(this);
-        tab.view.on("viewRendered", _.bind(this.renderSelectedTab, this));
+        tab.view.on("viewRendered", _.bind(tab.onViewRenderedHandler || this.onViewRendered, this));
         var model = common.constructorResult(tab, "modelClass", this);
         if (!common.isEmpty(model)) {
             tab.view.setModel(model);

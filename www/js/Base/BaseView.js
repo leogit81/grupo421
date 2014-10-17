@@ -45,10 +45,8 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
     */
     baseView.prototype.render = function () {
         var jsonData = this.getModelData();
-        
         //después del render se oculta la máscara de "Cargando..."
         this.hideLoadingMask();
-        
         return this.renderFromData(jsonData);
     };
     
@@ -60,8 +58,9 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
         
         this.armarHtmlConData(data);
         
+        this.renderHtml();
+        
         this.trigger("viewRendered");
-        return this.renderHtml();
     };
     
     baseView.prototype.clearView = function () {
@@ -100,8 +99,6 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
         if (!common.isEmpty(this.renderer)) {
             this.renderer.render(this);
         }
-
-        return this;
     };
     
     /**

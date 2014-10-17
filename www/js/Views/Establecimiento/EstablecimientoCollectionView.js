@@ -66,14 +66,11 @@ var EstablecimientoCollectionView = (function ($, common, Backbone, _, renderer,
         busquedaNominalEstablecimiento: function (eventData) {
             var codigoEstablecimiento = this.getCodigoEstablecimientoFromSelectedItem(eventData.currentTarget.outerHTML);
             
-            var establecimientoNominalModel = new EstablecimientoNominal();
-            //EstablecimientoNominalView.getInstance().setModel(establecimientoNominalModel);
-            var establecimientoView = new EstablecimientoNominalView();
-            establecimientoView.setModel(establecimientoNominalModel);
-            establecimientoNominalModel.load(codigoEstablecimiento);
-            //EstablecimientoNominalView.getInstance().ejecutarConsultaEstablecimiento(codigoEstablecimiento);
-            /*var establecimientoNominalView = new EstablecimientoNominalView();
-            establecimientoNominalView.ejecutarConsultaNominalEstablecimiento(codigoEstablecimiento);*/
+            //var establecimientoNominalModel = new EstablecimientoNominal();
+            var establecimientoView = new EstablecimientoNominalView({codigo: codigoEstablecimiento});
+            //establecimientoView.setModel(establecimientoNominalModel);
+            //establecimientoNominalModel.load(codigoEstablecimiento);
+            establecimientoView.loadDefaultView();
         },
         
         getCodigoEstablecimientoFromSelectedItem: function (selectedItem) {
@@ -100,4 +97,4 @@ var EstablecimientoCollectionView = (function ($, common, Backbone, _, renderer,
     };
 	
 	return establecimientoCollectionView;
-}(af, common, Backbone, _, AppFrameworkRenderer, BaseView, EstablecimientoNominal, EstablecimientoNominalView2));
+}(af, common, Backbone, _, AppFrameworkRenderer, BaseView, EstablecimientoNominal, EstablecimientoNominalView));

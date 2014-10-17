@@ -27,11 +27,9 @@
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.8tiles.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.touchLayer.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/xmltojson.js"></script>
-            <script type="text/javascript" charset="utf-8" src="libraries/XmlToJsonConverter.js"></script>
-
-            <!--            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+            <script type="text/javascript" charset="utf-8" src="js/Converter/XmlToJsonConverter.js"></script>
+            <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
             <script type="text/javascript" charset="utf-8" src="libraries/jquery.chained.min.js"></script>
-
             <script type="text/javascript" charset="utf-8" src="js/common.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/Singleton.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Services/ServiceConfig.js"></script>
@@ -39,14 +37,16 @@
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/MasterView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/TabPanelView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/GoogleMap.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/GoogleMapView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Base/GoogleMapView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseModel.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/ModelDataSource.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/AppFrameworkRenderer.js"></script>        
+            <script type="text/javascript" charset="utf-8" src="js/Base/GoogleMap.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/AppFrameworkRenderer.js"></script>        
             <script type="text/javascript" charset="utf-8" src="js/Models/Imagen.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Models/Participaciones.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/Prestacion.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/PrestacionCollection.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/Participaciones.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/CoordenadasMapa.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Domicilio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Telefono.js"></script>
@@ -56,20 +56,21 @@
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Dependencias.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/TipoFormacionProfesional.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/FormacionProfesional.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoNominal.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoCollection.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/EstablecimientoNominal.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/EstablecimientoCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/FarmaciaCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/FarmaciaNominal.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/CoordenadasMapaView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/DomicilioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/TelefonoView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/ParticipacionesView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/UbicacionEstablecimientoView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/EstablecimientoNominalGeneralView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/EstablecimientoNominalView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/EstablecimientoNominalView2.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/EstablecimientoCollectionView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/ConsultaEstablecimientoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/PrestacionCollectionView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ParticipacionesView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/UbicacionEstablecimientoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoNominalGeneralView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoNominalView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoNominalView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoCollectionView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ConsultaEstablecimientoView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Ministerio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MinisterioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultaMinisterioView.js"></script>
@@ -84,7 +85,6 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/ListadoFarmaciasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/BusquedaFarmaciaView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/ConsultaFarmaciasView.js"></script>
-            
             <script type="text/javascript" charset="utf-8" src="js/Views/MenuConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/app.js"></script>

@@ -103,7 +103,7 @@ ul li a div h3 {
     width: 120px;
 }
 
-#afui div#content .consultaNominalEstablecimiento {
+#afui div#content .tabPanelViewClass {
     padding-left: 0px;
     padding-right: 0px;
 }
@@ -111,4 +111,9 @@ ul li a div h3 {
 .selectedTab {
     padding-left: 10px;
     padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+span.prestacionesTabViewClass {
+    font-size: 0.75em;
 }

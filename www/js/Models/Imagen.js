@@ -1,4 +1,4 @@
-var Imagen = (function(BaseModel){
+var Imagen = (function (BaseModel) {
     "use strict";
     
     var imagen = BaseModel.extend({
@@ -9,4 +9,4 @@ var Imagen = (function(BaseModel){
     });
     
     return imagen;
-})(BaseModel);
+}(BaseModel));

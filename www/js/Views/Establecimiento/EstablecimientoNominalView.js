@@ -1,4 +1,4 @@
-var EstablecimientoNominalView2 = (function ($, renderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView) {
+var EstablecimientoNominalView = (function ($, renderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView) {
     "use strict";
     
     var establecimientoNominalView = TabPanelView.extend({
@@ -13,6 +13,14 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
         
         codigoEstablecimiento: null,
         
+        setCodigoEstablecimiento: function (codigoEstablecimiento) {
+            this.codigoEstablecimiento = codigoEstablecimiento;
+        },
+        
+        getCodigoEstablecimiento: function (codigoEstablecimiento) {
+            return this.codigoEstablecimiento;
+        },
+        
         tabs: [
             {
                 tabName: "General",
@@ -23,8 +31,9 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
             {
                 tabName: "Prestaciones",
                 panelId: "establecimientoPrestaciones",
-                viewClass: BaseView,
-                modelClass: BaseModel
+                viewClass: PrestacionCollectionView,
+                modelClass: PrestacionCollection,
+                titleClass: "prestacionesTabViewClass"
             },
             {
                 tabName: "Imágenes",
@@ -52,46 +61,21 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
 		initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            this.setCodigoEstablecimiento(attributes.codigo);
+            this.findTab("panelId", "establecimientoGeneral").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
+            this.findTab("panelId", "establecimientoPrestaciones").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
+            this.findTab("panelId", "establecimientoMapas").onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
             TabPanelView.prototype.initialize.call(this, attributes, options);
         },
-        
-        /*mostrarTabEstablecimientoGeneral: function () {
-            var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
-            tabGeneral.view.model.load(this.codigoEstablecimiento);
-        },*/
         
         /**
         * Setea el modelo para la vista y también actualiza los modelos de las vistas de los tabs.
         */
-        setModel: function (model) {
-            //TabPanelView.prototype.setModel.call(this, model);
-            
-            //var establecimientoModel = this.getModelOrDefault("General");
+        /*setModel: function (model) {
             this.getViewByName("General").setModel(model);
             
             this.getViewByName("Mapas").setModel(model.get("coordenadasDeMapa"));
-            
-            /*var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
-            this.getViewByName("coordenadasDeMapa").setModel(coordenadasModel);
-            
-            var domicilioModel = this.getModelOrDefault("domicilio");
-            this.getViewByName("domicilio").setModel(domicilioModel);
-            
-            var participacionesModel = this.getModelOrDefault("participaciones");
-            this.getViewByName("participaciones").setModel(participacionesModel);
-            
-            var telefonoModel1 = this.getModelOrDefault("telefono1");
-            this.getViewByName("telefono1").setModel(telefonoModel1);
-            
-            var telefonoModel2 = this.getModelOrDefault("telefono2");
-            this.getViewByName("telefono2").setModel(telefonoModel2);
-            
-            var telefonoModel3 = this.getModelOrDefault("telefono3");
-            this.getViewByName("telefono3").setModel(telefonoModel3);
-            
-            var telefonoModel4 = this.getModelOrDefault("telefono4");
-            this.getViewByName("telefono4").setModel(telefonoModel4);*/
-        },
+        },*/
         
         /**
         * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
@@ -117,20 +101,41 @@ var EstablecimientoNominalView2 = (function ($, renderer, BaseView, Establecimie
         $("#" + this.attributes.id).addClass("consultaNominalEstablecimiento");
     };*/
     
-    establecimientoNominalView.prototype.renderSelectedTab = function (args) {
-        //Si se hizo clic en el tab de mapas, se carga el mapa
-        if (!common.isEmpty(args)) {
-            var selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
-            if (selectedTabPanelId === "establecimientoMapas") {
-                var tabMapa = this.findTab("panelId", selectedTabPanelId);
-                $.ui.loadContent(tabMapa.view.attributes.id, false, false, "pop");
+    establecimientoNominalView.prototype.onGoogleMapViewRendered = function () {
+        //Si se hizo clic en el tab de mapas, se carga el mapa de forma diferente, no se muestra dentro del tab
+        /*var selectedTabPanelId = null;
+        
+        if (!common.isEmpty(args) && !common.isEmpty(args.currentTarget)) {
+            selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
+        }*/
+
+        if (this.selectedTab.panelId === "establecimientoMapas") {
+            var tabMapa = this.findTab("panelId", "establecimientoMapas");
+            $.ui.loadContent(tabMapa.view.attributes.id, false, false, "pop");
+            return;
+        }/* else if (selectedTabPanelId === "establecimientoPrestaciones") {
+            var tabPrestaciones = this.findTab("panelId", selectedTabPanelId);
+            if (common.isEmpty(tabPrestaciones.isLoaded) || !tabPrestaciones.isLoaded) {
+                this.loadPrestacionesTab(selectedTabPanelId);
+                tabPrestaciones.isLoaded = true;
             }
-        } else {
-            //Cuando se carga el tab panel view por primera vez, después de inicializar el mapa, viene por este laod.
-            TabPanelView.prototype.renderSelectedTab.call(this, args);
+        }*/
+        //Cuando se carga el tab panel view por primera vez, después de inicializar el mapa, viene por este load.
+        //TabPanelView.prototype.onViewRendered.call(this);
+    };
+    
+    /**
+    * Carga la data del tab de prestaciones cuando el usuario hace clic sobre el mismo.
+    * Lo hace una vez y el resto de las veces que se seleccione el tab muestra la data que ya tiene cargada.
+    */
+    establecimientoNominalView.prototype.loadPrestacionesTab = function (selectedTabPanelId) {
+        var tabPrestaciones = this.findTab("panelId", selectedTabPanelId);
+        if (common.isEmpty(tabPrestaciones.isLoaded) || !tabPrestaciones.isLoaded) {
+            tabPrestaciones.view.model.load(this.codigoEstablecimiento);
+            tabPrestaciones.isLoaded = true;
         }
         $("#" + this.attributes.id).addClass("consultaNominalEstablecimiento");
     };
 	
 	return establecimientoNominalView;
-}(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView));
+}(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView));

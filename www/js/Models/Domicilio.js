@@ -1,4 +1,4 @@
-var Domicilio = (function(BaseModel){
+var Domicilio = (function (BaseModel) {
     "use strict";
     
     var domicilio = BaseModel.extend({
@@ -9,4 +9,4 @@ var Domicilio = (function(BaseModel){
     });
     
     return domicilio;
-})(BaseModel);
+}(BaseModel));

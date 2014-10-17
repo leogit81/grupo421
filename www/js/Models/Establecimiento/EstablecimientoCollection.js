@@ -8,8 +8,6 @@ var EstablecimientoCollection = (function (common, Backbone, converter, Service)
         }
     });
     
-    //establecimientoCollection.prototype.converter = converter;
-
     establecimientoCollection.prototype.parse = function (parsedData) {
         return parsedData.EstablecimientoSearchResponse.establecimientos.establecimientoReducido;
     };

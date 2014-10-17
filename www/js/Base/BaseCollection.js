@@ -19,6 +19,10 @@ var BaseCollection = (function (common, Backbone, converter, Service, BaseModel)
         this.setParsedData(modelData);
     };
     
+    baseCollection.prototype.sync = function (method, model, options) {
+        BaseModel.prototype.sync.call(this, method, model, options);
+    };
+    
     /**
     * Parsea los datos que vienen del objeto JSON para poder setearlos en el modelo
     */
