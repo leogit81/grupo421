@@ -56,11 +56,13 @@ var app = (function ($, jquery) {
 
     function launchAppFramework(){
         resolverConflictos();
-        $.ui.scrollingDivs.menu_scroller.disable();
-        $.ui.disableNativeScrolling()
+//        $.ui.scrollingDivs.menu_scroller.disable();
+        $.ui.disableNativeScrolling();
+        
         $.ui.launch();
-        $.ui.disableSplitView()
+        $.ui.disableSplitView();
         $.ui.removeFooterMenu();
+        $.ui.updateBadge("#afui","3","tr");
         //Esta línea es para ocultar un div footer que contiene al menu, y que a pesar de moverlo
         //con el método removeFooterMenu, seguía mostrandose.
         $("div#navbar.footer").css("display", "none");
