@@ -88,6 +88,7 @@ ul li a div h3 {
 #afui .header h1 {
     width: 60%;
     left: 20%;
+    padding: 0.2% 0;
 }
 
 .titulosNominalEstablecimiento {
@@ -115,4 +116,9 @@ ul li a div h3 {
 
 #afui .menuButton {
     float:right !important;
+}
+
+.zimagen_header {
+    max-width:100%;
+    max-height:90%;
 }

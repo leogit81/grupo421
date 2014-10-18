@@ -1,22 +1,22 @@
-var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFarmaciasView, BusquedaFarmaciaView) {
+var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDrogueriasView, BusquedaDrogueriaView) {
     "use strict";
 
-    var consultaFarmaciasView = BaseView.extend({
+    var consultaDrogueriasView = BaseView.extend({
         tagName: 'div',
 
         attributes: {
-            'id': 'consultaFarmacias',
+            'id': 'consultaDroguerias',
             'class': 'panel',
-            'data-title': 'REFAR',
+            'data-title': 'REDRO',
             'data-nav':"consultas_nav",    
         },
 
         template : _.template(
-            '<div class="formGroupHead">Registro Federal de Farmacias. Seleccione una opción.</div>' +
+            '<div class="formGroupHead">Registro Federal de Droguerias. Seleccione una opción.</div>' +
             '<form>' +
             '<div class="button-grouped vertical">' +
-            '<a id="submitListadoFarmacias" class="button">Listado de Farmacias</a>' +
-            '<a id="submitBuscarFarmacia" class="button">Buscar Farmacia</a>' +
+            '<a id="submitListadoDroguerias" class="button">Listado de Droguerias</a>' +
+            '<a id="submitBuscarDrogueria" class="button">Buscar Drogueria</a>' +
             '</div>' +
             '</form>'
         ),
@@ -46,28 +46,28 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
             ministerioModel.processData(data);
         },*/
 
-        ejecutarBuscarFarmacia: function(){
-            var busquedaFarmaciaView = new BusquedaFarmaciaView();
-            busquedaFarmaciaView.render();
+        ejecutarBuscarDrogueria: function(){
+            var busquedaDrogueriaView = new BusquedaDrogueriaView();
+            busquedaDrogueriaView.render();
         },
 
-        ejecutarListadoFarmacias: function(){
-            var listadoFarmaciasView = new ListadoFarmaciasView();
-            listadoFarmaciasView.render();
+        ejecutarListadoDroguerias: function(){
+            var listadoDrogueriasView = new ListadoDrogueriasView();
+            listadoDrogueriasView.render();
         },
 
         render: function(){
-            //            $.ui.addContentDiv("consultaFarmacias", this.template());
-            //            $.ui.loadContent("consultaFarmacias", false, false, "slide");
+            //            $.ui.addContentDiv("consultaDroguerias", this.template());
+            //            $.ui.loadContent("consultaDroguerias", false, false, "slide");
 
-            if ($("#consultaFarmacias").length <= 0){
-                $.ui.addContentDiv("consultaFarmacias", this.template());//div panel + contenido
+            if ($("#consultaDroguerias").length <= 0){
+                $.ui.addContentDiv("consultaDroguerias", this.template());//div panel + contenido
             }else
             {
-                $.ui.updatePanel("consultaFarmacias", this.template());//solo contenido para actualizar
+                $.ui.updatePanel("consultaDroguerias", this.template());//solo contenido para actualizar
             }
-            $.ui.loadContent("consultaFarmacias", false, false, "slide");
-            $("#consultaFarmacias").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
+            $.ui.loadContent("consultaDroguerias", false, false, "slide");
+            $("#consultaDroguerias").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
 
 
             this.attachEvents();
@@ -80,10 +80,10 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitListadoFarmacias").on("click", _.bind(this.ejecutarListadoFarmacias, this));
-            jquery("#submitBuscarFarmacia").on("click", _.bind(this.ejecutarBuscarFarmacia, this));
+            jquery("#submitListadoDroguerias").on("click", _.bind(this.ejecutarListadoDroguerias, this));
+            jquery("#submitBuscarDrogueria").on("click", _.bind(this.ejecutarBuscarDrogueria, this));
         }
     });
 
-    return consultaFarmaciasView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoFarmaciasView, BusquedaFarmaciaView);
+    return consultaDrogueriasView;
+})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoDrogueriasView, BusquedaDrogueriaView);

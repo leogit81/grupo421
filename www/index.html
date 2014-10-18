@@ -44,24 +44,29 @@
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseModel.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/ModelDataSource.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/AppFrameworkRenderer.js"></script>        
+            <script type="text/javascript" charset="utf-8" src="js/Views/AppFrameworkRenderer.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Imagen.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Participaciones.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/CoordenadasMapa.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Domicilio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Telefono.js"></script>
-            
+
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Provincias.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Departamentos.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Localidades.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Dependencias.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/FormacionProfesional.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/TipoFormacionProfesional.js"></script>
-            
+
             <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoNominal.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/EstablecimientoCollection.js"></script>
+
             <script type="text/javascript" charset="utf-8" src="js/Models/FarmaciaCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/FarmaciaNominal.js"></script>
+
+            <script type="text/javascript" charset="utf-8" src="js/Models/DrogueriaCollection.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/DrogueriaNominal.js"></script>
+
             <script type="text/javascript" charset="utf-8" src="js/Views/CoordenadasMapaView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/DomicilioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/TelefonoView.js"></script>
@@ -78,7 +83,7 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ReportesProfesionalesView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/BusquedaProfesionalesView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ConsultaProfesionalesView.js"></script>
-            
+
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/UbicacionFarmaciaView.js"></script> 
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/FarmaciaNominalGeneralView.js"></script> 
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/FarmaciaNominalView.js"></script>
@@ -86,7 +91,15 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/ListadoFarmaciasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/BusquedaFarmaciaView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/ConsultaFarmaciasView.js"></script>
-            
+
+            <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/UbicacionDrogueriaView.js"></script> 
+            <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/DrogueriaNominalGeneralView.js"></script> 
+            <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/DrogueriaNominalView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/DrogueriaCollectionView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/ListadoDrogueriasView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/BusquedaDrogueriaView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/ConsultaDrogueriasView.js"></script>
+
             <script type="text/javascript" charset="utf-8" src="js/Views/MenuConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
@@ -98,11 +111,12 @@
                 <div id="afui" class="bb">
                     <div id="header">
                         <a id='menubadge' class='menuButton'></a>
+<!--                        <img src="./img/sisaMobile.png" class='zimagen_header'>-->
                     </div>
                     <div id="content">
                         <div id='map_canvas'></div>
                         <!--Paneles usados para navegar por la aplicación-->
-                        <div id="home" class="panel" data-title="SISA Móvil" selected="true" data-nav="consultas_nav">
+                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav">
                             <ul class="list">
                                 <li>
                                     <a>                                        
@@ -135,7 +149,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="item_menu">
+                                    <a id="linkConsultaDroguerias" class="item_menu" href="#">
                                         <img src="./img/iconos/tab_6.png">
                                         <div class="ztexto-lista"><h3>REDRO</h3>Registro Federal de Droguerías</div>
                                     </a>
@@ -192,8 +206,8 @@
                                 <li><a id="linkConsultaEstablecimiento2" class="item_menu" href="#"><img src="./img/iconos/con_ref/REFES_48.png"></a></li>
                                 <li><a id="linkConsultaProfSideMenu" class="item_menu"><img src="./img/iconos/con_ref/REFEPS_48.png"></a></li>
                                 <li><a class="item_menu"><img src="./img/iconos/con_ref/NomiVac_48.png"></a></li>
-                                <li><a class="item_menu"><img src="./img/iconos/con_ref/REFAR_48.png"></a></li>
-                                <li><a class="item_menu"><img src="./img/iconos/con_ref/REDRO_48.png"></a></li>
+                                <li><a id="linkConsultaFarmaciasSideMenu" class="item_menu"><img src="./img/iconos/con_ref/REFAR_48.png"></a></li>
+                                <li><a id="linkConsultaDrogueriasSideMenu" class="item_menu"><img src="./img/iconos/con_ref/REDRO_48.png"></a></li>
                                 <li><a class="item_menu"><img src="./img/iconos/con_ref/REMEDIAR_48.png"></a></li>
                                 <li><a class="item_menu"><img src="./img/iconos/con_ref/REDOS_48.png"></a></li>
                                 <li><a id="linkConsultaMinisterio2" class="item_menu" href="#"><img src="./img/iconos/con_ref/Ministerio_48.png"></a></li>

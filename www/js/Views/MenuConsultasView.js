@@ -28,27 +28,39 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
             jquery("#linkConsultaProfHome").on("click", _.bind(this.showConsultaProfesionales, this));
             jquery("#linkConsultaFarmacias").on("click", _.bind(this.showConsultaFarmacias, this));
+            jquery("#linkConsultaDroguerias").on("click", _.bind(this.showConsultaDroguerias, this));
             //esto es para el menú lateral
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
             jquery("#linkConsultaProfSideMenu").on("click", _.bind(this.showConsultaProfesionales, this));
+            jquery("#linkConsultaFarmaciasSideMenu").on("click", _.bind(this.showConsultaFarmacias, this));
+            jquery("#linkConsultaDrogueriasSideMenu").on("click", _.bind(this.showConsultaDroguerias, this));
         },
         
         showConsultaMinisterio: function(e){
             var consultaMinisterioView = ConsultaMinisterioView.getInstance();
             consultaMinisterioView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_9.png' class='zimagen_header'>");
         },
 		showConsultaEstablecimiento: function(e){
             var consultaEstablecimientoView = ConsultaEstablecimientoView.getInstance();
             consultaEstablecimientoView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_2.png' class='zimagen_header'>");
         },
         showConsultaProfesionales: function(e){
             var consultaProfesionalesView = ConsultaProfesionalesView.getInstance();
             consultaProfesionalesView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_3.png' class='zimagen_header'>");
         },
         showConsultaFarmacias: function(e){
             var consultaFarmaciasView = ConsultaFarmaciasView.getInstance();
             consultaFarmaciasView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_5.png' class='zimagen_header'>");
+        },
+        showConsultaDroguerias: function(e){
+            var consultaDrogueriasView = ConsultaDrogueriasView.getInstance();
+            consultaDrogueriasView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_6.png' class='zimagen_header'>");
         },
 	});
     
