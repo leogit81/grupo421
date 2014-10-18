@@ -7,7 +7,7 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
         attributes: {
             'id': 'busquedaFarmacia',
             'class': 'panel',
-            'data-title': 'REFAR',
+//            'data-title': 'REFAR',
             'data-nav':"consultas_nav",    
         },
 

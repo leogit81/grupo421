@@ -7,7 +7,7 @@ var UbicacionDrogueriaView = (function (_, common, BaseView) {
         
         attributes: {
             'id': 'resultadoConsultaDrogueria',
-            'data-title': 'REDRO',
+//            'data-title': 'REDRO',
         },
         
         template : _.template(

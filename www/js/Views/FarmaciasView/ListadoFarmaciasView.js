@@ -7,7 +7,7 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
         attributes: {
             'id': 'listadoFarmacias',
             'class': 'panel',
-            'data-title': 'REFAR',
+//            'data-title': 'REFAR',
             'data-nav':"consultas_nav",    
         },
 

@@ -7,7 +7,7 @@ var ListadoDrogueriasView = (function (jquery, $, renderer, BaseView, DrogueriaC
         attributes: {
             'id': 'listadoDroguerias',
             'class': 'panel',
-            'data-title': 'REDRO',
+//            'data-title': 'REDRO',
             'data-nav':"consultas_nav",    
         },
 

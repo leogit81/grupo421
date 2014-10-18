@@ -7,7 +7,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
         
         attributes: {
             'id': 'resultadoConsultaNominalDrogueria',
-            'data-title': 'REDRO',
+//            'data-title': 'REDRO',
             'data-nav': 'consultas_nav'
         },
         

@@ -10,7 +10,7 @@ var DrogueriaNominalGeneralView = (function ($, common, _, renderer, MasterView)
 
         attributes: {
             'id': 'drogueriaGeneral',
-            'data-title': 'REDRO',
+//            'data-title': 'REDRO',
         },
 
         template : _.template(

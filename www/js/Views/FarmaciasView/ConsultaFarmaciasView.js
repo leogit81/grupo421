@@ -7,7 +7,7 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
         attributes: {
             'id': 'consultaFarmacias',
             'class': 'panel',
-            'data-title': 'REFAR',
+//            'data-title': 'REFAR',
             'data-nav':"consultas_nav",    
         },
 

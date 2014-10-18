@@ -7,7 +7,7 @@ var BusquedaDrogueriaView = (function (jquery, $, renderer, BaseView, DrogueriaN
         attributes: {
             'id': 'busquedaDrogueria',
             'class': 'panel',
-            'data-title': 'REDRO',
+//            'data-title': 'REDRO',
             'data-nav':"consultas_nav",
         },
 

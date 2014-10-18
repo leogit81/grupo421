@@ -7,7 +7,7 @@ var DrogueriaCollectionView = (function ($, common, Backbone, _, renderer, BaseV
         
         attributes: {
             'id': 'resultadoConsultaGeneralDrogueria',
-            'data-title': 'REDRO',
+//            'data-title': 'REDRO',
             'data-nav': "consultas_nav"
         },
         
