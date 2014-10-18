@@ -21,30 +21,19 @@ var app = (function ($, jquery) {
     //
     // The scope of 'this' is the event.
     function onDeviceReady(){
+        //        Se incluye fastclick para evitar que se dispare dos veces el evento "click" cuando se hace un click
+        FastClick.attach(document.body);
         loadApp();
     };
-    
+
     function loadApp () {
         launchAppFramework();
         $("div#header").on("click", "a#menubadge", onClickMenuBadge);
         var consultasView = ConsultasView.getInstance();
         consultasView.render();
-        
+
         //es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
         $("#afui").delegate("a.backButton", "click", function(e) { af.ui.hideMask();});
-        
-        //Se agrega este "parche" para evitar que se duplique el evento click/tap al hacer un click.
-        var last_click_time = new Date().getTime();
-        var click_time;
-        document.addEventListener('click', function (e) {
-            click_time = e['timeStamp'];
-            if (click_time && (click_time - last_click_time) < 550) {
-                e.stopImmediatePropagation();
-                e.preventDefault();
-                return false;
-            }
-            last_click_time = click_time;
-        }, true);
     };
 
     /**
@@ -56,9 +45,9 @@ var app = (function ($, jquery) {
 
     function launchAppFramework(){
         resolverConflictos();
-//        $.ui.scrollingDivs.menu_scroller.disable();
+        //        $.ui.scrollingDivs.menu_scroller.disable();
         $.ui.disableNativeScrolling();
-        
+
         $.ui.launch();
         $.ui.disableSplitView();
         $.ui.removeFooterMenu();
