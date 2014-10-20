@@ -7,7 +7,7 @@ var GoogleMapView = (function ($, BaseView) {
 
         attributes: {
             'id': 'googleMapView',
-            'data-title': 'MAPA',
+//            'data-title': 'MAPA',
             'data-nav': "consultas_nav"
         },
         

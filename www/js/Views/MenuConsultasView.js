@@ -29,6 +29,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaProfHome").on("click", _.bind(this.showConsultaProfesionales, this));
             jquery("#linkConsultaFarmacias").on("click", _.bind(this.showConsultaFarmacias, this));
             jquery("#linkConsultaDroguerias").on("click", _.bind(this.showConsultaDroguerias, this));
+            jquery("#linkConsultaNomivac").on("click", _.bind(this.showConsultaNomivac, this));
             //esto es para el menú lateral
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
@@ -61,6 +62,11 @@ var MenuConsultasView = (function(BaseView, jquery){
             var consultaDrogueriasView = ConsultaDrogueriasView.getInstance();
             consultaDrogueriasView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_6.png' class='zimagen_header'>");
+        },
+        showConsultaNomivac: function(e){
+            var consultaNomivacView = ConsultaNomivacView.getInstance();
+            consultaNomivacView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_4.png' class='zimagen_header'>");
         },
 	});
     
