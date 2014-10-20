@@ -15,8 +15,8 @@ var ConsultaEstablecimientoView = (function ($, renderer, BaseView, Establecimie
             '<div class="formGroupHead">Filtros</div>' +
             '<form>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
-            '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento" onchange="deptos.actualizar()"></select>' +
-            '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento" onchange="localidades.actualizar()"></select>' +
+            '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"' +                                                                       'onchange="deptos.actualizar(provinciaEstablecimiento,departamentoEstablecimiento,localidadEstablecimiento)"></select>' +
+            '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"' +                                                                 'onchange="localidades.actualizar(provinciaEstablecimiento,departamentoEstablecimiento,localidadEstablecimiento)"></select>' +
             '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
             '<a id="submitConsultaEstablecimiento" class="button">Enviar</a>' +
             '</form>'

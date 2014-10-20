@@ -1,11 +1,11 @@
-var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection, EstablecimientoCollectionView) {
+var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, EstablecimientoCollectionView) {
     "use strict";
 
-    var consultaNomivacView = BaseView.extend({
+    var consultaRedosView = BaseView.extend({
         tagName: 'div',
 
         attributes: {
-            'id': 'consultaNomivac',
+            'id': 'consultaRedos',
             'class': 'panel',
 //            'data-title': 'Filtros',
             'data-nav': 'consultas_nav'
@@ -14,20 +14,20 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
             '<form>' +
-            '<input id="nombreNomivac" type="text" placeholder="Nombre de Establecimiento"/>' +
-            '<select id="pciaNomivac" name="pciaNomivac" onchange="deptos.actualizar(pciaNomivac, dptoNomivac, locNomivac)"></select>' +
-            '<select id="dptoNomivac" name="dptoNomivac" onchange="localidades.actualizar(pciaNomivac, dptoNomivac, locNomivac)"></select>' +
-            '<select id="locNomivac" name="locNomivac"></select>' +
-            '<a id="submitConsultaNomivac" class="button">Enviar</a>' +
+            '<input id="nombreRedos" type="text" placeholder="Nombre de Establecimiento"/>' +
+            '<select id="pciaRedos" name="pciaRedos" onchange="deptos.actualizar(pciaRedos, dptoRedos, locRedos)"></select>' +
+            '<select id="dptoRedos" name="dptoRedos" onchange="localidades.actualizar(pciaRedos, dptoRedos, locRedos)"></select>' +
+            '<select id="locRedos" name="locRedos"></select>' +
+            '<a id="submitConsultaRedos" class="button">Enviar</a>' +
             '</form>'
         ),
 
 
         render: function() {
             BaseView.prototype.render.call(this);            
-            document.getElementById("pciaNomivac").innerHTML = listaCompletaProvincias;
-            document.getElementById("dptoNomivac").innerHTML = "<option value =''>Seleccione un departamento...</option>";
-            document.getElementById("locNomivac").innerHTML = "<option value =''>Seleccione una localidad...</option>";
+            document.getElementById("pciaRedos").innerHTML = listaCompletaProvincias;
+            document.getElementById("dptoRedos").innerHTML = "<option value =''>Seleccione un departamento...</option>";
+            document.getElementById("locRedos").innerHTML = "<option value =''>Seleccione una localidad...</option>";
         },
 
         initialize: function (attributes, options) {
@@ -39,19 +39,19 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
         },
 
         setNombreEstablecimiento: function (e) {
-            this.model.set("nombreNomivac", e.target.value);
+            this.model.set("nombreRedos", e.target.value);
         },
 
-        ejecutarConsultaNomivac: function () {
-            var nombreEstablecimiento = $("#nombreNomivac").val();
-            var provinciaEstablecimiento = $("#pciaNomivac").val();
-            var departamentoEstablecimiento = $("#dptoNomivac").val();
-            var localidadEstablecimiento = $("#locNomivac").val();
+        ejecutarConsultaRedos: function () {
+            var nombreEstablecimiento = $("#nombreRedos").val();
+            var provinciaEstablecimiento = $("#pciaRedos").val();
+            var departamentoEstablecimiento = $("#dptoRedos").val();
+            var localidadEstablecimiento = $("#locRedos").val();
 
             this.modelDataSource.getModelData(ProgramasCollection, {
                 "longitud": 0,
                 "latitud": 0,
-                "redNOMIVAC": 'SI',
+                "sistemaNacionalSangre": 'SI',
                 "provincia": provinciaEstablecimiento,
                 "nombre": nombreEstablecimiento,
                 "depto": departamentoEstablecimiento,
@@ -66,8 +66,8 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
         */
         renderVistaDeDatos: function (data) {
             var programasCollection = new ProgramasCollection();
-            var nomivacColleccionView = EstablecimientoCollectionView.getInstance();
-            nomivacColleccionView.setModel({model: programasCollection});
+            var redosColleccionView = EstablecimientoCollectionView.getInstance();
+            redosColleccionView.setModel({model: programasCollection});
             programasCollection.processData(data);
         },
 
@@ -82,9 +82,9 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
          */
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate("#submitConsultaNomivac", "click", _.bind(this.ejecutarConsultaNomivac, this));
+            $("#afui").delegate("#submitConsultaRedos", "click", _.bind(this.ejecutarConsultaRedos, this));
         }
     });
 
-    return consultaNomivacView;
+    return consultaRedosView;
 })(af, AppFrameworkRenderer, BaseView, ProgramasCollection, EstablecimientoCollectionView);

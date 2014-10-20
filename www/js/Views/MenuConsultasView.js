@@ -30,12 +30,17 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaFarmacias").on("click", _.bind(this.showConsultaFarmacias, this));
             jquery("#linkConsultaDroguerias").on("click", _.bind(this.showConsultaDroguerias, this));
             jquery("#linkConsultaNomivac").on("click", _.bind(this.showConsultaNomivac, this));
+            jquery("#linkConsultaRedos").on("click", _.bind(this.showConsultaRedos, this));
+            jquery("#linkConsultaRemediar").on("click", _.bind(this.showConsultaRemediar, this));
             //esto es para el menú lateral
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
             jquery("#linkConsultaProfSideMenu").on("click", _.bind(this.showConsultaProfesionales, this));
             jquery("#linkConsultaFarmaciasSideMenu").on("click", _.bind(this.showConsultaFarmacias, this));
             jquery("#linkConsultaDrogueriasSideMenu").on("click", _.bind(this.showConsultaDroguerias, this));
+            jquery("#linkConsultaNomivacSideMenu").on("click", _.bind(this.showConsultaNomivac, this));
+            jquery("#linkConsultaRedosSideMenu").on("click", _.bind(this.showConsultaRedos, this));
+            jquery("#linkConsultaRemediarSideMenu").on("click", _.bind(this.showConsultaRemediar, this));
         },
         
         showConsultaMinisterio: function(e){
@@ -67,6 +72,16 @@ var MenuConsultasView = (function(BaseView, jquery){
             var consultaNomivacView = ConsultaNomivacView.getInstance();
             consultaNomivacView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_4.png' class='zimagen_header'>");
+        },
+        showConsultaRedos: function(e){
+            var consultaRedosView = ConsultaRedosView.getInstance();
+            consultaRedosView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_8.png' class='zimagen_header'>");
+        },
+        showConsultaRemediar: function(e){
+            var consultaRemediarView = ConsultaRemediarView.getInstance();
+            consultaRemediarView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_7.png' class='zimagen_header'>");
         },
 	});
     
