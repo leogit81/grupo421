@@ -71,6 +71,8 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
 
 
             this.attachEvents();
+            FastClick.attach($("#submitListadoDroguerias"));
+            FastClick.attach($("#submitBuscarDrogueria"));
             return this;
         },
 

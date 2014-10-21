@@ -71,6 +71,8 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
 
 
             this.attachEvents();
+            FastClick.attach($("#submitListadoFarmacias"));
+            FastClick.attach($("#submitBuscarFarmacia"));
             return this;
         },
 
