@@ -526,8 +526,24 @@ function Departamentos() {
                 dptosHTML += "<option value='" + listaDptos[i].idDpto + "'>" + listaDptos[i].departamento + "</option>";
             };
         };
+
         document.getElementById("departamentoEstablecimiento").innerHTML = dptosHTML;
         document.getElementById("localidadEstablecimiento").innerHTML = "<option value =''>Seleccione una localidad...</option>";
+    };
+    
+    this.actualizarDepartamentosDeLaVista = function (view) {
+        var i;
+        var dptosHTML;
+        var len = listaDptos.length;
+        var idProvinciaSeleccionada = af(view.getViewSelector() + " select#provinciaEstablecimiento").val();
+        dptosHTML += "<option value =''>Seleccione un departamento...</option>";
+        for (i = 0; i < len; i++) {
+            if ( listaDptos[i].idProv == idProvinciaSeleccionada ) {
+                dptosHTML += "<option value='" + listaDptos[i].idDpto + "'>" + listaDptos[i].departamento + "</option>";
+            };
+        };
+        af(view.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = dptosHTML;
+        af(view.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
     };
 };
 

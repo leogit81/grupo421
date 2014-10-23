@@ -16,7 +16,7 @@ var ConsultasView = (function($, BaseView, MenuConsultasView, renderer){
             contentEl.append(consultaElement);
 
             this.asideMenu = MenuConsultasView.getInstance();
-            this.asideMenu.render();
+            //this.asideMenu.render();
         }
     });
     

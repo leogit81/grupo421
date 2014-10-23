@@ -227,12 +227,13 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
         tab.view = common.constructorResult(tab, "viewClass");
         tab.view.setParent(this);
         tab.view.on("viewRendered", _.bind(tab.onViewRenderedHandler || this.onViewRendered, this));
-        var model = common.constructorResult(tab, "modelClass", this);
+        var model = common.constructorResult(tab, "modelClass");
         if (!common.isEmpty(model)) {
             tab.view.setModel(model);
         }
         tab.insertElID = 'selectedTab';
         tab.tabIndex = index;
+        tab.isLoaded = false;
     };
     
     _.extend(tabPanel, Backbone.Singleton);

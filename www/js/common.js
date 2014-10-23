@@ -151,10 +151,10 @@ var common = (function (_) {
     // y de esta forma lo instancia.
     // If the value of the named `property` is a function then invoke it with the
     // `object` as context; otherwise, return it.
-    common.constructorResult = function (object, property, scope) {
+    common.constructorResult = function (object, property) {
         if (object == null) return void 0;
         var value = object[property];
-        return _.isFunction(value) ? new value(scope) : value;
+        return _.isFunction(value) ? new value() : value;
     };
     
     return common;

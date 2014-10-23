@@ -4,7 +4,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
     var establecimientoNominalView = TabPanelView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
-        
+                                                         
         attributes: {
             'id': 'resultadoConsultaNominalEstablecimiento',
             'data-title': 'Consulta Nominal de Establecimiento',
@@ -44,11 +44,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             {
                 tabName: "Mapas",
                 panelId: "establecimientoMapas",
-                viewClass: GoogleMapView,
-                modelClass: function (scope) {
-                    var tabGeneral = scope.findTab("panelId", "establecimientoGeneral");
-                    return tabGeneral.view.model.get("coordenadasDeMapa");
-                }
+                viewClass: GoogleMapView
             }
         ],
         
@@ -62,10 +58,14 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             options = options || {};
             options.renderer = renderer;
             this.setCodigoEstablecimiento(attributes.codigo);
+            //llama al constructor base para que se carguen los tabs de panel
+            TabPanelView.prototype.initialize.call(this, attributes, options);
+            
             this.findTab("panelId", "establecimientoGeneral").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoPrestaciones").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
-            this.findTab("panelId", "establecimientoMapas").onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
-            TabPanelView.prototype.initialize.call(this, attributes, options);
+            var mapaEstablecimientoTab = this.findTab("panelId", "establecimientoMapas");
+            mapaEstablecimientoTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
+            mapaEstablecimientoTab.modelClass = this.getCoordenadasMapaModel();
         },
         
         /**
@@ -111,7 +111,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
 
         if (this.selectedTab.panelId === "establecimientoMapas") {
             var tabMapa = this.findTab("panelId", "establecimientoMapas");
-            $.ui.loadContent(tabMapa.view.attributes.id, false, false, "pop");
+            $.ui.loadContent(tabMapa.view.getViewId(), false, false, "pop");
             return;
         }/* else if (selectedTabPanelId === "establecimientoPrestaciones") {
             var tabPrestaciones = this.findTab("panelId", selectedTabPanelId);
@@ -134,7 +134,15 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             tabPrestaciones.view.model.load(this.codigoEstablecimiento);
             tabPrestaciones.isLoaded = true;
         }
-        $("#" + this.attributes.id).addClass("consultaNominalEstablecimiento");
+        $(this.getViewSelector()).addClass("consultaNominalEstablecimiento");
+    };
+    
+    /**
+    * Obtiene el modelo de coordenadas a partir del modelo de establecimiento nominal.
+    */
+    establecimientoNominalView.prototype.getCoordenadasMapaModel = function () {
+        var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
+        return tabGeneral.view.model.get("coordenadasDeMapa");
     };
 	
 	return establecimientoNominalView;

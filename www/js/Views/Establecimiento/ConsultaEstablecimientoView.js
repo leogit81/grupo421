@@ -15,19 +15,18 @@ var ConsultaEstablecimientoView = (function ($, renderer, BaseView, Establecimie
             '<div class="formGroupHead">Filtros</div>' +
             '<form>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
-            '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento" onchange="deptos.actualizar()"></select>' +
-            '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento" onchange="localidades.actualizar()"></select>' +
+            '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
+            '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
             '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
             '<a id="submitConsultaEstablecimiento" class="button">Enviar</a>' +
             '</form>'
         ),
-
-
+        
         render: function() {
             BaseView.prototype.render.call(this);            
-            document.getElementById("provinciaEstablecimiento").innerHTML = listaCompletaProvincias;
-            document.getElementById("departamentoEstablecimiento").innerHTML = "<option value =''>Seleccione un departamento...</option>";
-            document.getElementById("localidadEstablecimiento").innerHTML = "<option value =''>Seleccione una localidad...</option>";
+            $(this.getViewSelector() + " select#provinciaEstablecimiento")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
+            $(this.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
         },
 
         initialize: function (attributes, options) {
@@ -43,10 +42,10 @@ var ConsultaEstablecimientoView = (function ($, renderer, BaseView, Establecimie
         },
 
         ejecutarConsultaEstablecimiento: function () {
-            var nombreEstablecimiento = $("#nombreEstablecimiento").val();
-            var provinciaEstablecimiento = $("#provinciaEstablecimiento").val();
-            var departamentoEstablecimiento = $("#departamentoEstablecimiento").val();
-            var localidadEstablecimiento = $("#localidadEstablecimiento").val();
+            var nombreEstablecimiento = $(this.getViewSelector() + " input#nombreEstablecimiento").val();
+            var provinciaEstablecimiento = $(this.getViewSelector() + " select#provinciaEstablecimiento").val();
+            var departamentoEstablecimiento = $(this.getViewSelector() + " select#departamentoEstablecimiento").val();
+            var localidadEstablecimiento = $(this.getViewSelector() + " select#localidadEstablecimiento").val();
 
             this.modelDataSource.getModelData(EstablecimientoCollection, {
                 "provincia": provinciaEstablecimiento,
@@ -63,7 +62,8 @@ var ConsultaEstablecimientoView = (function ($, renderer, BaseView, Establecimie
         */
         renderVistaDeDatos: function (data) {
             var establecimientoCollection = new EstablecimientoCollection();
-            var establecimientoColleccionView = EstablecimientoCollectionView.getInstance();
+            //var establecimientoColleccionView = EstablecimientoCollectionView.getInstance();
+            var establecimientoColleccionView = new EstablecimientoCollectionView();
             establecimientoColleccionView.setModel({model: establecimientoCollection});
             establecimientoCollection.processData(data);
         },
@@ -79,7 +79,17 @@ var ConsultaEstablecimientoView = (function ($, renderer, BaseView, Establecimie
          */
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate("#submitConsultaEstablecimiento", "click", _.bind(this.ejecutarConsultaEstablecimiento, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaEstablecimiento", "click", _.bind(this.ejecutarConsultaEstablecimiento, this));
+            $("#afui").delegate(this.getViewSelector() + " select#provinciaEstablecimiento", "change", _.bind(this.actualizarListaDepartamentos, this));
+            $("#afui").delegate(this.getViewSelector() +" select#departamentoEstablecimiento", "change", _.bind(this.actualizarListaLocalidades, this));
+        },
+        
+        actualizarListaDepartamentos: function () {
+            deptos.actualizarDepartamentosDeLaVista(this);
+        },
+        
+        actualizarListaLocalidades: function () {
+            localidades.actualizarLocalidadesDeLaVista(this);
         }
     });
 

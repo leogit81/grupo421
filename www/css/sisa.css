@@ -117,3 +117,7 @@ ul li a div h3 {
 span.prestacionesTabViewClass {
     font-size: 0.75em;
 }
+
+#afui .menuButton {
+    float:right !important;
+}

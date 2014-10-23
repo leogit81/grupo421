@@ -4,7 +4,10 @@ var MenuConsultasView = (function(BaseView, jquery){
      */
     menuConsultasView = BaseView.extend({
         tagName: 'nav',
-        id: 'consultas_nav',
+        
+        attributes: {
+            'id': 'consultas_nav'
+        },
         
         template: _.template('<ul class="list">' +
                                 '<li>' + 
@@ -35,19 +38,23 @@ var MenuConsultasView = (function(BaseView, jquery){
         },
         
         showConsultaMinisterio: function(e){
-            var consultaMinisterioView = ConsultaMinisterioView.getInstance();
+            //var consultaMinisterioView = ConsultaMinisterioView.getInstance();
+            var consultaMinisterioView = new ConsultaMinisterioView();
             consultaMinisterioView.render();
         },
 		showConsultaEstablecimiento: function(e){
-            var consultaEstablecimientoView = ConsultaEstablecimientoView.getInstance();
+            //var consultaEstablecimientoView = ConsultaEstablecimientoView.getInstance();
+            var consultaEstablecimientoView = new ConsultaEstablecimientoView();
             consultaEstablecimientoView.render();
         },
         showConsultaProfesionales: function(e){
-            var consultaProfesionalesView = ConsultaProfesionalesView.getInstance();
+            //var consultaProfesionalesView = ConsultaProfesionalesView.getInstance();
+            var consultaProfesionalesView = new ConsultaProfesionalesView();
             consultaProfesionalesView.render();
         },
         showConsultaFarmacias: function(e){
-            var consultaFarmaciasView = ConsultaFarmaciasView.getInstance();
+            //var consultaFarmaciasView = ConsultaFarmaciasView.getInstance();
+            var consultaFarmaciasView = new ConsultaFarmaciasView();
             consultaFarmaciasView.render();
         },
 	});

@@ -28,7 +28,7 @@ var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, Maste
             options = options || {};
             options.renderer = renderer;
             
-            var ubicacionView = new UbicacionEstablecimientoView(this.getModelOrDefault("participaciones"));
+            var ubicacionView = new UbicacionEstablecimientoView();
             this.addView(ubicacionView, "ubicacion", "ubicacionEstablecimiento");
             
             var participacionesView = new ParticipacionesView(this.getModelOrDefault("participaciones"));

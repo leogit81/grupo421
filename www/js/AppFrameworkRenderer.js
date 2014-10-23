@@ -1,7 +1,7 @@
 /**
 * Encapsula lógica relacionada al rendering de los paneles para el Intel App Framework, porque se repite en varias vistas.
 */
-var AppFrameworkRenderer = (function (_, $, BaseView) {
+var AppFrameworkRenderer = (function (_, $, logger) {
     "use strict";
     
     var animation = "slide";
@@ -9,28 +9,59 @@ var AppFrameworkRenderer = (function (_, $, BaseView) {
     /**
     * Constructor
     */
-    var afRenderer = function (config) {
+    function AfRenderer (config) {
         config = config || {};
         animation = config.animation;
+        
+        $.bind(logger, "showError", _.bind(this.showError,this));
     };
     
-    afRenderer.render = function (view) {
+    AfRenderer.prototype.preRender = function (view) {
         //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
-        if ($("#"+view.attributes.id).length == 0) {
+        if ($(view.getViewSelector()).length == 0) {
             //div panel + contenido
-            $.ui.addContentDiv(view.attributes.id, view.$el[0].outerHTML);
-        } else {
-            //solo contenido para actualizar
-            $.ui.updatePanel(view.attributes.id, view.$el.html());
+            $.ui.addContentDiv(view.getViewId(), view.$el[0].outerHTML);
         }
-        
-        $.ui.loadContent(view.attributes.id, false, false, animation);
-        //agrego esta clase para poder aplicar estilos CSS
-        $("#" + view.attributes.id).addClass("consulta-detallada");
+        //$(view.getViewSelector()).addClass("consulta-detallada");
         return this;
     };
     
-    _.extend(afRenderer, Backbone.Singleton);
+    AfRenderer.prototype.render = function (view) {
+        //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
+        if ($(view.getViewSelector()).length == 0) {
+            //div panel + contenido
+            $.ui.addContentDiv(view.getViewId(), view.$el[0].outerHTML);
+        } else {
+            //solo contenido para actualizar
+            $.ui.updatePanel(view.getViewId(), view.$el.html());
+        }
+        
+        $.ui.loadContent(view.getViewId(), false, false, animation);
+        //agrego esta clase para poder aplicar estilos CSS
+        //$("#" + view.attributes.id).addClass("consulta-detallada");
+        
+        return this;
+    };    
     
-    return afRenderer;
-}(_, af, BaseView));
+    AfRenderer.prototype.showError = function (eventData) {
+        eventData = eventData || {};
+        var titulo = eventData.titulo || "Error de la aplicación";
+        var mensajeDeError = eventData.mensajeDeError;
+        this.showPopup(titulo, mensajeDeError)
+    };
+    
+    AfRenderer.prototype.showPopup = function (title, message) {
+        $.ui.hideMask();
+        
+        $.ui.popup({
+            title: title,
+            message: message,
+            cancelText: "Cancelar",
+            cancelOnly: true
+        });
+    };
+    
+    _.extend(AfRenderer, Backbone.Singleton);
+    
+    return AfRenderer;
+}(_, af, Logger));
