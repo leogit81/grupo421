@@ -17,10 +17,10 @@ var UbicacionDrogueriaView = (function (_, common, BaseView) {
                 "<div><label>Localidad</label><span><%=localidad%></span></div>" +
                 "<div><label>Departamento</label><span><%=departamento%></span></div>" +
                 "<div><label>Provincia</label><span><%=provincia%></span></div>" +
-                "<div><label>Teléfono 1</label><span><%=telefono1%></span></div>" +
-                "<div><label>Teléfono 2</label><span><%=telefono2%></span></div>" +
-                "<div><label>Teléfono 3</label><span><%=telefono3%></span></div>" +
-                "<div><label>Teléfono 4</label><span><%=telefono4%></span></div>"
+                "<% if (telefono1!='null - null') { %><div><label>Teléfono</label><span><%=telefono1%></span></div><% } %>" +
+                "<% if (telefono2!='null - null') { %><div><span class='ztel'><%=telefono2%></span></div><% } %>" +
+                "<% if (telefono3!='null - null') { %><div><span class='ztel'><%=telefono3%></span></div><% } %>" +
+                "<% if (telefono4!='null - null') { %><div><span class='ztel'><%=telefono4%></span></div><% } %>"
         ),
         
         /**
