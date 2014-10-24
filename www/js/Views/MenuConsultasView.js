@@ -33,6 +33,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaRedos").on("click", _.bind(this.showConsultaRedos, this));
             jquery("#linkConsultaRemediar").on("click", _.bind(this.showConsultaRemediar, this));
             jquery("#linkConsultaReferentes").on("click", _.bind(this.showConsultaReferentes, this));
+            jquery("#linkConsultaInstForm").on("click", _.bind(this.showConsultaInstForm, this));
             //esto es para el menú lateral
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
@@ -43,6 +44,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaRedosSideMenu").on("click", _.bind(this.showConsultaRedos, this));
             jquery("#linkConsultaRemediarSideMenu").on("click", _.bind(this.showConsultaRemediar, this));
             jquery("#linkConsultaReferentesSideMenu").on("click", _.bind(this.showConsultaReferentes, this));
+            jquery("#linkConsultaInstFormSideMenu").on("click", _.bind(this.showConsultaInstForm, this));
         },
         
         showConsultaMinisterio: function(e){
@@ -89,6 +91,11 @@ var MenuConsultasView = (function(BaseView, jquery){
             var consultaReferentesView = ConsultaReferentesView.getInstance();
             consultaReferentesView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_17.png' class='zimagen_header'>");
+        },
+        showConsultaInstForm: function(e){
+            var consultaInstFormView = ConsultaInstFormView.getInstance();
+            consultaInstFormView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_10.png' class='zimagen_header'>");
         },
 	});
     
