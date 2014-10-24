@@ -32,7 +32,7 @@ var InstFormNominalGeneralView = (function ($, common, _, renderer, MasterView) 
             "<% if (telefono2!='null - null') { %><div><span class='ztel'><%=telefono2%></span></div><% } %>" +
             "<% if (telefono3!='null - null') { %><div><span class='ztel'><%=telefono3%></span></div><% } %>" +
             "<% if (telefono4!='null - null') { %><div><span class='ztel'><%=telefono4%></span></div><% } %>" +
-            "<div id='carrerasInstForm'><h2>CARRERAS</h2><%=carreras%></div>"
+            "<% if (carreras) { %><div id='carrerasInstForm'><h2>CARRERAS</h2><%=carreras%><% } %></div>"
         ),
 
 
@@ -111,18 +111,21 @@ var InstFormNominalGeneralView = (function ($, common, _, renderer, MasterView) 
             jsonData.telefono4 = this.getNumeroTelefonoFormateado(this.model.get("telefono4"));
 
             var carreras = this.model.get("carreras").attributes.carrera;
-            var carrerasLen = carreras.length;
-            var carrerasString = '';
-            var i;
-            for (i = 0 ; i < carrerasLen ; i++) { 
-                carrerasString += 
-                    "<div><h4>" + carreras[i].nombre + "</h4>" +
-                    "Duración: " + carreras[i].candidadAnio + " años</br>" +
-                    "Nivel de formación: " + carreras[i].nivelFormacion + "</br>" +
-                    "Título: " + carreras[i].titulo + "</br>" +
-                    "Regulada: " + carreras[i].regulada + "</div></br>";
-            };
-            jsonData.carreras = carrerasString;
+            if (carreras){
+                var carrerasLen = carreras.length;
+                var carrerasString = '';
+                var i;
+                for (i = 0 ; i < carrerasLen ; i++) { 
+                    carrerasString += 
+                        "<div><h4>" + carreras[i].nombre + "</h4>" +
+                        "Duración: " + carreras[i].candidadAnio + " años</br>" +
+                        "Nivel de formación: " + carreras[i].nivelFormacion + "</br>" +
+                        "Título: " + carreras[i].titulo + "</br>" +
+                        "Regulada: " + carreras[i].regulada + "</div></br>";
+                }
+                jsonData.carreras = carrerasString;
+            }
+            else {jsonData.carreras = null}
         }
 
         return jsonData;
