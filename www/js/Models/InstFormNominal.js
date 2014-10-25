@@ -1,11 +1,10 @@
-var InstFormNominal = (function (common, BaseModel, CoordenadasMapa, Domicilio, Participaciones, Telefono, Carrera) {
+var InstFormNominal = (function (common, BaseModel, CoordenadasMapa, Domicilio, Participaciones, Telefono) {
     "use strict";
 
     var instFormNominal = BaseModel.extend({
         nestedModels: {
             coordenadas : CoordenadasMapa,
             domicilio : Domicilio,
-            carreras: Carrera,
             telefono1 : Telefono,
             telefono2 : Telefono,
             telefono3 : Telefono,
@@ -23,7 +22,7 @@ var InstFormNominal = (function (common, BaseModel, CoordenadasMapa, Domicilio, 
                     "nombre": null,
                     "provincia": null,
                     "auxiliarato": null,
-                    "carreras": Carrera,            /**/
+                    "carreras": null,
                     "codIndecDepto": null,
                     "codIndecLocalidad": null,
                     "coordenadas": CoordenadasMapa, /**/
@@ -80,4 +79,4 @@ var InstFormNominal = (function (common, BaseModel, CoordenadasMapa, Domicilio, 
     };
 
     return instFormNominal;
-}(common, BaseModel, CoordenadasMapa, Domicilio, Participaciones, Telefono, Carrera));
+}(common, BaseModel, CoordenadasMapa, Domicilio, Participaciones, Telefono));

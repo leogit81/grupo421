@@ -23,7 +23,6 @@ var InstFormNominalGeneralView = (function ($, common, _, renderer, MasterView) 
             "<div><label>Localidad</label><span><%=localidad%></span></div>" +
             "<div><label>Direccion</label><span><%=direccion%></span></div>" +
             "<div><label>Codigo Postal</label><span><%=codigoPostal%></span></div>" +
-            //"<div><label>Especialidades</label><span><%=especialidades%></span></div>" +
             "<div><label>Grado universitario</label><span><%=gradoUniversitario%></span></div>" +
             "<div><label>Tipo de institución</label><span><%=tipoInstitucion%></span></div>" +
             "<div><label>Subtipo de institución</label><span><%=subtipoInstitucion%></span></div>" +
@@ -32,6 +31,7 @@ var InstFormNominalGeneralView = (function ($, common, _, renderer, MasterView) 
             "<% if (telefono2!='null - null') { %><div><span class='ztel'><%=telefono2%></span></div><% } %>" +
             "<% if (telefono3!='null - null') { %><div><span class='ztel'><%=telefono3%></span></div><% } %>" +
             "<% if (telefono4!='null - null') { %><div><span class='ztel'><%=telefono4%></span></div><% } %>" +
+            "<% if (especialidades) { %><div id='especialidadesInstForm'><h2>ESPECIALIDADES</h2><%=especialidades%><% } %></div>" +
             "<% if (carreras) { %><div id='carrerasInstForm'><h2>CARRERAS</h2><%=carreras%><% } %></div>"
         ),
 
@@ -100,7 +100,6 @@ var InstFormNominalGeneralView = (function ($, common, _, renderer, MasterView) 
             jsonData.codigoPostal = domicilio.get("codigoPostal");
             jsonData.direccion = domicilio.get("direccion");
 
-            //jsonData.especialidades = this.model.get("especialidades");
             jsonData.gradoUniversitario = this.model.get("gradoUniversitario");
             jsonData.tipoInstitucion = this.model.get("tipoInstitucion");
             jsonData.subtipoInstitucion = this.model.get("subtipoInstitucion");
@@ -110,7 +109,7 @@ var InstFormNominalGeneralView = (function ($, common, _, renderer, MasterView) 
             jsonData.telefono3 = this.getNumeroTelefonoFormateado(this.model.get("telefono3"));
             jsonData.telefono4 = this.getNumeroTelefonoFormateado(this.model.get("telefono4"));
 
-            var carreras = this.model.get("carreras").attributes.carrera;
+            var carreras = this.model.get("carreras").carrera;
             if (carreras){
                 var carrerasLen = carreras.length;
                 var carrerasString = '';
@@ -125,7 +124,28 @@ var InstFormNominalGeneralView = (function ($, common, _, renderer, MasterView) 
                 }
                 jsonData.carreras = carrerasString;
             }
-            else {jsonData.carreras = null}
+            else {jsonData.carreras = null};
+
+            var especialidades = this.model.get("especialidades").especialidade;
+            if (especialidades){
+                var especialidadesLen = especialidades.length;
+                var especialidadesString = '';
+                var i;
+                var e;
+                for (i = 0 ; i < especialidadesLen ; i++) {
+                    e = especialidades[i];
+                    especialidadesString += "<div><h4>" + e.nombre + "</h4>";
+                    if ( e.refepsEntidadEvaluadora ) { especialidadesString += "Entidad Evaluadora: " + e.refepsEntidadEvaluadora + "</br>" };
+                    if ( e.acredSolicitada ) { especialidadesString += "Acreditación solicitada: " + e.acredSolicitada + "</br>" };
+                    if ( e.acredEvalRealizada ) { especialidadesString += "Evaluación de acred. realizada: " + e.acredEvalRealizada + "</br>" };
+                    if ( e.acredEvalCompleta ) { especialidadesString += "Evaluación de acred. completa: " + e.acredEvalCompleta + "</br>" };
+                    if ( e.acredNroExpediente ) { especialidadesString += "Expediente acred.: " + e.acredNroExpediente };
+                    especialidadesString += "</div></br>";
+                }
+                jsonData.especialidades = especialidadesString;
+            }
+            else {jsonData.especialidades = null};
+
         }
 
         return jsonData;

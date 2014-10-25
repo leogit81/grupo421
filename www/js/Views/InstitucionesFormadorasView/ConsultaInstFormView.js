@@ -1,4 +1,4 @@
-var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaInstFormView) { /*ListadoInstFormView,*/
+var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaInstFormView, ListadoInstFormView) { 
     "use strict";
 
     var consultaInstFormView = BaseView.extend({
@@ -87,4 +87,4 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
     });
 
     return consultaInstFormView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, BusquedaInstFormView); /ListadoInstFormView, */
+})(jQuery, af, AppFrameworkRenderer, BaseView, BusquedaInstFormView, ListadoInstFormView);
