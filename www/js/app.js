@@ -1,7 +1,11 @@
+/*Variable global para el slider de noticias*/
+var owl;
+
 /**
  * Aplicación PhoneGap. Cuando se inicializa la misma se bindean los eventos, el más importante de ellos es deviceready.
  * Una vez que se produjo este quiere decir que se puede llamar con seguridad a las funciones de la API de PhoneGap. 
  */
+
 var app = (function ($, jquery) {
     "use strict";
     //False para que App Framework no utilice el theme por defecto del dispositivo. Se fuerza un theme en index.html
@@ -28,6 +32,7 @@ var app = (function ($, jquery) {
 
     function loadApp () {
         launchAppFramework();
+        launchNoticiasSlider();
         $("div#header").on("click", "a#menubadge", onClickMenuBadge);
         var consultasView = ConsultasView.getInstance();
         consultasView.render();
@@ -50,14 +55,38 @@ var app = (function ($, jquery) {
 
         $.ui.launch();
         $.ui.disableSplitView();
-        $.ui.removeFooterMenu();
+//        $.ui.removeFooterMenu();
         $.ui.updateBadge("#afui","3","tr");
         //Esta línea es para ocultar un div footer que contiene al menu, y que a pesar de moverlo
         //con el método removeFooterMenu, seguía mostrandose.
-        $("div#navbar.footer").css("display", "none");
+//        $("div#navbar.footer").css("display", "none");
+        $("footer#defaultNav").css("display", "none");
         //esto cambia el texto del backbutton para todos los paneles de la aplicación
         $.ui.backButtonText = "Atrás";
         //$.touchLayer($("#afui").get(0));
+    };
+    
+    function launchNoticiasSlider () {
+        
+        var noticiasView = ListadoNoticiasView.getInstance();
+        noticiasView.render();
+        owl = jquery("#owl-demo").owlCarousel({
+            navigation : false, // Show next and prev buttons
+            autoPlay: 2000,
+            rewindSpeed: 500,
+            pagination: true,
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            singleItem:true
+
+            // "singleItem:true" is a shortcut for:
+            // items : 1, 
+            // itemsDesktop : false,
+            // itemsDesktopSmall : false,
+            // itemsTablet: false,
+            // itemsMobile : false
+
+        });        
     };
 
     /**

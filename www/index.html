@@ -112,13 +112,13 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/NomivacView/ConsultaNomivacView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/REDOSView/ConsultaREDOSView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/RemediarView/ConsultaRemediarView.js"></script>
-            
+
             <script type="text/javascript" charset="utf-8" src="js/Models/Referentes.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ReferentesView/ReferentesView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ReferentesView/ConsultaReferentesView.js"></script>
-            
+
             <script type="text/javascript" charset="utf-8" src="js/Models/InstFormNominal.js"></script>
-             <script type="text/javascript" charset="utf-8" src="js/Models/InstFormCollection.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/InstFormCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/InstitucionesFormadorasView/InstFormNominalGeneralView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/InstitucionesFormadorasView/InstFormNominalView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/InstitucionesFormadorasView/InstFormCollectionView.js"></script>
@@ -126,8 +126,19 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/InstitucionesFormadorasView/BusquedaInstFormView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/InstitucionesFormadorasView/ConsultaInstFormView.js"></script>
 
+            <script type="text/javascript" charset="utf-8" src="js/Models/NoticiaNominal.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/NoticiaCollection.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/NoticiasView/NoticiaNominalView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/NoticiasView/NoticiaCollectionView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/NoticiasView/ListadoNoticiasView.js"></script>
+            
+            
             <script type="text/javascript" charset="utf-8" src="js/Views/MenuConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultasView.js"></script>
+
+            <link rel="stylesheet" href="css/owl/owl.carousel.css">
+            <link rel="stylesheet" href="css/owl/owl.theme.css">
+            <script src="libraries/owl/owl.carousel.js"></script>
 
             <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/app-debug.js"></script>
@@ -143,7 +154,7 @@
                     <div id="content">
                         <div id='map_canvas'></div>
                         <!--Paneles usados para navegar por la aplicación-->
-                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav">
+                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_prueba">
                             <ul class="list">
                                 <li>
                                     <a>                                        
@@ -232,6 +243,11 @@
                             </ul>
                         </div>
 
+                        <!--                        asasdsdsasadsaddsasadklashdsjdakadasjkasdkjasdkjasdkjdaskjasdkjasdkasdklasdkjasdkjasdkjlas-->
+                        <footer id="zfooter_prueba">
+                            <div id="owl-demo" class="owl-carousel owl-theme"></div>
+                        </footer>
+                        <!--                        asasdsdsasadsaddsasadklashdsjdakadasjkasdkjasdkjasdkjdaskjasdkjasdkasdklasdkjasdkjasdkjlas-->
                         <nav id="home_nav"></nav>
                         <nav id="consultas_nav">
                             <ul class="list">

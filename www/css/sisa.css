@@ -126,3 +126,12 @@ ul li a div h3 {
 .ztel {
     padding-left: 62px;
 }
+
+
+/*CSS PARA EL SLIDER:      */
+#owl-demo .zslider-item {
+    display: block;
+    width: 100%;
+    height: auto;
+    font-size: 0.9em;
+}
