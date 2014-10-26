@@ -67,14 +67,13 @@ var app = (function ($, jquery) {
     };
     
     function launchNoticiasSlider () {
-        
         var noticiasView = ListadoNoticiasView.getInstance();
         noticiasView.render();
         owl = jquery("#owl-demo").owlCarousel({
             navigation : false, // Show next and prev buttons
             autoPlay: 2000,
             rewindSpeed: 500,
-            pagination: true,
+            pagination: false,
             slideSpeed : 300,
             paginationSpeed : 400,
             singleItem:true
