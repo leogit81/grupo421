@@ -7,7 +7,7 @@ var EstablecimientoCollectionView = (function ($, common, Backbone, _, renderer,
         
         attributes: {
             'id': 'resultadoConsultaGeneralEstablecimiento',
-            'data-title': 'Consulta General de Establecimientos',
+//            'data-title': 'Consulta General de Establecimientos',
             'data-nav': "consultas_nav"
         },
         

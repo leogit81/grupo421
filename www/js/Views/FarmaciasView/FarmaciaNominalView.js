@@ -7,7 +7,7 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
         
         attributes: {
             'id': 'resultadoConsultaNominalFarmacia',
-            'data-title': 'REFAR',
+//            'data-title': 'REFAR',
             'data-nav': 'consultas_nav'
         },
         

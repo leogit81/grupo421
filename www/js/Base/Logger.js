@@ -63,7 +63,8 @@ var Logger = (function ($, common) {
         ONLINE: "El dispositivo ha reestablecido la conexión a Internet. Ahora puede continuar utilizando la aplicación normalmente.",
         TIMEOUT: "Se ha agotado el tiempo de espera del servidor.",
         ERROR: "Se produjo un error al realizar la llamada al servicio web.",
-        404: "No se encontró la dirección del servicio Web solicitado."
+        404: "No se encontró la dirección del servicio Web solicitado.",
+        500: "Se produjo un error interno del servidor que ha impedido responder su solicitud. Por favor, reintente nuevamente más tarde"
     };
     
     return logger;

@@ -515,20 +515,19 @@ function Departamentos() {
                       {idProv: "24", idDpto: "513", departamento: "Yerba Buena"}
                      ];
     
-    this.actualizar = function () {
+    this.actualizar = function (pciaDiv, dptoDiv, locDiv) {
         var i;
         var dptosHTML;
         var len = listaDptos.length;
-        var idProvinciaSeleccionada = jQuery("#provinciaEstablecimiento").val();
+        var idProvinciaSeleccionada = pciaDiv.value;
         dptosHTML += "<option value =''>Seleccione un departamento...</option>";
         for (i = 0; i < len; i++) {
             if ( listaDptos[i].idProv == idProvinciaSeleccionada ) {
                 dptosHTML += "<option value='" + listaDptos[i].idDpto + "'>" + listaDptos[i].departamento + "</option>";
             };
         };
-
-        document.getElementById("departamentoEstablecimiento").innerHTML = dptosHTML;
-        document.getElementById("localidadEstablecimiento").innerHTML = "<option value =''>Seleccione una localidad...</option>";
+        document.getElementById(dptoDiv.id).innerHTML = dptosHTML;
+        document.getElementById(locDiv.id).innerHTML = "<option value =''>Seleccione una localidad...</option>";
     };
     
     this.actualizarDepartamentosDeLaVista = function (view) {

@@ -7,7 +7,7 @@ var FarmaciaCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
         
         attributes: {
             'id': 'resultadoConsultaGeneralFarmacia',
-            'data-title': 'REFAR',
+//            'data-title': 'REFAR',
             'data-nav': "consultas_nav"
         },
         

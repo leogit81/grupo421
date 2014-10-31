@@ -6,7 +6,7 @@ var EstablecimientoView = (function($, BaseView){
         
         attributes: {
             'id': 'resultadoConsultaEstablecimiento',
-            'data-title':'Consulta general de Establecimiento',
+//            'data-title':'Consulta general de Establecimiento',
             'data-nav':"consultas_nav",    
         },
         

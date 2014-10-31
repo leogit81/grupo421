@@ -7,7 +7,7 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
         attributes: {
             'id': 'consultaFarmacias',
             'class': 'panel',
-            'data-title': 'REFAR',
+//            'data-title': 'REFAR',
             'data-nav':"consultas_nav",    
         },
 
@@ -47,8 +47,8 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
         },*/
 
         ejecutarBuscarFarmacia: function(){
-                        var busquedaFarmaciaView = new BusquedaFarmaciaView();
-                        busquedaFarmaciaView.render();
+            var busquedaFarmaciaView = new BusquedaFarmaciaView();
+            busquedaFarmaciaView.render();
         },
 
         ejecutarListadoFarmacias: function(){
@@ -57,9 +57,22 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
         },
 
         render: function(){
-            $.ui.addContentDiv("consultaFarmacias", this.template());
+            //            $.ui.addContentDiv("consultaFarmacias", this.template());
+            //            $.ui.loadContent("consultaFarmacias", false, false, "slide");
+
+            if ($("#consultaFarmacias").length <= 0){
+                $.ui.addContentDiv("consultaFarmacias", this.template());//div panel + contenido
+            }else
+            {
+                $.ui.updatePanel("consultaFarmacias", this.template());//solo contenido para actualizar
+            }
             $.ui.loadContent("consultaFarmacias", false, false, "slide");
+            $("#consultaFarmacias").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
+
+
             this.attachEvents();
+            FastClick.attach($("#submitListadoFarmacias"));
+            FastClick.attach($("#submitBuscarFarmacia"));
             return this;
         },
 

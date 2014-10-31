@@ -7,7 +7,7 @@ var ConsultaProfesionalesView = (function (jquery, $, renderer, BaseView) {
         attributes: {
             'id': 'consultaProfesionales',
             'class': 'panel',
-            'data-title': 'REFEPS',
+//            'data-title': 'REFEPS',
             'data-nav':"consultas_nav",    
         },
         
