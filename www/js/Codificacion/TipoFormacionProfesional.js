@@ -1,8 +1,8 @@
 function TipoFormacionProfesional () {
     "use strict";
     var listaTipoFormacionProfesional = [{id: "1", nombre: "TipoFormacionProfesional1"}, 
-                           {id: "2", nombre: "TipoFormacionProfesional2"}
-                          ];
+                                         {id: "2", nombre: "TipoFormacionProfesional2"}
+                                        ];
 
     this.listaTipoFormacionProfesionalHTML = function () {
         var i;

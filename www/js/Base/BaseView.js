@@ -3,7 +3,7 @@
  * Cuando se construye la misma (initialize()) si se pasa el model en los attributes, la misma guarda una referencia a este.
  * Además, se atacha la función render al evento 'change' del model, de forma que cada vez que cambie este se actualice la vista. 
  */
-var BaseView = (function ($, common, _, jquery, Backbone) {
+var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     "use strict";
     
     var baseView = Backbone.View.extend({
@@ -13,16 +13,22 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
         template : _.template("<div></div>"),
     
         initialize: function (attributes, options) {
+            this.reemplazarViewId();
+            
             if (attributes !== undefined && !common.isEmpty(attributes.model)) {
                 this.setModel(attributes.model);
             }
             
             options = options || {};
             if (!common.isEmpty(options.renderer)) {
-               this.renderer = options.renderer;
+               this.renderer = options.renderer.getInstance();
             }
             
             this.attachEvents();
+            
+            //El prerender inserta el elemento HTML vacío de la vista en el DOM
+            afRenderer.getInstance().preRender(this);
+            $(this.getViewSelector()).addClass("consulta-detallada");
         },
         
         setModel: function (model) {
@@ -41,14 +47,20 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
     baseView.prototype.renderedHtml = null;
     
     /**
+    * Sobreescribe el valor del atributo ID en el elemento HTML generado para la vista con uno que es único.
+    */
+    baseView.prototype.reemplazarViewId = function () {
+        var uniqueId = this.generateUniqueViewId();
+        this.$el.attr("id", uniqueId);
+    };
+    
+    /**
     * Muestra los controles y la información del modelo en la página.
     */
     baseView.prototype.render = function () {
         var jsonData = this.getModelData();
-        
         //después del render se oculta la máscara de "Cargando..."
         this.hideLoadingMask();
-        
         return this.renderFromData(jsonData);
     };
     
@@ -60,8 +72,9 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
         
         this.armarHtmlConData(data);
         
-        this.trigger("viewRendered");
-        return this.renderHtml();
+        this.renderHtml();
+        
+        this.trigger("viewRendered", this);
     };
     
     baseView.prototype.clearView = function () {
@@ -100,8 +113,6 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
         if (!common.isEmpty(this.renderer)) {
             this.renderer.render(this);
         }
-
-        return this;
     };
     
     /**
@@ -150,6 +161,33 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
     };
     
     /**
+    * Genera un ID único para la vista.
+    * @returns {string} un id que concatena el id definido por el usuario y el id generado por Backbone para esa vista.
+    */
+    baseView.prototype.generateUniqueViewId = function () {
+        if (!common.isEmpty(this.attributes) && !common.isEmpty(this.attributes.id)){
+            return this.attributes.id + "_" + this.cid;
+        }
+        
+        return this.cid;
+    };
+    
+    /**
+    * Devuelve el ID único generado para la vista, utilizado para generar el atributo ID del elemento HTML.
+    */
+    baseView.prototype.getViewId = function () {
+        return this.$el.attr("id");
+    };
+    
+    /**
+    * Devuelve un selector que permite obtener el elemento HTML que tenga el mismo ID que la vista.
+    * @returns {string} selector CSS.
+    */
+    baseView.prototype.getViewSelector = function () {
+        return "#" + this.$el.attr("id");
+    };
+    
+    /**
      * Devuelve un string con el template de la vista reemplazando las variables por los valores pasados en el JSON
      * Utiliza el default del modelo para rellenar el objeto JSON con las propiedades faltantes necesarias para reemplazar
      * en el template.
@@ -179,4 +217,4 @@ var BaseView = (function ($, common, _, jquery, Backbone) {
     _.extend(baseView, Backbone.Singleton);
     
     return baseView;
-}(af, common, _, jQuery, Backbone));
+}(af, common, _, jQuery, Backbone, AppFrameworkRenderer));

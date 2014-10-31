@@ -1,4 +1,4 @@
-var Telefono = (function(BaseModel){
+var Telefono = (function (BaseModel) {
 	"use strict";
 	
 	var telefono = BaseModel.extend({
@@ -9,4 +9,4 @@ var Telefono = (function(BaseModel){
 	});
 	
 	return telefono;
-})(BaseModel);
+}(BaseModel));

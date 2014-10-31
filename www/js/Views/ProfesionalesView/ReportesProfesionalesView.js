@@ -14,7 +14,7 @@ var ReportesProfesionalesView = (function (jquery, $, renderer, BaseView) {
         template : _.template(
             '<div class="formGroupHead">Por favor, seleccione el filtro deseado.</div>' +
             '<form>' +
-                '<select id="tipoFormacionProfesional" name="tipoFormacionProfesional" onchange="formacionProfesional.actualizar()"></select>' +
+                '<select id="tipoFormacionProfesional" name="tipoFormacionProfesional" onchange="fProfesional.actualizar()"></select>' +
                 '<select id="formacionProfesional" name="formacionProfesional"></select>' +
                 '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
                 '<a id="submitBusquedaProfesionales" class="button">Consultar</a>' +
@@ -55,7 +55,7 @@ var ReportesProfesionalesView = (function (jquery, $, renderer, BaseView) {
             $.ui.addContentDiv("reportesProfesionales", this.template());
             $.ui.loadContent("reportesProfesionales", false, false, "slide");
             this.attachEvents();
-            setTimeout( function () {document.getElementById("tipoFormacionProfesional").innerHTML = tipoFormacionProfesional.listaTipoFormacionProfesionalHTML();}, 300);
+            document.getElementById("tipoFormacionProfesional").innerHTML = listaCompletaTipoFormacionProfesional;
             return this;
         },
         

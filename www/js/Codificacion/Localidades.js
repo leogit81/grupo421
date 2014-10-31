@@ -5261,12 +5261,12 @@ function Localidades() {
                            ];
 
 
-    this.actualizar = function () {
+    this.actualizar = function (pciaDiv, dptoDiv, locDiv) {
         var i;
         var localidadesHTML;
         var len = listaLocalidades.length;
-        var idProvinciaSeleccionada = jQuery("#provinciaEstablecimiento").val();
-        var idDepartamentoSeleccionado = jQuery("#departamentoEstablecimiento").val();
+        var idProvinciaSeleccionada = pciaDiv.value;
+        var idDepartamentoSeleccionado = dptoDiv.value;
         localidadesHTML += "<option value =''>Seleccione una localidad...</option>";
         for (i = 0; i < len; i++) {
             if ( ( listaLocalidades[i].idProvincia == idProvinciaSeleccionada ) &&
@@ -5274,7 +5274,24 @@ function Localidades() {
                 localidadesHTML += "<option value='" + listaLocalidades[i].idLocalidad + "'>" + listaLocalidades[i].localidad + "</option>";
             };
         };
-        document.getElementById("localidadEstablecimiento").innerHTML = localidadesHTML;
+        document.getElementById(locDiv.id).innerHTML = localidadesHTML;
+    };
+    
+    this.actualizarLocalidadesDeLaVista = function (view) {
+        var i;
+        var localidadesHTML;
+        var len = listaLocalidades.length;
+        var idProvinciaSeleccionada = af(view.getViewSelector() + " select#provinciaEstablecimiento").val();
+        var idDepartamentoSeleccionado = af(view.getViewSelector() + " select#departamentoEstablecimiento").val();
+        localidadesHTML += "<option value =''>Seleccione una localidad...</option>";
+        for (i = 0; i < len; i++) {
+            if ( ( listaLocalidades[i].idProvincia == idProvinciaSeleccionada ) &&
+                 ( listaLocalidades[i].idDepto == idDepartamentoSeleccionado ) ) {
+                localidadesHTML += "<option value='" + listaLocalidades[i].idLocalidad + "'>" + listaLocalidades[i].localidad + "</option>";
+            };
+        };
+        
+        af(view.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = localidadesHTML;
     };
 };
 

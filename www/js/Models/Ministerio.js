@@ -61,4 +61,4 @@ var Ministerio = (function (common, BaseModel, Telefono, CoordenadasMapa, Domici
     };
     
     return ministerio;
-})(common, BaseModel, Telefono, CoordenadasMapa, Domicilio);
+}(common, BaseModel, Telefono, CoordenadasMapa, Domicilio));

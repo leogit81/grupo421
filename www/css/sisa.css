@@ -11,10 +11,25 @@ padding-top: 0px !important;
 }*/
 
 ul li a div.ztexto-lista {
-    padding: 0px 11% 0px 25% !important;
-    position: absolute !important;
-    top: 15% !important;
+    padding: 0px 7% 0px 0% !important;
+    position: relative !important;
+    top: 0% !important;
     text-shadow: 0 -1px 0 rgba(0,0,0,.2) !important;
+}
+
+ul li a div.ztexto-lista img{
+    float: left;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+ul li a div.ztexto-lista h3{
+    padding-left: 32%;
+}
+ul li a div.ztexto-lista p{
+    padding-left: 32%;
 }
 
 ul li a div {
@@ -88,6 +103,7 @@ ul li a div h3 {
 #afui .header h1 {
     width: 60%;
     left: 20%;
+    padding: 0.2% 0;
 }
 
 .titulosNominalEstablecimiento {
@@ -103,7 +119,7 @@ ul li a div h3 {
     width: 120px;
 }
 
-#afui div#content .consultaNominalEstablecimiento {
+#afui div#content .tabPanelViewClass {
     padding-left: 0px;
     padding-right: 0px;
 }
@@ -111,4 +127,31 @@ ul li a div h3 {
 .selectedTab {
     padding-left: 10px;
     padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+span.prestacionesTabViewClass {
+    font-size: 0.75em;
+}
+
+#afui .menuButton {
+    float:right !important;
+}
+
+.zimagen_header {
+    max-width:100%;
+    max-height:90%;
+}
+
+.ztel {
+    padding-left: 62px;
+}
+
+
+/*CSS PARA EL SLIDER:      */
+#owl-demo .zslider-item {
+    display: block;
+    width: 100%;
+    height: auto;
+    font-size: 0.9em;
 }

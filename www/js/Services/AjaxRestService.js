@@ -1,4 +1,4 @@
-var AjaxRestService = (function (common, _, ServiceConfig, jQuery) {
+var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
     "use strict";
 
     /**
@@ -102,38 +102,37 @@ var AjaxRestService = (function (common, _, ServiceConfig, jQuery) {
         af.ui.showMask("Cargando...");
     };
     
-    AjaxService.prototype.successCallback = function (data) {
-        console.log(data.target.responseText);
-    };
-    
-    AjaxService.prototype.errorCallback = function (response) {
-        //TODO: PENDIENTE HACER MANEJO DE ERRORES DE LAS LLAMADAS A LOS WEB SERVICES.
-        try {
-            if (response.statusText === 'timeout') {
-                throw "Se ha agotado el tiempo de espera del servidor.";
+    AjaxService.prototype.internalSuccessCallback = function (data) {
+        var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
+        
+        if (codigoResultadoWS === "OK") {
+            if (!common.isEmpty(this.successCallback)) {
+                this.successCallback(data);
             }
-            
-            throw "Se produjo un error al realizar la llamada al servicio web.";
-        }
-        catch (err) {
-            this.processServiceError(err);
+        } else {
+            var jQuery_XHR = arguments[2];
+            this.processServiceError(jQuery_XHR, codigoResultadoWS);
         }
     };
     
-    //TODO: SACAR ESTE MÉTODO FUERA DEL SERVICIO
-    AjaxService.prototype.processServiceError = function (errorMessage) {
-        //jQuery(this).trigger("callRestServiceError");
-        af.ui.hideMask();
-        console.log(errorMessage);
-        af.ui.popup( {
-           title:"Mensaje de error",
-           message:errorMessage,
-           cancelText:"Cancelar",
-           cancelOnly:true
-         });
-        //alert(errorMessage);
-        //af("#modalErrores").html(errorMessage);
-        //af.ui.showModal("modalErrores");
+    AjaxService.prototype.getCodigoResultadoWebService = function (resultadoWS) {
+        return resultadoWS.getElementsByTagName("resultado").item().innerHTML;
+    };
+    
+    AjaxService.prototype.internalErrorCallback = function (response) {
+        this.processServiceError(response);
+        
+        if (!common.isEmpty(this.errorCallback)) {
+            this.errorCallback(response);
+        }
+    };
+    
+    AjaxService.prototype.processServiceError = function (response) {
+        if (arguments.length > 1) {
+            var codigoResultadoWS = arguments[1];
+            response.codigoResultadoWS = codigoResultadoWS;
+        }
+        logger.log(response);
     };
     
     /**
@@ -156,8 +155,8 @@ var AjaxRestService = (function (common, _, ServiceConfig, jQuery) {
                 dataType: this.dataType,
                 timeout: this.timeout,
                 beforeSend: _.bind(this.beforeSendCallback, this),
-                success: _.bind(this.successCallback, this),
-                error: _.bind(this.errorCallback, this),
+                success: _.bind(this.internalSuccessCallback, this),
+                error: _.bind(this.internalErrorCallback, this),
                 headers: {'X-Requested-With': 'XMLHttpRequest'}
             });
         } else if (serviceProvider === 'custom') {
@@ -169,4 +168,4 @@ var AjaxRestService = (function (common, _, ServiceConfig, jQuery) {
     };
     
     return AjaxService;
-}(common, _, ServiceConfig, jQuery));
+}(Logger, common, _, ServiceConfig, jQuery));

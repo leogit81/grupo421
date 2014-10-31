@@ -6,7 +6,7 @@ var EstablecimientoNominalView = (function($, BaseView){
         
         attributes: {
             'id': 'resultadoConsultaEstablecimiento',
-            'data-title':'Consulta Nominal de Establecimiento',
+//            'data-title':'Consulta Nominal de Establecimiento',
             'data-nav':"consultas_nav",    
         },
         

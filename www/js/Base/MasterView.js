@@ -23,6 +23,25 @@ var MasterView = (function ($, common, BaseView) {
                                                         insertElID: insertionElementId
                                                     };
         }
+        view.on("viewRendered", _.bind(this.onViewRendered, this));
+    };
+    
+    /**
+    * Handler del evento viewRendered que se dispará luego de que una de las vistas de los tabs termina de cargarse.
+    */
+    masterView.prototype.onViewRendered = function (view) {
+        this.updateHTMLSubVista(view);
+    };
+    
+        /**
+    * Busca una view por una de sus propiedades, en el array de vistas anidadas.
+    * @param {String} prop, el nombre de la propiedad de la vista.
+    * @param {String} value, valor de la propiedad.
+    */
+    masterView.prototype.findNestedView = function (prop, value) {
+        return _.find(this.nestedViewsDictionary, function (item) {
+            return item.view[prop] === value;
+        }, this);
     };
     
     /**
@@ -60,6 +79,19 @@ var MasterView = (function ($, common, BaseView) {
             insertElement.append(common.isEmpty(htmlSubvista)?"":htmlSubvista);
         } else {
             this.$el.append(htmlSubvista);
+        }
+    };
+    
+    /**
+    * Actualiza el HTML de la subvista en la vista maestra.
+    * @param {Object} view, es la subvista que se actualizará en la vista maestra.
+    */
+    masterView.prototype.updateHTMLSubVista = function (view) {
+        if (!common.isEmpty(view)) {
+            var viewObject = this.findNestedView('cid', view.cid);
+            if (!common.isEmpty(viewObject)) {
+                this.insertHTMLSubVista(viewObject);
+            }
         }
     };
     
