@@ -11,9 +11,6 @@ var BaseCollection = (function (common, Backbone, converter, Service, BaseModel)
         }
     });
     
-    _.extend(baseCollection, Backbone.Singleton);
-    common.extendSinPisar(baseCollection.prototype , false, BaseModel.prototype);
-    
     baseCollection.prototype.setJsonData = function (jsonData) {
         var modelData = this.parse(jsonData);
         this.setParsedData(modelData);
@@ -37,6 +34,9 @@ var BaseCollection = (function (common, Backbone, converter, Service, BaseModel)
     baseCollection.prototype.processData = function (data) {
         BaseModel.prototype.processData.call(this, data);
     };
+    
+    _.extend(baseCollection, Backbone.Singleton);
+    common.extendSinPisar(baseCollection.prototype , false, BaseModel.prototype);
     
     return baseCollection;
 }(common, Backbone, XmlToJSONConverter, AjaxRestService, BaseModel));

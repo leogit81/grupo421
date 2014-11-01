@@ -35,7 +35,7 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
         
         renderVistaDeDatos: function (data) {
             var farmaciaCollection = new FarmaciaCollection();
-            var farmaciaColleccionView = FarmaciaCollectionView.getInstance();
+            var farmaciaColleccionView = new FarmaciaCollectionView();
             farmaciaColleccionView.setModel({model: farmaciaCollection});
             farmaciaCollection.processData(data);
         },
@@ -69,7 +69,7 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
 //            $.ui.loadContent("listadoFarmacias", false, false, "slide");
             
             
-            if ($("#listadoFarmacias").length <= 0){
+            /*if ($("#listadoFarmacias").length <= 0){
                 $.ui.addContentDiv("listadoFarmacias", this.template());//div panel + contenido
             }else
             {
@@ -80,7 +80,8 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
             
             
             
-            this.attachEvents();
+            this.attachEvents();*/
+            BaseView.prototype.render.call(this);
             document.getElementById("provinciaFarmacia").innerHTML = listaCompletaProvincias;
             document.getElementById("dependenciaFarmacia").innerHTML = listaCompletaDependencias;
 
@@ -93,7 +94,7 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitConsultaListadoFarmacias").on("click", _.bind(this.ejecutarListadoFarmacias, this));
+            $("#afui").delegate("#submitConsultaListadoFarmacias", "click", _.bind(this.ejecutarListadoFarmacias, this));
         }
     });
 

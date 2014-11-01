@@ -90,6 +90,8 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
             jsonData = this.model.toJSON();
         }
         
+        jsonData = _.extend(this.getModelDefault(), jsonData);
+        
         return jsonData;
     };
     
@@ -149,7 +151,6 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     
     baseView.prototype.logError = function (response) {
         this.hideLoadingMask();
-        //TODO: implementar la lógica para mostrar errores que se produjeron durante la llamada del servicio
     };
     
     /**
@@ -198,7 +199,7 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
             jsonData = {};
         }
         
-        jsonData = _.extend(this.getModelDefault(), jsonData);
+        //jsonData = _.extend(this.getModelDefault(), jsonData);
         
         return this.template(jsonData);
     };
@@ -207,7 +208,7 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     * Devuelve el default del modelo.
     */
     baseView.prototype.getModelDefault = function () {
-        if (!common.isEmpty(this.model)) {
+        if (!common.isEmpty(this.model) && !common.isEmpty(this.model.defaults)) {
             return this.model.defaults;
         }
         

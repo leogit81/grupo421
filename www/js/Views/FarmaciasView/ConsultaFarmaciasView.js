@@ -60,7 +60,7 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
             //            $.ui.addContentDiv("consultaFarmacias", this.template());
             //            $.ui.loadContent("consultaFarmacias", false, false, "slide");
 
-            if ($("#consultaFarmacias").length <= 0){
+            /*if ($("#consultaFarmacias").length <= 0){
                 $.ui.addContentDiv("consultaFarmacias", this.template());//div panel + contenido
             }else
             {
@@ -68,9 +68,10 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
             }
             $.ui.loadContent("consultaFarmacias", false, false, "slide");
             $("#consultaFarmacias").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
+*/
 
-
-            this.attachEvents();
+            //this.attachEvents();
+            BaseView.prototype.render.call(this);
             FastClick.attach($("#submitListadoFarmacias"));
             FastClick.attach($("#submitBuscarFarmacia"));
             return this;
@@ -82,8 +83,8 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitListadoFarmacias").on("click", _.bind(this.ejecutarListadoFarmacias, this));
-            jquery("#submitBuscarFarmacia").on("click", _.bind(this.ejecutarBuscarFarmacia, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitListadoFarmacias", "click", _.bind(this.ejecutarListadoFarmacias, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitBuscarFarmacia", "click", _.bind(this.ejecutarBuscarFarmacia, this));
         }
     });
 

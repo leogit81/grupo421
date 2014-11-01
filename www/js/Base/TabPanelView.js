@@ -52,7 +52,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     
     tabPanel.prototype.renderFromData = function () {
         BaseView.prototype.renderFromData.call(this);
-        $("#" + this.attributes.id).addClass("tabPanelViewClass");
+        $(this.getViewSelector()).addClass("tabPanelViewClass");
     };
     
     tabPanel.prototype.selectedTab = null;
@@ -111,7 +111,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
     * @param {Object} data, es la data que se utiliza para reemplazar el template
     */
     tabPanel.prototype.insertTabDivInDOM = function (data) {
-        var tabsDiv = $("#afui div#" + this.attributes.id + " div.tabs");
+        var tabsDiv = $("#afui div#" + this.getViewSelector() + " div.tabs");
         //Existe el div class='tabs'
         if (tabsDiv.length === 0) {
             BaseView.prototype.armarHtmlConData.call(this, data);
@@ -197,7 +197,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView) {
         BaseView.prototype.attachEvents.call(this);
         //bindea un handler para el click de cada tab de la vista
         //$("#afui").delegate("#" + this.attributes.id + " ul li a", "click", _.bind(this.renderSelectedTab, this));
-        $("#afui").delegate("#" + this.attributes.id + " ul li a", "click", _.bind(this.onSelectedTab, this));
+        $("#afui").delegate("#" + this.getViewSelector() + " ul li a", "click", _.bind(this.onSelectedTab, this));
     };
     
     /**
