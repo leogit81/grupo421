@@ -55,12 +55,18 @@ var app = (function ($, jquery, logger) {
         consultasView.render();
 
         //es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
-        $("#afui").delegate("a.backButton", "click", function(e) { af.ui.hideMask();});
+        $("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
     };
 
     /**
      * Se ejecuta al hacer click en el icono de las tres rayitas que muestra el menú lateral.  
      */
+    function onClickBackButtonHandler (e) {
+        af.ui.hideMask();
+        var activeDiv = af.ui.activeDiv;
+        setTimeout( function () {activeDiv.remove()} , 500);
+    }
+    
     function onClickMenuBadge() {
         af.ui.toggleSideMenu();
     }

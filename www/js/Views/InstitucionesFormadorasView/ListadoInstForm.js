@@ -88,7 +88,8 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitConsultaListadoInstForm").on("click", _.bind(this.ejecutarListadoInstForm, this));
+//            jquery("#submitConsultaListadoInstForm").on("click", _.bind(this.ejecutarListadoInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaListadoInstForm", "click", _.bind(this.ejecutarListadoInstForm, this));
         }
     });
 

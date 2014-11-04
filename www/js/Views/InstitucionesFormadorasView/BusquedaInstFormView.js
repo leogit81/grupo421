@@ -41,16 +41,16 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
 
         render: function(){
             BaseView.prototype.render.call(this);
-            if ($("#busquedaInstForm").length <= 0){
-                $.ui.addContentDiv("busquedaInstForm", this.template());//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("busquedaInstForm", this.template());//solo contenido para actualizar
-            }
-            $.ui.loadContent("busquedaInstForm", false, false, "slide");
-            $("#busquedaInstForm").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
-
-            this.attachEvents();
+////            if ($("#busquedaInstForm").length <= 0){
+////                $.ui.addContentDiv("busquedaInstForm", this.template());//div panel + contenido
+////            }else
+////            {
+////                $.ui.updatePanel("busquedaInstForm", this.template());//solo contenido para actualizar
+////            }
+////            $.ui.loadContent("busquedaInstForm", false, false, "slide");
+////            $("#busquedaInstForm").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
+//
+//            this.attachEvents();
             return this;
         },
 
@@ -60,7 +60,8 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitConsultaBusquedaInstForm").on("click", _.bind(this.ejecutarBusquedaInstForm, this));
+//            jquery("#submitConsultaBusquedaInstForm").on("click", _.bind(this.ejecutarBusquedaInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaBusquedaInstForm", "click", _.bind(this.ejecutarBusquedaInstForm, this));
         }
     });
 

@@ -56,20 +56,20 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
         },
 
         render: function(){
-            //            $.ui.addContentDiv("consultaInstForm", this.template());
-            //            $.ui.loadContent("consultaInstForm", false, false, "slide");
+//            //            $.ui.addContentDiv("consultaInstForm", this.template());
+//            //            $.ui.loadContent("consultaInstForm", false, false, "slide");
+//
+//            if ($("#consultaInstForm").length <= 0){
+//                $.ui.addContentDiv("consultaInstForm", this.template());//div panel + contenido
+//            }else
+//            {
+//                $.ui.updatePanel("consultaInstForm", this.template());//solo contenido para actualizar
+//            }
+//            $.ui.loadContent("consultaInstForm", false, false, "slide");
+//            $("#consultaInstForm").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
 
-            if ($("#consultaInstForm").length <= 0){
-                $.ui.addContentDiv("consultaInstForm", this.template());//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("consultaInstForm", this.template());//solo contenido para actualizar
-            }
-            $.ui.loadContent("consultaInstForm", false, false, "slide");
-            $("#consultaInstForm").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
-
-
-            this.attachEvents();
+            BaseView.prototype.render.call(this);
+//            this.attachEvents();
             FastClick.attach($("#submitListadoInstForm"));
             FastClick.attach($("#submitBuscarInstForm"));
             return this;
@@ -81,8 +81,10 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitListadoInstForm").on("click", _.bind(this.ejecutarListadoInstForm, this));
-            jquery("#submitBuscarInstForm").on("click", _.bind(this.ejecutarBuscarInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitListadoInstForm", "click", _.bind(this.ejecutarListadoInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitBuscarInstForm", "click", _.bind(this.ejecutarBuscarInstForm, this));
+//            jquery("#submitListadoInstForm").on("click", _.bind(this.ejecutarListadoInstForm, this));
+//            jquery("#submitBuscarInstForm").on("click", _.bind(this.ejecutarBuscarInstForm, this));
         }
     });
 

@@ -28,7 +28,8 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
             
             //El prerender inserta el elemento HTML vacío de la vista en el DOM
             //afRenderer.getInstance().preRender(this);
-            $(this.getViewSelector()).addClass("consulta-detallada");
+            //$(this.getViewSelector()).addClass("consulta-detallada");
+            this.$el.attr("data-footer", "none");
         },
         
         setModel: function (model) {
@@ -73,6 +74,8 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
         this.armarHtmlConData(data);
         
         this.renderHtml();
+        
+        $(this.getViewSelector()).addClass("consulta-detallada");
         
         this.trigger("viewRendered", this);
     };

@@ -63,11 +63,15 @@ var InstFormCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
         },
 
         busquedaNominalInstForm: function (eventData) {
-            var codigoInstForm = this.getCodigoInstFormFromSelectedItem(eventData.currentTarget.outerHTML);
-            var instFormNominalModel = new InstFormNominal();
-            var instFormView = new InstFormNominalView();
-            instFormView.setModel(instFormNominalModel);
-            instFormNominalModel.load(codigoInstForm);
+            //            var codigoInstForm = this.getCodigoInstFormFromSelectedItem(eventData.currentTarget.outerHTML);
+            //            var instFormNominalModel = new InstFormNominal();
+            //            var instFormView = new InstFormNominalView();
+            //            instFormView.setModel(instFormNominalModel);
+            //            instFormNominalModel.load(codigoInstForm);
+
+            var codigoInstForm = this.getCodigoInstFormFromSelectedItem(eventData.currentTarget.outerHTML),
+                instFormNominalView = new InstFormNominalView({codigo: codigoInstForm});
+            instFormNominalView.loadDefaultView();
         },
 
         getCodigoInstFormFromSelectedItem: function (selectedItem) {
@@ -76,7 +80,7 @@ var InstFormCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
 
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate("#resultadoConsultaGeneralInstForm ul li a", "click", _.bind(this.busquedaNominalInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " ul li a", "click", _.bind(this.busquedaNominalInstForm, this));
         }
 
     });
