@@ -27,7 +27,7 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
             this.attachEvents();
             
             //El prerender inserta el elemento HTML vacío de la vista en el DOM
-            afRenderer.getInstance().preRender(this);
+            //afRenderer.getInstance().preRender(this);
             $(this.getViewSelector()).addClass("consulta-detallada");
         },
         
