@@ -74,7 +74,7 @@ var app = (function ($, jquery, logger) {
     function launchAppFramework() {
         resolverConflictos();
         //        $.ui.scrollingDivs.menu_scroller.disable();
-        $.ui.disableNativeScrolling();
+        //$.ui.disableNativeScrolling();
 
         $.ui.launch();
         $.ui.disableSplitView();

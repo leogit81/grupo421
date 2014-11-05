@@ -28,6 +28,7 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
             
             //El prerender inserta el elemento HTML vacío de la vista en el DOM
             //afRenderer.getInstance().preRender(this);
+            //this.insertElementInDom();
             //$(this.getViewSelector()).addClass("consulta-detallada");
             this.$el.attr("data-footer", "none");
         },
@@ -42,6 +43,14 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
             this.model.on('change', this.render, this);
         }
     });
+    
+    /**
+    * Inserta el elemento HTML mínimo que tiene la vista en el DOM.
+    * Si la vista tiene un parent, lo inserta dentro del elemento HTML con ID igual al InsertElID
+    */
+    baseView.prototype.insertElementInDom = function () {
+        $("#afui div#content").append(this.$el[0]);
+    };
     
     baseView.prototype.model = null;
     baseView.prototype.scroller = null;
@@ -115,8 +124,13 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     * Este método se utiliza en el render() y renderEmptyView()
     */
     baseView.prototype.renderHtml = function () {
-        if (!common.isEmpty(this.renderer)) {
-            this.renderer.render(this);
+        if (!common.isEmpty(this.parent)) {
+            //el parent debería ser una MasterView que tiene este método
+            //this.parent.updateView(this.renderedHtml);
+        } else {
+            if (!common.isEmpty(this.renderer)) {
+                this.renderer.render(this);
+            }   
         }
     };
     

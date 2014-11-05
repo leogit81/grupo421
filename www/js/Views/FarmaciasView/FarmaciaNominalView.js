@@ -21,7 +21,7 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
             return this.codigoFarmacia;
         },
         
-        tabs: [
+        tabsConfig: [
             {
                 tabName: "General",
                 panelId: "farmaciaGeneral",

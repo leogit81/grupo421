@@ -13,7 +13,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
         
         codigoDrogueria: null,
         
-        tabs: [
+        tabsConfig: [
             {
                 tabName: "General",
                 panelId: "drogueriaGeneral",

@@ -21,7 +21,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             return this.codigoEstablecimiento;
         },
         
-        tabs: [
+        tabsConfig: [
             {
                 tabName: "General",
                 panelId: "establecimientoGeneral",
@@ -33,13 +33,13 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
                 panelId: "establecimientoPrestaciones",
                 viewClass: PrestacionCollectionView,
                 modelClass: PrestacionCollection,
-                titleClass: "prestacionesTabViewClass"
+                titleCSSClass: "prestacionesTabViewClass"
             },
             {
                 tabName: "Imágenes",
                 panelId: "establecimientoImagenes",
-                viewClass: BaseView,
-                modelClass: BaseModel
+                viewClass: ImagenesView,
+                customLoadView: function () { this.view.render(); }
             },
             {
                 tabName: "Mapas",
