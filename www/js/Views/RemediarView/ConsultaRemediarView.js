@@ -7,7 +7,6 @@ var ConsultaRemediarView = (function ($, renderer, BaseView, ProgramasCollection
         attributes: {
             'id': 'consultaRemediar',
             'class': 'panel',
-//            'data-title': 'Filtros',
             'data-nav': 'consultas_nav'
         },
 
@@ -43,10 +42,10 @@ var ConsultaRemediarView = (function ($, renderer, BaseView, ProgramasCollection
         },
 
         ejecutarConsultaRemediar: function () {
-            var nombreEstablecimiento = $("#nombreRemediar").val();
-            var provinciaEstablecimiento = $("#pciaRemediar").val();
-            var departamentoEstablecimiento = $("#dptoRemediar").val();
-            var localidadEstablecimiento = $("#locRemediar").val();
+            var nombreEstablecimiento = $(this.getViewSelector() + " input#nombreRemediar").val();
+            var provinciaEstablecimiento = $(this.getViewSelector() + " select#pciaRemediar").val();
+            var departamentoEstablecimiento = $(this.getViewSelector() + " select#dptoRemediar").val();
+            var localidadEstablecimiento = $(this.getViewSelector() + " select#locRemediar").val();
 
             this.modelDataSource.getModelData(ProgramasCollection, {
                 "longitud": 0,
@@ -66,7 +65,7 @@ var ConsultaRemediarView = (function ($, renderer, BaseView, ProgramasCollection
         */
         renderVistaDeDatos: function (data) {
             var programasCollection = new ProgramasCollection();
-            var remediarColleccionView = EstablecimientoCollectionView.getInstance();
+            var remediarColleccionView = new EstablecimientoCollectionView();
             remediarColleccionView.setModel({model: programasCollection});
             programasCollection.processData(data);
         },
@@ -82,7 +81,17 @@ var ConsultaRemediarView = (function ($, renderer, BaseView, ProgramasCollection
          */
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate("#submitConsultaRemediar", "click", _.bind(this.ejecutarConsultaRemediar, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaRemediar", "click", _.bind(this.ejecutarConsultaRemediar, this));
+            $("#afui").delegate(this.getViewSelector() + " select#pciaRemediar", "change", _.bind(this.actualizarListaDepartamentos, this));
+            $("#afui").delegate(this.getViewSelector() +" select#dptoRemediar", "change", _.bind(this.actualizarListaLocalidades, this));
+        },
+        
+        actualizarListaDepartamentos: function () {
+            deptos.actualizarDepartamentosDeLaVista(this);
+        },
+        
+        actualizarListaLocalidades: function () {
+            localidades.actualizarLocalidadesDeLaVista(this);
         }
     });
 

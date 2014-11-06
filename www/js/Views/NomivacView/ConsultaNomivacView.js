@@ -7,7 +7,6 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
         attributes: {
             'id': 'consultaNomivac',
             'class': 'panel',
-//            'data-title': 'Filtros',
             'data-nav': 'consultas_nav'
         },
 
@@ -43,10 +42,10 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
         },
 
         ejecutarConsultaNomivac: function () {
-            var nombreEstablecimiento = $("#nombreNomivac").val();
-            var provinciaEstablecimiento = $("#pciaNomivac").val();
-            var departamentoEstablecimiento = $("#dptoNomivac").val();
-            var localidadEstablecimiento = $("#locNomivac").val();
+            var nombreEstablecimiento = $(this.getViewSelector() + " input#nombreNomivac").val();
+            var provinciaEstablecimiento = $(this.getViewSelector() + " select#pciaNomivac").val();
+            var departamentoEstablecimiento = $(this.getViewSelector() + " select#dptoNomivac").val();
+            var localidadEstablecimiento = $(this.getViewSelector() + " select#locNomivac").val();
 
             this.modelDataSource.getModelData(ProgramasCollection, {
                 "longitud": 0,
@@ -66,7 +65,7 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
         */
         renderVistaDeDatos: function (data) {
             var programasCollection = new ProgramasCollection();
-            var nomivacColleccionView = EstablecimientoCollectionView.getInstance();
+            var nomivacColleccionView = new EstablecimientoCollectionView();
             nomivacColleccionView.setModel({model: programasCollection});
             programasCollection.processData(data);
         },
@@ -82,7 +81,17 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
          */
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate("#submitConsultaNomivac", "click", _.bind(this.ejecutarConsultaNomivac, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaNomivac", "click", _.bind(this.ejecutarConsultaNomivac, this));
+            $("#afui").delegate(this.getViewSelector() + " select#pciaNomivac", "change", _.bind(this.actualizarListaDepartamentos, this));
+            $("#afui").delegate(this.getViewSelector() +" select#dptoNomivac", "change", _.bind(this.actualizarListaLocalidades, this));
+        },
+        
+        actualizarListaDepartamentos: function () {
+            deptos.actualizarDepartamentosDeLaVista(this);
+        },
+        
+        actualizarListaLocalidades: function () {
+            localidades.actualizarLocalidadesDeLaVista(this);
         }
     });
 

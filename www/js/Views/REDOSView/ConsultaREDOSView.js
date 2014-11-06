@@ -7,7 +7,6 @@ var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, E
         attributes: {
             'id': 'consultaRedos',
             'class': 'panel',
-//            'data-title': 'Filtros',
             'data-nav': 'consultas_nav'
         },
 
@@ -43,10 +42,10 @@ var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, E
         },
 
         ejecutarConsultaRedos: function () {
-            var nombreEstablecimiento = $("#nombreRedos").val();
-            var provinciaEstablecimiento = $("#pciaRedos").val();
-            var departamentoEstablecimiento = $("#dptoRedos").val();
-            var localidadEstablecimiento = $("#locRedos").val();
+            var nombreEstablecimiento = $(this.getViewSelector() + " input#nombreRedos").val();
+            var provinciaEstablecimiento = $(this.getViewSelector() + " select#pciaRedos").val();
+            var departamentoEstablecimiento = $(this.getViewSelector() + " select#dptoRedos").val();
+            var localidadEstablecimiento = $(this.getViewSelector() + " select#locRedos").val();
 
             this.modelDataSource.getModelData(ProgramasCollection, {
                 "longitud": 0,
@@ -66,7 +65,7 @@ var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, E
         */
         renderVistaDeDatos: function (data) {
             var programasCollection = new ProgramasCollection();
-            var redosColleccionView = EstablecimientoCollectionView.getInstance();
+            var redosColleccionView = new EstablecimientoCollectionView();
             redosColleccionView.setModel({model: programasCollection});
             programasCollection.processData(data);
         },
@@ -82,7 +81,17 @@ var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, E
          */
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate("#submitConsultaRedos", "click", _.bind(this.ejecutarConsultaRedos, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaRedos", "click", _.bind(this.ejecutarConsultaRedos, this));
+            $("#afui").delegate(this.getViewSelector() + " select#pciaRedos", "change", _.bind(this.actualizarListaDepartamentos, this));
+            $("#afui").delegate(this.getViewSelector() +" select#dptoRedos", "change", _.bind(this.actualizarListaLocalidades, this));
+        },
+        
+        actualizarListaDepartamentos: function () {
+            deptos.actualizarDepartamentosDeLaVista(this);
+        },
+        
+        actualizarListaLocalidades: function () {
+            localidades.actualizarLocalidadesDeLaVista(this);
         }
     });
 

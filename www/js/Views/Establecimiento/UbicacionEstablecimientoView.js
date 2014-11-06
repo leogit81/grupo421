@@ -28,7 +28,7 @@ var UbicacionEstablecimientoView = (function (_, common, BaseView) {
         setModel: function (model) {
             BaseView.prototype.setModel.call(this, model);
             
-            /*var domicilioModel = this.getModelOrDefault("domicilio").model;
+            var domicilioModel = this.getModelOrDefault("domicilio").model;
             domicilioModel.on('change', this.render, this);
             
             var telefonoModel1 = this.getModelOrDefault("telefono1").model;
@@ -41,7 +41,7 @@ var UbicacionEstablecimientoView = (function (_, common, BaseView) {
             telefonoModel3.on('change', this.render, this);
             
             var telefonoModel4 = this.getModelOrDefault("telefono4").model;
-            telefonoModel4.on('change', this.render, this);*/
+            telefonoModel4.on('change', this.render, this);
         },
         
         getModelOrDefault: function (submodelName) {

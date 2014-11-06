@@ -39,20 +39,7 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
             instFormNominalModel.load(codigoInstForm);
         },
 
-        render: function(){
-            BaseView.prototype.render.call(this);
-            if ($("#busquedaInstForm").length <= 0){
-                $.ui.addContentDiv("busquedaInstForm", this.template());//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("busquedaInstForm", this.template());//solo contenido para actualizar
-            }
-            $.ui.loadContent("busquedaInstForm", false, false, "slide");
-            $("#busquedaInstForm").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
-
-            this.attachEvents();
-            return this;
-        },
+//        render: function(){},
 
         /**
          * Usado para bindear eventos a los controles del formulario.
@@ -60,9 +47,8 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitConsultaBusquedaInstForm").on("click", _.bind(this.ejecutarBusquedaInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaBusquedaInstForm", "click", _.bind(this.ejecutarBusquedaInstForm, this));
         }
     });
-
     return busquedaInstFormView;
 })(jQuery, af, AppFrameworkRenderer, BaseView, InstFormNominal, InstFormNominalView);

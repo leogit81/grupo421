@@ -13,6 +13,14 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
         
         codigoFarmacia: null,
         
+        setCodigoFarmacia: function (codigoFarmacia) {
+            this.codigoFarmacia = codigoFarmacia;
+        },
+        
+        getCodigoFarmacia: function (codigoFarmacia) {
+            return this.codigoFarmacia;
+        },
+        
         tabs: [
             {
                 tabName: "General",
@@ -36,10 +44,10 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
                 tabName: "Mapas",
                 panelId: "farmaciaMapas",
                 viewClass: GoogleMapView,
-                modelClass: function (scope) {
+                /*modelClass: function (scope) {
                     var tabGeneral = scope.findTab("panelId", "farmaciaGeneral");
                     return tabGeneral.view.model.get("coordenadasDeMapa");
-                }
+                }*/
             }
         ],
         
@@ -52,7 +60,13 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
 		initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            this.setCodigoFarmacia(attributes.codigo);
             TabPanelView.prototype.initialize.call(this, attributes, options);
+            
+            this.findTab("panelId", "farmaciaGeneral").filtroConsulta = _.bind(this.getCodigoFarmacia, this);
+            var mapaFarmaciaTab = this.findTab("panelId", "farmaciaMapas");
+            mapaFarmaciaTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
+            mapaFarmaciaTab.modelClass = this.getCoordenadasMapaModel();
         },
         
         /*mostrarTabEstablecimientoGeneral: function () {
@@ -63,7 +77,7 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
         /**
         * Setea el modelo para la vista y también actualiza los modelos de las vistas de los tabs.
         */
-        setModel: function (model) {
+        /*setModel: function (model) {
             //TabPanelView.prototype.setModel.call(this, model);
             
             //var establecimientoModel = this.getModelOrDefault("General");
@@ -71,7 +85,7 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
             
             this.getViewByName("Mapas").setModel(model.get("coordenadasDeMapa"));
             
-            /*var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
+            var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
             this.getViewByName("coordenadasDeMapa").setModel(coordenadasModel);
             
             var domicilioModel = this.getModelOrDefault("domicilio");
@@ -90,8 +104,9 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
             this.getViewByName("telefono3").setModel(telefonoModel3);
             
             var telefonoModel4 = this.getModelOrDefault("telefono4");
-            this.getViewByName("telefono4").setModel(telefonoModel4);*/
+            this.getViewByName("telefono4").setModel(telefonoModel4);
         },
+*/
         
         /**
         * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
@@ -130,6 +145,37 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
             TabPanelView.prototype.renderSelectedTab.call(this, args);
         }
         $("#" + this.attributes.id).addClass("consultaNominalFarmacia");
+    };
+    
+    /**
+    * Obtiene el modelo de coordenadas a partir del modelo de farmacia nominal.
+    */
+    farmaciaNominalView.prototype.getCoordenadasMapaModel = function () {
+        var tabGeneral = this.findTab("panelId", "farmaciaGeneral");
+        return tabGeneral.view.model.get("coordenadasDeMapa");
+    };
+    
+    farmaciaNominalView.prototype.onGoogleMapViewRendered = function () {
+        //Si se hizo clic en el tab de mapas, se carga el mapa de forma diferente, no se muestra dentro del tab
+        /*var selectedTabPanelId = null;
+        
+        if (!common.isEmpty(args) && !common.isEmpty(args.currentTarget)) {
+            selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
+        }*/
+
+        if (this.selectedTab.panelId === "farmaciaMapas") {
+            var tabMapa = this.findTab("panelId", "farmaciaMapas");
+            $.ui.loadContent(tabMapa.view.getViewId(), false, false, "pop");
+            return;
+        }/* else if (selectedTabPanelId === "establecimientoPrestaciones") {
+            var tabPrestaciones = this.findTab("panelId", selectedTabPanelId);
+            if (common.isEmpty(tabPrestaciones.isLoaded) || !tabPrestaciones.isLoaded) {
+                this.loadPrestacionesTab(selectedTabPanelId);
+                tabPrestaciones.isLoaded = true;
+            }
+        }*/
+        //Cuando se carga el tab panel view por primera vez, después de inicializar el mapa, viene por este load.
+        //TabPanelView.prototype.onViewRendered.call(this);
     };
 	
 	return farmaciaNominalView;

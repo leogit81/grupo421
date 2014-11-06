@@ -7,7 +7,7 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
         attributes: {
             'id': 'listadoFarmacias',
             'class': 'panel',
-//            'data-title': 'REFAR',
+            //            'data-title': 'REFAR',
             'data-nav':"consultas_nav",    
         },
 
@@ -32,10 +32,10 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
             this.modelDataSource = new ModelDataSource ({view: this});
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
         },
-        
+
         renderVistaDeDatos: function (data) {
             var farmaciaCollection = new FarmaciaCollection();
-            var farmaciaColleccionView = FarmaciaCollectionView.getInstance();
+            var farmaciaColleccionView = new FarmaciaCollectionView();
             farmaciaColleccionView.setModel({model: farmaciaCollection});
             farmaciaCollection.processData(data);
         },
@@ -65,11 +65,11 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
         },
 
         render: function(){
-//            $.ui.addContentDiv("listadoFarmacias", this.template());
-//            $.ui.loadContent("listadoFarmacias", false, false, "slide");
-            
-            
-            if ($("#listadoFarmacias").length <= 0){
+            //            $.ui.addContentDiv("listadoFarmacias", this.template());
+            //            $.ui.loadContent("listadoFarmacias", false, false, "slide");
+
+
+            /*if ($("#listadoFarmacias").length <= 0){
                 $.ui.addContentDiv("listadoFarmacias", this.template());//div panel + contenido
             }else
             {
@@ -77,10 +77,11 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
             }
             $.ui.loadContent("listadoFarmacias", false, false, "slide");
             $("#listadoFarmacias").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
-            
-            
-            
-            this.attachEvents();
+
+
+
+            this.attachEvents();*/
+            BaseView.prototype.render.call(this);
             document.getElementById("provinciaFarmacia").innerHTML = listaCompletaProvincias;
             document.getElementById("dependenciaFarmacia").innerHTML = listaCompletaDependencias;
 
@@ -93,7 +94,7 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitConsultaListadoFarmacias").on("click", _.bind(this.ejecutarListadoFarmacias, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaListadoFarmacias", "click", _.bind(this.ejecutarListadoFarmacias, this));
         }
     });
 

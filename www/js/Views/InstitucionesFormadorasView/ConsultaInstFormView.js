@@ -33,18 +33,6 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
         },
 
-        /**
-        * Hace el render de la vista que muestra los datos del modelo que se obtuvieron a partir de la consulta
-        * aplicando los filtros.
-        * @param {Object} data, información del modelo obtenida del servicio.
-        */
-        /*    renderVistaDeDatos: function (data) {
-            var ministerioModel = new Ministerio();
-            var ministerioView = MinisterioView.getInstance();
-            ministerioView.setModel({model: ministerioModel});
-            ministerioModel.processData(data);
-        },*/
-
         ejecutarBuscarInstForm: function(){
             var busquedaInstFormView = new BusquedaInstFormView();
             busquedaInstFormView.render();
@@ -56,20 +44,7 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
         },
 
         render: function(){
-            //            $.ui.addContentDiv("consultaInstForm", this.template());
-            //            $.ui.loadContent("consultaInstForm", false, false, "slide");
-
-            if ($("#consultaInstForm").length <= 0){
-                $.ui.addContentDiv("consultaInstForm", this.template());//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("consultaInstForm", this.template());//solo contenido para actualizar
-            }
-            $.ui.loadContent("consultaInstForm", false, false, "slide");
-            $("#consultaInstForm").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
-
-
-            this.attachEvents();
+            BaseView.prototype.render.call(this);
             FastClick.attach($("#submitListadoInstForm"));
             FastClick.attach($("#submitBuscarInstForm"));
             return this;
@@ -81,10 +56,9 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitListadoInstForm").on("click", _.bind(this.ejecutarListadoInstForm, this));
-            jquery("#submitBuscarInstForm").on("click", _.bind(this.ejecutarBuscarInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitListadoInstForm", "click", _.bind(this.ejecutarListadoInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitBuscarInstForm", "click", _.bind(this.ejecutarBuscarInstForm, this));
         }
     });
-
     return consultaInstFormView;
 })(jQuery, af, AppFrameworkRenderer, BaseView, BusquedaInstFormView, ListadoInstFormView);

@@ -7,12 +7,12 @@ var owl;
  */
 var app = (function ($, jquery, logger) {
     "use strict";
-    
+
     /**
     * Indica si la aplicación tiene disponible conexión a Internet o no.
     */
     var appStatus = null;
-    
+
     //False para que App Framework no utilice el theme por defecto del dispositivo. Se fuerza un theme en index.html
     $.ui.useOSThemes = false;
 
@@ -35,7 +35,7 @@ var app = (function ($, jquery, logger) {
         logger.log({status: 0, statusText: "offline"});
         appStatus = "offline";
     }
-    
+
     function onDeviceOnline() {
         logger.log({status: 0, statusText: "online"});
         appStatus = "online";
@@ -55,12 +55,23 @@ var app = (function ($, jquery, logger) {
         consultasView.render();
 
         //es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
-        $("#afui").delegate("a.backButton", "click", function(e) { af.ui.hideMask();});
+        $("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
+        $("#afui").delegate("a.button.icon.close", "click", onClickCloseButtonHandler);
     };
 
     /**
      * Se ejecuta al hacer click en el icono de las tres rayitas que muestra el menú lateral.  
      */
+    function onClickBackButtonHandler (e) {
+        af.ui.hideMask();
+        var activeDiv = af.ui.activeDiv;
+        setTimeout( function () {activeDiv.remove()} , 500);
+    }
+    
+    function onClickCloseButtonHandler (e) {
+        af.ui.hideModal();
+    }
+
     function onClickMenuBadge() {
         af.ui.toggleSideMenu();
     }
@@ -72,17 +83,17 @@ var app = (function ($, jquery, logger) {
 
         $.ui.launch();
         $.ui.disableSplitView();
-//        $.ui.removeFooterMenu();
+        //        $.ui.removeFooterMenu();
         $.ui.updateBadge("#afui","3","tr");
         //Esta línea es para ocultar un div footer que contiene al menu, y que a pesar de moverlo
         //con el método removeFooterMenu, seguía mostrandose.
-//        $("div#navbar.footer").css("display", "none");
+        //        $("div#navbar.footer").css("display", "none");
         $("footer#defaultNav").css("display", "none");
         //esto cambia el texto del backbutton para todos los paneles de la aplicación
         $.ui.backButtonText = "Atrás";
         //$.touchLayer($("#afui").get(0));
     };
-    
+
     function launchNoticiasSlider () {
         var noticiasView = ListadoNoticiasView.getInstance();
         noticiasView.render();

@@ -11,6 +11,14 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
         },
 
         codigoInstForm: null,
+        
+        setCodigoInstForm: function (codigoInstForm) {
+            this.codigoInstForm = codigoInstForm;
+        },
+        
+        getCodigoInstForm: function (codigoInstForm) {
+            return this.codigoInstForm;
+        },
 
         tabs: [
             {
@@ -24,10 +32,10 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
                 tabName: "Mapas",
                 panelId: "instFormMapas",
                 viewClass: GoogleMapView,
-                modelClass: function (scope) {
-                    var tabGeneral = scope.findTab("panelId", "instFormGeneral");
-                    return tabGeneral.view.model.get("coordenadas");
-                }
+//                modelClass: function (scope) {
+//                    var tabGeneral = scope.findTab("panelId", "instFormGeneral");
+//                    return tabGeneral.view.model.get("coordenadas");
+//                }
             }
         ],
 
@@ -40,7 +48,9 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            this.setCodigoInstForm(attributes.codigo);
             TabPanelView.prototype.initialize.call(this, attributes, options);
+            this.findTab("panelId", "instFormGeneral").filtroConsulta = _.bind(this.getCodigoInstForm, this);
         },
 
         /*mostrarTabEstablecimientoGeneral: function () {

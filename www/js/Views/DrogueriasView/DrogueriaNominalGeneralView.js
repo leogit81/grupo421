@@ -9,8 +9,7 @@ var DrogueriaNominalGeneralView = (function ($, common, _, renderer, MasterView)
         className: 'panel consulta-detallada',
 
         attributes: {
-            'id': 'drogueriaGeneral',
-//            'data-title': 'REDRO',
+            'id': 'drogueriaGeneral'
         },
 
         template : _.template(

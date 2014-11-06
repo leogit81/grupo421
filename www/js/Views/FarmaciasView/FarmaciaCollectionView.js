@@ -1,7 +1,7 @@
 var FarmaciaCollectionView = (function ($, common, Backbone, _, renderer, BaseView, FarmaciaNominal, FarmaciaNominalView) {
     "use strict";
     
-    var farmaciaCollectionView = BaseView.extend({
+    var farmaciaCollectionView = BaseCollectionView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
         
@@ -11,11 +11,11 @@ var FarmaciaCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
             'data-nav': "consultas_nav"
         },
         
-        template : _.template("<ul class='list'><%= renderedHtml %></ul>"),
-
-        renderedHtml: null,
+        itemTemplateString : "<li><a><%=nombre%></br><span class='codigoFarmacia'> <%=codigo%> </span> - <%=provincia%></a></li>",
         
-        armarHtml: function (farmacias) {
+        //template : _.template("<ul class='list'><%= renderedHtml %></ul>"),
+        
+        /*armarHtml: function (farmacias) {
             this.renderedHtml = "";
             _.each(farmacias, this.itemTemplate, this);
         },
@@ -61,33 +61,30 @@ var FarmaciaCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
             $.ui.hideMask();
             
             return this;
-        },
+        },*/
         
         busquedaNominalFarmacia: function (eventData) {
-            var codigoFarmacia = this.getCodigoFarmaciaFromSelectedItem(eventData.currentTarget.outerHTML);
+            var codigoFarmacia = this.getCodigoFarmaciaFromSelectedItem(eventData.currentTarget.outerHTML),
+                farmaciaNominalView = new FarmaciaNominalView({codigo: codigoFarmacia});
+                farmaciaNominalView.loadDefaultView();
             
-            var farmaciaNominalModel = new FarmaciaNominal();
-            //EstablecimientoNominalView.getInstance().setModel(establecimientoNominalModel);
+            /*var farmaciaNominalModel = new FarmaciaNominal();
             var farmaciaView = new FarmaciaNominalView();
             farmaciaView.setModel(farmaciaNominalModel);
-            farmaciaNominalModel.load(codigoFarmacia);
-            //EstablecimientoNominalView.getInstance().ejecutarConsultaEstablecimiento(codigoEstablecimiento);
-            /*var establecimientoNominalView = new EstablecimientoNominalView();
-            establecimientoNominalView.ejecutarConsultaNominalEstablecimiento(codigoEstablecimiento);*/
+            farmaciaNominalModel.load(codigoFarmacia);*/
         },
         
         getCodigoFarmaciaFromSelectedItem: function (selectedItem) {
             return common.trim($(selectedItem).find("span.codigoFarmacia").html());
         },
         
-        attachEvents: function() {
+        /*attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate("#resultadoConsultaGeneralFarmacia ul li a", "click", _.bind(this.busquedaNominalFarmacia, this));
-        }
-        
+        }*/
 	});
     
-    farmaciaCollectionView.prototype.setModel = function (attributes) {
+    /*farmaciaCollectionView.prototype.setModel = function (attributes) {
         if (attributes !== undefined && attributes.model !== undefined) {
             this.model = attributes.model;
         } else {
@@ -97,6 +94,9 @@ var FarmaciaCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
         //this.model.on('change', this.render, this);
         this.model.on('remove', this.render, this);
         this.model.on('add', this.render, this);
+    };*/
+    farmaciaCollectionView.prototype.busquedaNominalItem = function (eventData) {
+        this.busquedaNominalFarmacia(eventData);
     };
 	
 	return farmaciaCollectionView;

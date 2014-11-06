@@ -67,7 +67,7 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
             //            });
         },
 
-        render: function(){
+        /*render: function(){
             //            $.ui.addContentDiv("busquedaFarmacia", this.template());
             //            $.ui.loadContent("busquedaFarmacia", false, false, "slide");
 
@@ -86,7 +86,7 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
 
             this.attachEvents();
             return this;
-        },
+        },*/
 
         /**
          * Usado para bindear eventos a los controles del formulario.
@@ -94,7 +94,7 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitConsultaBusquedaFarmacia").on("click", _.bind(this.ejecutarBusquedaFarmacia, this));
+            $("#afui").delegate("#submitConsultaBusquedaFarmacia","click", _.bind(this.ejecutarBusquedaFarmacia, this));
         }
     });
 
