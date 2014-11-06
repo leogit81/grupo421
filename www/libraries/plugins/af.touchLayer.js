@@ -29,11 +29,11 @@
         return $.touchLayer;
     };
     //configuration stuff
-    var inputElements = ["input", "select", "textarea"];
+    var inputElements = ["input", "select", "textarea","range"];
     var autoBlurInputTypes = ["button", "radio", "checkbox", "range", "date"];
-    var requiresJSFocus = $.os.ios; //devices which require .focus() on dynamic click events
+    var requiresJSFocus = $.os.ios||($.os.androidICS&&$.os.chrome); //devices which require .focus() on dynamic click events
     var verySensitiveTouch = $.os.blackberry; //devices which have a very sensitive touch and touchmove is easily fired even on simple taps
-    var inputElementRequiresNativeTap = $.os.blackberry||$.os.fennec || ($.os.android && !$.os.chrome); //devices which require the touchstart event to bleed through in order to actually fire the click on select elements
+    var inputElementRequiresNativeTap = $.os.blackberry||$.os.fennec || ($.os.android&&!$.os.androidICS); //devices which require the touchstart event to bleed through in order to actually fire the click on select elements
 //    var selectElementRequiresNativeTap = $.os.blackberry||$.os.fennec || ($.os.android && !$.os.chrome); //devices which require the touchstart event to bleed through in order to actually fire the click on select elements
 //    var focusScrolls = $.os.ios; //devices scrolling on focus instead of resizing
     var requirePanning = $.os.ios&&!$.os.ios7; //devices which require panning feature
@@ -42,11 +42,6 @@
     var skipTouchEnd = false; //Fix iOS bug with alerts/confirms
     var cancelClick = false;
 
-    function getTime() {
-        var d = new Date();
-        var n = d.getTime();
-        return n;
-    }
     var touchLayer = function(el) {
         this.clearTouchVars();
         el.addEventListener("touchstart", this, false);
@@ -91,7 +86,7 @@
             that.isScrolling = true;
             that.scrollingEl_ = el;
             if (!$.feat.nativeTouchScroll)
-                that.scrollerIsScrolling = true;            
+                that.scrollerIsScrolling = true;
             that.fireEvent("UIEvents", "scrollstart", el, false, false);
         });
         $.bind(this, "scrollend", function(el) {
@@ -206,7 +201,10 @@
             }
 
             //this.log("hiding address bar");
-            if ($.os.desktop || $.os.kindle) {
+            if($.os.ios7){
+                window.scrollTo(1, 1);
+            }
+            else if ($.os.desktop || $.os.kindle) {
                 this.layer.style.height = "100%";
             } else if ($.os.android) {
                 //on some phones its immediate
@@ -235,7 +233,7 @@
             } else
                 return numOnly(document.documentElement.style.height); //TODO: works well on iPhone, test BB
         },
-        onOrientationChange: function(e) {
+        onOrientationChange: function() {
             //this.log("orientationchange");
             //if a resize already happened, fire the orientationchange
             var self=this;
@@ -249,13 +247,9 @@
             } else this.previewReshapeEvent("orientationchange");
             if($.os.android && $.os.chrome) {
                 this.layer.style.height = "100%";
-                var time = didBlur ? 600 : 0;
-                setTimeout(function(){
-                    self.hideAddressBar(0,1);
-                }, time);
             }
         },
-        onResize: function(e) {
+        onResize: function() {
             //avoid infinite loop on iPhone
             if (this.ignoreNextResize_) {
                 //this.log("ignored resize");
@@ -384,12 +378,11 @@
         },
 
         onTouchStart: function(e) {
-            //setup initial touch position            
+            //setup initial touch position
             this.dX = e.touches[0].pageX;
             this.dY = e.touches[0].pageY;
             this.lastTimestamp = e.timeStamp;
             this.lastTouchStartX = this.lastTouchStartY = null;
-
             if ($.os.ios) {
 
                 if (skipTouchEnd === e.touches[0].identifier) {
@@ -413,7 +406,9 @@
             if (requirePanning || $.feat.nativeTouchScroll) this.checkDOMTree(e.target, this.layer);
             //scrollend check
             if (this.isScrolling) {
+
                 //remove prev timeout
+
                 if (this.scrollTimeout_ !== null) {
                     clearTimeout(this.scrollTimeout_);
                     this.scrollTimeout_ = null;
@@ -421,11 +416,13 @@
                     if (this.scrollTimeoutEl_ !== this.scrollingEl_) this.scrollEnded(false);
                     else this.blockPossibleClick_ = true;
                     //check if event was already set
-                } else if (this.scrollTimeoutEl_) {
+
+                } else  {
                     //trigger
                     this.scrollEnded(true);
-                    this.blockPossibleClick_ = true;
+                    this.blockPossibleClick_ = false;
                 }
+
             }
 
             // We allow forcing native tap in android devices (required in special cases)
@@ -450,7 +447,7 @@
             }
 
             //do not prevent default on chrome.  Chrome >=33 has issues with this
-            if($.os.chrome||$.os.fennec) return;
+            if($.os.chrome||$.os.fennec||$.os.androidICS) return;
             //prevent default if possible
 
             if (!this.isPanning_ && !this.requiresNativeTap) {
@@ -482,6 +479,7 @@
         ignoreScrolling: function(el) {
             if (el.scrollWidth === undefined || el.clientWidth === undefined) return true;
             if (el.scrollHeight === undefined || el.clientHeight === undefined) return true;
+
             return false;
         },
 
@@ -510,7 +508,6 @@
 
             //check native scroll
             if ($.feat.nativeTouchScroll) {
-
                 //prevent errors
                 if (this.ignoreScrolling(el)) {
                     return;
@@ -524,10 +521,12 @@
                     this.isScrolling = true;
                     return;
                 } else if (this.allowsHorizontalScroll(el, styles)) {
+
                     this.isScrollingVertical_ = false;
                     this.scrollingEl_ = null;
                     this.isScrolling = true;
                 }
+
             }
             //check recursive up to top element
             var isTarget = (el === parentTarget);
@@ -571,9 +570,9 @@
             }
             //non-native scroll devices
 
-            if ((!$.os.blackberry10)) {
+            if ((!$.os.blackberry10&&!this.requiresNativeTap)) {
                 //legacy stuff for old browsers
-                if (!this.isScrolling || !$.feat.nativeTouchScroll)
+                if (!this.isScrolling || (!$.feat.nativeTouchScroll&&!this.requiresNativeTap))
                     e.preventDefault();
                 return;
             }
@@ -589,8 +588,10 @@
                 itMoved = itMoved && !(Math.abs(this.cX) < 10 && Math.abs(this.cY) < 10);
             }
 
+
             //don't allow document scroll unless a specific click demands it further ahead
             if (!$.os.ios || !this.requiresNativeTap) this.allowDocumentScroll_ = false;
+
 
             //panning action
             if (this.isPanning_ && itMoved) {
@@ -599,6 +600,7 @@
 
                 //a generated click
             } else if (!itMoved && !this.requiresNativeTap) {
+
                 this.scrollerIsScrolling = false;
                 if (!this.trackingClick) {
                     return;
@@ -609,6 +611,7 @@
 
                 //fire click
                 if (!this.blockClicks && !this.blockPossibleClick_) {
+
                     var theTarget = e.target;
                     var changedTouches = e.changedTouches ? e.changedTouches[0] : e.touches[0];
                     if (theTarget.nodeType === 3) theTarget = theTarget.parentNode;
