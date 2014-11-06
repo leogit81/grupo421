@@ -39,6 +39,8 @@ var InstFormNominalGeneralView = (function ($, common, _, renderer, MasterView) 
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            this.createNestedViewsDictionary(this);
+            
             MasterView.prototype.initialize.call(this, attributes, options);
         },
 

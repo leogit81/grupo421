@@ -1,7 +1,7 @@
-var NoticiaNominalView = (function ($, MasterView, renderer) {
+var NoticiaNominalView = (function ($, BaseView, renderer) {
     "use strict";
 
-    var noticiaNominalView = MasterView.extend({
+    var noticiaNominalView = BaseView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
 
@@ -19,11 +19,11 @@ var NoticiaNominalView = (function ($, MasterView, renderer) {
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
-            MasterView.prototype.initialize.call(this, attributes, options);
+            BaseView.prototype.initialize.call(this, attributes, options);
         },
 
         setModel: function (model) {
-            MasterView.prototype.setModel.call(this, model);
+            BaseView.prototype.setModel.call(this, model);
         }
     });
 
@@ -33,4 +33,4 @@ var NoticiaNominalView = (function ($, MasterView, renderer) {
         return this;
     };
     return noticiaNominalView;
-}(af, MasterView, AppFrameworkRenderer));
+}(af, BaseView, AppFrameworkRenderer));

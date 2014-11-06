@@ -34,7 +34,7 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
             this.modelDataSource = new ModelDataSource ({view: this});
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
         },
-        
+
         renderVistaDeDatos: function (data) {
             var instFormCollection = new InstFormCollection();
             var instFormColleccionView = InstFormCollectionView.getInstance();
@@ -64,21 +64,11 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
         },
 
         render: function(){
-            if ($("#listadoInstForm").length <= 0){
-                $.ui.addContentDiv("listadoInstForm", this.template());//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("listadoInstForm", this.template());//solo contenido para actualizar
-            }
-            $.ui.loadContent("listadoInstForm", false, false, "slide");
-            $("#listadoInstForm").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
-            
-            this.attachEvents();
+            BaseView.prototype.render.call(this);
             document.getElementById("pciaInstForm").innerHTML = listaCompletaProvincias;
             document.getElementById("dptoInstForm").innerHTML = "<option value =''>Seleccione un departamento...</option>";
             document.getElementById("locInstForm").innerHTML = "<option value =''>Seleccione una localidad...</option>";
             document.getElementById("dependenciaInstForm").innerHTML = listaCompletaDependencias;
-
             return this;
         },
 
@@ -88,7 +78,6 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-//            jquery("#submitConsultaListadoInstForm").on("click", _.bind(this.ejecutarListadoInstForm, this));
             $("#afui").delegate(this.getViewSelector() + " a#submitConsultaListadoInstForm", "click", _.bind(this.ejecutarListadoInstForm, this));
         }
     });

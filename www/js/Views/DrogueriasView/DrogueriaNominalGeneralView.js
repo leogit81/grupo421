@@ -9,8 +9,7 @@ var DrogueriaNominalGeneralView = (function ($, common, _, renderer, MasterView)
         className: 'panel consulta-detallada',
 
         attributes: {
-            'id': 'drogueriaGeneral',
-//            'data-title': 'REDRO',
+            'id': 'drogueriaGeneral'
         },
 
         template : _.template(
@@ -28,6 +27,8 @@ var DrogueriaNominalGeneralView = (function ($, common, _, renderer, MasterView)
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.createNestedViewsDictionary(this);
 
             var ubicacionView = new UbicacionDrogueriaView(this.getModelOrDefault("participaciones"));
             this.addView(ubicacionView, "ubicacion", "ubicacionDrogueria");

@@ -6,8 +6,7 @@ var UbicacionDrogueriaView = (function (_, common, BaseView) {
         className: 'ubicacionView',
         
         attributes: {
-            'id': 'resultadoConsultaDrogueria',
-//            'data-title': 'REDRO',
+            'id': 'resultadoConsultaDrogueria'
         },
         
         template : _.template(

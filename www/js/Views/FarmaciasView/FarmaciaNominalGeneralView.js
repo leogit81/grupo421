@@ -27,6 +27,8 @@ var FarmaciaNominalGeneralView = (function ($, common, _, renderer, MasterView) 
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.createNestedViewsDictionary(this);
 
             var ubicacionView = new UbicacionFarmaciaView(this.getModelOrDefault("participaciones"));
             this.addView(ubicacionView, "ubicacion", "ubicacionFarmacia");

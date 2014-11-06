@@ -28,6 +28,9 @@ var MinisterioView = (function ($, MasterView, CoordenadasMapaView, DomicilioVie
 		initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.createNestedViewsDictionary(this);
+            
 		    MasterView.prototype.initialize.call(this, attributes, options);
 		    var coordenadaView, domicilioView, telefonoView1, telefonoView2, telefonoView3, telefonoView4;
             

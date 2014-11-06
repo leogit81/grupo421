@@ -7,12 +7,23 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
         
         attributes: {
             'id': 'resultadoConsultaNominalDrogueria',
-//            'data-title': 'REDRO',
+//            'data-title': 'REFAR',
             'data-nav': 'consultas_nav'
         },
         
         codigoDrogueria: null,
         
+<<<<<<< HEAD
+=======
+        setCodigoDrogueria: function (codigoDrogueria) {
+            this.codigoDrogueria = codigoDrogueria;
+        },
+        
+        getCodigoDrogueria: function (codigoDrogueria) {
+            return this.codigoDrogueria;
+        },
+        
+>>>>>>> a210a8ebb3db8245cd83e673cff5453ac980331a
         tabsConfig: [
             {
                 tabName: "General",
@@ -36,10 +47,10 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
                 tabName: "Mapas",
                 panelId: "drogueriaMapas",
                 viewClass: GoogleMapView,
-                modelClass: function (scope) {
+                /*modelClass: function (scope) {
                     var tabGeneral = scope.findTab("panelId", "drogueriaGeneral");
                     return tabGeneral.view.model.get("coordenadasDeMapa");
-                }
+                }*/
             }
         ],
         
@@ -52,7 +63,13 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
 		initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            this.setCodigoDrogueria(attributes.codigo);
             TabPanelView.prototype.initialize.call(this, attributes, options);
+            
+            this.findTab("panelId", "drogueriaGeneral").filtroConsulta = _.bind(this.getCodigoDrogueria, this);
+            var mapaDrogueriaTab = this.findTab("panelId", "drogueriaMapas");
+            mapaDrogueriaTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
+            mapaDrogueriaTab.modelClass = this.getCoordenadasMapaModel();
         },
         
         /*mostrarTabEstablecimientoGeneral: function () {
@@ -63,7 +80,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
         /**
         * Setea el modelo para la vista y también actualiza los modelos de las vistas de los tabs.
         */
-        setModel: function (model) {
+        /*setModel: function (model) {
             //TabPanelView.prototype.setModel.call(this, model);
             
             //var establecimientoModel = this.getModelOrDefault("General");
@@ -71,7 +88,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
             
             this.getViewByName("Mapas").setModel(model.get("coordenadasDeMapa"));
             
-            /*var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
+            var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
             this.getViewByName("coordenadasDeMapa").setModel(coordenadasModel);
             
             var domicilioModel = this.getModelOrDefault("domicilio");
@@ -90,8 +107,9 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
             this.getViewByName("telefono3").setModel(telefonoModel3);
             
             var telefonoModel4 = this.getModelOrDefault("telefono4");
-            this.getViewByName("telefono4").setModel(telefonoModel4);*/
+            this.getViewByName("telefono4").setModel(telefonoModel4);
         },
+*/
         
         /**
         * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
@@ -130,6 +148,37 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
             TabPanelView.prototype.renderSelectedTab.call(this, args);
         }
         $("#" + this.attributes.id).addClass("consultaNominalDrogueria");
+    };
+    
+    /**
+    * Obtiene el modelo de coordenadas a partir del modelo de drogueria nominal.
+    */
+    drogueriaNominalView.prototype.getCoordenadasMapaModel = function () {
+        var tabGeneral = this.findTab("panelId", "drogueriaGeneral");
+        return tabGeneral.view.model.get("coordenadasDeMapa");
+    };
+    
+    drogueriaNominalView.prototype.onGoogleMapViewRendered = function () {
+        //Si se hizo clic en el tab de mapas, se carga el mapa de forma diferente, no se muestra dentro del tab
+        /*var selectedTabPanelId = null;
+        
+        if (!common.isEmpty(args) && !common.isEmpty(args.currentTarget)) {
+            selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
+        }*/
+
+        if (this.selectedTab.panelId === "drogueriaMapas") {
+            var tabMapa = this.findTab("panelId", "drogueriaMapas");
+            $.ui.loadContent(tabMapa.view.getViewId(), false, false, "pop");
+            return;
+        }/* else if (selectedTabPanelId === "establecimientoPrestaciones") {
+            var tabPrestaciones = this.findTab("panelId", selectedTabPanelId);
+            if (common.isEmpty(tabPrestaciones.isLoaded) || !tabPrestaciones.isLoaded) {
+                this.loadPrestacionesTab(selectedTabPanelId);
+                tabPrestaciones.isLoaded = true;
+            }
+        }*/
+        //Cuando se carga el tab panel view por primera vez, después de inicializar el mapa, viene por este load.
+        //TabPanelView.prototype.onViewRendered.call(this);
     };
 	
 	return drogueriaNominalView;

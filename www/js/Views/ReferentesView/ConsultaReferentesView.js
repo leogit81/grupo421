@@ -44,8 +44,8 @@ var ConsultaReferentesView = (function(jquery, $, renderer, BaseView, Referentes
         },
 
         ejecutarConsultaReferentes: function(){
-            var nombreReferentes = $("#nombreReferentes").val();
-            var pciaReferentes = $("#pciaReferentes").val();
+            var nombreReferentes = $(this.getViewSelector() + " input#nombreReferentes").val();
+            var pciaReferentes = $(this.getViewSelector() + " select#pciaReferentes").val();
             this.modelDataSource.getModelData(Referentes, {
                 "nombre": nombreReferentes,
                 "provincia": pciaReferentes
@@ -53,15 +53,8 @@ var ConsultaReferentesView = (function(jquery, $, renderer, BaseView, Referentes
         },
 
         render: function(){
-            if ($("#consultaReferentes").length <= 0){
-                $.ui.addContentDiv("consultaReferentes", this.template());//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("consultaReferentes", this.template());//solo contenido para actualizar
-            }
-            $.ui.loadContent("consultaReferentes", false, false, "slide");
-            this.attachEvents();
-            document.getElementById("pciaReferentes").innerHTML = listaCompletaProvincias;
+            BaseView.prototype.render.call(this);
+            $(this.getViewSelector() + " select#pciaReferentes")[0].innerHTML = listaCompletaProvincias;
             return this;
         },
 
@@ -71,9 +64,8 @@ var ConsultaReferentesView = (function(jquery, $, renderer, BaseView, Referentes
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            jquery("#submitConsultaReferentes").on("click", _.bind(this.ejecutarConsultaReferentes, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaReferentes", "click", _.bind(this.ejecutarConsultaReferentes, this));
         }
     });
-
     return consultaReferentesView;
 })(jQuery, af, AppFrameworkRenderer, BaseView, Referentes, ReferentesView);
