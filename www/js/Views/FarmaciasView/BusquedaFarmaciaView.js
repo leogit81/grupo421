@@ -55,9 +55,10 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
             var codigoFarmacia = $("#codigoFarmacia").val();
             var farmaciaNominalModel = new FarmaciaNominal();
             //EstablecimientoNominalView.getInstance().setModel(establecimientoNominalModel);
-            var farmaciaView = new FarmaciaNominalView();
-            farmaciaView.setModel(farmaciaNominalModel);
-            farmaciaNominalModel.load(codigoFarmacia);
+            var farmaciaView = new FarmaciaNominalView({codigo: codigoFarmacia});
+            farmaciaView.loadDefaultView();
+//            farmaciaView.setModel(farmaciaNominalModel);
+//            farmaciaNominalModel.load(codigoFarmacia);
 
             //            this.modelDataSource.getModelData(FarmaciaCollection, {
             //                "dependencia": dependenciaFarmacia,
@@ -94,7 +95,7 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate("#submitConsultaBusquedaFarmacia","click", _.bind(this.ejecutarBusquedaFarmacia, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaBusquedaFarmacia","click", _.bind(this.ejecutarBusquedaFarmacia, this));
         }
     });
 

@@ -20,7 +20,7 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
             return this.codigoInstForm;
         },
 
-        tabs: [
+        tabsConfig: [
             {
                 tabName: "General",
                 panelId: "instFormGeneral",

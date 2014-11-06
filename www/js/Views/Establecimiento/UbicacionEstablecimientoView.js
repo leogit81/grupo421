@@ -6,7 +6,7 @@ var UbicacionEstablecimientoView = (function (_, common, BaseView) {
         className: 'ubicacionView',
         
         attributes: {
-            'id': 'resultadoConsultaEstablecimiento'
+            'id': 'ubicacionEstablecimiento'
         },
         
         template : _.template(
