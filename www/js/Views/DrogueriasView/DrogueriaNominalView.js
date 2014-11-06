@@ -12,9 +12,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
         },
         
         codigoDrogueria: null,
-        
-<<<<<<< HEAD
-=======
+
         setCodigoDrogueria: function (codigoDrogueria) {
             this.codigoDrogueria = codigoDrogueria;
         },
@@ -22,8 +20,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
         getCodigoDrogueria: function (codigoDrogueria) {
             return this.codigoDrogueria;
         },
-        
->>>>>>> a210a8ebb3db8245cd83e673cff5453ac980331a
+
         tabsConfig: [
             {
                 tabName: "General",
