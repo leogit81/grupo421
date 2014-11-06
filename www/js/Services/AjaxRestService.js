@@ -116,7 +116,8 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
     };
     
     AjaxService.prototype.getCodigoResultadoWebService = function (resultadoWS) {
-        return resultadoWS.getElementsByTagName("resultado").item().innerHTML;
+        return resultadoWS.getElementsByTagName("resultado").item().textContent;
+//        return resultadoWS.getElementsByTagName("resultado").item().innerHTML;
     };
     
     AjaxService.prototype.internalErrorCallback = function (response) {

@@ -34,12 +34,14 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
         ejecutarBusquedaInstForm: function(){
             var codigoInstForm = $("#codigoInstForm").val();
             var instFormNominalModel = new InstFormNominal();
-            var instFormView = new InstFormNominalView();
-            instFormView.setModel(instFormNominalModel);
-            instFormNominalModel.load(codigoInstForm);
+            var instFormView = new InstFormNominalView({codigo: codigoInstForm});
+            instFormView.loadDefaultView();
+
+            //            instFormView.setModel(instFormNominalModel);
+            //            instFormNominalModel.load(codigoInstForm);
         },
 
-//        render: function(){},
+        //        render: function(){},
 
         /**
          * Usado para bindear eventos a los controles del formulario.

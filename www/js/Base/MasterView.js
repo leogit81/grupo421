@@ -3,12 +3,16 @@
  */
 var MasterView = (function ($, common, BaseView) {
     "use strict";
-    
+
     var masterView = BaseView.extend({
+        createNestedViewsDictionary: function (attributes, options) {
+            BaseView.prototype.initialize.call(this);
+            this.nestedViewsDictionary = {};
+        }
     });
-    
-    masterView.prototype.nestedViewsDictionary = {};
-    
+
+    masterView.prototype.nestedViewsDictionary = null;
+
     /**
      * Agrega una vista a la colección de vistas.
      * @param {BaseView} view 
@@ -20,20 +24,20 @@ var MasterView = (function ($, common, BaseView) {
         view.setParent(this);
         if (!common.isEmpty(viewName)) {
             this.nestedViewsDictionary[viewName] = {    view: view,
-                                                        insertElID: insertionElementId
-                                                    };
+                                                    insertElID: insertionElementId
+                                                   };
         }
         view.on("viewRendered", _.bind(this.onViewRendered, this));
     };
-    
+
     /**
     * Handler del evento viewRendered que se dispará luego de que una de las vistas de los tabs termina de cargarse.
     */
     masterView.prototype.onViewRendered = function (view) {
         this.updateHTMLSubVista(view);
     };
-    
-        /**
+
+    /**
     * Busca una view por una de sus propiedades, en el array de vistas anidadas.
     * @param {String} prop, el nombre de la propiedad de la vista.
     * @param {String} value, valor de la propiedad.
@@ -43,7 +47,7 @@ var MasterView = (function ($, common, BaseView) {
             return item.view[prop] === value;
         }, this);
     };
-    
+
     /**
      * Devuelve una vista por nombre.
      *  @param {String} , el nombre de la vista, si se quiere poder acceder a la misma mediante nombre. 
@@ -51,20 +55,20 @@ var MasterView = (function ($, common, BaseView) {
     masterView.prototype.getViewByName = function (viewName) {
         return this.nestedViewsDictionary[viewName].view;
     };
-    
+
     /**
      * Cada una de las vistas anidadas cuando se renderiza guarda el resultado en la propiedad renderedHTML
      */
     masterView.prototype.armarHtmlConData = function (data) {
         BaseView.prototype.armarHtmlConData.call(this, data);
-        
+
         for (var nestedView in this.nestedViewsDictionary) {
             if (this.nestedViewsDictionary.hasOwnProperty(nestedView)) {
                 this.insertHTMLSubVista(this.nestedViewsDictionary[nestedView]);
             }
         }
     };
-    
+
     /**
     * Inserta el HTML de la subvista en el elemento de la vista maestra que tiene el mismo insertionElementId
     * @param {Object} viewObject, es un objeto que tiene la subvista y el ID del elemento de la vista maestra
@@ -73,7 +77,7 @@ var MasterView = (function ($, common, BaseView) {
     masterView.prototype.insertHTMLSubVista = function (viewObject) {
         var insertElement = $(this.$el[0]).find("#" + viewObject.insertElID),
             htmlSubvista = viewObject.view.$el[0].innerHTML;
-        
+
         if (insertElement.length > 0) {
             insertElement.empty();
             insertElement.append(common.isEmpty(htmlSubvista)?"":htmlSubvista);
@@ -81,7 +85,7 @@ var MasterView = (function ($, common, BaseView) {
             this.$el.append(htmlSubvista);
         }
     };
-    
+
     /**
     * Actualiza el HTML de la subvista en la vista maestra.
     * @param {Object} view, es la subvista que se actualizará en la vista maestra.
@@ -94,7 +98,7 @@ var MasterView = (function ($, common, BaseView) {
             }
         }
     };
-    
+
     /**
     * En la master view el render se hace solamente para la vista maestra, no para cada una 
     */
@@ -105,7 +109,7 @@ var MasterView = (function ($, common, BaseView) {
 
         return this;
     };
-    
+
     /**
     * Devuelve un objeto literal con el sub model o un objeto literal vacío.
     * @param {String} submodelName, nombre que tiene la propiedad que contiene el sub model
@@ -124,6 +128,6 @@ var MasterView = (function ($, common, BaseView) {
 
         return {};
     };
-    
+
     return masterView;
 }(af, common, BaseView));

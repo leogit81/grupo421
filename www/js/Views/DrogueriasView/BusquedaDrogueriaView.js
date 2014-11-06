@@ -34,9 +34,10 @@ var BusquedaDrogueriaView = (function (jquery, $, renderer, BaseView, DrogueriaN
         ejecutarBusquedaDrogueria: function(){
             var codigoDrogueria = $("#codigoDrogueria").val();
             var drogueriaNominalModel = new DrogueriaNominal();
-            var drogueriaView = new DrogueriaNominalView();
-            drogueriaView.setModel(drogueriaNominalModel);
-            drogueriaNominalModel.load(codigoDrogueria);
+            var drogueriaView = new DrogueriaNominalView({codigo: codigoDrogueria});
+            drogueriaView.loadDefaultView();
+//            drogueriaView.setModel(drogueriaNominalModel);
+//            drogueriaNominalModel.load(codigoDrogueria);
         },
 
 //        render: function(){},
