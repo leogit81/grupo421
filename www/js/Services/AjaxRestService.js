@@ -116,7 +116,11 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
     };
     
     AjaxService.prototype.getCodigoResultadoWebService = function (resultadoWS) {
-        return resultadoWS.getElementsByTagName("resultado").item().textContent;
+        var resultado = resultadoWS.getElementsByTagName("resultado").item();
+        
+        return resultado.textContent || resultado.innerHTML;
+        
+//        return resultadoWS.getElementsByTagName("resultado").item().textContent;
 //        return resultadoWS.getElementsByTagName("resultado").item().innerHTML;
     };
     
