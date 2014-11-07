@@ -58,6 +58,14 @@ var app = (function ($, jquery, logger) {
         $("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
         $("#afui").delegate("a.button.icon.close", "click", onClickCloseButtonHandler);
     };
+    
+    function wp8DesktopBrowser () {
+        if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+            var script = document.createElement("script");
+            script.src = "plugins/af.desktopBrowsers.js";
+            var tag = $("head").append(script);
+        }
+    };
 
     /**
      * Se ejecuta al hacer click en el icono de las tres rayitas que muestra el menú lateral.  
@@ -75,11 +83,12 @@ var app = (function ($, jquery, logger) {
     function onClickMenuBadge() {
         af.ui.toggleSideMenu();
     }
+    
 
     function launchAppFramework() {
         resolverConflictos();
         //        $.ui.scrollingDivs.menu_scroller.disable();
-        $.ui.disableNativeScrolling();
+        //$.ui.disableNativeScrolling();
 
         $.ui.launch();
         $.ui.disableSplitView();
