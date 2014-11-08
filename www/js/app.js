@@ -42,8 +42,6 @@ var app = (function ($, jquery, logger) {
     }
 
     function onDeviceReady(){
-        //        Se incluye fastclick para evitar que se dispare dos veces el evento "click" cuando se hace un click
-        FastClick.attach(document.body);
         loadApp();
     };
 
