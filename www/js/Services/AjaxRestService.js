@@ -105,7 +105,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
     AjaxService.prototype.internalSuccessCallback = function (data) {
         var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
         
-        if (codigoResultadoWS === "OK") {
+        if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO") {
             if (!common.isEmpty(this.successCallback)) {
                 this.successCallback(data);
             }
