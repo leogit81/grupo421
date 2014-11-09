@@ -19,6 +19,8 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             '<a id="submitBuscarEstablecimiento" class="button">Buscar Establecimiento</a>' +
             '</br>' +
             '<a id="submitReporteEstablecimiento" class="button">Reporte de Establecimientos</a>' +
+            '</br>' +
+            '<a id="submitReporteCamas" class="button">Reporte camas de Establecimientos</a>' +
             '</div>' +
             '</form>'
         ),
@@ -50,6 +52,12 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             var reporteEstablecimientoView = new ReporteEstablecimientoView();
             reporteEstablecimientoView.render();
         },
+        
+        ejecutarReporteCamas: function () {
+            var reporteEstablecimientoCamasView = new ReporteEstablecimientoCamasView();
+            reporteEstablecimientoCamasView.render();
+        },
+
 
         render: function(){
             BaseView.prototype.render.call(this);   
@@ -65,6 +73,7 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             $("#afui").delegate(this.getViewSelector() + " a#submitListadoEstablecimiento", "click", _.bind(this.ejecutarListadoEstablecimiento, this));
             $("#afui").delegate(this.getViewSelector() + " a#submitBuscarEstablecimiento", "click", _.bind(this.ejecutarBuscarEstablecimiento, this));
             $("#afui").delegate(this.getViewSelector() + " a#submitReporteEstablecimiento", "click", _.bind(this.ejecutarReporteEstablecimiento, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitReporteCamas", "click", _.bind(this.ejecutarReporteCamas, this));
         }
     });
     return consultaEstablecimientoView;

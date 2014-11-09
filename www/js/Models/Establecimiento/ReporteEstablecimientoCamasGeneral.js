@@ -1,7 +1,7 @@
-var ReporteEstablecimientoNominal = (function (common, BaseModel) {
+var ReporteEstablecimientoCamasGeneral = (function (common, BaseModel) {
     "use strict";
 
-    var reporteEstablecimientoNominal = BaseModel.extend({
+    var reporteEstablecimientoCamasGeneral = BaseModel.extend({
         defaults : function () {
             var myDefault = function () {
                 return {
@@ -41,11 +41,11 @@ var ReporteEstablecimientoNominal = (function (common, BaseModel) {
         }
     });
 
-    reporteEstablecimientoNominal.prototype.getServiceConfig = function () {
+    reporteEstablecimientoCamasGeneral.prototype.getServiceConfig = function () {
         return {
-            url: 'establecimiento/cantidadEstablecimientos'
+            url: 'establecimiento/cantidadCamasEstablecimientos'
         };
     };
 
-    return reporteEstablecimientoNominal;
+    return reporteEstablecimientoCamasGeneral;
 }(common, BaseModel));
