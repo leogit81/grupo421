@@ -1,4 +1,4 @@
-var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, ListadoEstablecimientoView, BusquedaEstablecimientoView) {
+var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, ListadoEstablecimientoView, BusquedaEstablecimientoView, ReporteEstablecimientoView) {
     "use strict";
 
     var consultaEstablecimientoView = BaseView.extend({
@@ -17,6 +17,8 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             '<a id="submitListadoEstablecimiento" class="button">Listado de Establecimientos</a>' +
 			'</br>' +
             '<a id="submitBuscarEstablecimiento" class="button">Buscar Establecimiento</a>' +
+            '</br>' +
+            '<a id="submitReporteEstablecimiento" class="button">Reporte de Establecimientos</a>' +
             '</div>' +
             '</form>'
         ),
@@ -43,6 +45,11 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             var listadoEstablecimientoView = new ListadoEstablecimientoView();
             listadoEstablecimientoView.render();
         },
+        
+        ejecutarReporteEstablecimiento: function () {
+            var reporteEstablecimientoView = new ReporteEstablecimientoView();
+            reporteEstablecimientoView.render();
+        },
 
         render: function(){
             BaseView.prototype.render.call(this);   
@@ -57,7 +64,8 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate(this.getViewSelector() + " a#submitListadoEstablecimiento", "click", _.bind(this.ejecutarListadoEstablecimiento, this));
             $("#afui").delegate(this.getViewSelector() + " a#submitBuscarEstablecimiento", "click", _.bind(this.ejecutarBuscarEstablecimiento, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitReporteEstablecimiento", "click", _.bind(this.ejecutarReporteEstablecimiento, this));
         }
     });
     return consultaEstablecimientoView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoEstablecimientoView, BusquedaEstablecimientoView);
+})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoEstablecimientoView, BusquedaEstablecimientoView, ReporteEstablecimientoView);
