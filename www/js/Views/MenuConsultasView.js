@@ -29,7 +29,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             BaseView.prototype.attachEvents.call(this);
             jquery("#linkConsultaMinisterio").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
-            jquery("#linkConsultaProfHome").on("click", _.bind(this.showConsultaProfesionales, this));
+            jquery("#linkConsultaProfesionales").on("click", _.bind(this.showConsultaProfesionales, this));
             jquery("#linkConsultaFarmacias").on("click", _.bind(this.showConsultaFarmacias, this));
             jquery("#linkConsultaDroguerias").on("click", _.bind(this.showConsultaDroguerias, this));
             jquery("#linkConsultaNomivac").on("click", _.bind(this.showConsultaNomivac, this));
@@ -40,7 +40,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             //esto es para el menú lateral
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
-            jquery("#linkConsultaProfSideMenu").on("click", _.bind(this.showConsultaProfesionales, this));
+            jquery("#linkConsultaProfesionalesSideMenu").on("click", _.bind(this.showConsultaProfesionales, this));
             jquery("#linkConsultaFarmaciasSideMenu").on("click", _.bind(this.showConsultaFarmacias, this));
             jquery("#linkConsultaDrogueriasSideMenu").on("click", _.bind(this.showConsultaDroguerias, this));
             jquery("#linkConsultaNomivacSideMenu").on("click", _.bind(this.showConsultaNomivac, this));

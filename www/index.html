@@ -13,6 +13,16 @@
             <!--App Framework includes start-->
             <link rel="stylesheet" type="text/css" href="css/appframework/af.ui.css" />
             <link rel="stylesheet" type="text/css" href="css/appframework/icons.css" />
+
+            <script type="text/javascript" charset="utf-8" src="libraries/appframework.js"></script>
+            <script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui.js"></script>
+
+			<!--comentar para que funcione en el RIPLE-->
+			<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>
+
+			
+			<!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.8tiles.js"></script>-->
+            <!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.touchLayer.js"></script>-->
             <!--App Framework includes end-->
 
             <!--SISA Móvil-->
@@ -20,29 +30,17 @@
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz43FjcTt7PYeUpxk-RzVR__kSyooWcBg&sensor=false"></script>
             <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 
-            <script type='application/javascript' charset="utf-8" src='libraries/fastclick/fastclick.js'></script>
-
             <script type="text/javascript" charset="utf-8" src="libraries/jquery.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/underscore.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/backbone.js"></script>
-            <script type="text/javascript" charset="utf-8" src="libraries/appframework.js"></script>
-            <script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui.js"></script>
-            <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.8tiles.js"></script>
-            <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.touchLayer.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/xmltojson.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Converter/XmlToJsonConverter.js"></script>
-            <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+          
+			<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
             <script type="text/javascript" charset="utf-8" src="libraries/jquery.chained.min.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/common.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/GoogleMap.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Base/Logger.js"></script
-
-            <!--include de la Aplicación SISA Móvil-->
-            <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/app-debug.js"></script>
-            <script type="text/javascript" charset="utf-8" src="main.js"></script>
-            <!--Fin include de la Aplicación SISA Móvil-->
-                
+            <script type="text/javascript" charset="utf-8" src="js/Base/Logger.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/Singleton.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Services/ServiceConfig.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Services/AjaxRestService.js"></script>
@@ -68,6 +66,7 @@
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Departamentos.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Localidades.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Dependencias.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Codificacion/Profesiones.js"></script>
 
             <script type="text/javascript" charset="utf-8" src="js/Models/ProgramasCollection.js"></script>
 
@@ -77,6 +76,8 @@
             <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/EstablecimientoCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/FarmaciaCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/FarmaciaNominal.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/ProfesionalCollection.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/ProfesionalNominal.js"></script>
 
             <script type="text/javascript" charset="utf-8" src="js/Models/DrogueriaCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/DrogueriaNominal.js"></script>
@@ -85,28 +86,36 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/DomicilioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/TelefonoView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ImagenesView.js"></script>
+
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/PrestacionCollectionView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ParticipacionesView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/UbicacionEstablecimientoView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoNominalGeneralView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoNominalView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoCollectionView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ConsultaEstablecimientoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ListadoEstablecimientoView.js"></script>
+			<script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/BusquedaEstablecimientoView.js"></script>
+			<script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ConsultaEstablecimientoView.js"></script>
+			
             <script type="text/javascript" charset="utf-8" src="js/Models/Ministerio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MinisterioView/MinisterioView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MinisterioView/ConsultaMinisterioView.js"></script>
 
-            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ReportesProfesionalesView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/BusquedaProfesionalesView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ProfesionalNominalGeneralView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ProfesionalNominalView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ProfesionalCollectionView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ListadoProfesionalesView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/BusquedaProfesionalView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ProfesionalesView/ConsultaProfesionalesView.js"></script>
 
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/UbicacionFarmaciaView.js"></script> 
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/FarmaciaNominalGeneralView.js"></script> 
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/FarmaciaNominalView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/FarmaciaCollectionView.js"></script>
-            <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/ListadoFarmaciasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/BusquedaFarmaciaView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/ListadoFarmaciasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/FarmaciasView/ConsultaFarmaciasView.js"></script>
+
             <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/UbicacionDrogueriaView.js"></script> 
             <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/DrogueriaNominalGeneralView.js"></script> 
             <script type="text/javascript" charset="utf-8" src="js/Views/DrogueriasView/DrogueriaNominalView.js"></script>
@@ -143,6 +152,10 @@
             <link rel="stylesheet" href="css/owl/owl.carousel.css">
             <link rel="stylesheet" href="css/owl/owl.theme.css">
             <script src="libraries/owl/owl.carousel.js"></script>
+
+            <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/app-debug.js"></script>
+            <script type="text/javascript" charset="utf-8" src="main.js"></script>
             </head>
         <body>
             <div class="app">
@@ -175,7 +188,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a id="linkConsultaProfHome" class="item_menu" href="#">
+                                    <a id="linkConsultaProfesionales" class="item_menu" href="#">
 
                                         <div class="ztexto-lista">
                                             <img src="./img/iconos/tab_3.png">
@@ -286,17 +299,16 @@
                             </ul>
                         </div>
 
-                        <!--                        asasdsdsasadsaddsasadklashdsjdakadasjkasdkjasdkjasdkjdaskjasdkjasdkasdklasdkjasdkjasdkjlas-->
                         <footer id="zfooter_noticias">
                             <div id="owl-demo" class="owl-carousel owl-theme"></div>
                         </footer>
-                        <!--                        asasdsdsasadsaddsasadklashdsjdakadasjkasdkjasdkjasdkjdaskjasdkjasdkasdklasdkjasdkjasdkjlas-->
+
                         <nav id="home_nav"></nav>
                         <nav id="consultas_nav">
                             <ul class="list">
                                 <li class="item_menu"><a><img src="./img/iconos/con_ref/GEOREFES_48.png"></a></li>
                                 <li><a id="linkConsultaEstablecimiento2" class="item_menu" href="#"><img src="./img/iconos/con_ref/REFES_48.png"></a></li>
-                                <li><a id="linkConsultaProfSideMenu" class="item_menu"><img src="./img/iconos/con_ref/REFEPS_48.png"></a></li>
+                                <li><a id="linkConsultaProfesionalesSideMenu" class="item_menu"><img src="./img/iconos/con_ref/REFEPS_48.png"></a></li>
                                 <li><a id="linkConsultaNomivacSideMenu" class="item_menu"><img src="./img/iconos/con_ref/NomiVac_48.png"></a></li>
                                 <li><a id="linkConsultaFarmaciasSideMenu" class="item_menu"><img src="./img/iconos/con_ref/REFAR_48.png"></a></li>
                                 <li><a id="linkConsultaDrogueriasSideMenu" class="item_menu"><img src="./img/iconos/con_ref/REDRO_48.png"></a></li>

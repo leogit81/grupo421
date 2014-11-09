@@ -16,6 +16,7 @@ var ConsultasView = (function($, BaseView, MenuConsultasView, renderer){
             contentEl.append(consultaElement);
 
             this.asideMenu = MenuConsultasView.getInstance();
+            $("#content").trigger("orientationchange");
             //this.asideMenu.render();
         }
     });

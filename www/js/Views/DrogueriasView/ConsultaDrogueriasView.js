@@ -45,8 +45,6 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
 
         render: function(){
             BaseView.prototype.render.call(this);
-            FastClick.attach($("#submitListadoDroguerias"));
-            FastClick.attach($("#submitBuscarDrogueria"));
             return this;
         },
 

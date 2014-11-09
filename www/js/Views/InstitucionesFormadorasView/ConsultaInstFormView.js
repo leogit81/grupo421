@@ -45,8 +45,6 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
 
         render: function(){
             BaseView.prototype.render.call(this);
-            FastClick.attach($("#submitListadoInstForm"));
-            FastClick.attach($("#submitBuscarInstForm"));
             return this;
         },
 

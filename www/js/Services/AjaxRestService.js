@@ -25,7 +25,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
     
     AjaxService.prototype.loadConfig = function (config) {
         //Configuración del servicio que se toma por default del archivo ServiceConfig, puede ser modificado pasando el parámetro config
-        this.baseUrl = ServiceConfig.baseUrl;
+        this.baseUrl = config.baseUrl || ServiceConfig.baseUrl;
         this.config = config || {};
         this.url = config.url;
         this.enableCors = config.enableCors || ServiceConfig.enableCors || this.enableCors;
@@ -116,7 +116,9 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
     };
     
     AjaxService.prototype.getCodigoResultadoWebService = function (resultadoWS) {
-        return resultadoWS.getElementsByTagName("resultado").item().textContent;
+        var resultado = resultadoWS.getElementsByTagName("resultado").item();
+        
+        return resultado.textContent || resultado.innerHTML;
     };
     
     AjaxService.prototype.internalErrorCallback = function (response) {
