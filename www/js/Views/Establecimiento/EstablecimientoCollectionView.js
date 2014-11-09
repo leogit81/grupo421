@@ -1,4 +1,4 @@
-var EstablecimientoCollectionView = (function ($, common, EstablecimientoNominalView) {
+var EstablecimientoCollectionView = (function ($, common, BaseCollectionView, EstablecimientoNominalView) {
     "use strict";
     
     var establecimientoCollectionView = BaseCollectionView.extend({
@@ -25,4 +25,4 @@ var EstablecimientoCollectionView = (function ($, common, EstablecimientoNominal
     };
 	
 	return establecimientoCollectionView;
-}(af, common, EstablecimientoNominalView));
+}(af, common, BaseCollectionView, EstablecimientoNominalView));

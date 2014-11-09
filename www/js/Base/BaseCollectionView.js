@@ -23,19 +23,28 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
 		initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            //la opcion asociadoBusquedaNominal indica si cada item de la colección
+            //"dispara" una búsqueda nominal al hacer clic sobre un item.
+            if (!common.isEmpty(options.asociadoBusquedaNominal)) {
+                this.asociadoBusquedaNominal = options.asociadoBusquedaNominal;
+            } else {
+                this.asociadoBusquedaNominal = true;
+            }
+            
             BaseView.prototype.initialize.call(this, attributes, options);
-            this.setModel(attributes);
+            //this.setModel(attributes);
         },
         
-        cantidadDeEstablecimientos: 0,
+        cantidadDeItems: 0,
         
         render: function (model, collection, options) {
-            //TODO: esto hay que corregirlo, es un parche para evitar que me haga un render para cada establecimiento que se agrega a la colecciÃ³n.
-            this.cantidadDeEstablecimientos++;
-            if (this.cantidadDeEstablecimientos < collection.length) {
+            //TODO: esto hay que corregirlo, es un parche para evitar que me haga un render para cada item que se agrega a la colecciÃ³n.
+            this.cantidadDeItems++;
+            if (this.cantidadDeItems < collection.length) {
                 return;
             } else {
-                this.cantidadDeEstablecimientos = 0;
+                this.cantidadDeItems = 0;
             }
             //fin del parche
             
@@ -54,17 +63,15 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
         
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate(this.getViewSelector() + " ul li a", "click", _.bind(this.busquedaNominalItem, this));
+            if (this.asociadoBusquedaNominal){
+                $("#afui").delegate(this.getViewSelector() + " ul li a", "click", _.bind(this.busquedaNominalItem, this));
+            }
         }
         
 	});
     
     baseCollectionView.prototype.setModel = function (attributes) {
-        if (attributes !== undefined && attributes.model !== undefined) {
-            this.model = attributes.model;
-        } else {
-            return;
-        }
+        BaseView.prototype.setModel.call(this, attributes);
         
         this.model.on('remove', this.render, this);
         this.model.on('add', this.render, this);

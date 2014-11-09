@@ -42,8 +42,6 @@ var app = (function ($, jquery, logger) {
     }
 
     function onDeviceReady(){
-        //        Se incluye fastclick para evitar que se dispare dos veces el evento "click" cuando se hace un click
-        FastClick.attach(document.body);
         loadApp();
     };
 
@@ -57,6 +55,14 @@ var app = (function ($, jquery, logger) {
         //es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
         $("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
         $("#afui").delegate("a.button.icon.close", "click", onClickCloseButtonHandler);
+    };
+    
+    function wp8DesktopBrowser () {
+        if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+            var script = document.createElement("script");
+            script.src = "plugins/af.desktopBrowsers.js";
+            var tag = $("head").append(script);
+        }
     };
 
     /**
@@ -75,6 +81,7 @@ var app = (function ($, jquery, logger) {
     function onClickMenuBadge() {
         af.ui.toggleSideMenu();
     }
+    
 
     function launchAppFramework() {
         resolverConflictos();

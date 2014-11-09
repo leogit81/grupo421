@@ -114,9 +114,9 @@ var TabPanel = (function ($, common) {
             if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
                 self.view.model.load(_.result(self, "filtroConsulta"));
                 self.isLoaded = true;
-            } /*else {
-                self.tabPanelView.renderFromData();
-            }*/
+            } else {
+                self.tabPanelView.showPanel(self.view);
+            }
         }
         
         self.loadConfig = loadConfig;

@@ -285,6 +285,11 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         return tab;
     };
     
+    tabPanelView.prototype.showPanel = function (panelId) {
+        this.selectedTabEl().empty();
+        this.selectedTabEl().append(this.selectedTab.view.$el.html());
+    };
+    
     _.extend(tabPanelView, Backbone.Singleton);
     common.extendSinPisar(tabPanelView.prototype , false, MasterView.prototype);
     

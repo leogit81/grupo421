@@ -33,14 +33,32 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
             this.$el.attr("data-footer", "none");
         },
 
+        /**
+        * El parámetro model puede ser un objeto literal que contenga el model.
+        * Ej: {"model": BaseModel}
+        */
         setModel: function (model) {
-            if (common.isEmpty(model.model) || _.isFunction(model.model)) {
+            if (common.isEmpty(model))
+            {
+                throw "Argumento inválido. Debe proporcionar el atributo obligatorio 'model'."
+            }
+            
+            if (common.isEmpty(model.model) || this.modelEsCollection(model)) {
+                //si es una BaseCollection, el model.model tiene una función de Backbone
+                //que no es el objeto que estamos esperando. Por eso lo seteamos así.
                 this.model = model;
             } else {
                 this.model = model.model;
             }
 
             this.model.on('change', this.render, this);
+        },
+        
+        /**
+        * Indica si el model es una objeto que extiende de Backbone.Collection
+        */
+        modelEsCollection: function (model) {
+            return !common.isEmpty(model) && !common.isEmpty(model.models) && _.isFunction(model.model);
         }
     });
 
