@@ -1,4 +1,4 @@
-var EstablecimientoNominalView = (function ($, renderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView) {
+var EstablecimientoNominalView = (function ($, renderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView, CamasCollectionView) {
     "use strict";
     
     var establecimientoNominalView = TabPanelView.extend({
@@ -44,6 +44,13 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
                 tabName: "Mapas",
                 panelId: "establecimientoMapas",
                 viewClass: GoogleMapView
+            },
+			{
+                tabName: "Camas",
+                panelId: "establecimientoCamas",
+                viewClass: CamasCollectionView,
+				modelClass: CamasCollection
+				//titleCSSClass: "camasTabViewClass"
             }
         ],
         
@@ -57,12 +64,14 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             options = options || {};
             options.renderer = renderer;
             this.setCodigoEstablecimiento(attributes.codigo);
+			
             //llama al constructor base para que se carguen los tabs de panel
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "establecimientoGeneral").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoPrestaciones").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
-            var mapaEstablecimientoTab = this.findTab("panelId", "establecimientoMapas");
+            this.findTab("panelId", "establecimientoCamas").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
+			var mapaEstablecimientoTab = this.findTab("panelId", "establecimientoMapas");
             mapaEstablecimientoTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
             mapaEstablecimientoTab.modelClass = this.getCoordenadasMapaModel();
         },
@@ -135,7 +144,20 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
         }
         $(this.getViewSelector()).addClass("consultaNominalEstablecimiento");
     };
-    
+	
+    /**
+    * Carga la data del tab de camas de un establecimiento cuando el usuario hace clic sobre el mismo.
+    * Lo hace una vez y el resto de las veces que se seleccione el tab muestra la data que ya tiene cargada.
+    */
+    establecimientoNominalView.prototype.loadCamasTab = function (selectedTabPanelId) {
+        var tabCamas = this.findTab("panelId", selectedTabPanelId);
+        if (common.isEmpty(tabCamas.isLoaded) || !tabCamas.isLoaded) {
+            tabCamas.view.model.load(this.codigoEstablecimiento);
+            tabCamas.isLoaded = true;
+        }
+        $(this.getViewSelector()).addClass("consultaNominalEstablecimiento");
+    };
+	
     /**
     * Obtiene el modelo de coordenadas a partir del modelo de establecimiento nominal.
     */
@@ -145,4 +167,4 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
     };
 	
 	return establecimientoNominalView;
-}(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView));
+}(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView, CamasCollectionView));

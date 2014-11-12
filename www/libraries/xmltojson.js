@@ -182,7 +182,7 @@ var xmlToJSON = (function () {
                 if (sCollectedTxt) {
                         if (options.grokText) {
                                 value = grokType(sCollectedTxt.replace(trimMatch, ''));
-                                if (value) {
+                                if (value || !isNaN(value)) {   //!!!!!!OJOOO QUE ESTO PUEDE ROMPER TODO
 									vResult[options.textKey] = value;
 								}
                         } else if (options.normalize) {
