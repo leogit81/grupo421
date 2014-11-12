@@ -162,6 +162,10 @@ span.prestacionesTabViewClass {
     box-shadow: 0px 0px 20px!important;
 }
 
+footer#zfooter_noticias {    
+    -webkit-box-shadow: black 0px 5px 20px 5px !important;
+}
+
 a.button.icon.close {
     float: right;
 }

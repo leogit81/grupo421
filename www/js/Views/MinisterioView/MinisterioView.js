@@ -7,7 +7,8 @@ var MinisterioView = (function ($, MasterView, CoordenadasMapaView, DomicilioVie
         
         attributes: {
             'id': 'resultadoConsultaMinisterio',
-            'data-nav': "consultas_nav"
+            'data-nav': "consultas_nav",
+            'data-footer': 'none'
         },
         
         template : _.template("<div><label>Localidad</label><span><%=localidad%></span></div></br>" +

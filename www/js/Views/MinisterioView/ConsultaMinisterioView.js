@@ -6,7 +6,8 @@ var ConsultaMinisterioView = (function(jquery, $, renderer, BaseView, Ministerio
         attributes: {
             'id': 'consultaMinisterio',
             'class': 'panel',
-            'data-nav':"consultas_nav",    
+            'data-nav':"consultas_nav",
+            'data-footer': 'none'
         },
         
         template : _.template(
