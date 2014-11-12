@@ -14,10 +14,10 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
             '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar profesionales.</div>' +
             '<form>' +
             '<input id="matriculaProfesional" type="number" name="matriculaProfesional" placeholder="Matricula del profesional"></input></br>' +
-			'<input id="nombreProfesional" type="text" name="nombreProfesional" placeholder="Nombre del profesional"></input></br>' +
+            '<input id="nombreProfesional" type="text" name="nombreProfesional" placeholder="Nombre del profesional"></input></br>' +
             '<input id="apellidoProfesional" type="text" name="apellidoProfesional" placeholder="Apellido del profesional"></input></br>' +
-			'<input id="dniProfesional" type="number" name="dniProfesional" placeholder="Numero de documento del profesional"></input></br>' +
-			'<select id="provinciaProfesional" name="provinciaProfesional"></select>' +
+            '<input id="dniProfesional" type="number" name="dniProfesional" placeholder="Numero de documento del profesional"></input></br>' +
+            '<select id="provinciaProfesional" name="provinciaProfesional"></select>' +
             '<select id="profesionProfesional" name="profesionProfesional"></select>' +
             '<a id="submitConsultaListadoProfesionales" class="button">Consultar</a>' +
             '</form>'
@@ -45,24 +45,28 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
 
         ejecutarListadoProfesionales: function(){
             var matriculaProfesional = $("#matriculaProfesional").val();
-			var nombreProfesional = $("#nombreProfesional").val().toUpperCase();
-			var apellidoProfesional = $("#apellidoProfesional").val().toUpperCase();
-			var dniProfesional = $("#dniProfesional").val().toUpperCase();
+            var nombreProfesional = $("#nombreProfesional").val().toUpperCase();
+            var apellidoProfesional = $("#apellidoProfesional").val().toUpperCase();
+            var dniProfesional = $("#dniProfesional").val().toUpperCase();
             var provinciaProfesional = $("#provinciaProfesional").val();
             var profesionProfesional = $("#profesionProfesional").val();
-            
+
             var dataWS = {
                 "usuario": 'uutn',
                 "clave": '11SC2NXHAI',
                 "provinciaMatriculacion": provinciaProfesional,
                 "profesion": profesionProfesional,
-				"nombre": nombreProfesional,
-				"apellido": apellidoProfesional,
-				"numeroDocumento": dniProfesional
+                "nombre": nombreProfesional,
+                "numeroDocumento": dniProfesional
             };
- //Solo se incluye si la matricula no esta vacia. Porque sino busca por matricula vacia y no encuentra a nadie.
+            //Solo se incluye si la matricula no esta vacia. Porque sino busca por matricula vacia y no encuentra a nadie.
             if (matriculaProfesional) {
                 dataWS.matricula = matriculaProfesional;
+            }
+
+            //Solo se incluye si el apellido no esta vacío. Buscando por apellido vacío, no devuelve resultados.
+            if (apellidoProfesional) {
+                dataWS.apellido = apellidoProfesional;
             }
 
             this.modelDataSource.getModelData(ProfesionalCollection, dataWS);

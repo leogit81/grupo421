@@ -13,8 +13,9 @@ var app = (function ($, jquery, logger) {
     */
     var appStatus = null;
 
-    //False para que App Framework no utilice el theme por defecto del dispositivo. Se fuerza un theme en index.html
-    $.ui.useOSThemes = false;
+    $.ui.useOSThemes = false; /*False para que App Framework no utilice el theme por defecto del dispositivo. Se fuerza un theme en index.html*/
+    
+    $.ui.autoLaunch = false; /*Deshabilitar el inicio automático de intel app framework*/
 
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
@@ -22,7 +23,11 @@ var app = (function ($, jquery, logger) {
         document.addEventListener('deviceready', onDeviceReady, false);
         document.addEventListener('offline', onDeviceOffline, false);
         document.addEventListener('online', onDeviceOnline, false);
+        
+        document.addEventListener('click', onClickPrueba, false);
     }
+    
+    function onClickPrueba () { console.log("se hizo un click") }
 
     function initialize() {
         bindEvents();
@@ -56,7 +61,7 @@ var app = (function ($, jquery, logger) {
         $("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
         $("#afui").delegate("a.button.icon.close", "click", onClickCloseButtonHandler);
     };
-    
+
     function wp8DesktopBrowser () {
         if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
             var script = document.createElement("script");
@@ -73,7 +78,7 @@ var app = (function ($, jquery, logger) {
         var activeDiv = af.ui.activeDiv;
         setTimeout( function () {activeDiv.remove()} , 250);
     }
-    
+
     function onClickCloseButtonHandler (e) {
         af.ui.hideModal();
     }
@@ -81,7 +86,7 @@ var app = (function ($, jquery, logger) {
     function onClickMenuBadge() {
         af.ui.toggleSideMenu();
     }
-    
+
 
     function launchAppFramework() {
         resolverConflictos();
@@ -89,16 +94,13 @@ var app = (function ($, jquery, logger) {
         //$.ui.disableNativeScrolling();
 
         $.ui.launch();
-        $.ui.disableSplitView();
-        //        $.ui.removeFooterMenu();
-        $.ui.updateBadge("#afui","3","tr");
-        //Esta línea es para ocultar un div footer que contiene al menu, y que a pesar de moverlo
-        //con el método removeFooterMenu, seguía mostrandose.
-        //        $("div#navbar.footer").css("display", "none");
-        $("footer#defaultNav").css("display", "none");
-        //esto cambia el texto del backbutton para todos los paneles de la aplicación
-        $.ui.backButtonText = "Atrás";
-        //$.touchLayer($("#afui").get(0));
+        $.ui.ready( function () {
+            $.ui.slideMenuXThreshold = 50; /*Umbral en px para hacer abrir/cerrar el menú lateral*/
+            $.ui.disableSplitView();
+            $.ui.updateBadge("#afui","3","tr");
+            $("footer#defaultNav").css("display", "none");
+            $.ui.backButtonText = "Atrás"; /*esto cambia el texto del backbutton para todos los paneles de la aplicación*/
+        });
     };
 
     function launchNoticiasSlider () {
