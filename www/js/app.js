@@ -14,7 +14,7 @@ var app = (function ($, jquery, logger) {
     var appStatus = null;
 
     $.ui.useOSThemes = false; /*False para que App Framework no utilice el theme por defecto del dispositivo. Se fuerza un theme en index.html*/
-    
+
     $.ui.autoLaunch = false; /*Deshabilitar el inicio automático de intel app framework*/
 
     // Bind any events that are required on startup. Common events are:
@@ -23,11 +23,7 @@ var app = (function ($, jquery, logger) {
         document.addEventListener('deviceready', onDeviceReady, false);
         document.addEventListener('offline', onDeviceOffline, false);
         document.addEventListener('online', onDeviceOnline, false);
-        
-        document.addEventListener('click', onClickPrueba, false);
     }
-    
-    function onClickPrueba () { console.log("se hizo un click") }
 
     function initialize() {
         bindEvents();
