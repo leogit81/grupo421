@@ -56,6 +56,7 @@ var app = (function ($, jquery, logger) {
         //es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
         $("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
         $("#afui").delegate("a.button.icon.close", "click", onClickCloseButtonHandler);
+        $("#afui").delegate("#loginButton", "click", onClickLoginButtonHandler);
     };
 
     function wp8DesktopBrowser () {
@@ -64,6 +65,13 @@ var app = (function ($, jquery, logger) {
             script.src = "plugins/af.desktopBrowsers.js";
             var tag = $("head").append(script);
         }
+    };
+
+    /*
+     * POPUP para iniciar sesión
+     */
+    function onClickLoginButtonHandler () {
+        var iniciarSesion = new InicioSesionView();
     };
 
     /**

@@ -60,6 +60,7 @@ var Logger = (function ($, common) {
         LIMITE_EXCEDIDO: "Se ha excedido la cantidad máxima de registros que puede devolver la consulta. Por favor, pruebe nuevamente incluyendo otros filtros.",
         REGISTRO_NO_ENCONTRADO: "No se ha encontrado ningún registro para los filtros proporcionados. Por favor, verifique que los mismos sean correctos.",
         MULTIPLE_RESULTADO: "Se encontró más de un registro para la búsqueda realizada.",
+        "ERROR_AUTENTICACION : ERROR DE AUTENTICACION!": "Usuario y/o contraseña inválidos",
         OFFLINE: "Se ha detectado que el dispositivo no tiene conexión a Internet. La misma es necesaria para el correcto funcionamiento de la aplicación.",
         ONLINE: "El dispositivo ha reestablecido la conexión a Internet. Ahora puede continuar utilizando la aplicación normalmente.",
         TIMEOUT: "Se ha agotado el tiempo de espera del servidor.",

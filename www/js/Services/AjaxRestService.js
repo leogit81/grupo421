@@ -19,10 +19,10 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         this.serviceProvider = null;
         this.timeout = 30000;
         this.dataType = 'xml';
-        
+
         this.loadConfig(config);
     }
-    
+
     AjaxService.prototype.loadConfig = function (config) {
         //Configuración del servicio que se toma por default del archivo ServiceConfig, puede ser modificado pasando el parámetro config
         this.baseUrl = config.baseUrl || ServiceConfig.baseUrl;
@@ -31,7 +31,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         this.enableCors = config.enableCors || ServiceConfig.enableCors || this.enableCors;
         this.serviceProvider = config.serviceProvider || ServiceConfig.serviceProvider || this.serviceProvider;
         this.timeout = config.timeout || ServiceConfig.timeout || this.timeout;
-        
+
         //Configuración que NO se encuentra en el archivo ServiceConfig, que se configura con el parámetro config
         if (!common.isEmpty(config)) {
             this.method = config.method || this.method;
@@ -40,14 +40,14 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
             this.beforeSendCallback = config.beforeSend || this.beforeSendCallback;
             this.dataType = config.dataType || this.dataType;
         }
-        
+
         if (this.enableCors) {
             this.enableProxy();
         }
     };
-    
+
     AjaxService.prototype.constructor = AjaxService;
-    
+
     /**
      * Habilita el proxy para soportar CORS en los casos que el servidor al que se quiere acceder no lo implemente.
      */
@@ -57,7 +57,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         var slice = [].slice;
         var origin = window.location.protocol + '//' + window.location.host;
         var open = XMLHttpRequest.prototype.open;
-        
+
         XMLHttpRequest.prototype.open = function () {
             var args = slice.call(arguments);
             var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
@@ -67,14 +67,14 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
             }
             return open.apply(this, args);
         };
-        
+
         if (typeof XDomainRequest !== "undefined") {
             // XDomainRequest for IE.
             //TODO: CONFIGURE PROXY FOR XDomainRequest object
             return;
         }
     };
-    
+
     /**
      * Create the XHR object.
      * @param {string} método HTTP
@@ -95,16 +95,21 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         }
         return xhr;
     };
-    
+
     AjaxService.prototype.beforeSendCallback = function (data) {
         //jQuery(this).trigger("beforeCallRestService");
         //TODO: ESTO HAY QUE MODIFICARLOS POR UN EVENTO, O BUSCAR UNA MANERA DE NO INVOCAR COSAS DE LA VISTA EN EL SERVICIO
         af.ui.showMask("Cargando...");
     };
-    
+
     AjaxService.prototype.internalSuccessCallback = function (data) {
-        var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
-        
+        if (common.isJSON(data)){
+            var codigoResultadoWS = JSON.parse(data).estado;
+        }
+        else {
+            var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
+        }
+
         if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO") {
             if (!common.isEmpty(this.successCallback)) {
                 this.successCallback(data);
@@ -115,20 +120,38 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         }
     };
     
+    AjaxService.prototype.internalPostSuccessCallback = function (data) {
+        if (common.isJSON(data)){
+            var codigoResultadoWS = JSON.parse(data).estado.toUpperCase();
+        }
+        else {
+            var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
+        }
+
+        if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO") {
+            if (!common.isEmpty(this.successCallback)) {
+                this.successCallback(data);
+            }
+        } else {
+            var jQuery_XHR = arguments[2];
+            this.processServiceError(jQuery_XHR, codigoResultadoWS);
+        }
+    };
+
     AjaxService.prototype.getCodigoResultadoWebService = function (resultadoWS) {
         var resultado = resultadoWS.getElementsByTagName("resultado").item();
-        
+
         return resultado.textContent || resultado.innerHTML;
     };
-    
+
     AjaxService.prototype.internalErrorCallback = function (response) {
         this.processServiceError(response);
-        
+
         if (!common.isEmpty(this.errorCallback)) {
             this.errorCallback(response);
         }
     };
-    
+
     AjaxService.prototype.processServiceError = function (response) {
         if (arguments.length > 1) {
             var codigoResultadoWS = arguments[1];
@@ -136,7 +159,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         }
         logger.log(response);
     };
-    
+
     /**
      * Obtiene los datos del servicio mediante una llamada Ajax
      * @param {Object} newUrl, una url del servicio que reemplace a la que se seteo previamente
@@ -144,13 +167,13 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
      */
     AjaxService.prototype.get = function (data, otraUrl) {
         var requestedUrl = '';
-        
+
         if (!common.isEmpty(otraUrl)) {
             requestedUrl = common.combineUrl(otraUrl, data);
         } else {
             requestedUrl = common.combineUrl(this.baseUrl, this.url, data);
         }
-      
+
         if (this.serviceProvider === 'jquery') {
             jQuery.ajax({
                 url: requestedUrl,
@@ -168,6 +191,36 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
             xhr.send();
         }
     };
-    
+
+    AjaxService.prototype.post = function (data, otraUrl) {
+        var requestedUrl = '';
+
+        if (!common.isEmpty(otraUrl)) {
+            requestedUrl = common.combineUrl(otraUrl);
+        } else {
+            requestedUrl = common.combineUrl(this.baseUrl, this.url);
+        }
+        if (this.serviceProvider === 'jquery') {
+            
+            jQuery.ajax({
+                url: requestedUrl,
+                type: 'POST',
+                timeout: this.timeout,
+                contentType: 'application/json',
+                headers: {'Access-Control-Allow-Origin': '*', 'X-Requested-With': 'XMLHttpRequest'},
+                data: JSON.stringify(data),
+                beforeSend: _.bind(this.beforeSendCallback, this),
+                success: _.bind(this.internalPostSuccessCallback, this),
+                error: _.bind(this.internalErrorCallback, this),
+                complete: function (jqXHR, textStatus) { af.ui.hideMask(); }
+            });
+        } else if (serviceProvider === 'custom') {
+            var xhr = this.createCORSRequest(method, requestedUrl);
+            xhr.onload = this.successCallback;
+            xhr.onerror = this.errorCallback;
+            xhr.send();
+        }
+    };
+
     return AjaxService;
 }(Logger, common, _, ServiceConfig, jQuery));
