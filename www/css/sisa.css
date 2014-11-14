@@ -138,6 +138,10 @@ span.prestacionesTabViewClass {
     float:right !important;
 }
 
+#afui .icon.key {
+    float: left !important;
+}
+
 .zimagen_header {
     max-width:100%;
     max-height:90%;
@@ -148,7 +152,7 @@ span.prestacionesTabViewClass {
 }
 
 
-/*CSS PARA EL SLIDER:      */
+/*INICIO CSS PARA EL SLIDER:      */
 #owl-demo .zslider-item {
     display: block;
     width: 100%;
@@ -165,7 +169,17 @@ span.prestacionesTabViewClass {
 footer#zfooter_noticias {    
     -webkit-box-shadow: black 0px 5px 20px 5px !important;
 }
+/*FIN CSS PARA EL SLIDER:      */
 
 a.button.icon.close {
     float: right;
+}
+
+#loginButton {
+    padding-left: 1.5%;
+    padding-top: 3%;
+}
+
+.ztexto-iniciarSesion{
+    font-size: 0.55em;
 }

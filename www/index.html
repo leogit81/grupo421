@@ -17,6 +17,7 @@
             <script type="text/javascript" charset="utf-8" src="libraries/appframework.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.slidemenu.js"></script>
+            <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.popup.js"></script>
 
 			<!--comentar para que funcione en el RIPLE-->
 <!--			<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>-->
@@ -160,6 +161,9 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/NoticiasView/ListadoNoticiasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MenuConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultasView.js"></script>
+            
+            <script type="text/javascript" charset="utf-8" src="js/Models/InicioSesion.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/AutenticacionView/InicioSesionView.js"></script>
 
             <link rel="stylesheet" href="css/owl/owl.carousel.css">
             <link rel="stylesheet" href="css/owl/owl.theme.css">
@@ -173,13 +177,14 @@
             <div class="app">
                 <div id="afui" class="bb">
                     <div id="header">
+                        <a id='loginButton' class='icon key'><span class='ztexto-iniciarSesion'>(Iniciar sesión)</span></a>
                         <a id='menubadge' class='menuButton'></a>
                         <!--                        <img src="./img/sisaMobile.png" class='zimagen_header'>-->
                     </div>
                     <div id="content">
                         <div id='map_canvas'></div>
                         <!--Paneles usados para navegar por la aplicación-->
-                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias">
+                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias" data-load="common.showLogin" data-unload="common.hideLogin">
                             <ul class="list">
                                 <li>
                                     <a>                                        
