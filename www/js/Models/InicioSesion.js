@@ -32,8 +32,8 @@ var InicioSesion = (function (common, BaseModel) {
                 alert('Almacenamiento local no soportado.');
             } else {
                 try {
-                    localStorage.setItem('usuario', this.usuario);
-                    localStorage.setItem('clave', this.clave);
+                    localStorage.setItem('usuario', this.get("usuario"));
+                    localStorage.setItem('clave', this.get("clave"));
                 } catch (e) {
                     if (e == QUOTA_EXCEEDED_ERR) {
                         alert('Límite de almacenamiento excedido.');
