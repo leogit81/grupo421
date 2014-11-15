@@ -13,11 +13,11 @@ var InicioSesion = (function (common, BaseModel) {
         /*
         ** Se sobreescribe el método sync para que ejecute un POST en vez de un GET
         */
-        sync: function (method, model, options) {
-            if (method === 'read') {
-                this.service.post(options);
-            }
-        }
+//        sync: function (method, model, options) {
+//            if (method === 'read') {
+//                this.service.post(options);
+//            }
+//        }
     });
 
     inicioSesion.prototype.getServiceConfig = function () {

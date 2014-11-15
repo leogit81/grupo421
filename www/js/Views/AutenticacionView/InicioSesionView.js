@@ -18,7 +18,7 @@ var InicioSesionView = (function ($, common, _, InicioSesion) {
                     var recordar = $("#recordar")[0].checked;
                     var dataWS = {credenciales: {usuario: user, clave: pass}};
                     var iniciarSesion = new InicioSesion();
-                    iniciarSesion.sync("read", this, dataWS);
+                    iniciarSesion.update(dataWS);
                     if (recordar) {
                     inicioSesionview.guardarLocalStorage(user, pass, recordar);
                     }
