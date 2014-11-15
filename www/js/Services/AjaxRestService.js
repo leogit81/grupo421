@@ -139,7 +139,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
     };
 
     AjaxService.prototype.getCodigoResultadoWebService = function (resultadoWS) {
-        var resultado = resultadoWS.getElementsByTagName("resultado").item();
+        var resultado = resultadoWS.getElementsByTagName("resultado").item(0);
 
         return resultado.textContent || resultado.innerHTML;
     };
