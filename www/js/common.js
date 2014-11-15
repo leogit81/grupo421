@@ -192,7 +192,7 @@ var common = (function (_) {
 _.mixin({
     compactObject: function(o) {
         _.each(o, function(v, k) {
-            if(!v) {
+            if(!v && ( isNaN(v) || common.isEmpty(v))) { /*!!!!!!!!!!!!!!*/
                 delete o[k];
             }
         });
