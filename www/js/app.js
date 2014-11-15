@@ -43,6 +43,8 @@ var app = (function ($, jquery, logger) {
     }
 
     function onDeviceReady(){
+        ServiceConfig.usuario = localStorage.getItem("usuario");
+        ServiceConfig.clave = localStorage.getItem("clave");
         loadApp();
     };
 
@@ -57,6 +59,7 @@ var app = (function ($, jquery, logger) {
         $("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
         $("#afui").delegate("a.button.icon.close", "click", onClickCloseButtonHandler);
         $("#afui").delegate("#loginButton", "click", onClickLoginButtonHandler);
+        $("#afui").delegate("#logoutButton", "click", onClickLogoutButtonHandler);
     };
 
     function wp8DesktopBrowser () {
@@ -72,6 +75,10 @@ var app = (function ($, jquery, logger) {
      */
     function onClickLoginButtonHandler () {
         var iniciarSesion = new InicioSesionView();
+    };
+    
+    function onClickLogoutButtonHandler () {
+        var cerrarSesion = new CierreSesionView();
     };
 
     /**

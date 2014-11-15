@@ -3,21 +3,45 @@ var InicioSesion = (function (common, BaseModel) {
     var inicioSesion = BaseModel.extend({
         defaults : {
             "usuario" : null,
-            "clave" : null
+            "clave" : null,
+            "permisos": null
         },
 
         initialize: function (attributes, options) {
             BaseModel.prototype.initialize.call(this, attributes, options);
             this.service.loadConfig(this.getServiceConfig());
         },
-        /*
-        ** Se sobreescribe el método sync para que ejecute un POST en vez de un GET
-        */
-//        sync: function (method, model, options) {
-//            if (method === 'read') {
-//                this.service.post(options);
-//            }
-//        }
+
+        processData: function (data) {
+            var jsonData = this.converter.convert(data);
+            this.setJsonData(jsonData);
+            
+            /*
+            *Si llegó a este punto es porque el usuario autenticó correctamente.
+            *Se actualiza el serviceConfig con usuario y contraseña.
+            *Se actualiza el boton de inicio/cierre de sesión.
+            *Se persisten los datos de loggeo en el localStorage.
+            */
+            
+            ServiceConfig.usuario = this.get("usuario");
+            ServiceConfig.clave = this.get("clave");
+            
+            common.showLogin();
+
+            if (typeof(localStorage) == 'undefined' ) {
+                alert('Almacenamiento local no soportado.');
+            } else {
+                try {
+                    localStorage.setItem('usuario', this.usuario);
+                    localStorage.setItem('clave', this.clave);
+                } catch (e) {
+                    if (e == QUOTA_EXCEEDED_ERR) {
+                        alert('Límite de almacenamiento excedido.');
+                    }
+                }
+            }
+
+        }
     });
 
     inicioSesion.prototype.getServiceConfig = function () {

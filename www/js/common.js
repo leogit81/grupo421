@@ -22,10 +22,18 @@ var common = (function (_) {
     };
 
     common.showLogin = function () {
-        document.getElementById("loginButton").style.display="block";
+        if (ServiceConfig.usuario) {
+            document.getElementById("loginButton").style.display="none";
+            document.getElementById("logoutButton").style.display="block";
+        }
+        else {
+            document.getElementById("loginButton").style.display="block";
+            document.getElementById("logoutButton").style.display="none";
+        }
     };
     common.hideLogin = function () {
         document.getElementById("loginButton").style.display="none";
+        document.getElementById("logoutButton").style.display="none";
     };
 
     /**
