@@ -99,7 +99,9 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 
         this.armarHtmlConData(data);
 
-        this.renderHtml();
+        if (common.isEmpty(this.parent)) {
+            this.renderHtml();
+        }
 
         $(this.getViewSelector()).addClass("consulta-detallada");
 

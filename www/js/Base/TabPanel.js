@@ -111,12 +111,11 @@ var TabPanel = (function ($, common) {
                 return;
             }
 
-            if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
+             if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
                 self.view.model.load(_.result(self, "filtroConsulta"));
-                self.isLoaded = true;
-            } else {
-                self.tabPanelView.showPanel(self.view);
-            }
+                //self.isLoaded = true;
+             }
+            //self.tabPanelView.showPanel(self.view);
         }
         
         self.loadConfig = loadConfig;

@@ -24,6 +24,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
             //this.wrapTabsConfigInFunction(),
             //this.tabsConfig = this.createTabsConfig();
             this.loadTabsConfig();
+            this.createNestedViewsDictionary();
             this.initializeTabs();
         },
         
@@ -72,6 +73,13 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
             }
         },
         
+        /**
+        * Cuando se hace clic en un tab, se le dice al TabPanel que cargue la vista que tiene.
+        * Si la vista asociada al TabPanel seleccionado ya se encuentra cargada, entonces,
+        * muestra el contenido de esta.
+        * Si la vista del TabPanel se estÃ¡ cargando por primera vez, se debe esperar a que se
+        * produzca el evento viewRendered para mostrar el contenido.
+        */
         loadSelectedTab: function () {
             /*if (common.isEmpty(this.selectedTab.isLoaded) || !this.selectedTab.isLoaded) {
                 this.selectedTab.view.model.load(_.result(this.selectedTab, "filtroConsulta"));
@@ -80,19 +88,43 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
                 this.renderFromData();
             }*/
             this.selectedTab.loadView();
+            if (this.selectedTab.isLoaded) {
+                this.showPanel();
+            }
         },
         
         /**
-        * Handler del evento viewRendered que se dispará luego de que una de las vistas de los tabs termina de cargarse.
-        */
-        onViewRendered: function (view) {
-            //this.renderFromData();
-            if (this.selectedTab.view.getViewId() === view.getViewId()){
-                $(this.getViewSelector() + " div#selectedTab").empty();
-                $(this.getViewSelector() + " div#selectedTab").html(view.$el.html());
+        * Handler del evento viewRendered que se disparÃ¡ luego de que una de las vistas de los tabs
+        * termina de cargarse.
+        * Se deberÃ­a ejecutar una vez por cada vista de cada TabPanel, ya que una vez cargada,
+        * no se vuelve a llamar al servicio y no se hace otro render.
+         */
+         onViewRendered: function (view) {
+             //this.renderFromData();
+            /*if (this.selectedTab.view.getViewId() === view.getViewId()){
+                 $(this.getViewSelector() + " div#selectedTab").empty();
+                 $(this.getViewSelector() + " div#selectedTab").html(view.$el.html());
+            }*/
+
+            //Al cargarse el tab panel por primera vez, se hace el render que carga los tÃ­tulos de los tabs
+            this.selectedTab.isLoaded = true;
+            if (this.isLoadingDefaultView) {
+                this.isLoadingDefaultView = false;
+                this.render();
+                return;
+             }
+            this.showPanel();
+
+            /*var selectedTabHtml = this.selectedTabEl().html();
+            //no se encontrÃ³ ningÃºn registro
+            if (common.isEmpty(selectedTabHtml) || selectedTabHtml === ""){
+                //$.ui.goBack();
+                return;
             }
-            $.ui.hideMask();
-        }
+            this.render();
+            this.showPanel();
+            $.ui.hideMask();*/
+         }
     });
     
     tabPanelView.prototype.hideLoadingMask = function () { };
@@ -104,7 +136,8 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     
     tabPanelView.prototype.selectedTab = null;
     tabPanelView.prototype.selectedTabEl = function () {
-        return $("#selectedTab");
+        //return $("#selectedTab");
+        return $(this.getViewSelector() + " div#selectedTab");
     };
     
     tabPanelView.prototype.clearView = function () {
@@ -126,7 +159,8 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     */
     tabPanelView.prototype.loadDefaultView = function () {
         this.loadSelectedTab();
-        this.render();
+        //this.render();
+        this.isLoadingDefaultView = true;
     };
     
     /**
@@ -136,6 +170,16 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         if (!common.isEmpty(this.selectedTab)) {
             this.insertHTMLSubVista(this.selectedTab);
         }
+    };
+    
+    /* Es como el método que está en MasterView, pero directamente recibe como argumento
+    * un string con el Html que se quiere usar para actualizar el elemento selectedTab
+    */
+    tabPanelView.prototype.updateSubVistaConHTML = function (subViewHtml) {
+        var insertElement = this.selectedTabEl();
+
+        insertElement.empty();
+        insertElement.append(subViewHtml);
     };
     
     /**
@@ -220,6 +264,15 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         return $(tabBuscado).length > 0;
     };
     
+    tabPanelView.prototype.getTabHtmlPorHref = function (href) {
+        var tabBuscado = _.find($(".tabs ul li a", this.el),
+            function (item) {
+                return $(item).hash() === href;
+            });
+        
+        return $(tabBuscado);
+    };
+    
     /**
     * Agrega un rango de tabs.
     * @param {TabPanel[]} tabs un array de objetos TabPanel
@@ -239,6 +292,16 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     tabPanelView.prototype.findTab = function (prop, value) {
         return _.find(this.tabs, function (item) {
             return item[prop] === value;
+        }, this);
+    };
+    
+    /**
+    * Busca un tab a partir de la view que contiene
+    * @param {View} view, vista del tab que se quiere encontrar.
+    */
+    tabPanelView.prototype.findTabByView = function (view) {
+        return _.find(this.tabs, function (item) {
+            return item.view.getViewId() === view.getViewId();
         }, this);
     };
     
@@ -281,8 +344,12 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         
         var tab = new TabPanel(tabConfig);
         tab.initialize();
-        tab.view.on("viewRendered", _.bind(this.onViewRenderedHandler || this.onViewRendered, this));
-        return tab;
+        this.nestedViewsDictionary[tab.tabName] = {
+            view: tab.view,
+            insertElID: "selectedTab"
+        };
+        tab.view.on("viewRendered", _.bind(tabConfig.onViewRenderedHandler || this.onViewRendered, this));
+         return tab;
     };
     
     tabPanelView.prototype.showPanel = function (panelId) {

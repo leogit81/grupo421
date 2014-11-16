@@ -35,6 +35,7 @@ var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, Esta
             var codigoEstablecimiento = $("#codigoEstablecimiento").val();
             var establecimientoNominalModel = new EstablecimientoNominal();
             var establecimientoView = new EstablecimientoNominalView({codigo: codigoEstablecimiento});
+            af.ui.showMask("Cargando...");
             establecimientoView.loadDefaultView();
         },
 

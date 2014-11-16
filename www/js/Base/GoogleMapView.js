@@ -29,7 +29,7 @@ var GoogleMapView = (function ($, BaseView) {
             }
         },
         
-        render: function () {            
+        /*render: function () {            
             var latLong = {latitud: this.model.get("latitud"),
                            longitud: this.model.get("longitud")
                           };
@@ -37,10 +37,25 @@ var GoogleMapView = (function ($, BaseView) {
             var nuevoMapa = new GoogleMap(establecimientos);
             var mapaHtmlElement = $(this.getViewSelector())[0];
             nuevoMapa.mostrarMapaEstablecimiento(this.model, mapaHtmlElement);
-        },
+        },*/
+        render: function () {
+            BaseView.prototype.armarHtmlConData.call(this, {});
+            
+            var latLong = {
+                latitud: this.model.get("latitud"),
+                longitud: this.model.get("longitud")
+            };
+             var establecimientos = [latLong];
+             var nuevoMapa = new GoogleMap(establecimientos);
+            this.parent.updateSubVistaConHTML(this.$el[0].outerHTML);
+             //var mapaHtmlElement = $(this.getViewSelector())[0];
+            var mapaHtmlElement = $("#map_canvas")[0];
+             nuevoMapa.mostrarMapaEstablecimiento(this.model, mapaHtmlElement);
+         },
+         
         
         mapaFinalizadoHandler: function () {
-            this.trigger("viewRendered");
+            this.trigger("viewRendered", this);
         },
         
         getInstance: function () {

@@ -6,7 +6,7 @@ var MasterView = (function ($, common, BaseView) {
 
     var masterView = BaseView.extend({
         createNestedViewsDictionary: function (attributes, options) {
-            BaseView.prototype.initialize.call(this);
+            //BaseView.prototype.initialize.call(this);
             this.nestedViewsDictionary = {};
         }
     });
