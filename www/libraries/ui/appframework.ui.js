@@ -5942,7 +5942,9 @@ if (!Date.now)
 
                     that.launchCompleted = true;
                     //trigger ui ready
-                    $.query("#afui #splashscreen").remove();
+                    /*LUCAS
+                    *$.query("#afui #splashscreen").remove();
+                    LUCAS*/
                     if($.os.fennec){
                         $(document).trigger("afui:ready");
                     }

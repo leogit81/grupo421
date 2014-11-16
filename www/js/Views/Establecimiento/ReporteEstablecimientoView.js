@@ -12,12 +12,10 @@ var ReporteEstablecimientoView = (function ($, renderer, BaseView, ReporteEstabl
 
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
-            '<form>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
             '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
-            '<a id="submitReporteEstablecimiento" class="button">Enviar</a>' +
-            '</form>'
+            '<a id="submitReporteEstablecimiento" class="button">Enviar</a>'
         ),
         render: function() {
             BaseView.prototype.render.call(this);            

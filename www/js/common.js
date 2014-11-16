@@ -20,6 +20,17 @@ var common = (function (_) {
         }
         return true;
     };
+    
+    common.homeLoad = function () {
+        common.showLogin();
+        document.getElementById("zfooter_noticias").style.display="block";
+    };
+    
+    common.homeUnload = function () {
+        common.hideLogin();
+        document.getElementById("zfooter_noticias").style.display="none";
+        document.getElementById("navbar").style.display="none";
+    };
 
     common.showLogin = function () {
         if (ServiceConfig.usuario) {

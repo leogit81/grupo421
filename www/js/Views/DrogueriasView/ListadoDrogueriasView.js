@@ -12,11 +12,9 @@ var ListadoDrogueriasView = (function (jquery, $, renderer, BaseView, DrogueriaC
 
         template : _.template(
             '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar droguerias.</div>' +
-            '<form>' +
             '<select id="dependenciaDrogueria" name="dependenciaDrogueria"></select>' +
             '<select id="provinciaDrogueria" name="provinciaDrogueria"></select>' +                
-            '<a id="submitConsultaListadoDroguerias" class="button">Consultar</a>' +
-            '</form>'
+            '<a id="submitConsultaListadoDroguerias" class="button">Consultar</a>'
         ),
 
         initialize: function(attributes, options) {
@@ -51,8 +49,8 @@ var ListadoDrogueriasView = (function (jquery, $, renderer, BaseView, DrogueriaC
 
         render: function(){
             BaseView.prototype.render.call(this);
-            document.getElementById("provinciaDrogueria").innerHTML = listaCompletaProvincias;
-            document.getElementById("dependenciaDrogueria").innerHTML = listaCompletaDependencias;
+            $(this.getViewSelector() + " select#provinciaDrogueria")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#dependenciaDrogueria")[0].innerHTML = listaCompletaDependencias;
             return this;
         },
 

@@ -18,7 +18,7 @@ var NoticiaCollectionView = (function ($, common, Backbone, _, renderer, BaseVie
         },
 
         itemTemplate: function (noticia) {
-            var temp = "<div class='owl-item'><div class='zslider-item'><h3><%=titulo%></h3></br>" + 
+            var temp = "<div class='owl-item'><div class='zslider-item'><h3><%=titulo%></h3><span class='zmas'><i>[más...]</i></span></br>" + 
                 "<div id='idNoticia' style='display: none;'><%=idNoticia%></div></div></div>";
             this.renderedHtml += _.template(temp, noticia);
         },
@@ -46,6 +46,7 @@ var NoticiaCollectionView = (function ($, common, Backbone, _, renderer, BaseVie
 
             this.$el.empty();
             this.armarHtml(this.model.toJSON());
+            owl.data('owlCarousel').removeItem(0);
             owl.data('owlCarousel').addItem(this.renderedHtml);
 
             //TODO: ESTO NO TIENE QUE ESTAR ACÁ PORQUE YA ESTÁ EN LA CLASE BaseView

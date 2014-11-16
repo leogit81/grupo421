@@ -125,7 +125,9 @@ body {
     width:100%;
     left:0;
     min-height:100%;
-    background:rgba(29,29,28,1) !important;
+    /*LUCAS
+    *background:rgba(29,29,28,1) !important;
+    LUCAS*/
     color:white !important;
     font-size:30px;
     text-align:center;

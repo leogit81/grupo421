@@ -12,7 +12,6 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
 
         template : _.template(
             '<div class="formGroupHead">Registro Federal de Establecimientos. Seleccione una opción.</div>' +
-            '<form>' +
             '<div>' +
             '<a id="submitListadoEstablecimiento" class="button">Listado de Establecimientos</a>' +
 			'</br>' +
@@ -21,8 +20,7 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             '<a id="submitReporteEstablecimiento" class="button">Reporte de Establecimientos</a>' +
             '</br>' +
             '<a id="submitReporteCamas" class="button">Reporte camas de Establecimientos</a>' +
-            '</div>' +
-            '</form>'
+            '</div>'
         ),
 
         initialize: function(attributes, options) {

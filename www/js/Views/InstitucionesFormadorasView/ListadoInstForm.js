@@ -12,14 +12,12 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
 
         template : _.template(
             '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar Instituciones Formadoras.</div>' +
-            '<form>' +
             '<input id="nombreInstForm" type="text" placeholder="Nombre de Institución Formadora"/>' +
             '<select id="dependenciaInstForm" name="dependenciaInstForm"></select>' +
             '<select id="pciaInstForm" name="pciaInstForm" onchange="deptos.actualizar(pciaInstForm, dptoInstForm, locInstForm)"></select>' +
             '<select id="dptoInstForm" name="dptoInstForm" onchange="localidades.actualizar(pciaInstForm, dptoInstForm, locInstForm)"></select>' +
             '<select id="locInstForm" name="locInstForm"></select>' +
-            '<a id="submitConsultaListadoInstForm" class="button">Consultar</a>' +
-            '</form>'
+            '<a id="submitConsultaListadoInstForm" class="button">Consultar</a>'
         ),
 
         initialize: function(attributes, options) {
@@ -65,10 +63,10 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
 
         render: function(){
             BaseView.prototype.render.call(this);
-            document.getElementById("pciaInstForm").innerHTML = listaCompletaProvincias;
-            document.getElementById("dptoInstForm").innerHTML = "<option value =''>Seleccione un departamento...</option>";
-            document.getElementById("locInstForm").innerHTML = "<option value =''>Seleccione una localidad...</option>";
-            document.getElementById("dependenciaInstForm").innerHTML = listaCompletaDependencias;
+            $(this.getViewSelector() + " select#pciaInstForm")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#dptoInstForm")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
+            $(this.getViewSelector() + " select#locInstForm")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
+            $(this.getViewSelector() + " select#dependenciaInstForm")[0].innerHTML = listaCompletaDependencias;
             return this;
         },
 

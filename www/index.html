@@ -19,11 +19,11 @@
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.slidemenu.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.popup.js"></script>
 
-			<!--comentar para que funcione en el RIPLE-->
-<!--			<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>-->
+            <!--comentar para que funcione en el RIPLE-->
+            <!--			<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>-->
 
-			
-			<!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.8tiles.js"></script>-->
+
+            <!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.8tiles.js"></script>-->
             <!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.touchLayer.js"></script>-->
             <!--App Framework includes end-->
 
@@ -37,8 +37,8 @@
             <script type="text/javascript" charset="utf-8" src="libraries/backbone.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/xmltojson.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Converter/XmlToJsonConverter.js"></script>
-          
-			<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+
+            <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
             <script type="text/javascript" charset="utf-8" src="libraries/jquery.chained.min.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/common.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/GoogleMap.js"></script>
@@ -57,10 +57,10 @@
             <script type="text/javascript" charset="utf-8" src="js/Base/BaseCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Base/ModelDataSource.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Imagen.js"></script>
-			
-			<script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/Cama.js"></script>
-			<script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/CamasCollection.js"></script>
-			
+
+            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/Cama.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/CamasCollection.js"></script>
+
             <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/Prestacion.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/PrestacionCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/Participaciones.js"></script>
@@ -95,9 +95,9 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/TelefonoView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ImagenesView.js"></script>
 
-			<script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/CamasCollectionView.js"></script>
-			
-			<script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/PrestacionCollectionView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/CamasCollectionView.js"></script>
+
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/PrestacionCollectionView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ParticipacionesView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/UbicacionEstablecimientoView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ReporteEstablecimientoNominalView.js"></script>
@@ -107,8 +107,8 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoNominalView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/EstablecimientoCollectionView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ListadoEstablecimientoView.js"></script>
-			<script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/BusquedaEstablecimientoView.js"></script>
-			<script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ConsultaEstablecimientoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/BusquedaEstablecimientoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/Establecimiento/ConsultaEstablecimientoView.js"></script>
 
             <script type="text/javascript" charset="utf-8" src="js/Models/Ministerio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MinisterioView/MinisterioView.js"></script>
@@ -161,7 +161,7 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/NoticiasView/ListadoNoticiasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MenuConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultasView.js"></script>
-            
+
             <script type="text/javascript" charset="utf-8" src="js/Models/InicioSesion.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/AutenticacionView/InicioSesionView.js"></script>
 
@@ -176,6 +176,10 @@
         <body>
             <div class="app">
                 <div id="afui" class="bb">
+                    <div id="splashscreen" class='ui-loader'>
+                        <img src="./res/screen/android/screen-xhdpi-portrait.png">
+                        <span class='ui-icon ui-icon-loading spin'></span><h1 >Cargando aplicación...</h1>
+                    </div>
                     <div id="header">
                         <a id='loginButton' class='icon key'><span class='ztexto-iniciarSesion'>(Iniciar sesión)</span></a>
                         <a id='logoutButton' class='icon user'><span class='ztexto-iniciarSesion'>(Cerrar sesión)</span></a>
@@ -185,7 +189,7 @@
                     <div id="content">
                         <div id='map_canvas'></div>
                         <!--Paneles usados para navegar por la aplicación-->
-                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias" data-load="common.showLogin" data-unload="common.hideLogin">
+                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias" data-load="common.homeLoad" data-unload="common.homeUnload">
                             <ul class="list">
                                 <li>
                                     <a>                                        
@@ -317,8 +321,12 @@
                             </ul>
                         </div>
 
-                        <footer id="zfooter_noticias">
-                            <div id="owl-demo" class="owl-carousel owl-theme"></div>
+                        <footer id="zfooter_noticias" class="header">
+                            <div id="owl-demo" class="owl-carousel owl-theme">
+                                <div class="zcargando" style="overflow-x:hidden;overflow-y:hidden;opacity: 1;">
+                                    <i>Cargando noticias SISA...</i>
+                                </div> 
+                            </div>
                         </footer>
 
                         <nav id="home_nav"></nav>

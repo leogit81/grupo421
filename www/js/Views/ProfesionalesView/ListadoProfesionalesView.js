@@ -12,15 +12,13 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
 
         template : _.template(
             '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar profesionales.</div>' +
-            '<form>' +
             '<input id="matriculaProfesional" type="number" name="matriculaProfesional" placeholder="Matricula del profesional"></input></br>' +
             '<input id="nombreProfesional" type="text" name="nombreProfesional" placeholder="Nombre del profesional"></input></br>' +
             '<input id="apellidoProfesional" type="text" name="apellidoProfesional" placeholder="Apellido del profesional"></input></br>' +
             '<input id="dniProfesional" type="number" name="dniProfesional" placeholder="Numero de documento del profesional"></input></br>' +
             '<select id="provinciaProfesional" name="provinciaProfesional"></select>' +
             '<select id="profesionProfesional" name="profesionProfesional"></select>' +
-            '<a id="submitConsultaListadoProfesionales" class="button">Consultar</a>' +
-            '</form>'
+            '<a id="submitConsultaListadoProfesionales" class="button">Consultar</a>'
         ),
 
         initialize: function(attributes, options) {
@@ -74,8 +72,8 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
 
         render: function(){
             BaseView.prototype.render.call(this);
-            document.getElementById("provinciaProfesional").innerHTML = listaCompletaProvincias;
-            document.getElementById("profesionProfesional").innerHTML = listaCompletaProfesiones;
+            $(this.getViewSelector() + " select#provinciaProfesional")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#profesionProfesional")[0].innerHTML = listaCompletaProfesiones;
             return this;
         },
 

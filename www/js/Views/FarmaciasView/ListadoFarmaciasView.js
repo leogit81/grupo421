@@ -12,11 +12,9 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
 
         template : _.template(
             '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar farmacias.</div>' +
-            '<form>' +
             '<select id="dependenciaFarmacia" name="dependenciaFarmacia"></select>' +
             '<select id="provinciaFarmacia" name="provinciaFarmacia"></select>' +                
-            '<a id="submitConsultaListadoFarmacias" class="button">Consultar</a>' +
-            '</form>'
+            '<a id="submitConsultaListadoFarmacias" class="button">Consultar</a>'
         ),
 
         initialize: function(attributes, options) {
@@ -81,8 +79,8 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
 
             this.attachEvents();*/
             BaseView.prototype.render.call(this);
-            document.getElementById("provinciaFarmacia").innerHTML = listaCompletaProvincias;
-            document.getElementById("dependenciaFarmacia").innerHTML = listaCompletaDependencias;
+            $(this.getViewSelector() + " select#provinciaFarmacia")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#dependenciaFarmacia")[0].innerHTML = listaCompletaDependencias;
 
             return this;
         },

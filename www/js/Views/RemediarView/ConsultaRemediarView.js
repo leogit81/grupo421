@@ -12,13 +12,11 @@ var ConsultaRemediarView = (function ($, renderer, BaseView, ProgramasCollection
 
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
-            '<form>' +
             '<input id="nombreRemediar" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="pciaRemediar" name="pciaRemediar" onchange="deptos.actualizar(pciaRemediar, dptoRemediar, locRemediar)"></select>' +
             '<select id="dptoRemediar" name="dptoRemediar" onchange="localidades.actualizar(pciaRemediar, dptoRemediar, locRemediar)"></select>' +
             '<select id="locRemediar" name="locRemediar"></select>' +
-            '<a id="submitConsultaRemediar" class="button">Enviar</a>' +
-            '</form>'
+            '<a id="submitConsultaRemediar" class="button">Enviar</a>'
         ),
 
 

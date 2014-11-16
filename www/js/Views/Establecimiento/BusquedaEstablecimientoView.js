@@ -12,10 +12,8 @@ var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, Esta
 
         template : _.template(
             '<div class="formGroupHead">Ingrese el código de establecimiento que quiera buscar.</div>' +
-            '<form>' +
             '<input id="codigoEstablecimiento" type="number" name="codigoEstablecimiento" placeholder="Código de establecimiento"></input></br>' +
-            '<a id="submitConsultaBusquedaEstablecimiento" class="button">Consultar</a>' +
-            '</form>'
+            '<a id="submitConsultaBusquedaEstablecimiento" class="button">Consultar</a>'
         ),
 
         initialize: function(attributes, options) {
