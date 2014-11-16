@@ -74,8 +74,8 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
 
         render: function(){
             BaseView.prototype.render.call(this);
-            document.getElementById("provinciaProfesional").innerHTML = listaCompletaProvincias;
-            document.getElementById("profesionProfesional").innerHTML = listaCompletaProfesiones;
+            $(this.getViewSelector() + " select#provinciaProfesional")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#profesionProfesional")[0].innerHTML = listaCompletaProfesiones;
             return this;
         },
 

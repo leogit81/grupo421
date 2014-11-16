@@ -51,8 +51,8 @@ var ListadoDrogueriasView = (function (jquery, $, renderer, BaseView, DrogueriaC
 
         render: function(){
             BaseView.prototype.render.call(this);
-            document.getElementById("provinciaDrogueria").innerHTML = listaCompletaProvincias;
-            document.getElementById("dependenciaDrogueria").innerHTML = listaCompletaDependencias;
+            $(this.getViewSelector() + " select#provinciaDrogueria")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#dependenciaDrogueria")[0].innerHTML = listaCompletaDependencias;
             return this;
         },
 

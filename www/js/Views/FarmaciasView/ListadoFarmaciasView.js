@@ -81,8 +81,8 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
 
             this.attachEvents();*/
             BaseView.prototype.render.call(this);
-            document.getElementById("provinciaFarmacia").innerHTML = listaCompletaProvincias;
-            document.getElementById("dependenciaFarmacia").innerHTML = listaCompletaDependencias;
+            $(this.getViewSelector() + " select#provinciaFarmacia")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#dependenciaFarmacia")[0].innerHTML = listaCompletaDependencias;
 
             return this;
         },
