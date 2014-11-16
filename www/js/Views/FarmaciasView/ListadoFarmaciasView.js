@@ -12,11 +12,9 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
 
         template : _.template(
             '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar farmacias.</div>' +
-            '<form>' +
             '<select id="dependenciaFarmacia" name="dependenciaFarmacia"></select>' +
             '<select id="provinciaFarmacia" name="provinciaFarmacia"></select>' +                
-            '<a id="submitConsultaListadoFarmacias" class="button">Consultar</a>' +
-            '</form>'
+            '<a id="submitConsultaListadoFarmacias" class="button">Consultar</a>'
         ),
 
         initialize: function(attributes, options) {
