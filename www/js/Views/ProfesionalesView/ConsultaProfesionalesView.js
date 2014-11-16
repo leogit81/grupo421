@@ -13,8 +13,9 @@ var ConsultaProfesionalesView = (function (jquery, $, renderer, BaseView, Listad
         template : _.template(
             '<div class="formGroupHead">Registro Federal de Profesionales. Seleccione una opción.</div>' +
             '<form>' +
-            '<div class="button-grouped vertical">' +
+            '<div>' +
             '<a id="submitListadoProfesionales" class="button">Listado de Profesionales</a>' +
+            '<br>' +
             '<a id="submitBuscarProfesional" class="button">Buscar Profesional</a>' +
             '</div>' +
             '</form>'

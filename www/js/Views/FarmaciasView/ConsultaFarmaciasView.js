@@ -13,8 +13,9 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
         template : _.template(
             '<div class="formGroupHead">Registro Federal de Farmacias. Seleccione una opción.</div>' +
             '<form>' +
-            '<div class="button-grouped vertical">' +
+            '<div>' +
             '<a id="submitListadoFarmacias" class="button">Listado de Farmacias</a>' +
+            '<br>' +
             '<a id="submitBuscarFarmacia" class="button">Buscar Farmacia</a>' +
             '</div>' +
             '</form>'

@@ -185,7 +185,7 @@
                     <div id="content">
                         <div id='map_canvas'></div>
                         <!--Paneles usados para navegar por la aplicación-->
-                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias" data-load="common.showLogin" data-unload="common.hideLogin">
+                        <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias" data-load="common.homeLoad" data-unload="common.homeUnload">
                             <ul class="list">
                                 <li>
                                     <a>                                        
@@ -317,7 +317,7 @@
                             </ul>
                         </div>
 
-                        <footer id="zfooter_noticias">
+                        <footer id="zfooter_noticias" class="header">
                             <div id="owl-demo" class="owl-carousel owl-theme"></div>
                         </footer>
 

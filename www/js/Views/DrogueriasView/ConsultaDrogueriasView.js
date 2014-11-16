@@ -13,8 +13,9 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
         template : _.template(
             '<div class="formGroupHead">Registro Federal de Droguerias. Seleccione una opción.</div>' +
             '<form>' +
-            '<div class="button-grouped vertical">' +
+            '<div>' +
             '<a id="submitListadoDroguerias" class="button">Listado de Droguerias</a>' +
+            '<br>' +
             '<a id="submitBuscarDrogueria" class="button">Buscar Drogueria</a>' +
             '</div>' +
             '</form>'

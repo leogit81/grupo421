@@ -177,6 +177,7 @@ footer#zfooter_noticias {
 
 a.button.icon.close {
     float: right;
+    width: 40px;
 }
 
 #loginButton {
@@ -191,4 +192,33 @@ a.button.icon.close {
 
 .ztexto-iniciarSesion{
     font-size: 0.55em;
+}
+
+
+/**********************************************/
+.button {
+  background: #34add9;
+  background-image: -webkit-linear-gradient(top, #34add9, #2b66b8);
+  background-image: -moz-linear-gradient(top, #34add9, #2b66b8);
+  background-image: -ms-linear-gradient(top, #34add9, #2b66b8);
+  background-image: -o-linear-gradient(top, #34add9, #2b66b8);
+  background-image: linear-gradient(to bottom, #34add9, #2b66b8);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 2px 2px 3px #000000;
+  font-family: 'Slate Pro', Slate, 'Myriad Pro', 'BBAlpha Sans', Helvetica;
+  color: #ffffff !important;
+/*  font-size: 20px;*/
+  padding: 5px 10px 5px 10px !important;
+  text-decoration: none;
+    width: 100%;
+}
+
+#afui select {
+    border: 1px solid #74BAFF;
+}
+
+#afui input {
+    border: 1px solid #74BAFF !important;
 }
