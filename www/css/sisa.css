@@ -165,7 +165,7 @@ span.prestacionesTabViewClass {
 }
 
 .footer {
-    height: 13% !important;
+    height: 75px !important;
     border-top: 1px !important;
     box-shadow: 0px 0px 20px!important;
 }
@@ -197,31 +197,31 @@ a.button.icon.close {
 
 /**********************************************/
 .button {
-  background: #34add9;
-  background-image: -webkit-linear-gradient(top, #34add9, #2b66b8);
-  background-image: -moz-linear-gradient(top, #34add9, #2b66b8);
-  background-image: -ms-linear-gradient(top, #34add9, #2b66b8);
-  background-image: -o-linear-gradient(top, #34add9, #2b66b8);
-  background-image: linear-gradient(to bottom, #34add9, #2b66b8);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  text-shadow: 2px 2px 3px #000000;
-  font-family: 'Slate Pro', Slate, 'Myriad Pro', 'BBAlpha Sans', Helvetica;
-  color: #ffffff !important;
-/*  font-size: 20px;*/
-  padding: 5px 10px 5px 10px !important;
-  text-decoration: none;
+    background: #34add9;
+    background-image: -webkit-linear-gradient(top, #34add9, #2b66b8);
+    background-image: -moz-linear-gradient(top, #34add9, #2b66b8);
+    background-image: -ms-linear-gradient(top, #34add9, #2b66b8);
+    background-image: -o-linear-gradient(top, #34add9, #2b66b8);
+    background-image: linear-gradient(to bottom, #34add9, #2b66b8);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    text-shadow: 2px 2px 3px #000000;
+    font-family: 'Slate Pro', Slate, 'Myriad Pro', 'BBAlpha Sans', Helvetica;
+    color: #ffffff !important;
+    /*  font-size: 20px;*/
+    padding: 5px 10px 5px 10px !important;
+    text-decoration: none;
     width: 100%;
 }
 .button:active {
-  background: #3cb0fd !important;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db)!important;
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db)!important;
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db)!important;
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db)!important;
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db)!important;
-  text-decoration: none!important;
+    background: #3cb0fd !important;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db)!important;
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db)!important;
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db)!important;
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db)!important;
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db)!important;
+    text-decoration: none!important;
 }
 
 #afui select {
@@ -230,4 +230,36 @@ a.button.icon.close {
 
 #afui input {
     border: 1px solid #74BAFF !important;
+}
+
+.zcargando {
+    -webkit-transition: text-shadow 1s linear;
+    -moz-transition: text-shadow 1s linear;
+    -ms-transition: text-shadow 1s linear;
+    -o-transition: text-shadow 1s linear;
+    transition: text-shadow 1s linear;
+}
+.zcargando:hover,
+.zcargando.glow {
+    text-shadow: 0 0 5px white;
+    -webkit-text-shadow: 0 0 5px white;
+}
+
+.zmas {
+    float:right;
+}
+
+div#splashscreen {
+    top: initial !important;
+    background: white !important;
+    padding: 0 0 0 0;
+    opacity: 1;
+}
+div#splashscreen img {
+    height: 100%;
+    width: 100%;
+    padding: 0 0 0 0;
+}
+div#splashscreen h1 {
+    color: black;
 }

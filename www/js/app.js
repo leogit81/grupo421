@@ -50,8 +50,9 @@ var app = (function ($, jquery, logger) {
 
     function loadApp () {
         launchAppFramework();
-        launchNoticiasSlider();
         wp8DesktopBrowser();
+        $.query("#afui #splashscreen").remove();
+        launchNoticiasSlider();
         $("div#header").on("click", "a#menubadge", onClickMenuBadge);
         var consultasView = ConsultasView.getInstance();
         consultasView.render();
@@ -77,7 +78,7 @@ var app = (function ($, jquery, logger) {
     function onClickLoginButtonHandler () {
         var iniciarSesion = new InicioSesionView();
     };
-    
+
     function onClickLogoutButtonHandler () {
         var cerrarSesion = new CierreSesionView();
     };
@@ -116,6 +117,8 @@ var app = (function ($, jquery, logger) {
     };
 
     function launchNoticiasSlider () {
+        var glow = $('.zcargando');
+        setInterval(function(){glow.hasClass('glow') ? glow.removeClass('glow') : glow.addClass('glow');}, 1000);
         var noticiasView = ListadoNoticiasView.getInstance();
         noticiasView.render();
         owl = jquery("#owl-demo").owlCarousel({
@@ -126,7 +129,7 @@ var app = (function ($, jquery, logger) {
             slideSpeed : 300,
             paginationSpeed : 400,
             singleItem:true
-        });        
+        });
     };
 
     /**
