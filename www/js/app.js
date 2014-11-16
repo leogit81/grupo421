@@ -51,6 +51,7 @@ var app = (function ($, jquery, logger) {
     function loadApp () {
         launchAppFramework();
         launchNoticiasSlider();
+        wp8DesktopBrowser();
         $("div#header").on("click", "a#menubadge", onClickMenuBadge);
         var consultasView = ConsultasView.getInstance();
         consultasView.render();
@@ -65,7 +66,7 @@ var app = (function ($, jquery, logger) {
     function wp8DesktopBrowser () {
         if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
             var script = document.createElement("script");
-            script.src = "plugins/af.desktopBrowsers.js";
+            script.src = "libraries/plugins/af.desktopBrowsers.js";
             var tag = $("head").append(script);
         }
     };
