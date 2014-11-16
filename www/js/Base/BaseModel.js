@@ -107,7 +107,7 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
     baseModel.prototype.load = function (data) {
         this.sync('read', this, data);
     };
-    
+
     baseModel.prototype.update = function (data) {
         this.sync('update', this, data);
     };
@@ -118,10 +118,17 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
         return {};
     };
 
-    baseModel.prototype.processData = function (data) {
+    baseModel.prototype.processData = function (data) {    
+        /*Chequeo para las consultas privadas, si la consulta devuelve un error de autenticación, muestra el popup de login*/
+        if (this.service.resultadoUltimaEjecucion === "ERROR_AUTENTICACION") {
+            Logger.log({status:this.service.resultadoUltimaEjecucion});
+            var iniciarSesion = new InicioSesionView();
+            return false;
+        }
         var jsonData = this.converter.convert(data);
-        this.trigger('beforeChange');
+        //this.trigger('beforeChange');
         this.setJsonData(jsonData);
+        return true;
     };
 
     _.extend(baseModel, Backbone.Singleton);
