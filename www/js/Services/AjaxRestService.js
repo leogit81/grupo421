@@ -12,34 +12,44 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
      * }
      */
     function AjaxService(config) {
-        this.baseUrl = null;
-        this.url = null;
+        //valores por defecto que toma cuando se construye el objeto si no se pasa config.
+        //Son configurables mediante el objeto config pasado por parámetro.
+        this.baseUrl = "";
+        this.url = "";
         this.method = 'GET';
-        this.enableCors = null;
-        this.serviceProvider = null;
+        this.enableCors = false;
+        this.serviceProvider = 'jquery';
         this.timeout = 30000;
         this.dataType = 'xml';
-
+        this.successCallback = this.defaultSuccessCallback;
+        this.errorCallback = this.defaultErrorCallback;
+        
         this.loadConfig(config);
+        
+        //guarda el resultado de la ultima ejecución del servicio.
+        this.resultadoUltimaEjecucion = {};
     }
 
+    /**
+    * Carga la configuración al servicio. Si se omiten propiedades en el objeto config,
+    * Toma el valor del ServiceConfig para esa propiedad. Y si en el ServiceConfig no estuviera
+    * definido se queda con lo que está configurado en la instancia del service.
+    */
     AjaxService.prototype.loadConfig = function (config) {
         //Configuración del servicio que se toma por default del archivo ServiceConfig, puede ser modificado pasando el parámetro config
-        this.baseUrl = config.baseUrl || ServiceConfig.baseUrl;
         this.config = config || {};
-        this.url = config.url;
+        this.baseUrl = config.baseUrl || ServiceConfig.baseUrl || this.baseUrl;
+        this.url = config.url || this.url;
         this.enableCors = config.enableCors || ServiceConfig.enableCors || this.enableCors;
         this.serviceProvider = config.serviceProvider || ServiceConfig.serviceProvider || this.serviceProvider;
         this.timeout = config.timeout || ServiceConfig.timeout || this.timeout;
 
         //Configuración que NO se encuentra en el archivo ServiceConfig, que se configura con el parámetro config
-        if (!common.isEmpty(config)) {
-            this.method = config.method || this.method;
-            this.successCallback = config.success || this.successCallback;
-            this.errorCallback = config.error || this.errorCallback;
-            this.beforeSendCallback = config.beforeSend || this.beforeSendCallback;
-            this.dataType = config.dataType || this.dataType;
-        }
+        this.method = config.method || this.method;
+        this.successCallback = config.success || this.successCallback;;
+        this.errorCallback = config.error || this.errorCallback;
+        this.beforeSendCallback = config.beforeSend || this.beforeSendCallback;
+        this.dataType = config.dataType || this.dataType;
 
         if (this.enableCors) {
             this.enableProxy();
@@ -95,6 +105,14 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         }
         return xhr;
     };
+    
+    AjaxService.prototype.defaultSuccessCallback =  function (data) {
+        console.log("La llamada ajax se ejecutó correctamente.");
+    };
+    
+    AjaxService.prototype.defaultErrorCallback =  function (data) {
+        console.log("Se produjo un error al realizar la llamada ajax.");
+    };
 
     AjaxService.prototype.beforeSendCallback = function (data) {
         //jQuery(this).trigger("beforeCallRestService");
@@ -109,11 +127,12 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         else {
             var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
         }
+        this.resultadoUltimaEjecucion = codigoResultadoWS;
 
         if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO") {
             if (!common.isEmpty(this.successCallback)) {
                 this.successCallback(data);
-            }
+        }
         } else {
             var jQuery_XHR = arguments[2];
             this.processServiceError(jQuery_XHR, codigoResultadoWS);
@@ -127,6 +146,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         else {
             var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
         }
+        this.resultadoUltimaEjecucion = codigoResultadoWS;
 
         if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO") {
             if (!common.isEmpty(this.successCallback)) {
@@ -150,6 +170,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         if (!common.isEmpty(this.errorCallback)) {
             this.errorCallback(response);
         }
+        this.resultadoUltimaEjecucion = "ERROR_AJAX";
         af.ui.hideMask();
     };
 
