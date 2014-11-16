@@ -57,7 +57,7 @@ var AppFrameworkRenderer = (function (_, $, logger) {
         $.ui.popup({
             title: title,
             message: message,
-            cancelText: "Cancelar",
+            cancelText: "Aceptar",
             cancelOnly: true
         });
     };

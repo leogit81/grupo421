@@ -34,7 +34,9 @@ var BusquedaProfesionalView = (function (jquery, $, renderer, BaseView, Profesio
         ejecutarBusquedaProfesional: function(){
             var codigoProfesional = $("#codigoProfesional").val();
             var profesionalNominalModel = new ProfesionalNominal();
-            var profesionalView = new ProfesionalNominalView({usuario: 'uutn', clave: '11SC2NXHAI', codigo: codigoProfesional});
+            var profesionalView = new ProfesionalNominalView({usuario: ServiceConfig.usuario, 
+                                                              clave: ServiceConfig.clave, 
+                                                              codigo: codigoProfesional});
             profesionalView.loadDefaultView();
         },
 

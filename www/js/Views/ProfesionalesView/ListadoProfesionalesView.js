@@ -52,8 +52,8 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
             var profesionProfesional = $("#profesionProfesional").val();
 
             var dataWS = {
-                "usuario": 'uutn',
-                "clave": '11SC2NXHAI',
+                "usuario": ServiceConfig.usuario,
+                "clave": ServiceConfig.clave,
                 "provinciaMatriculacion": provinciaProfesional,
                 "profesion": profesionProfesional,
                 "nombre": nombreProfesional,

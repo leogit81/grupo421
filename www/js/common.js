@@ -22,10 +22,18 @@ var common = (function (_) {
     };
 
     common.showLogin = function () {
-        document.getElementById("loginButton").style.display="block";
+        if (ServiceConfig.usuario) {
+            document.getElementById("loginButton").style.display="none";
+            document.getElementById("logoutButton").style.display="block";
+        }
+        else {
+            document.getElementById("loginButton").style.display="block";
+            document.getElementById("logoutButton").style.display="none";
+        }
     };
     common.hideLogin = function () {
         document.getElementById("loginButton").style.display="none";
+        document.getElementById("logoutButton").style.display="none";
     };
 
     /**
@@ -63,6 +71,7 @@ var common = (function (_) {
         var parametrosGet = "";
 
         if (_.isObject(data)) {
+            _.compactObject(data);
             parametrosGet += '?';
             for (var property in data) {
                 parametrosGet += property + '=' + data[property] + '&';
@@ -175,3 +184,18 @@ var common = (function (_) {
 
     return common;
 }(_));
+
+
+/*Esta función se utiliza para extender underscore con compactObject.
+*La función compactObject se utiliza para procesar un objeto y eliminar los atributos que tengan valor falsy (undefined, null, "")
+*/
+_.mixin({
+    compactObject: function(o) {
+        _.each(o, function(v, k) {
+            if(!v && ( isNaN(v) || common.isEmpty(v))) { /*!!!!!!!!!!!!!!*/
+                delete o[k];
+            }
+        });
+        return o;
+    }
+});

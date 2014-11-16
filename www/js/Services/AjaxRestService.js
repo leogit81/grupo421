@@ -119,7 +119,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
             this.processServiceError(jQuery_XHR, codigoResultadoWS);
         }
     };
-    
+
     AjaxService.prototype.internalPostSuccessCallback = function (data) {
         if (common.isJSON(data)){
             var codigoResultadoWS = JSON.parse(data).estado.toUpperCase();
@@ -150,6 +150,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         if (!common.isEmpty(this.errorCallback)) {
             this.errorCallback(response);
         }
+        af.ui.hideMask();
     };
 
     AjaxService.prototype.processServiceError = function (response) {
@@ -201,7 +202,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
             requestedUrl = common.combineUrl(this.baseUrl, this.url);
         }
         if (this.serviceProvider === 'jquery') {
-            
+
             jQuery.ajax({
                 url: requestedUrl,
                 type: 'POST',
