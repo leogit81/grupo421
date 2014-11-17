@@ -6,7 +6,8 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         className: "panel",
         
         template : _.template("<div class='tabs'><ul></ul></div>" +
-                              "<div id='selectedTab' class='selectedTab consulta-detallada'></div>"),
+                              "<div id='selectedTab' class='selectedTab consulta-detallada'></div>" + 
+                             "<div id='map_canvas' style='width:100%; height:100%; min-height:100%; overflow:auto;'></div>"),
         /**
         * Array con la configuración de cada tab. Ver TabPanel para detalle de configuración.
         */
@@ -88,43 +89,30 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
                 this.renderFromData();
             }*/
             this.selectedTab.loadView();
-            if (this.selectedTab.isLoaded) {
-                this.showPanel();
-            }
+            //if (this.selectedTab.isLoaded) {
+                //this.showPanel();
+            //}
         },
         
         /**
-        * Handler del evento viewRendered que se disparÃ¡ luego de que una de las vistas de los tabs
-        * termina de cargarse.
-        * Se deberÃ­a ejecutar una vez por cada vista de cada TabPanel, ya que una vez cargada,
-        * no se vuelve a llamar al servicio y no se hace otro render.
+        * Handler del evento viewRendered que se disparÃ¡ al finalizar la ejecución
+        * del método render de cualquiera de las vistas asociadas a los tabs.
          */
-         onViewRendered: function (view) {
-             //this.renderFromData();
-            /*if (this.selectedTab.view.getViewId() === view.getViewId()){
-                 $(this.getViewSelector() + " div#selectedTab").empty();
-                 $(this.getViewSelector() + " div#selectedTab").html(view.$el.html());
-            }*/
-
-            //Al cargarse el tab panel por primera vez, se hace el render que carga los tÃ­tulos de los tabs
+        onViewRendered: function (view) {
+            //Este se utiliza para no llamar al servicio que devuelve los datos del modelo,
+            //cada vez que se hace clic en alguno de los tabs.
             this.selectedTab.isLoaded = true;
+            
+            //Cuando se carga el tab panel por primera vez ingresa al if y hace el render
             if (this.isLoadingDefaultView) {
                 this.isLoadingDefaultView = false;
                 this.render();
                 return;
              }
+            
+            $(this.getViewSelector()).trigger("orientationchange");
             this.showPanel();
-
-            /*var selectedTabHtml = this.selectedTabEl().html();
-            //no se encontrÃ³ ningÃºn registro
-            if (common.isEmpty(selectedTabHtml) || selectedTabHtml === ""){
-                //$.ui.goBack();
-                return;
-            }
-            this.render();
-            this.showPanel();
-            $.ui.hideMask();*/
-         }
+        }
     });
     
     tabPanelView.prototype.hideLoadingMask = function () { };
@@ -152,15 +140,17 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         this.loadTabs();
         this.setTabWidth();
         this.armarHtmlSelectedTab();
+        //$(this.$el[0]).css("style", "width:100%; height:100%;");
+        $("#map_canvas").attr("data-touchlayer", "ignore");
     };
     
     /**
     * Muestra la vista con el tab seleccionado.
     */
     tabPanelView.prototype.loadDefaultView = function () {
+        this.isLoadingDefaultView = true;
         this.loadSelectedTab();
         //this.render();
-        this.isLoadingDefaultView = true;
     };
     
     /**
@@ -179,7 +169,8 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         var insertElement = this.selectedTabEl();
 
         insertElement.empty();
-        insertElement.append(subViewHtml);
+        var panel = $(subViewHtml).removeClass("panel");
+        insertElement.append(panel);
     };
     
     /**
@@ -352,9 +343,18 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
          return tab;
     };
     
-    tabPanelView.prototype.showPanel = function (panelId) {
-        this.selectedTabEl().empty();
-        this.selectedTabEl().append(this.selectedTab.view.$el.html());
+    tabPanelView.prototype.showPanel = function () {
+        //Si el tab seleccionado es un mapa, oculto el div selectedTab y muestro el div map_canvas
+        //y viceversa, si el tab seleccionado no es un mapa.
+        if (this.selectedTab.esMapa){
+            this.selectedTabEl().hide();
+            $(this.getViewSelector() + " #map_canvas").show();
+        } else {
+            this.selectedTabEl().empty();
+            this.selectedTabEl().append(this.selectedTab.view.$el.html());
+            $(this.getViewSelector() + " #map_canvas").hide();
+            this.selectedTabEl().show();
+        }
     };
     
     _.extend(tabPanelView, Backbone.Singleton);

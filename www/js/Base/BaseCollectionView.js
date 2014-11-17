@@ -41,14 +41,14 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
         render: function (model, collection, options) {
             //TODO: esto hay que corregirlo, es un parche para evitar que me haga un render para cada item que se agrega a la colecciÃ³n.
             this.cantidadDeItems++;
-            if (this.cantidadDeItems < collection.length) {
+            if (this.cantidadDeItems < this.model.length) {
                 return;
             } else {
                 this.cantidadDeItems = 0;
             }
             //fin del parche
             
-            BaseView.prototype.render.call(this, model, collection, options);
+            BaseView.prototype.render.call(this);
             
             return this;
         },

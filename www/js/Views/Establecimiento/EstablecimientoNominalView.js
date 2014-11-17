@@ -43,7 +43,8 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             {
                 tabName: "Mapas",
                 panelId: "establecimientoMapas",
-                viewClass: GoogleMapView
+                viewClass: GoogleMapView,
+                esMapa: true
             },
 			{
                 tabName: "Camas",
@@ -67,9 +68,17 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
         },
         
         loadMapaEstablecimiento: function () {
-            var coordenadasEstablecimientoModel = this.tabPanelView.getCoordenadasMapaModel();
-            this.view.setModel(coordenadasEstablecimientoModel);
-            this.view.render();
+            this.showPanel();
+            //if (common.isEmpty(this.selectedTab.isLoaded) || !this.selectedTab.isLoaded) {
+                $(this.getViewSelector()).find("#map_canvas").on('resize', _.bind(this.onMapaResize, this));
+                var coordenadasEstablecimientoModel = this.getCoordenadasMapaModel();
+                this.selectedTab.view.setModel(coordenadasEstablecimientoModel);
+                this.selectedTab.view.render();
+            //}
+        },
+        
+        onMapaResize: function () {
+            google.maps.event.trigger(this.selectedTab.googleMap, 'resize');
         },
         
         ejecutarConsultaNominalEstablecimiento: function (codigoEstablecimiento) {
@@ -84,7 +93,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             this.setCodigoEstablecimiento(attributes.codigo);
 			
             //llama al constructor base para que se carguen los tabs de panel
-            this.tabsConfig[3].onViewRenderedHandler = this.onGoogleMapViewRendered;
+            //this.tabsConfig[3].onViewRenderedHandler = this.onGoogleMapViewRendered;
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "establecimientoGeneral").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
@@ -93,7 +102,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
 			var mapaEstablecimientoTab = this.findTab("panelId", "establecimientoMapas");
             /*mapaEstablecimientoTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
             mapaEstablecimientoTab.modelClass = this.getCoordenadasMapaModel();*/
-            mapaEstablecimientoTab.customLoadView = this.loadMapaEstablecimiento;
+            mapaEstablecimientoTab.customLoadView = _.bind(this.loadMapaEstablecimiento, this);
         },
         
         /**
@@ -129,12 +138,15 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
         $("#" + this.attributes.id).addClass("consultaNominalEstablecimiento");
     };*/
     
-    establecimientoNominalView.prototype.onGoogleMapViewRendered = function (googleMapView) {
+    /*establecimientoNominalView.prototype.onGoogleMapViewRendered = function (googleMapView) {
         this.selectedTab.isLoaded = true;
         //$.ui.loadContent(googleMapView.getViewId(), false, false, "pop");
-        $.ui.loadContent("#map_canvas", false, false, "pop");
+        //$.ui.loadContent(this.getViewSelector() + " div#map_canvas", false, false, "pop");
+        //$.ui.loadContent("#map_canvas_global", false, false, "pop");
+        //$("#map_canvas").trigger("orientationchange");
         //$(googleMapView.getViewSelector()).css("display", "block");
-     };
+        //$.(this.getViewSelector() + " #map_canvas").show();
+     };*/
     
     /**
     * Carga la data del tab de prestaciones cuando el usuario hace clic sobre el mismo.

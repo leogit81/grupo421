@@ -47,10 +47,18 @@ var GoogleMapView = (function ($, BaseView) {
             };
              var establecimientos = [latLong];
              var nuevoMapa = new GoogleMap(establecimientos);
-            this.parent.updateSubVistaConHTML(this.$el[0].outerHTML);
-             //var mapaHtmlElement = $(this.getViewSelector())[0];
-            var mapaHtmlElement = $("#map_canvas")[0];
-             nuevoMapa.mostrarMapaEstablecimiento(this.model, mapaHtmlElement);
+            //this.parent.updateSubVistaConHTML(this.$el[0].outerHTML);
+            //var mapaHtmlElement = $(this.getViewSelector())[0];
+            var mapaCanvas = $(this.parent.getViewSelector() + " div#map_canvas");
+            /*mapaCanvas.unbind();
+            mapaCanvas.undelegate();*/
+            //var mapaHtmlElement = $("#map_canvas_global")[0];
+             //nuevoMapa.mostrarMapaEstablecimiento(this.model, mapaCanvas[0]);
+            mapaCanvas.css("height", mapaCanvas.parent().height());
+            var latLong2 = new google.maps.LatLng(latLong.latitud, latLong.longitud);
+            var map = createMap(this.parent.getViewSelector() + " #map_canvas", latLong2);
+            this.parent.selectedTab.googleMap = map;
+            this.model.trigger("mapaFinalizado");
          },
          
         

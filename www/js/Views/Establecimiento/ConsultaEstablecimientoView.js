@@ -28,13 +28,13 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.initializeModelDataSource();
+            //this.initializeModelDataSource();
         },
 
-        initializeModelDataSource: function () {
+        /*initializeModelDataSource: function () {
             this.modelDataSource = new ModelDataSource ({view: this});
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },
+        },*/
         
         ejecutarBuscarEstablecimiento: function(){
             var busquedaEstablecimientoView = new BusquedaEstablecimientoView();

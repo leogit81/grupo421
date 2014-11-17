@@ -49,7 +49,7 @@ var TabPanel = (function ($, common) {
                 return;
             }
 
-            self.view = config.view;
+            /*self.view = config.view;
             self.viewClass = config.viewClass;
             self.tabName = config.tabName;
             self.panelId = config.panelId;
@@ -59,7 +59,8 @@ var TabPanel = (function ($, common) {
             self.tabIndex = config.tabIndex;
             self.isLoaded = config.isLoaded;
             self.tabPanelView = config.tabPanelView;
-            self.customLoadView = config.customLoadView;
+            self.customLoadView = config.customLoadView;*/
+            _.extend(self, config);
         }
         
         function getDefaultConfig() {
@@ -108,14 +109,22 @@ var TabPanel = (function ($, common) {
         function loadView() {
             if (!common.isEmpty(self.customLoadView)) {
                 self.customLoadView();
-                return;
+            } else {
+                if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
+                    self.view.model.load(_.result(self, "filtroConsulta"));
+                } else {
+                     //si es un mapa no hace el render nuevamente, muestra el mapa que ya se cargó
+                     //la primera vez
+                     if (!self.esMapa) {
+                        self.view.render();
+                     } else {
+                         $(self.view.parent.getViewSelector()).find("#map_canvas").resize();
+                     }
+                }            
             }
 
-             if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
-                self.view.model.load(_.result(self, "filtroConsulta"));
-                //self.isLoaded = true;
-             }
             //self.tabPanelView.showPanel(self.view);
+            self.isLoaded = true;
         }
         
         self.loadConfig = loadConfig;

@@ -187,7 +187,7 @@
                         <!--                        <img src="./img/sisaMobile.png" class='zimagen_header'>-->
                     </div>
                     <div id="content">
-                        <div id='map_canvas'></div>
+                        <div id='map_canvas_global'></div>
                         <!--Paneles usados para navegar por la aplicación-->
                         <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias" data-load="common.homeLoad" data-unload="common.homeUnload">
                             <ul class="list">
@@ -351,5 +351,23 @@
                     </div>
                 </div>
             </div>
+            
+                <script>
+        var map;
+        function createMap(selector, latLong) {
+          var mapOptions = {
+            zoom: 8,
+            center: latLong/*new google.maps.LatLng(-34.397, 150.644)*/,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+		  mapElement = af(selector);
+          /*map = new google.maps.Map(document.getElementById('map-canvas'),
+              mapOptions);*/
+		  map = new google.maps.Map(mapElement.get(0),
+			mapOptions);
+            return map;
+        }
+    </script>
+            
         </body>
         </html>
