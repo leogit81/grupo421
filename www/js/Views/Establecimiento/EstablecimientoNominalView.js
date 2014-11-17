@@ -51,35 +51,8 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
                 panelId: "establecimientoCamas",
                 viewClass: CamasCollectionView,
 				modelClass: CamasCollection
-				//titleCSSClass: "camasTabViewClass"
             }
         ],
-        
-        loadSelectedTab: function () {
-            //parche, hace el clic de la vista general para que se actualice la ubicacion
-            TabPanelView.prototype.loadSelectedTab.call(this);
-            /*if (this.selectedTab.panelId === "establecimientoGeneral"){
-                var self = this;
-                setTimeout( function () {
-                    var tabHtml = self.getTabHtmlPorHref("establecimientoGeneral");
-                    tabHtml[0].click();
-                }, 300)
-            }*/
-        },
-        
-        /*loadMapaEstablecimiento: function () {
-            this.showPanel();
-            //if (common.isEmpty(this.selectedTab.isLoaded) || !this.selectedTab.isLoaded) {
-                $(this.getViewSelector()).find("#map_canvas").on('resize', _.bind(this.onMapaResize, this));
-                var coordenadasEstablecimientoModel = this.getCoordenadasMapaModel();
-                this.selectedTab.view.setModel(coordenadasEstablecimientoModel);
-                this.selectedTab.view.render();
-            //}
-        },
-        
-        onMapaResize: function () {
-            google.maps.event.trigger(this.selectedTab.googleMap, 'resize');
-        },*/
         
         ejecutarConsultaNominalEstablecimiento: function (codigoEstablecimiento) {
             this.codigoEstablecimiento = codigoEstablecimiento;
@@ -92,27 +65,12 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             options.renderer = renderer;
             this.setCodigoEstablecimiento(attributes.codigo);
 			
-            //llama al constructor base para que se carguen los tabs de panel
-            //this.tabsConfig[3].onViewRenderedHandler = this.onGoogleMapViewRendered;
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "establecimientoGeneral").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoPrestaciones").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoCamas").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
-			//var mapaEstablecimientoTab = this.findTab("panelId", "establecimientoMapas");
-            /*mapaEstablecimientoTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
-            mapaEstablecimientoTab.modelClass = this.getCoordenadasMapaModel();*/
-            //mapaEstablecimientoTab.customLoadView = _.bind(this.loadMapaEstablecimiento, this);
         },
-        
-        /**
-        * Setea el modelo para la vista y también actualiza los modelos de las vistas de los tabs.
-        */
-        /*setModel: function (model) {
-            this.getViewByName("General").setModel(model);
-            
-            this.getViewByName("Mapas").setModel(model.get("coordenadasDeMapa"));
-        },*/
         
         /**
         * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
@@ -132,21 +90,6 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
         var tab = this.findTab("tabName", viewName);
         return tab.view;
     };
-    
-    /*establecimientoNominalView.prototype.render = function (viewName) {
-        TabPanelView.prototype.render.call(this);
-        $("#" + this.attributes.id).addClass("consultaNominalEstablecimiento");
-    };*/
-    
-    /*establecimientoNominalView.prototype.onGoogleMapViewRendered = function (googleMapView) {
-        this.selectedTab.isLoaded = true;
-        //$.ui.loadContent(googleMapView.getViewId(), false, false, "pop");
-        //$.ui.loadContent(this.getViewSelector() + " div#map_canvas", false, false, "pop");
-        //$.ui.loadContent("#map_canvas_global", false, false, "pop");
-        //$("#map_canvas").trigger("orientationchange");
-        //$(googleMapView.getViewSelector()).css("display", "block");
-        //$.(this.getViewSelector() + " #map_canvas").show();
-     };*/
     
     /**
     * Carga la data del tab de prestaciones cuando el usuario hace clic sobre el mismo.

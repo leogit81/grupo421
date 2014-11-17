@@ -51,6 +51,11 @@ ul li a div h3 {
     margin-right: 0;
     padding: 0;
     list-style: none;
+    background-color: darkblue;
+}
+
+.tabs ul li.selectedTabButtonClass{
+    background-color: azure;
 }
 
 .tabs ul {

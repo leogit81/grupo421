@@ -68,10 +68,20 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         
         onSelectedTab: function (args) {
             if (!common.isEmpty(args)) {
-                var selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
-                this.selectedTab = this.findTab("panelId", selectedTabPanelId);
+                this.selectedTabButtonHref = args.currentTarget.getAttribute("href");
+                this.selectedTab = this.findTab("panelId", common.trimLeft(this.selectedTabButtonHref, "#"));
                 this.loadSelectedTab();
+                this.setSelectedTabButtonClass(this.selectedTabButtonHref);
             }
+        },
+        
+        /**
+        * Setea la clase css del tab button seleccionado.
+        */
+        setSelectedTabButtonClass: function (selectedTabButtonHref) {
+            var selectedTabButtonEl = this.getTabHtmlPorHref(selectedTabButtonHref);
+            this.$el.find(".tabs ul li").removeClass("selectedTabButtonClass");
+            selectedTabButtonEl.addClass("selectedTabButtonClass");
         },
         
         /**
@@ -118,7 +128,14 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
             //Cuando se carga el tab panel por primera vez ingresa al if y hace el render
             if (this.isLoadingDefaultView) {
                 this.isLoadingDefaultView = false;
+                //para que al mostrar el tab general la primera vez se muestren completos
+                //los datos de la ubicación del establecimiento
                 this.render();
+                this.setSelectedTabButtonClass(this.selectedTabButtonHref);
+                var self = this;
+                setTimeout( function () {
+                    self.selectedTab.view.render();
+                }, 150);
                 return;
              }
             
@@ -126,6 +143,9 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
             this.showPanel();
         }
     });
+    
+    tabPanelView.prototype.selectedTab = null;
+    tabPanelView.prototype.selectedTabButtonHref = null;
     
     /**
     * Obtiene el modelo de coordenadas a partir del modelo de establecimiento nominal.
@@ -144,7 +164,6 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         this.setElement($(this.getViewSelector())[0]);
     };
     
-    tabPanelView.prototype.selectedTab = null;
     tabPanelView.prototype.selectedTabEl = function () {
         //return $("#selectedTab");
         return $(this.getViewSelector() + " div#selectedTab");
@@ -163,7 +182,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         this.setTabWidth();
         this.armarHtmlSelectedTab();
         //$(this.$el[0]).css("style", "width:100%; height:100%;");
-        $("#map_canvas").attr("data-touchlayer", "ignore");
+        //$("#map_canvas").attr("data-touchlayer", "ignore");
     };
     
     /**
@@ -171,8 +190,8 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     */
     tabPanelView.prototype.loadDefaultView = function () {
         this.isLoadingDefaultView = true;
+        this.selectedTabButtonHref = "#" + this.selectedTab.panelId;
         this.loadSelectedTab();
-        //this.render();
     };
     
     /**
@@ -278,9 +297,9 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     };
     
     tabPanelView.prototype.getTabHtmlPorHref = function (href) {
-        var tabBuscado = _.find($(".tabs ul li a", this.el),
+        var tabBuscado = _.find(this.$el.find(".tabs ul li"),
             function (item) {
-                return $(item).hash() === href;
+                return $(item).find("a").attr("href") === href;
             });
         
         return $(tabBuscado);
