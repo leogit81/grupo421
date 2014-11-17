@@ -70,9 +70,9 @@ function GoogleMap(listaEstablecimiento) {
         * @param {google.maps.LatLng} posicion, posición donde se centrará el mapa.
         * @param {HTMLElement} htmlElement, elemento del DOM donde insertar el mapa.
         */    
-    this.showMap = function (posicion, htmlElement) {
+    this.showMap = function (posicion, htmlElement, nivelZoom) {
         var mapOptions = {
-            zoom: 14,
+            zoom: nivelZoom,
             center: posicion,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             mapTypeControl: true,
@@ -96,7 +96,8 @@ function GoogleMap(listaEstablecimiento) {
                 latLong = new google.maps.LatLng(establecimiento.latitud, establecimiento.longitud),
                 mapBounds = new google.maps.LatLngBounds();
 
-            var map = this.showMap(latLong, htmlElement);
+            var nivelZoom = model.get("nivelZoom");
+            var map = this.showMap(latLong, htmlElement, nivelZoom);
             mapBounds.extend(latLong);
             addMarkersToMap(map, latLong);
 
@@ -113,7 +114,7 @@ function GoogleMap(listaEstablecimiento) {
         setTimeout( function () { 
             google.maps.event.trigger(map, 'resize');
             map.setCenter(latLong);
-            map.setZoom(16);
+            map.setZoom(nivelZoom);
         }, 2500 );
     };
 }

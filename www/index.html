@@ -350,24 +350,6 @@
                         </nav>
                     </div>
                 </div>
-            </div>
-            
-                <script>
-        var map;
-        function createMap(selector, latLong) {
-          var mapOptions = {
-            zoom: 8,
-            center: latLong/*new google.maps.LatLng(-34.397, 150.644)*/,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-		  mapElement = af(selector);
-          /*map = new google.maps.Map(document.getElementById('map-canvas'),
-              mapOptions);*/
-		  map = new google.maps.Map(mapElement.get(0),
-			mapOptions);
-            return map;
-        }
-    </script>
-            
+            </div>            
         </body>
         </html>
