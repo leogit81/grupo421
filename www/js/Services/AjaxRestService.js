@@ -122,14 +122,14 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
 
     AjaxService.prototype.internalSuccessCallback = function (data) {
         if (common.isJSON(data)){
-            var codigoResultadoWS = JSON.parse(data).estado;
+            var codigoResultadoWS = JSON.parse(data).estado.split(":")[0].trim();
         }
         else {
             var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
         }
         this.resultadoUltimaEjecucion = codigoResultadoWS;
 
-        if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO") {
+        if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO" || codigoResultadoWS === "ERROR_AUTENTICACION") {
             if (!common.isEmpty(this.successCallback)) {
                 this.successCallback(data);
         }
@@ -141,14 +141,14 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
 
     AjaxService.prototype.internalPostSuccessCallback = function (data) {
         if (common.isJSON(data)){
-            var codigoResultadoWS = JSON.parse(data).estado.toUpperCase();
+            var codigoResultadoWS = JSON.parse(data).estado.split(":")[0].trim().toUpperCase();
         }
         else {
             var codigoResultadoWS = this.getCodigoResultadoWebService(data).toUpperCase();
         }
         this.resultadoUltimaEjecucion = codigoResultadoWS;
 
-        if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO") {
+        if (codigoResultadoWS === "OK" || codigoResultadoWS === "LIMITE_EXCEDIDO" || codigoResultadoWS === "ERROR_AUTENTICACION") {
             if (!common.isEmpty(this.successCallback)) {
                 this.successCallback(data);
             }

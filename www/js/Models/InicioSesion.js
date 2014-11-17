@@ -13,20 +13,29 @@ var InicioSesion = (function (common, BaseModel) {
         },
 
         processData: function (data) {
-            var jsonData = this.converter.convert(data);
-            this.setJsonData(jsonData);
-            
+            //            var jsonData = this.converter.convert(data);
+            //            this.setJsonData(jsonData);
+
+            /*Parche para cancelar ejecución si el usuario no se autenticó correctamente*/
+            if (!BaseModel.prototype.processData.call(this,data)) return;
             /*
             *Si llegó a este punto es porque el usuario autenticó correctamente.
             *Se actualiza el serviceConfig con usuario y contraseña.
             *Se actualiza el boton de inicio/cierre de sesión.
             *Se persisten los datos de loggeo en el localStorage.
             */
-            
+
             ServiceConfig.usuario = this.get("usuario");
             ServiceConfig.clave = this.get("clave");
             
-            common.showLogin();
+            /*
+            *Si $.ui.history.length = 0, significa que estamos en el home. 
+            *En cualquier otro caso, no se muestra el botón de inicio de sesión
+            */
+            if($.ui.history.length == 0)
+            {
+                common.showLogin();
+            }
 
             if (typeof(localStorage) == 'undefined' ) {
                 alert('Almacenamiento local no soportado.');

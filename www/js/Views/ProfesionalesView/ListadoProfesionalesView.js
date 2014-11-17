@@ -34,12 +34,13 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
         },
 
-        renderVistaDeDatos: function (data) {
-            var profesionalCollection = new ProfesionalCollection();
-            var profesionalColleccionView = ProfesionalCollectionView.getInstance();
-            profesionalColleccionView.setModel({model: profesionalCollection});
-            profesionalCollection.processData(data);
-        },
+//        renderVistaDeDatos: function (data) {
+//            var profesionalCollection = new ProfesionalCollection();
+//            var profesionalColleccionView = new ProfesionalCollectionView();
+//            profesionalColleccionView.setModel({model: profesionalCollection});
+//            profesionalCollection.load(data);
+//            profesionalCollection.processData(data);
+//        },
 
         ejecutarListadoProfesionales: function(){
             var matriculaProfesional = $("#matriculaProfesional").val();
@@ -67,7 +68,11 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
                 dataWS.apellido = apellidoProfesional;
             }
 
-            this.modelDataSource.getModelData(ProfesionalCollection, dataWS);
+//            this.modelDataSource.getModelData(ProfesionalCollection, dataWS);
+            var profesionalCollection = new ProfesionalCollection();
+            var profesionalColleccionView = new ProfesionalCollectionView();
+            profesionalColleccionView.setModel({model: profesionalCollection});
+            profesionalCollection.load(dataWS);
         },
 
         render: function(){
