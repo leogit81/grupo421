@@ -10,8 +10,8 @@ var InstFormCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
             'data-nav': "consultas_nav"
         },
         
-        itemTemplateString: "<li><a><%=nombre%></br><span class='codigoInstForm'> <%=codigoSISA%> </span> - <%=provincia%></a></li>",
-
+        itemTemplateString: "<li><a><%=nombre%></br><span class='codigoInstForm'> <%=codigoSISA%> </span> </li>",
+//- <% if (provincia) { %><%=provincia%></a><% } %>
         busquedaNominalInstForm: function (eventData) {
             var codigoInstForm = this.getCodigoInstFormFromSelectedItem(eventData.currentTarget.outerHTML),
                 instFormNominalView = new InstFormNominalView({codigo: codigoInstForm});

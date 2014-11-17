@@ -35,7 +35,7 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
 
         renderVistaDeDatos: function (data) {
             var instFormCollection = new InstFormCollection();
-            var instFormColleccionView = InstFormCollectionView.getInstance();
+            var instFormColleccionView = new InstFormCollectionView();
             instFormColleccionView.setModel({model: instFormCollection});
             instFormCollection.processData(data);
         },

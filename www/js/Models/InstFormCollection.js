@@ -2,6 +2,13 @@ var InstFormCollection = (function (common, Backbone, converter, Service) {
     "use strict";
     
     var instFormCollection = BaseCollection.extend({
+                
+        defaults : {
+            "nombre": null,
+            "codigoSISA": null,
+            "provincia": null
+        },
+        
         initialize: function (attributes, options) {
             BaseCollection.prototype.initialize.call(this, attributes, options);
             this.service.loadConfig(this.getServiceConfig());
