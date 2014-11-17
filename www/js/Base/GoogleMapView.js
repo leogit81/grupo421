@@ -1,4 +1,4 @@
-var GoogleMapView = (function ($, BaseView) {
+var GoogleMapView = (function ($, BaseView, renderer) {
     "use strict";
 
     var googleMapView = BaseView.extend({
@@ -10,6 +10,9 @@ var GoogleMapView = (function ($, BaseView) {
             'data-nav': "consultas_nav"
         },
         
+        template : _.template(
+            "<div><span class='mapaDefaultMessage'>Lo sentimos, no se puede visualizar el mapa porque no hay información disponible de las coordenadas.</div>"),
+        
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = this;
@@ -18,7 +21,7 @@ var GoogleMapView = (function ($, BaseView) {
         
         setModel: function (model) {
             BaseView.prototype.setModel.call(this, model);
-            this.model.on("mapaFinalizado", _.bind(this.mapaFinalizadoHandler, this));
+            //this.model.on("mapaFinalizado", _.bind(this.mapaFinalizadoHandler, this));
         },
         
         preRender: function () {            
@@ -30,24 +33,37 @@ var GoogleMapView = (function ($, BaseView) {
         },
         
         render: function () {
-            BaseView.prototype.armarHtmlConData.call(this, {});
-            
             var latLong = {
                 latitud: this.model.get("latitud"),
                 longitud: this.model.get("longitud")
             };
-            var establecimientos = [latLong];
-            var nuevoMapa = new GoogleMap(establecimientos);
+            
+            if ((common.isEmpty(latLong.latitud) || latLong.latitud == "null")
+                && (common.isEmpty(latLong.longitud) || latLong.longitud == "null")) {
+                BaseView.prototype.render.call(this);
+                this.parent.updateHTMLSubVista(this);
+            } else {
+                if (common.isEmpty(this.model.get("nivelZoom")))
+                {
+                    this.model.set("nivelZoom", 14);
+                }
+                this.mostrarMapa(latLong);
+            }
+         },
+        
+        mostrarMapa: function (latLong) {
+            //BaseView.prototype.armarHtmlConData.call(this);
+            var nuevoMapa = new GoogleMap([latLong]);
             var mapaCanvas = $(this.parent.getViewSelector() + " div#map_canvas");
             nuevoMapa.mostrarMapaEstablecimiento(this.model, mapaCanvas[0]);
             mapaCanvas.css("height", mapaCanvas.parent().height());
             this.parent.selectedTab.googleMap = nuevoMapa;
-         },
-         
-        
-        mapaFinalizadoHandler: function () {
             this.trigger("viewRendered", this);
         },
+        
+        /*mapaFinalizadoHandler: function () {
+            this.trigger("viewRendered", this);
+        },*/
         
         getInstance: function () {
             return this;
@@ -55,5 +71,4 @@ var GoogleMapView = (function ($, BaseView) {
     });
 
     return googleMapView;
-})(af, BaseView);
-
+}(af, BaseView, AppFrameworkRenderer));

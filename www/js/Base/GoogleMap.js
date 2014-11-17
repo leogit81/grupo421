@@ -110,7 +110,7 @@ function GoogleMap(listaEstablecimiento) {
             });
         }
 
-        model.trigger("mapaFinalizado");
+        //model.trigger("mapaFinalizado");
         setTimeout( function () { 
             google.maps.event.trigger(map, 'resize');
             map.setCenter(latLong);

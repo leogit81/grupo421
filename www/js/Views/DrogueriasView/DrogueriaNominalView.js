@@ -43,10 +43,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
                 tabName: "Mapas",
                 panelId: "drogueriaMapas",
                 viewClass: GoogleMapView,
-                /*modelClass: function (scope) {
-                    var tabGeneral = scope.findTab("panelId", "drogueriaGeneral");
-                    return tabGeneral.view.model.get("coordenadasDeMapa");
-                }*/
+                esMapa: true
             }
         ],
         

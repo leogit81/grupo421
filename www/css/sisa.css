@@ -85,7 +85,6 @@ ul li a div h3 {
     padding: 0px;
     line-height: 2;
     display: block;
-    margin-bottom: 10px;
 }
 
 .tabs #selectedTab div{
@@ -128,6 +127,7 @@ ul li a div h3 {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+    margin-top: 10px;
 }
 
 span.prestacionesTabViewClass {

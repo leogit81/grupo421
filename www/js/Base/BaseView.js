@@ -235,7 +235,7 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
             jsonData = {};
         }
 
-        //jsonData = _.extend(this.getModelDefault(), jsonData);
+        //jsonData = _.extend(_.result(this.getModelDefault()), jsonData);
 
         return this.template(jsonData);
     };

@@ -110,20 +110,17 @@ var TabPanel = (function ($, common) {
             if (!common.isEmpty(self.customLoadView)) {
                 self.customLoadView();
             } else {
-                if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
-                    self.view.model.load(_.result(self, "filtroConsulta"));
+                if (self.esMapa) {
+                    self.view.parent.loadMapaView();
                 } else {
-                     //si es un mapa no hace el render nuevamente, muestra el mapa que ya se cargó
-                     //la primera vez
-                     if (!self.esMapa) {
+                    if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
+                        self.view.model.load(_.result(self, "filtroConsulta"));
+                    } else {
                         self.view.render();
-                     } else {
-                         $(self.view.parent.getViewSelector()).find("#map_canvas").resize();
-                     }
-                }            
+                    }
+                }
             }
 
-            //self.tabPanelView.showPanel(self.view);
             self.isLoaded = true;
         }
         

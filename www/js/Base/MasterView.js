@@ -79,9 +79,11 @@ var MasterView = (function ($, common, BaseView) {
             htmlSubvista = viewObject.view.$el[0].innerHTML;
 
         if (insertElement.length > 0) {
+            //viewObject.view.setElement(insertElement[0]);
             insertElement.empty();
             insertElement.append(common.isEmpty(htmlSubvista)?"":htmlSubvista);
         } else {
+            //viewObject.view.setElement(this.$el[0]);
             this.$el.append(htmlSubvista);
         }
     };

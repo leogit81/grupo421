@@ -50,6 +50,30 @@ var EstablecimientoNominalGeneralView = (function ($, common, _, renderer, Maste
             var participacionesModel = this.getModelOrDefault("participaciones");
             this.getViewByName("participaciones").setModel(participacionesModel);
         }
+        
+        /*,
+        insertHTMLSubVista: function (viewObject) {
+            this.$el.append(this.replaceTemplateWithData());;
+            var insertElement = $(this.$el[0]).find("#" + viewObject.insertElID),
+            htmlSubvista = viewObject.view.$el[0].innerHTML;
+
+            if (insertElement.length > 0) {
+                viewObject.view.setElement(insertElement[0]);
+            } else {
+                viewObject.view.setElement(this.$el[0]);
+            }
+            MasterView.prototype.insertHTMLSubVista.call(this, viewObject);
+        },
+        
+        replaceTemplateWithData: function (jsonData) {
+            if (common.isEmpty(jsonData)) {
+                jsonData = {};
+            }
+
+            jsonData = _.extend(_.result({"defaults": this.getModelDefault()}, "defaults"), jsonData);
+
+            return this.template(jsonData);
+        }*/
 	});
     
     establecimientoNominalGeneralView.prototype.getModelDefault = function () {

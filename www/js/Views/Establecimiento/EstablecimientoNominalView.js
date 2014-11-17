@@ -67,7 +67,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             }*/
         },
         
-        loadMapaEstablecimiento: function () {
+        /*loadMapaEstablecimiento: function () {
             this.showPanel();
             //if (common.isEmpty(this.selectedTab.isLoaded) || !this.selectedTab.isLoaded) {
                 $(this.getViewSelector()).find("#map_canvas").on('resize', _.bind(this.onMapaResize, this));
@@ -79,7 +79,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
         
         onMapaResize: function () {
             google.maps.event.trigger(this.selectedTab.googleMap, 'resize');
-        },
+        },*/
         
         ejecutarConsultaNominalEstablecimiento: function (codigoEstablecimiento) {
             this.codigoEstablecimiento = codigoEstablecimiento;
@@ -99,10 +99,10 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             this.findTab("panelId", "establecimientoGeneral").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoPrestaciones").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoCamas").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
-			var mapaEstablecimientoTab = this.findTab("panelId", "establecimientoMapas");
+			//var mapaEstablecimientoTab = this.findTab("panelId", "establecimientoMapas");
             /*mapaEstablecimientoTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
             mapaEstablecimientoTab.modelClass = this.getCoordenadasMapaModel();*/
-            mapaEstablecimientoTab.customLoadView = _.bind(this.loadMapaEstablecimiento, this);
+            //mapaEstablecimientoTab.customLoadView = _.bind(this.loadMapaEstablecimiento, this);
         },
         
         /**
@@ -177,10 +177,10 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
     /**
     * Obtiene el modelo de coordenadas a partir del modelo de establecimiento nominal.
     */
-    establecimientoNominalView.prototype.getCoordenadasMapaModel = function () {
+    /*establecimientoNominalView.prototype.getCoordenadasMapaModel = function () {
         var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
         return tabGeneral.view.model.get("coordenadasDeMapa");
-    };
+    };*/
 	
 	return establecimientoNominalView;
 }(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView, CamasCollectionView));

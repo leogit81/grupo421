@@ -43,10 +43,7 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
                 tabName: "Mapas",
                 panelId: "farmaciaMapas",
                 viewClass: GoogleMapView,
-                /*modelClass: function (scope) {
-                    var tabGeneral = scope.findTab("panelId", "farmaciaGeneral");
-                    return tabGeneral.view.model.get("coordenadasDeMapa");
-                }*/
+                esMapa: true
             }
         ],
         
@@ -63,9 +60,9 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "farmaciaGeneral").filtroConsulta = _.bind(this.getCodigoFarmacia, this);
-            var mapaFarmaciaTab = this.findTab("panelId", "farmaciaMapas");
+            /*var mapaFarmaciaTab = this.findTab("panelId", "farmaciaMapas");
             mapaFarmaciaTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
-            mapaFarmaciaTab.modelClass = this.getCoordenadasMapaModel();
+            mapaFarmaciaTab.modelClass = this.getCoordenadasMapaModel();*/
         },
         
         /*mostrarTabEstablecimientoGeneral: function () {

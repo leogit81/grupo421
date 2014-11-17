@@ -32,10 +32,7 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
                 tabName: "Mapas",
                 panelId: "instFormMapas",
                 viewClass: GoogleMapView,
-//                modelClass: function (scope) {
-//                    var tabGeneral = scope.findTab("panelId", "instFormGeneral");
-//                    return tabGeneral.view.model.get("coordenadas");
-//                }
+                esMapa: true
             }
         ],
 

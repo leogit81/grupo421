@@ -94,6 +94,18 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
             //}
         },
         
+        loadMapaView: function () {
+            this.showPanel();
+            $(this.getViewSelector()).find("#map_canvas").on('resize', _.bind(this.onMapaResize, this));
+            var coordenadasEstablecimientoModel = this.getCoordenadasMapaModel();
+            this.selectedTab.view.setModel(coordenadasEstablecimientoModel);
+            this.selectedTab.view.render();
+        },
+        
+        onMapaResize: function () {
+            google.maps.event.trigger(this.selectedTab.googleMap, 'resize');
+        },
+        
         /**
         * Handler del evento viewRendered que se disparÃ¡ al finalizar la ejecución
         * del método render de cualquiera de las vistas asociadas a los tabs.
@@ -115,11 +127,21 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         }
     });
     
+    /**
+    * Obtiene el modelo de coordenadas a partir del modelo de establecimiento nominal.
+    */
+    tabPanelView.prototype.getCoordenadasMapaModel = function () {
+        //var tabMapa = this.findTab("esMapa", true);
+        var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
+        return tabGeneral.view.model.get("coordenadasDeMapa");
+    };
+    
     tabPanelView.prototype.hideLoadingMask = function () { };
     
     tabPanelView.prototype.renderFromData = function () {
         BaseView.prototype.renderFromData.call(this);
         $(this.getViewSelector()).addClass("tabPanelViewClass");
+        this.setElement($(this.getViewSelector())[0]);
     };
     
     tabPanelView.prototype.selectedTab = null;
@@ -337,7 +359,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         tab.initialize();
         this.nestedViewsDictionary[tab.tabName] = {
             view: tab.view,
-            insertElID: "selectedTab"
+            insertElID: (tab.esMapa ? "map_canvas" : "selectedTab")
         };
         tab.view.on("viewRendered", _.bind(tabConfig.onViewRenderedHandler || this.onViewRendered, this));
          return tab;
