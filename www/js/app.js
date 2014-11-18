@@ -51,6 +51,7 @@ var app = (function ($, jquery, logger) {
     function loadApp () {
         launchAppFramework();
         wp8DesktopBrowser();
+        googleMapLoadSrc();
         $.query("#afui #splashscreen").remove();
         launchNoticiasSlider();
         $("div#header").on("click", "a#menubadge", onClickMenuBadge);
@@ -72,6 +73,15 @@ var app = (function ($, jquery, logger) {
         }
     };
 
+    function googleMapLoadSrc () {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBz43FjcTt7PYeUpxk-RzVR__kSyooWcBg&sensor=false&' +
+            'callback=dummyFunction';
+        document.body.appendChild(script);
+        window.dummyFunction = function () {};        
+    };
+    
     /*
      * POPUP para iniciar sesión
      */
