@@ -48,6 +48,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaRemediarSideMenu").on("click", _.bind(this.showConsultaRemediar, this));
             jquery("#linkConsultaReferentesSideMenu").on("click", _.bind(this.showConsultaReferentes, this));
             jquery("#linkConsultaInstFormSideMenu").on("click", _.bind(this.showConsultaInstForm, this));
+            jquery("#linkConsultaGeorefes").on("click", _.bind(this.showConsultaGeorefes, this));
         },
         
         showConsultaMinisterio: function(e){
@@ -103,6 +104,11 @@ var MenuConsultasView = (function(BaseView, jquery){
             var consultaInstFormView = ConsultaInstFormView.getInstance();
             consultaInstFormView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_10.png' class='zimagen_header'>");
+        },
+        showConsultaGeorefes: function(e){
+            var consultaGeorefesView = ConsultaGeorefesView.getInstance();
+            consultaGeorefesView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_11.png' class='zimagen_header'>");
         },
 	});
     
