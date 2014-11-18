@@ -22,7 +22,7 @@ var Logger = (function ($, common) {
         if (response.status === 200)
             return "Información";
         
-        return "SIISA Móvil";
+        return "SISA Móvil";
     };
     
     logger.obtenerCodigoError = function (response) {

@@ -11,11 +11,11 @@ var ConsultaProfesionalesView = (function (jquery, $, renderer, BaseView, Listad
         },
 
         template : _.template(
-            '<div class="formGroupHead">Registro Federal de Profesionales. Seleccione una opción.</div>' +
+            '<div class="formGroupHead">Registro Federal de Profesionales.<br>Seleccione una opción.</div>' +
             '<div>' +
-            '<a id="submitListadoProfesionales" class="button">Listado de Profesionales</a>' +
+            '<a id="submitListadoProfesionales" class="button">Búsqueda de profesionales</a>' +
             '<br>' +
-            '<a id="submitBuscarProfesional" class="button">Buscar Profesional</a>' +
+            '<a id="submitBuscarProfesional" class="button">Buscar profesional por código</a>' +
             '</div>'
         ),
 

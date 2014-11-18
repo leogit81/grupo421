@@ -13,7 +13,7 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
         template : _.template(
             '<div class="formGroupHead">Ingrese el código de la institución formadora que quiere buscar.</div>' +
             '<input id="codigoInstForm" type="number" name="codigoInstForm" placeholder="Código de Institución Formadora"></input></br>' +
-            '<a id="submitConsultaBusquedaInstForm" class="button">Consultar</a>'
+            '<a id="submitConsultaBusquedaInstForm" class="button">Buscar</a>'
         ),
 
         initialize: function(attributes, options) {
@@ -34,13 +34,8 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
             var instFormNominalModel = new InstFormNominal();
             var instFormView = new InstFormNominalView({codigo: codigoInstForm});
             instFormView.loadDefaultView();
-
-            //            instFormView.setModel(instFormNominalModel);
-            //            instFormNominalModel.load(codigoInstForm);
         },
-
-        //        render: function(){},
-
+        
         /**
          * Usado para bindear eventos a los controles del formulario.
          * Se ejecuta después del render cuando los controles se encuentran cargados en la página. 

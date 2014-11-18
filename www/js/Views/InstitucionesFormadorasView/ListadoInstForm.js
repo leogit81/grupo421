@@ -11,13 +11,13 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
         },
 
         template : _.template(
-            '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar Instituciones Formadoras.</div>' +
+            '<div class="formGroupHead">Complete uno o varios filtros para buscar instituciones formadoras.</div>' +
             '<input id="nombreInstForm" type="text" placeholder="Nombre de Institución Formadora"/>' +
             '<select id="dependenciaInstForm" name="dependenciaInstForm"></select>' +
             '<select id="pciaInstForm" name="pciaInstForm" onchange="deptos.actualizar(pciaInstForm, dptoInstForm, locInstForm)"></select>' +
             '<select id="dptoInstForm" name="dptoInstForm" onchange="localidades.actualizar(pciaInstForm, dptoInstForm, locInstForm)"></select>' +
             '<select id="locInstForm" name="locInstForm"></select>' +
-            '<a id="submitConsultaListadoInstForm" class="button">Consultar</a>'
+            '<a id="submitConsultaListadoInstForm" class="button">Buscar</a>'
         ),
 
         initialize: function(attributes, options) {

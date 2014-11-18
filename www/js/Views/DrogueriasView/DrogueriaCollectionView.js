@@ -10,7 +10,7 @@ var DrogueriaCollectionView = (function ($, common, Backbone, _, renderer, BaseV
             'data-nav': "consultas_nav"
         },
 
-        itemTemplateString: "<li><a><%=nombre%></br><span class='codigoDrogueria'> <%=codigo%> </span> - <%=provincia%></a></li>",
+        itemTemplateString: "<li><a><span class='znombre'><%=nombre%></span></br><span class='codigoDrogueria'> <%=codigo%> </span> - <%=provincia%></a></li>",
 
         busquedaNominalDrogueria: function (eventData) {
             var codigoDrogueria = this.getCodigoDrogueriaFromSelectedItem(eventData.currentTarget.outerHTML),

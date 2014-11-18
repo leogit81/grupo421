@@ -11,12 +11,12 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
         },
 
         template : _.template(
-            '<div class="formGroupHead">Filtros</div>' +
+            '<div class="formGroupHead">Complete uno o varios filtros para buscar establecimientos en el registro NoMiVac.</div>' +
             '<input id="nombreNomivac" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="pciaNomivac" name="pciaNomivac" onchange="deptos.actualizar(pciaNomivac, dptoNomivac, locNomivac)"></select>' +
             '<select id="dptoNomivac" name="dptoNomivac" onchange="localidades.actualizar(pciaNomivac, dptoNomivac, locNomivac)"></select>' +
             '<select id="locNomivac" name="locNomivac"></select>' +
-            '<a id="submitConsultaNomivac" class="button">Enviar</a>'
+            '<a id="submitConsultaNomivac" class="button">Buscar</a>'
         ),
 
 

@@ -7,7 +7,7 @@ var EstablecimientoCollectionView = (function ($, common, BaseCollectionView, Es
             'data-nav': "consultas_nav"
         },
         
-        itemTemplateString : "<li><a><%=nombre%></br><span class='codigoEstablecimiento'> <%=codigo%> </span> - <%=provincia%></a></li>",
+        itemTemplateString : "<li><a><span class='znombre'><%=nombre%></span></br><span class='codigoEstablecimiento'> <%=codigo%> </span> - <%=provincia%></a></li>",
 
         busquedaNominalEstablecimiento: function (eventData) {
             var codigoEstablecimiento = this.getCodigoEstablecimientoFromSelectedItem(eventData.currentTarget.outerHTML),

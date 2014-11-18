@@ -11,12 +11,12 @@ var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, E
         },
 
         template : _.template(
-            '<div class="formGroupHead">Filtros</div>' +
+            '<div class="formGroupHead">Complete uno o varios filtros para buscar establecimientos en el registro REDOS.</div>' +
             '<input id="nombreRedos" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="pciaRedos" name="pciaRedos" onchange="deptos.actualizar(pciaRedos, dptoRedos, locRedos)"></select>' +
             '<select id="dptoRedos" name="dptoRedos" onchange="localidades.actualizar(pciaRedos, dptoRedos, locRedos)"></select>' +
             '<select id="locRedos" name="locRedos"></select>' +
-            '<a id="submitConsultaRedos" class="button">Enviar</a>'
+            '<a id="submitConsultaRedos" class="button">Buscar</a>'
         ),
 
 

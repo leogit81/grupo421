@@ -11,12 +11,12 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         },
 
         template : _.template(
-            '<div class="formGroupHead">Filtros</div>' +
+            '<div class="formGroupHead">Complete uno o varios filtros para buscar establecimientos.</div>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
             '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
-            '<a id="submitConsultaEstablecimiento" class="button">Enviar</a>'
+            '<a id="submitConsultaEstablecimiento" class="button">Buscar</a>'
         ),
         
         render: function() {
