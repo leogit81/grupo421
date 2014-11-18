@@ -10,11 +10,13 @@ var ProfesionalCollectionView = (function ($, common, Backbone, _, renderer, Bas
             'data-nav': "consultas_nav"
         },
 
-        itemTemplateString: "<li><a><%=nombre%> <%=apellido%></br><span class='codigoProfesional'><%=codigo%></span></a></li>",
+        itemTemplateString: "<li><a><span class='znombre'><%=nombre%> <%=apellido%></span></br><span class='codigoProfesional'><%=codigo%></span></a></li>",
 
         busquedaNominalProfesional: function (eventData) {
             var codigoProfesional = this.getCodigoProfesionalFromSelectedItem(eventData.currentTarget.outerHTML),
-                profesionalNominalView = new ProfesionalNominalView({usuario: 'uutn', clave: '11SC2NXHAI', codigo: codigoProfesional});
+                profesionalNominalView = new ProfesionalNominalView({usuario: ServiceConfig.usuario, 
+                                                                     clave: ServiceConfig.clave, 
+                                                                     codigo: codigoProfesional});
             profesionalNominalView.loadDefaultView();
         },
 

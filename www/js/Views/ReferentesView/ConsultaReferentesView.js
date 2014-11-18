@@ -10,10 +10,10 @@ var ConsultaReferentesView = (function(jquery, $, renderer, BaseView, Referentes
         },
 
         template : _.template(
-            '<div class="formGroupHead">Llene los filtros para buscar referentes.</div>' +
+            '<div class="formGroupHead">Complete uno o varios filtros para buscar referentes.</div>' +
             '<input id="nombreReferentes" type="text" placeholder="Nombre referente"/>' +
             '<select id="pciaReferentes"></select>' +
-            '<a id="submitConsultaReferentes" class="button">Consultar</a>'
+            '<a id="submitConsultaReferentes" class="button">Buscar</a>'
         ),
 
         initialize: function(attributes, options) {

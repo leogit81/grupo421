@@ -12,7 +12,7 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
         template : _.template(
             "<div><h2>Reporte de Establecimientos</h2></div></br>" +
             "<div><label>Cantidad total</label><%=cantidadTotal%></div></br>" +
-            "<div><label>Porcentaje total</label><%=porcentajeTotal%></div></br>" +
+//            "<div><label>Porcentaje total</label><%=porcentajeTotal%></div></br>" +
             "<% if (ItemList) { %><div id='itemList'><h2>Distribución</h2><%=ItemList%><% } %></div>"
         ),
 
@@ -52,10 +52,10 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
             var i;
             for (i = 0 ; i < itemListLen ; i++) { 
                 itemListString += 
-                    "<div>Cantidad: " + itemList[i].cantidad + "</br>" +
-                    "Descripción: " + itemList[i].descripcion + "</br>" +
-                    "ID: " + itemList[i].id + "</br>" +
-                    "Porcentaje: " + itemList[i].porcentaje + "</div></br>";
+                    "<span class='descItemReporte'>" + itemList[i].descripcion + "</span></br>" +
+                    "<div>Cantidad: <span class='cantidadItemReporte'>" + itemList[i].cantidad + "</span></br>" +
+                    "<span class='idItemReporte'>ID: " + itemList[i].id + "</br></span>" +
+                    "Porcentaje:<span class='porcetajeItemReporte'> " + itemList[i].porcentaje + "%</span></div></br>";
             }
             jsonData.ItemList = itemListString;
         }

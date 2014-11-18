@@ -27,11 +27,11 @@ function GoogleMap(listaEstablecimiento) {
             miPosicion = latLong,
             map = showMap(latLong);
         mapBounds.extend(latLong);
-        addMarkersToMap(map, latLong);
+        this.addMarkersToMap(map, latLong);
         var i;
         for (i = 0; i < listaEstablecimiento.length; i++) {
             latLong = new google.maps.LatLng(listaEstablecimiento[i].latitud, listaEstablecimiento[i].longitud);
-            addMarkersToMap(map, latLong);
+            this.addMarkersToMap(map, latLong);
             mapBounds.extend(latLong);
         }
         //map.fitBounds(mapBounds);
@@ -106,7 +106,7 @@ function GoogleMap(listaEstablecimiento) {
             var nivelZoom = model.get("nivelZoom");
             var map = this.showMap(latLong, htmlElement, nivelZoom);
             mapBounds.extend(latLong);
-            addMarkersToMap(map, latLong);
+            this.addMarkersToMap(map, latLong);
 
             //map.fitBounds(mapBounds);
             //map.center(miPosicion.B, miPosicion.k);

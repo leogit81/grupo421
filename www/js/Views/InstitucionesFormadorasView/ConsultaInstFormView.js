@@ -11,11 +11,11 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
         },
 
         template : _.template(
-            '<div class="formGroupHead">Registro Federal de Instituciones Formadoras. Seleccione una opción.</div>' +
+            '<div class="formGroupHead">Registro Federal de Instituciones Formadoras.<br>Seleccione una opción.</div>' +
             '<div>' +
-            '<a id="submitListadoInstForm" class="button">Listado de Instituciones Formadoras</a>' +
+            '<a id="submitListadoInstForm" class="button">Búsqueda de instituciones formadoras</a>' +
             '<br>' +
-            '<a id="submitBuscarInstForm" class="button">Buscar Institución Formadora</a>' +
+            '<a id="submitBuscarInstForm" class="button">Buscar institución formadora por código</a>' +
             '</div>'
         ),
 

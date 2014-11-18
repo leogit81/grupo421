@@ -9,8 +9,9 @@ var PrestacionCollectionView = (function ($, common, _, renderer, BaseCollection
             'id': 'resultadoConsultaNominalPrestacionesEstablecimiento',
             'data-nav': "consultas_nav"
         },
-        
-        itemTemplateString : "<li><span><%=nombre%></span></li>"
+        collectionTemplate : _.template("<ul class='list inset'><%= renderedHtml %></ul>"),
+
+        itemTemplateString : "<li><span class='znombre'><%=nombre%></span></li>"
 	});
 	
 	return prestacionCollectionView;

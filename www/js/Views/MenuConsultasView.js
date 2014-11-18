@@ -37,6 +37,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaRemediar").on("click", _.bind(this.showConsultaRemediar, this));
             jquery("#linkConsultaReferentes").on("click", _.bind(this.showConsultaReferentes, this));
             jquery("#linkConsultaInstForm").on("click", _.bind(this.showConsultaInstForm, this));
+            jquery("#linkConsultaGeorefes").on("click", _.bind(this.showConsultaGeorefes, this));
             //esto es para el menú lateral
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
@@ -48,7 +49,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaRemediarSideMenu").on("click", _.bind(this.showConsultaRemediar, this));
             jquery("#linkConsultaReferentesSideMenu").on("click", _.bind(this.showConsultaReferentes, this));
             jquery("#linkConsultaInstFormSideMenu").on("click", _.bind(this.showConsultaInstForm, this));
-            jquery("#linkConsultaGeorefes").on("click", _.bind(this.showConsultaGeorefes, this));
+            jquery("#linkConsultaGeorefesSideMenu").on("click", _.bind(this.showConsultaGeorefes, this));
         },
         
         showConsultaMinisterio: function(e){

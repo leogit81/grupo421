@@ -271,3 +271,19 @@ div#splashscreen img {
 div#splashscreen h1 {
     color: black;
 }
+
+.znombre {
+    font-weight: bold;
+}
+
+.idItemReporte {
+    display: none;
+}
+
+.cantidadItemReporte, .descItemReporte, .porcetajeItemReporte {
+    font-weight: bold;
+}
+
+.tituloCamas {
+    font-weight: bolder;
+}

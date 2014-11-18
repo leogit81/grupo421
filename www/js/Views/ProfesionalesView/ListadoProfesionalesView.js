@@ -11,14 +11,14 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
         },
 
         template : _.template(
-            '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar profesionales.</div>' +
+            '<div class="formGroupHead">Complete uno o varios filtros para buscar profesionales.</div>' +
             '<input id="matriculaProfesional" type="number" name="matriculaProfesional" placeholder="Matricula del profesional"></input></br>' +
             '<input id="nombreProfesional" type="text" name="nombreProfesional" placeholder="Nombre del profesional"></input></br>' +
             '<input id="apellidoProfesional" type="text" name="apellidoProfesional" placeholder="Apellido del profesional"></input></br>' +
             '<input id="dniProfesional" type="number" name="dniProfesional" placeholder="Numero de documento del profesional"></input></br>' +
             '<select id="provinciaProfesional" name="provinciaProfesional"></select>' +
             '<select id="profesionProfesional" name="profesionProfesional"></select>' +
-            '<a id="submitConsultaListadoProfesionales" class="button">Consultar</a>'
+            '<a id="submitConsultaListadoProfesionales" class="button">Buscar</a>'
         ),
 
         initialize: function(attributes, options) {

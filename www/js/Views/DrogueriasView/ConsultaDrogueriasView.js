@@ -11,11 +11,11 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
         },
 
         template : _.template(
-            '<div class="formGroupHead">Registro Federal de Droguerias. Seleccione una opción.</div>' +
+            '<div class="formGroupHead">Registro Federal de Droguerías.<br>Seleccione una opción.</div>' +
             '<div>' +
-            '<a id="submitListadoDroguerias" class="button">Listado de Droguerias</a>' +
+            '<a id="submitListadoDroguerias" class="button">Búsqueda de droguerías</a>' +
             '<br>' +
-            '<a id="submitBuscarDrogueria" class="button">Buscar Drogueria</a>' +
+            '<a id="submitBuscarDrogueria" class="button">Buscar droguería por código</a>' +
             '</div>'
         ),
 

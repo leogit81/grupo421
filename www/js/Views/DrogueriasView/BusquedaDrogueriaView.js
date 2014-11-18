@@ -11,9 +11,9 @@ var BusquedaDrogueriaView = (function (jquery, $, renderer, BaseView, DrogueriaN
         },
 
         template : _.template(
-            '<div class="formGroupHead">Ingrese el código de la drogueria que quiere buscar.</div>' +
-            '<input id="codigoDrogueria" type="number" name="codigoDrogueria" placeholder="Código de drogueria"></input></br>' +
-            '<a id="submitConsultaBusquedaDrogueria" class="button">Consultar</a>'
+            '<div class="formGroupHead">Ingrese el código de la droguería que quiere buscar.</div>' +
+            '<input id="codigoDrogueria" type="number" name="codigoDrogueria" placeholder="Código de droguería"></input></br>' +
+            '<a id="submitConsultaBusquedaDrogueria" class="button">Buscar</a>'
         ),
 
         initialize: function(attributes, options) {

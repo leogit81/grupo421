@@ -11,10 +11,10 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
         },
 
         template : _.template(
-            '<div class="formGroupHead">Seleccione el filtro por el que quiera buscar farmacias.</div>' +
+            '<div class="formGroupHead">Complete uno o varios filtros para buscar farmacias.</div>' +
             '<select id="dependenciaFarmacia" name="dependenciaFarmacia"></select>' +
             '<select id="provinciaFarmacia" name="provinciaFarmacia"></select>' +                
-            '<a id="submitConsultaListadoFarmacias" class="button">Consultar</a>'
+            '<a id="submitConsultaListadoFarmacias" class="button">Buscar</a>'
         ),
 
         initialize: function(attributes, options) {
@@ -37,18 +37,6 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
             farmaciaCollection.processData(data);
         },
 
-        /**
-        * Hace el render de la vista que muestra los datos del modelo que se obtuvieron a partir de la consulta
-        * aplicando los filtros.
-        * @param {Object} data, información del modelo obtenida del servicio.
-        */
-        /*    renderVistaDeDatos: function (data) {
-            var ministerioModel = new Ministerio();
-            var ministerioView = MinisterioView.getInstance();
-            ministerioView.setModel({model: ministerioModel});
-            ministerioModel.processData(data);
-        },*/
-
         ejecutarListadoFarmacias: function(){
             var dependenciaFarmacia = $("#dependenciaFarmacia").val();
             var provinciaFarmacia = $("#provinciaFarmacia").val();
@@ -62,22 +50,6 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
         },
 
         render: function(){
-            //            $.ui.addContentDiv("listadoFarmacias", this.template());
-            //            $.ui.loadContent("listadoFarmacias", false, false, "slide");
-
-
-            /*if ($("#listadoFarmacias").length <= 0){
-                $.ui.addContentDiv("listadoFarmacias", this.template());//div panel + contenido
-            }else
-            {
-                $.ui.updatePanel("listadoFarmacias", this.template());//solo contenido para actualizar
-            }
-            $.ui.loadContent("listadoFarmacias", false, false, "slide");
-            $("#listadoFarmacias").addClass("consulta-detallada"); //agrego esta clase para poder aplicar estilos CSS
-
-
-
-            this.attachEvents();*/
             BaseView.prototype.render.call(this);
             $(this.getViewSelector() + " select#provinciaFarmacia")[0].innerHTML = listaCompletaProvincias;
             $(this.getViewSelector() + " select#dependenciaFarmacia")[0].innerHTML = listaCompletaDependencias;

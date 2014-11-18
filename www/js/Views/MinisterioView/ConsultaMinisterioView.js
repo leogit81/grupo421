@@ -10,9 +10,9 @@ var ConsultaMinisterioView = (function(jquery, $, renderer, BaseView, Ministerio
         },
 
         template : _.template(
-            '<div class="formGroupHead">Filtros</div>' +
+            '<div class="formGroupHead">Complete el filtro para buscar un ministerio.</div>' +
             '<select id="numeroMinisterio" required="true"></select>' +
-            '<a id="submitConsultaMinisterio" class="button">Enviar</a>'
+            '<a id="submitConsultaMinisterio" class="button">Buscar</a>'
         ),
 
         initialize: function(attributes, options) {
