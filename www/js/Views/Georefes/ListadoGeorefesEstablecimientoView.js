@@ -1,17 +1,19 @@
-var ListadoEstablecimientoView = (function ($, renderer, BaseView, EstablecimientoCollection, EstablecimientoCollectionView) {
+var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, GeorefesEstablecimientoCollection, GeorefesEstablecimientoCollectionView, GoogleMap) {
     "use strict";
 
-    var listadoEstablecimientoView = BaseView.extend({
+    var listadoGeorefesEstablecimientoView = BaseView.extend({
         tagName: 'div',
 
         attributes: {
-            'id': 'consultaEstablecimiento',
+            'id': 'listadoGeorefesEstablecimiento',
             'class': 'panel',
             'data-nav': 'consultas_nav'
         },
 
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
+            '<label>Cantidad de establecimientos cercanos</label>' +
+            '<input id="cantidadEstablecimientosCercanos" type="number" name="cantidadEstablecimientosCercanos" placeholder="10"></input></br>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
@@ -19,7 +21,7 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
             '<a id="submitConsultaEstablecimiento" class="button">Enviar</a>'
         ),
         
-        render: function() {
+        render: function () {
             BaseView.prototype.render.call(this);            
             $(this.getViewSelector() + " select#provinciaEstablecimiento")[0].innerHTML = listaCompletaProvincias;
             $(this.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
@@ -34,22 +36,26 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
             this.initializeModelDataSource();
         },
 
-        setNombreEstablecimiento: function (e) {
-            this.model.set("nombreEstablecimiento", e.target.value);
-        },
-
-        ejecutarConsultaEstablecimiento: function () {
-            var nombreEstablecimiento = $(this.getViewSelector() + " input#nombreEstablecimiento").val();
-            var provinciaEstablecimiento = $(this.getViewSelector() + " select#provinciaEstablecimiento").val();
-            var departamentoEstablecimiento = $(this.getViewSelector() + " select#departamentoEstablecimiento").val();
-            var localidadEstablecimiento = $(this.getViewSelector() + " select#localidadEstablecimiento").val();
-
-            this.modelDataSource.getModelData(EstablecimientoCollection, {
-                "provincia": provinciaEstablecimiento,
-                "nombre": nombreEstablecimiento,
-                "depto": departamentoEstablecimiento,
-                "localidad": localidadEstablecimiento
+        ejecutarListadoGeorefesEstablecimiento: function () {
+            var mapa = new GoogleMap();
+            var filtroServicio = {};
+            mapa.getPosicion(function (position) {
+                filtroServicio = {
+                    "longitud": position.coords.longitude,
+                    "latitud": position.coords.latitude
+                }
             });
+            
+            filtroServicio.longitud = '151.274856';
+            filtroServicio.latitud = '-33.890542';
+            
+            filtroServicio.nombre = $(this.getViewSelector() + " input#nombreEstablecimiento").val();
+            filtroServicio.provincia = $(this.getViewSelector() + " select#provinciaEstablecimiento").val();
+            filtroServicio.depto = $(this.getViewSelector() + " select#departamentoEstablecimiento").val();
+            filtroServicio.localidad = $(this.getViewSelector() + " select#localidadEstablecimiento").val();
+            filtroServicio.cantidad = $(this.getViewSelector() + "#cantidadEstablecimientosCercanos").val();
+
+            this.modelDataSource.getModelData(GeorefesEstablecimientoCollection, filtroServicio);
         },
 
         /**
@@ -58,15 +64,14 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         * @param {Object} data, información del modelo obtenida del servicio.
         */
         renderVistaDeDatos: function (data) {
-            var establecimientoCollection = new EstablecimientoCollection();
-            //var establecimientoColleccionView = EstablecimientoCollectionView.getInstance();
-            var establecimientoColleccionView = new EstablecimientoCollectionView();
-            establecimientoColleccionView.setModel({model: establecimientoCollection});
-            establecimientoCollection.processData(data);
+            var georefesEstablecimientoCollection = new GeorefesEstablecimientoCollection();
+            var georefesEstablecimientoCollectionView = new GeorefesEstablecimientoCollectionView();
+            georefesEstablecimientoCollectionView.setModel({model: georefesEstablecimientoCollection});
+            georefesEstablecimientoCollection.processData(data);
         },
 
         initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
+            this.modelDataSource = new ModelDataSource();
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
         },
 
@@ -76,7 +81,7 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
          */
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaEstablecimiento", "click", _.bind(this.ejecutarConsultaEstablecimiento, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaEstablecimiento", "click", _.bind(this.ejecutarListadoGeorefesEstablecimiento, this));
             $("#afui").delegate(this.getViewSelector() + " select#provinciaEstablecimiento", "change", _.bind(this.actualizarListaDepartamentos, this));
             $("#afui").delegate(this.getViewSelector() +" select#departamentoEstablecimiento", "change", _.bind(this.actualizarListaLocalidades, this));
         },
@@ -90,5 +95,5 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         }
     });
 
-    return listadoEstablecimientoView;
-})(af, AppFrameworkRenderer, BaseView, EstablecimientoCollection, EstablecimientoCollectionView);
+    return listadoGeorefesEstablecimientoView;
+}(af, AppFrameworkRenderer, BaseView, GeorefesEstablecimientoCollection, GeorefesEstablecimientoCollectionView, GoogleMap));

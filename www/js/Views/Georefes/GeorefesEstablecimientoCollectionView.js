@@ -1,17 +1,23 @@
-var PrestacionCollectionView = (function ($, common, _, renderer, BaseCollectionView) {
+var GeorefesEstablecimientoCollectionView = (function ($, BaseCollectionView) {
     "use strict";
     
-    var prestacionCollectionView = BaseCollectionView.extend({
+    var georefesEstablecimientoCollectionView = BaseCollectionView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
         
         attributes: {
-            'id': 'resultadoConsultaNominalPrestacionesEstablecimiento',
+            'id': 'resultadoGeorefesEstablecimientoGeneral',
             'data-nav': "consultas_nav"
         },
         
-        itemTemplateString : "<li><a><span><%=nombre%></span></a></li>"
+        itemTemplateString : "<li>" + 
+            "<span><%=dependencia%></span>" +
+            "<span><%=nombre%></span>" +
+            "<span><%=provincia%></span>" +
+            "<span><%=tipologia%></span>" +
+            "<span><%=distancia%></span>" +
+        "</li>"
 	});
 	
-	return prestacionCollectionView;
-}(af, common, _, AppFrameworkRenderer, BaseCollectionView));
+	return georefesEstablecimientoCollectionView;
+}(af, BaseCollectionView));

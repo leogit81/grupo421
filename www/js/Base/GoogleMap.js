@@ -1,75 +1,82 @@
 function GoogleMap(listaEstablecimiento) {
     'use strict';
-
-    this.initialize = function () {
-        var posicion = getPosicion();
-
-        //addMarkersToMap(map);    DEJAR COMENTADO
+    
+    this.listaEstablecimientos = listaEstablecimiento;
+    
+    /**
+    * Obtiene la posición del dispositivo y muestra un mapa centrado en esta.
+    * Además le agrega los marcados para las coordenadas de la lista de establecimientos,
+    * que se pasó como argumento al constructo del GoogleMap.
+    */
+    this.obtenerPosicionYMostrarMapa = function () {
+        var options =  { maximumAge: 3000, timeout: 3000, enableHighAccuracy: true };
+        this.getPosicion(onSuccessPosicion, onErrorPosicion, options);
     };
 
-    var getPosicion = function () {
-        var options =  { maximumAge: 3000, timeout: 3000, enableHighAccuracy: true };
-        navigator.geolocation.getCurrentPosition(onSuccessPosicion, onErrorPosicion, options);
-    },
+    this.getPosicion = function (successCallback, errorCallback, options) {
+        errorCallback = errorCallback || onErrorPosicion;
+        successCallback = successCallback || onSuccessPosicion;
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+    };
 
-        onSuccessPosicion = function (position) {
-            var mapBounds = new google.maps.LatLngBounds(),
-                longitud = position.coords.longitude,
-                latitud = position.coords.latitude,
-                latLong = new google.maps.LatLng(latitud, longitud),
-                miPosicion = latLong,
-                map = showMap(latLong);
-            mapBounds.extend(latLong);
+    function onSuccessPosicion (position) {
+        var mapBounds = new google.maps.LatLngBounds(),
+            longitud = position.coords.longitude,
+            latitud = position.coords.latitude,
+            latLong = new google.maps.LatLng(latitud, longitud),
+            miPosicion = latLong,
+            map = showMap(latLong);
+        mapBounds.extend(latLong);
+        addMarkersToMap(map, latLong);
+        var i;
+        for (i = 0; i < listaEstablecimiento.length; i++) {
+            latLong = new google.maps.LatLng(listaEstablecimiento[i].latitud, listaEstablecimiento[i].longitud);
             addMarkersToMap(map, latLong);
-            var i;
-            for (i = 0; i < listaEstablecimiento.length; i++) {
-                latLong = new google.maps.LatLng(listaEstablecimiento[i].latitud, listaEstablecimiento[i].longitud);
-                addMarkersToMap(map, latLong);
-                mapBounds.extend(latLong);
-            }
-            //map.fitBounds(mapBounds);
-            //map.center(miPosicion.B, miPosicion.k);
-            var listener = google.maps.event.addListenerOnce(map, "idle", function () {
-                if (map.getZoom() > 16) {
-                    map.setZoom(16);
-                };
-            });
-            //af.trigger(this,"mapa_listo");
-        },
+            mapBounds.extend(latLong);
+        }
+        //map.fitBounds(mapBounds);
+        //map.center(miPosicion.B, miPosicion.k);
+        var listener = google.maps.event.addListenerOnce(map, "idle", function () {
+            if (map.getZoom() > 16) {
+                map.setZoom(16);
+            };
+        });
+        //af.trigger(this,"mapa_listo");
+    };
 
-        onErrorPosicion = function (error) {
-            alert('code: '    + error.code    + '\n' +
-                  'message: ' + error.message + '\n');
-        },
+    function onErrorPosicion (error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    };
 
-        addMarkersToMap = function (map, latLong) {
+    this.addMarkersToMap = function (map, latLong) {
 
 
-            //var latitudeAndLongitudeOne = new google.maps.LatLng('-33.890542','151.274856');
-            var icono = '../img/iconos/tab_2.png';
-            var markerOne = new google.maps.Marker({
-                //position: latitudeAndLongitudeOne,
-                position: latLong,
-                map: map,
-                animation: google.maps.Animation.DROP,
-                title: 'HOLA',
-                //icon: icono,
-                //draggable: true,
-            });
-            var infowindow = new google.maps.InfoWindow({
-                content: "<a id='linkConsultaMinisterio' class='item_menu' href='linkConsultaMinisterio'><img src='./img/iconos/tab_9.png'><div class='ztexto-lista'>Ministerio</div></a>" //contentString
-            });
-            google.maps.event.addListener(markerOne, 'click', function () {
-                infowindow.open(map, markerOne);
-            });
+        //var latitudeAndLongitudeOne = new google.maps.LatLng('-33.890542','151.274856');
+        var icono = '../img/iconos/tab_2.png';
+        var markerOne = new google.maps.Marker({
+            //position: latitudeAndLongitudeOne,
+            position: latLong,
+            map: map,
+            animation: google.maps.Animation.DROP,
+            title: 'HOLA',
+            //icon: icono,
+            //draggable: true,
+        });
+        var infowindow = new google.maps.InfoWindow({
+            content: "<a id='linkConsultaMinisterio' class='item_menu' href='linkConsultaMinisterio'><img src='./img/iconos/tab_9.png'><div class='ztexto-lista'>Ministerio</div></a>" //contentString
+        });
+        google.maps.event.addListener(markerOne, 'click', function () {
+            infowindow.open(map, markerOne);
+        });
 
-        };
+    };
 
     /**
-        * Muestra el mapa en el elemento html proporcionado.
-        * @param {google.maps.LatLng} posicion, posición donde se centrará el mapa.
-        * @param {HTMLElement} htmlElement, elemento del DOM donde insertar el mapa.
-        */    
+    * Muestra el mapa en el elemento html proporcionado.
+    * @param {google.maps.LatLng} posicion, posición donde se centrará el mapa.
+    * @param {HTMLElement} htmlElement, elemento del DOM donde insertar el mapa.
+    */
     this.showMap = function (posicion, htmlElement, nivelZoom) {
         var mapOptions = {
             zoom: nivelZoom,

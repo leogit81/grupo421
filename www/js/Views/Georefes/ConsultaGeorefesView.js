@@ -1,4 +1,4 @@
-var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoEstablecimientoView, BusquedaEstablecimientoView, ReporteEstablecimientoView) {
+var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoGeorefesEstablecimientoView) {
     "use strict";
 
     var consultaGeorefesView = BaseView.extend({
@@ -25,28 +25,21 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoEsta
             options = options || {};
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
-
-            //this.initializeModelDataSource();
         },
-
-        /*initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },*/
         
         ejecutarBuscarEstablecimientoCercano: function(){
-            var busquedaEstablecimientoView = new BusquedaEstablecimientoView();
-            busquedaEstablecimientoView.render();
+            var listadoGeorefesEstablecimientoView = new ListadoGeorefesEstablecimientoView();
+            listadoGeorefesEstablecimientoView.render();
         },
 
         ejecutarBuscarFarmaciaCercana: function(){
-            var listadoEstablecimientoView = new ListadoEstablecimientoView();
-            listadoEstablecimientoView.render();
+            /*var listadoEstablecimientoView = new ListadoEstablecimientoView();
+            listadoEstablecimientoView.render();*/
         },
         
-        ejecutarDrogueriaCercana: function () {
-            var reporteEstablecimientoView = new ReporteEstablecimientoView();
-            reporteEstablecimientoView.render();
+        ejecutarBuscarDrogueriaCercana: function () {
+            /*var reporteEstablecimientoView = new ReporteEstablecimientoView();
+            reporteEstablecimientoView.render();*/
         },
         
         /*render: function(){
@@ -62,9 +55,9 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoEsta
             BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesEstablecimiento", "click", _.bind(this.ejecutarBuscarEstablecimientoCercano, this));
             $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesFarmacia", "click", _.bind(this.ejecutarBuscarFarmaciaCercana, this));
-            $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesDrogueria", "click", _.bind(this.ejecutarDrogueriaCercana, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesDrogueria", "click", _.bind(this.ejecutarBuscarDrogueriaCercana, this));
         }
     });
     
     return consultaGeorefesView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoEstablecimientoView, BusquedaEstablecimientoView, ReporteEstablecimientoView);
+})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoGeorefesEstablecimientoView);

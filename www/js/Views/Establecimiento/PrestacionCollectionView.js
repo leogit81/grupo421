@@ -10,7 +10,7 @@ var PrestacionCollectionView = (function ($, common, _, renderer, BaseCollection
             'data-nav': "consultas_nav"
         },
         
-        itemTemplateString : "<li><a><span><%=nombre%></span></a></li>"
+        itemTemplateString : "<li><span><%=nombre%></span></li>"
 	});
 	
 	return prestacionCollectionView;
