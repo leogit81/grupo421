@@ -41,11 +41,6 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoGeor
             /*var reporteEstablecimientoView = new ReporteEstablecimientoView();
             reporteEstablecimientoView.render();*/
         },
-        
-        /*render: function(){
-            BaseView.prototype.render.call(this);   
-            return this;
-        },*/
 
         /**
          * Usado para bindear eventos a los controles del formulario.

@@ -287,3 +287,11 @@ div#splashscreen h1 {
 .tituloCamas {
     font-weight: bolder;
 }
+
+.nombreEstablecimientoCercano{
+    font-weight: bold;
+}
+
+.distanciaEstablecimientoCercano label{
+    font-weight: bold;
+}

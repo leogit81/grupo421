@@ -1,4 +1,4 @@
-var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, GeorefesEstablecimientoCollection, GeorefesEstablecimientoCollectionView, GoogleMap) {
+var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, GeorefesEstablecimientoCollection, GeorefesEstablecimientoCollectionView, Geolocation) {
     "use strict";
 
     var listadoGeorefesEstablecimientoView = BaseView.extend({
@@ -9,6 +9,8 @@ var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, Geore
             'class': 'panel',
             'data-nav': 'consultas_nav'
         },
+        
+        cantidadDeEstablecimientosCercanosPorDefecto: 10,
 
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
@@ -26,6 +28,7 @@ var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, Geore
             $(this.getViewSelector() + " select#provinciaEstablecimiento")[0].innerHTML = listaCompletaProvincias;
             $(this.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
             $(this.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
+            $(this.getViewSelector() + " #cantidadEstablecimientosCercanos").val(this.cantidadDeEstablecimientosCercanosPorDefecto);
         },
 
         initialize: function (attributes, options) {
@@ -37,25 +40,25 @@ var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, Geore
         },
 
         ejecutarListadoGeorefesEstablecimiento: function () {
-            var mapa = new GoogleMap();
             var filtroServicio = {};
-            mapa.getPosicion(function (position) {
+            var self = this;
+            Geolocation.obtenerPosicion(function (position) {
                 filtroServicio = {
                     "longitud": position.coords.longitude,
                     "latitud": position.coords.latitude
                 }
-            });
-            
-            filtroServicio.longitud = '151.274856';
-            filtroServicio.latitud = '-33.890542';
-            
-            filtroServicio.nombre = $(this.getViewSelector() + " input#nombreEstablecimiento").val();
-            filtroServicio.provincia = $(this.getViewSelector() + " select#provinciaEstablecimiento").val();
-            filtroServicio.depto = $(this.getViewSelector() + " select#departamentoEstablecimiento").val();
-            filtroServicio.localidad = $(this.getViewSelector() + " select#localidadEstablecimiento").val();
-            filtroServicio.cantidad = $(this.getViewSelector() + "#cantidadEstablecimientosCercanos").val();
+                
+                //filtroServicio.longitud = '151.274856';
+                //filtroServicio.latitud = '-33.890542';
 
-            this.modelDataSource.getModelData(GeorefesEstablecimientoCollection, filtroServicio);
+                filtroServicio.nombre = $(self.getViewSelector() + " input#nombreEstablecimiento").val();
+                filtroServicio.provincia = $(self.getViewSelector() + " select#provinciaEstablecimiento").val();
+                filtroServicio.depto = $(self.getViewSelector() + " select#departamentoEstablecimiento").val();
+                filtroServicio.localidad = $(self.getViewSelector() + " select#localidadEstablecimiento").val();
+                filtroServicio.cantidad = $(self.getViewSelector() + " #cantidadEstablecimientosCercanos").val();
+
+                self.modelDataSource.getModelData(GeorefesEstablecimientoCollection, filtroServicio);
+            });
         },
 
         /**
@@ -96,4 +99,4 @@ var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, Geore
     });
 
     return listadoGeorefesEstablecimientoView;
-}(af, AppFrameworkRenderer, BaseView, GeorefesEstablecimientoCollection, GeorefesEstablecimientoCollectionView, GoogleMap));
+}(af, AppFrameworkRenderer, BaseView, GeorefesEstablecimientoCollection, GeorefesEstablecimientoCollectionView, Geolocation));

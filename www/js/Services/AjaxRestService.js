@@ -179,7 +179,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
             var codigoResultadoWS = arguments[1];
             response.codigoResultadoWS = codigoResultadoWS;
         }
-        logger.log(response);
+        logger.logServiceError(response);
     };
 
     /**

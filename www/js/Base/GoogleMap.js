@@ -9,14 +9,12 @@ function GoogleMap(listaEstablecimiento) {
     * que se pasó como argumento al constructo del GoogleMap.
     */
     this.obtenerPosicionYMostrarMapa = function () {
-        var options =  { maximumAge: 3000, timeout: 3000, enableHighAccuracy: true };
-        this.getPosicion(onSuccessPosicion, onErrorPosicion, options);
+        this.getPosicion(onSuccessPosicion);
     };
 
-    this.getPosicion = function (successCallback, errorCallback, options) {
-        errorCallback = errorCallback || onErrorPosicion;
+    this.getPosicion = function (successCallback) {
         successCallback = successCallback || onSuccessPosicion;
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+        Geolocation.obtenerPosicion(successCallback);
     };
 
     function onSuccessPosicion (position) {
@@ -42,11 +40,6 @@ function GoogleMap(listaEstablecimiento) {
             };
         });
         //af.trigger(this,"mapa_listo");
-    };
-
-    function onErrorPosicion (error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
     };
 
     this.addMarkersToMap = function (map, latLong) {

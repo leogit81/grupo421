@@ -3,57 +3,76 @@ var Logger = (function ($, common) {
     
     var logger = {};
     
-    logger.log = function (response) {
+    logger.logServiceError = function (response) {
         var errorData = {};
-        errorData.codigoError = this.obtenerCodigoError(response);
-        errorData.titulo = this.obtenerTituloDelMensaje(response);
-        errorData.mensajeDeError = this.obtenerMensajeError(errorData);
+        errorData.codigoError = obtenerCodigoError(response);
+        errorData.titulo = obtenerTituloDelMensaje(response);
+        errorData.mensajeDeError = obtenerMensajeError(errorData);
         console.log(errorData.mensajeDeError);
         $.trigger(logger, "showError", [errorData]);
     };
     
-    logger.obtenerTituloDelMensaje = function (response) {
-        if (response.status === 0)
+    /**
+    * Para logue en general, se le pasa un objeto con la data del error
+    * @param {Object} errorData, tiene el código de error, el título del pop up y el mensaje de error
+    * que se muestran por pantalla al usuario.
+    * ejemplo: {codigoError: 1, titulo: "SISA Móvil", mensajeDeError: "..."}
+    */
+    logger.log = function (errorData) {
+        errorData = errorData || {};
+        errorData.titulo = errorData.titulo || "SISA Móvil";
+        errorData.mensajeDeError = errorData.mensajeDeError || "Error desconocido";
+        console.log(errorData.mensajeDeError);
+        $.trigger(logger, "showError", [errorData]);
+    };
+    
+    function obtenerTituloDelMensaje(response) {
+        if (response.status === 0) {
             return "Atención";
+        }
         
-        if (response.status === 200 && response.codigoResultadoWS.toUpperCase() === "ERROR_INESPERADO")
+        if (response.status === 200 && response.codigoResultadoWS.toUpperCase() === "ERROR_INESPERADO") {
             return "Error del servicio";
+        }
         
-        if (response.status === 200)
+        if (response.status === 200) {
             return "Información";
+        }
         
         return "SISA Móvil";
-    };
+    }
     
-    logger.obtenerCodigoError = function (response) {
-        if (response.status === 0)
+    function obtenerCodigoError(response) {
+        if (response.status === 0) {
             return response.statusText;
+        }
         
-        if (response.status === 200)
+        if (response.status === 200) {
             return response.codigoResultadoWS;
+        }
         
         return response.status.toString();
-    };
+    }
     
-    logger.obtenerMensajeError = function (errorData) {
+    function obtenerMensajeError(errorData) {
         errorData = errorData || {};
         
         if (!common.isEmpty(errorData.mensajeDeError)) {
             return errorData.mensajeDeError;
         }
         
-        return this.obtenerMensajeDefaultPorCodigo(errorData.codigoError);
-    };
+        return obtenerMensajeDefaultPorCodigo(errorData.codigoError);
+    }
         
-    logger.obtenerMensajeDefaultPorCodigo = function (codigoDeError) {
+    function obtenerMensajeDefaultPorCodigo(codigoDeError) {
         codigoDeError = codigoDeError || "";
         codigoDeError = codigoDeError.toUpperCase();
         
-        if (this.errores.hasOwnProperty(codigoDeError)) {
-            return this.errores[codigoDeError];
+        if (logger.errores.hasOwnProperty(codigoDeError)) {
+            return logger.errores[codigoDeError];
         }
         return "Error desconocido";
-    };
+    }
     
     logger.errores = {
         ERROR_INESPERADO: "Se produjo un error inesperado durante la invocación del servicio Web.",

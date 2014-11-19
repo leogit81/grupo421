@@ -10,12 +10,14 @@ var GeorefesEstablecimientoCollectionView = (function ($, BaseCollectionView) {
             'data-nav': "consultas_nav"
         },
         
-        itemTemplateString : "<li>" + 
-            "<span><%=dependencia%></span>" +
-            "<span><%=nombre%></span>" +
-            "<span><%=provincia%></span>" +
-            "<span><%=tipologia%></span>" +
-            "<span><%=distancia%></span>" +
+        itemTemplateString : "<li>" +
+            "<div class='georefesEstablecimientoCercanoItem'>" +
+                "<div><span class='nombreEstablecimientoCercano'><%=nombre%></span></div>" +
+                "<div><span><%=dependencia%></span></div>" +
+                "<div><span><%=provincia%></span></div>" +
+                "<div><span><%=tipologia%></span></div>" +
+                "<div class='distanciaEstablecimientoCercano'><label>Distancia:</label><span><%=distancia%></span></div>" +
+            "</div>" +
         "</li>"
 	});
 	
