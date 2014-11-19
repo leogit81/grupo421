@@ -33,13 +33,13 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoGeor
         },
 
         ejecutarBuscarFarmaciaCercana: function(){
-            /*var listadoEstablecimientoView = new ListadoEstablecimientoView();
-            listadoEstablecimientoView.render();*/
+            var listadoGeorefesFarmaciaView = new ListadoGeorefesFarmaciaView();
+            listadoGeorefesFarmaciaView.render();
         },
         
         ejecutarBuscarDrogueriaCercana: function () {
-            /*var reporteEstablecimientoView = new ReporteEstablecimientoView();
-            reporteEstablecimientoView.render();*/
+            var listadoGeorefesDrogueriaView = new ListadoGeorefesDrogueriaView();
+            listadoGeorefesDrogueriaView.render();
         },
 
         /**

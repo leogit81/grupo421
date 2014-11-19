@@ -15,7 +15,7 @@ var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, Geore
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
             '<label>Cantidad de establecimientos cercanos</label>' +
-            '<input id="cantidadEstablecimientosCercanos" type="number" name="cantidadEstablecimientosCercanos" placeholder="10"></input></br>' +
+            '<input id="cantidadEstablecimientosCercanos" type="number" name="cantidadEstablecimientosCercanos"></input></br>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
@@ -46,10 +46,7 @@ var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, Geore
                 filtroServicio = {
                     "longitud": position.coords.longitude,
                     "latitud": position.coords.latitude
-                }
-                
-                //filtroServicio.longitud = '151.274856';
-                //filtroServicio.latitud = '-33.890542';
+                };
 
                 filtroServicio.nombre = $(self.getViewSelector() + " input#nombreEstablecimiento").val();
                 filtroServicio.provincia = $(self.getViewSelector() + " select#provinciaEstablecimiento").val();
