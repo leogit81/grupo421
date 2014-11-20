@@ -107,10 +107,17 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         loadMapaView: function () {
             this.showPanel();
             $(this.getViewSelector()).find("#map_canvas").on('resize', _.bind(this.onMapaResize, this));
-            var coordenadasEstablecimientoModel = this.getCoordenadasMapaModel();
-            this.selectedTab.view.setModel(coordenadasEstablecimientoModel);
+            var coordenadasModel = this.getCoordenadasMapaModel();
+            this.selectedTab.view.setModel(coordenadasModel);
             this.selectedTab.view.render();
         },
+        
+        /**
+        * Setea la posicion central del mapa.
+        */
+        /*setCenterPositionMapView: function () {
+            this.selectedTab.view.setPosicion(this.getCoordenadasEstablecimiento());
+        },*/
         
         onMapaResize: function () {
             google.maps.event.trigger(this.selectedTab.googleMap, 'resize');
@@ -148,13 +155,26 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     tabPanelView.prototype.selectedTabButtonHref = null;
     
     /**
-    * Obtiene el modelo de coordenadas a partir del modelo de establecimiento nominal.
+    * Obtiene el modelo de coordenadas de mapa que tiene la información de posición
+    * de los establecimientos y del dispositivo.
     */
     tabPanelView.prototype.getCoordenadasMapaModel = function () {
         //var tabMapa = this.findTab("esMapa", true);
         var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
         return tabGeneral.view.model.get("coordenadasDeMapa");
     };
+    
+    /**
+    * Obtiene las coordenadas del establecimiento.
+    */
+    /*tabPanelView.prototype.getCoordenadasEstablecimiento = function () {
+        var coordenadasModel = this.getCoordenadasMapaModel();
+        var coordenadas = {
+            "latitud": coordenadasModel.get("latitud"),
+            "longitud": coordenadasModel.get("longitud")
+        };
+        return coordenadas;
+    };*/
     
     tabPanelView.prototype.hideLoadingMask = function () { };
     
@@ -335,6 +355,15 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         return _.find(this.tabs, function (item) {
             return item.view.getViewId() === view.getViewId();
         }, this);
+    };
+    
+    /**
+     * Devuelve una vista por nombre.
+     *  @param {String} , el nombre de la vista, si se quiere poder acceder a la misma mediante nombre. 
+     */
+    tabPanelView.prototype.getViewByName = function (viewName) {
+        var tab = this.findTab("tabName", viewName);
+        return tab.view;
     };
     
     tabPanelView.prototype.attachEvents = function() {

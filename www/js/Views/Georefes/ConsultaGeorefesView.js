@@ -1,4 +1,4 @@
-var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoGeorefesEstablecimientoView) {
+var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView) {
     "use strict";
 
     var consultaGeorefesView = BaseView.extend({
@@ -15,6 +15,8 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoGeor
             '<div>' +
             '<a id="submitListadoGeorefesEstablecimiento" class="button">Establecimientos cercanos</a>' +
 			'</br>' +
+            '<a id="submitBusquedaEstablecimientosCercanos" class="button">Búsqueda establecimientos cercanos</a>' +
+			'</br>' +
             '<a id="submitListadoGeorefesFarmacia" class="button">Farmacias cercanas</a>' +
             '</br>' +
             '<a id="submitListadoGeorefesDrogueria" class="button">Droguerías cercanas</a>' +
@@ -27,17 +29,22 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoGeor
             BaseView.prototype.initialize.call(this, attributes, options);
         },
         
-        ejecutarBuscarEstablecimientoCercano: function(){
+        ejecutarListadoEstablecimientoCercano: function(){
             var listadoGeorefesEstablecimientoView = new ListadoGeorefesEstablecimientoView();
             listadoGeorefesEstablecimientoView.render();
         },
+        
+        ejecutarBusquedaEstablecimientoCercano: function(){
+            var busquedaEstablecimientoCercanoView = new BusquedaEstablecimientosCercanosView();
+            busquedaEstablecimientoCercanoView.render();
+        },
 
-        ejecutarBuscarFarmaciaCercana: function(){
+        ejecutarListadoFarmaciaCercana: function(){
             var listadoGeorefesFarmaciaView = new ListadoGeorefesFarmaciaView();
             listadoGeorefesFarmaciaView.render();
         },
         
-        ejecutarBuscarDrogueriaCercana: function () {
+        ejecutarListadoDrogueriaCercana: function () {
             var listadoGeorefesDrogueriaView = new ListadoGeorefesDrogueriaView();
             listadoGeorefesDrogueriaView.render();
         },
@@ -48,11 +55,12 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView, ListadoGeor
          */
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesEstablecimiento", "click", _.bind(this.ejecutarBuscarEstablecimientoCercano, this));
-            $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesFarmacia", "click", _.bind(this.ejecutarBuscarFarmaciaCercana, this));
-            $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesDrogueria", "click", _.bind(this.ejecutarBuscarDrogueriaCercana, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesEstablecimiento", "click", _.bind(this.ejecutarListadoEstablecimientoCercano, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitBusquedaEstablecimientosCercanos", "click", _.bind(this.ejecutarBusquedaEstablecimientoCercano, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesFarmacia", "click", _.bind(this.ejecutarListadoFarmaciaCercana, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitListadoGeorefesDrogueria", "click", _.bind(this.ejecutarListadoDrogueriaCercana, this));
         }
     });
     
     return consultaGeorefesView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, ListadoGeorefesEstablecimientoView);
+})(jQuery, af, AppFrameworkRenderer, BaseView);

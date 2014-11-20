@@ -1,4 +1,4 @@
-var EstablecimientoNominalView = (function ($, renderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView, CamasCollectionView) {
+var EstablecimientoNominalView = (function ($, renderer, TabPanelView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView, CamasCollectionView) {
     "use strict";
     
     var establecimientoNominalView = TabPanelView.extend({
@@ -41,7 +41,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
                 customLoadView: function () { this.view.render(); }
             },
             {
-                tabName: "Mapas",
+                tabName: "Mapa",
                 panelId: "establecimientoMapas",
                 viewClass: GoogleMapView,
                 esMapa: true
@@ -54,11 +54,11 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             }
         ],
         
-        ejecutarConsultaNominalEstablecimiento: function (codigoEstablecimiento) {
+        /*ejecutarConsultaNominalEstablecimiento: function (codigoEstablecimiento) {
             this.codigoEstablecimiento = codigoEstablecimiento;
             var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
             tabGeneral.view.model.load(this.codigoEstablecimiento);
-        },
+        },*/
         
 		initialize: function (attributes, options) {
             options = options || {};
@@ -70,6 +70,7 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
             this.findTab("panelId", "establecimientoGeneral").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoPrestaciones").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoCamas").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
+            //this.findTab("panelId", "establecimientoMapas").miPosicion = this.getCoordenadasEstablecimiento();
         },
         
         /**
@@ -86,10 +87,10 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
      * Devuelve una vista por nombre.
      *  @param {String} , el nombre de la vista, si se quiere poder acceder a la misma mediante nombre. 
      */
-    establecimientoNominalView.prototype.getViewByName = function (viewName) {
+    /*establecimientoNominalView.prototype.getViewByName = function (viewName) {
         var tab = this.findTab("tabName", viewName);
         return tab.view;
-    };
+    };*/
     
     /**
     * Carga la data del tab de prestaciones cuando el usuario hace clic sobre el mismo.
@@ -126,4 +127,4 @@ var EstablecimientoNominalView = (function ($, renderer, BaseView, Establecimien
     };*/
 	
 	return establecimientoNominalView;
-}(af, AppFrameworkRenderer, BaseView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView, CamasCollectionView));
+}(af, AppFrameworkRenderer, TabPanelView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView, CamasCollectionView));

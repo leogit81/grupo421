@@ -17,15 +17,15 @@ function GoogleMap(listaEstablecimiento) {
         Geolocation.obtenerPosicion(successCallback);
     };
 
-    function onSuccessPosicion (position) {
+    this.onSuccessPosicion = function (position, htmlElement) {
         var mapBounds = new google.maps.LatLngBounds(),
-            longitud = position.coords.longitude,
-            latitud = position.coords.latitude,
-            latLong = new google.maps.LatLng(latitud, longitud),
+            //longitud = position.coords.longitude,
+            //latitud = position.coords.latitude,
+            latLong = new google.maps.LatLng(position.latitud, position.longitud),
             miPosicion = latLong,
-            map = showMap(latLong);
-        mapBounds.extend(latLong);
-        this.addMarkersToMap(map, latLong);
+            map = this.showMap(latLong, htmlElement, 14);
+        //mapBounds.extend(latLong);
+        //this.addMarkersToMap(map, latLong);
         var i;
         for (i = 0; i < listaEstablecimiento.length; i++) {
             latLong = new google.maps.LatLng(listaEstablecimiento[i].latitud, listaEstablecimiento[i].longitud);
@@ -40,6 +40,14 @@ function GoogleMap(listaEstablecimiento) {
             };
         });
         //af.trigger(this,"mapa_listo");
+        
+        setTimeout( function () { 
+            google.maps.event.trigger(map, 'resize');
+            map.setCenter(latLong);
+            map.setZoom(14);
+        }, 2500 );
+        
+        return map;
     };
 
     this.addMarkersToMap = function (map, latLong) {
@@ -116,5 +124,9 @@ function GoogleMap(listaEstablecimiento) {
             map.setCenter(latLong);
             map.setZoom(nivelZoom);
         }, 2500 );
+    };
+    
+    this.loadMap = function (position, htmlElement) {
+        this.onSuccessPosicion(position, htmlElement);
     };
 }

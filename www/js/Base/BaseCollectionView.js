@@ -40,12 +40,12 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
         
         render: function (model, collection, options) {
             //TODO: esto hay que corregirlo, es un parche para evitar que me haga un render para cada item que se agrega a la colecciÃ³n.
-            this.cantidadDeItems++;
+            /*this.cantidadDeItems++;
             if (this.cantidadDeItems < this.model.length) {
                 return;
             } else {
                 this.cantidadDeItems = 0;
-            }
+            }*/
             //fin del parche
             
             BaseView.prototype.render.call(this);
@@ -73,8 +73,23 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
     baseCollectionView.prototype.setModel = function (attributes) {
         BaseView.prototype.setModel.call(this, attributes);
         
-        this.model.on('remove', this.render, this);
-        this.model.on('add', this.render, this);
+        this.model.on('remove', this.onItemRemoved, this);
+        this.model.on('add', this.onItemAdded, this);
+    };
+    
+    baseCollectionView.prototype.onItemAdded = function (model, collection, options) {
+        this.cantidadDeItems++;
+        
+        if (this.cantidadDeItems === this.model.length) {
+            this.render();
+        }
+    };
+    
+    baseCollectionView.prototype.onItemRemoved = function (model, collection, options) {
+        this.cantidadDeItems--;
+        if (this.cantidadDeItems === 0) {
+            this.render();
+        }
     };
     
     baseCollectionView.prototype.template = function (jsonData) {

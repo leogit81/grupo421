@@ -34,6 +34,37 @@ var BaseCollection = (function (common, Backbone, converter, Service, BaseModel)
     baseCollection.prototype.processData = function (data) {
         BaseModel.prototype.processData.call(this, data);
     };
+    
+    baseCollection.prototype.obtenerCoordenadasMarcadoresMapa = function () {
+        var listaDeCoordenadas = [];
+        
+        _.each(this.models, function (item, index, list) {
+            var coordenadasDeMapa = item.get("coordenadasDeMapa");
+            
+            if (!common.isEmpty(coordenadasDeMapa)) {
+                /*var coordenadas = {
+                    "latitud": coordenadasDeMapaModel.latitud,
+                    "longitud": coordenadasDeMapaModel.latitud
+                };*/
+                
+                listaDeCoordenadas.push(coordenadasDeMapa);
+            }
+        });
+        
+        return listaDeCoordenadas;
+    };
+    
+    /**
+    * Obtiene la posición en la cual se centrará el mapa.
+    */
+    baseCollection.prototype.getCenterPosition = function () {
+        var coordenadas = {
+                "latitud": this.latitud,
+                "longitud": this.longitud
+            };
+        
+        return coordenadas;
+    };
 
     _.extend(baseCollection, Backbone.Singleton);
     common.extendSinPisar(baseCollection.prototype , false, BaseModel.prototype);

@@ -1,17 +1,17 @@
-var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, EstablecimientoNominal, EstablecimientoNominalView) {
+var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, EstablecimientoNominalView) {
     "use strict";
 
     var busquedaEstablecimientoView = BaseView.extend({
         tagName: 'div',
 
         attributes: {
-            'id': 'busquedaEstablecimiento',
+            'id': 'busquedaEstablecimientoNominal',
             'class': 'panel',
             'data-nav':"consultas_nav",    
         },
 
         template : _.template(
-            '<div class="formGroupHead">Ingrese el código del establecimiento que quiere buscar.</div>' +
+            '<div class="formGroupHead">Ingrese el código del establecimiento que desee buscar.</div>' +
             '<input id="codigoEstablecimiento" type="number" name="codigoEstablecimiento" placeholder="Código de establecimiento"></input></br>' +
             '<a id="submitConsultaBusquedaEstablecimiento" class="button">Buscar</a>'
         ),
@@ -21,17 +21,17 @@ var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, Esta
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.initializeModelDataSource();
+            //this.initializeModelDataSource();
         },
 
-        initializeModelDataSource: function () {
+        /*initializeModelDataSource: function () {
             this.modelDataSource = new ModelDataSource ({view: this});
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },
+        },*/
 
         ejecutarBusquedaEstablecimiento: function(){
             var codigoEstablecimiento = $("#codigoEstablecimiento").val();
-            var establecimientoNominalModel = new EstablecimientoNominal();
+            //var establecimientoNominalModel = new EstablecimientoNominal();
             var establecimientoView = new EstablecimientoNominalView({codigo: codigoEstablecimiento});
             af.ui.showMask("Cargando...");
             establecimientoView.loadDefaultView();
@@ -48,4 +48,4 @@ var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, Esta
     });
 
     return busquedaEstablecimientoView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, EstablecimientoNominal, EstablecimientoNominalView);
+})(jQuery, af, AppFrameworkRenderer, BaseView, EstablecimientoNominalView);

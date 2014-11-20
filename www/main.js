@@ -3,4 +3,5 @@
     
     $(document).ready(app.initialize);
     //app.initialize();
+//}(af, app));
 }(af, app));

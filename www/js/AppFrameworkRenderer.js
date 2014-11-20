@@ -16,7 +16,7 @@ var AppFrameworkRenderer = (function (_, $, logger) {
         $.bind(logger, "showError", _.bind(this.showError,this));
     };
     
-    AfRenderer.prototype.preRender = function (view) {
+    /*AfRenderer.prototype.preRender = function (view) {
         //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
         if ($(view.getViewSelector()).length == 0) {
             //div panel + contenido
@@ -24,7 +24,7 @@ var AppFrameworkRenderer = (function (_, $, logger) {
         }
         //$(view.getViewSelector()).addClass("consulta-detallada");
         return this;
-    };
+    };*/
     
     AfRenderer.prototype.render = function (view) {
         //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel

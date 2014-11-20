@@ -11,6 +11,8 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
             options = options || {};
             this.setConverter(options.converter || converter);
         },
+        
+        posicion: null,
 
         /**
         * Si defaults tiene una referencia a un objeto, wrapea ese objeto en una función que cada vez que se ejecuta devuelve una
@@ -130,7 +132,26 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
         this.setJsonData(jsonData);
         return true;
     };
-
+    
+    /**
+    * Obtiene una lista de coordenadas de puntos que se pueden situar sobre el mapa.
+    */
+    baseModel.prototype.obtenerCoordenadasMarcadoresMapa = function () {
+        return [];
+    };
+    
+    /**
+    * Obtiene la posición en la cual se centrará el mapa.
+    */
+    baseModel.prototype.getCenterPosition = function () {
+        var coordenadas = {
+                "latitud": this.get("latitud"),
+                "longitud": this.get("longitud")
+            };
+        
+        return coordenadas;
+    };
+    
     _.extend(baseModel, Backbone.Singleton);
 
     return baseModel;
