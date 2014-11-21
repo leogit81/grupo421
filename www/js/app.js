@@ -118,7 +118,7 @@ var app = (function ($, jquery, logger) {
 
         $.ui.launch();
         $.ui.ready( function () {
-            $.ui.slideMenuXThreshold = 50; /*Umbral en px para hacer abrir/cerrar el menú lateral*/
+            $.ui.slideMenuXThreshold = 1; /*Umbral en px para hacer abrir/cerrar el menú lateral*/
             $.ui.disableSplitView();
             $.ui.updateBadge("#afui","3","tr");
             $("footer#defaultNav").css("display", "none");

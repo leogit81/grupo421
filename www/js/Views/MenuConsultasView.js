@@ -28,7 +28,8 @@ var MenuConsultasView = (function(BaseView, jquery){
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
             jquery("#linkConsultaMinisterio").on("click", _.bind(this.showConsultaMinisterio, this));
-            jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
+            $("#afui").delegate("#linkConsultaEstablecimiento", "click", _.bind(this.showConsultaEstablecimiento, this));
+//            jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
             jquery("#linkConsultaProfesionales").on("click", _.bind(this.showConsultaProfesionales, this));
             jquery("#linkConsultaFarmacias").on("click", _.bind(this.showConsultaFarmacias, this));
             jquery("#linkConsultaDroguerias").on("click", _.bind(this.showConsultaDroguerias, this));

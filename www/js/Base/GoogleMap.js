@@ -1,8 +1,6 @@
 function GoogleMap(listaEstablecimiento) {
     'use strict';
-    
-    this.listaEstablecimientos = listaEstablecimiento;
-    
+
     /**
     * Obtiene la posición del dispositivo y muestra un mapa centrado en esta.
     * Además le agrega los marcados para las coordenadas de la lista de establecimientos,
@@ -24,15 +22,14 @@ function GoogleMap(listaEstablecimiento) {
             latLong = new google.maps.LatLng(position.latitud, position.longitud),
             miPosicion = latLong,
             map = this.showMap(latLong, htmlElement, 14);
-        //mapBounds.extend(latLong);
-        //this.addMarkersToMap(map, latLong);
+        mapBounds.extend(miPosicion);
+        this.addMarkersToMapMiPosicion(map, miPosicion);
         var i;
         for (i = 0; i < listaEstablecimiento.length; i++) {
-            latLong = new google.maps.LatLng(listaEstablecimiento[i].latitud, listaEstablecimiento[i].longitud);
-            this.addMarkersToMap(map, latLong);
-            mapBounds.extend(latLong);
+            this.addMarkersToMapEstablecimiento(map, mapBounds, listaEstablecimiento[i]);
+//            mapBounds.extend(latLong);
         }
-        //map.fitBounds(mapBounds);
+        map.fitBounds(mapBounds);
         //map.center(miPosicion.B, miPosicion.k);
         var listener = google.maps.event.addListenerOnce(map, "idle", function () {
             if (map.getZoom() > 16) {
@@ -40,18 +37,28 @@ function GoogleMap(listaEstablecimiento) {
             };
         });
         //af.trigger(this,"mapa_listo");
-        
-        setTimeout( function () { 
-            google.maps.event.trigger(map, 'resize');
-            map.setCenter(latLong);
-            map.setZoom(14);
-        }, 2500 );
-        
+
+//        setTimeout( function () { 
+//            google.maps.event.trigger(map, 'resize');
+//            //            map.setCenter(latLong);
+//            //            map.setZoom(14);
+//        }, 2500 );
+
         return map;
     };
 
-    this.addMarkersToMap = function (map, latLong) {
+    this.addMarkersToMapMiPosicion = function (map, miPosicion) {
+        var icono = '../img/iconos/tab_2.png';
+        var markerOne = new google.maps.Marker({
+            position: miPosicion,
+            map: map,
+            animation: google.maps.Animation.DROP
+        });
 
+    };
+
+    this.addMarkersToMapEstablecimiento = function (map, mapBounds, establecimiento) {
+        var latLong = new google.maps.LatLng(establecimiento.coordenadasDeMapa.latitud, establecimiento.coordenadasDeMapa.longitud);
 
         //var latitudeAndLongitudeOne = new google.maps.LatLng('-33.890542','151.274856');
         var icono = '../img/iconos/tab_2.png';
@@ -59,14 +66,14 @@ function GoogleMap(listaEstablecimiento) {
             //position: latitudeAndLongitudeOne,
             position: latLong,
             map: map,
-            animation: google.maps.Animation.DROP,
-            title: 'HOLA',
+            animation: google.maps.Animation.DROP
             //icon: icono,
             //draggable: true,
         });
-        var infowindow = new google.maps.InfoWindow({
-            content: "<a id='linkConsultaMinisterio' class='item_menu' href='linkConsultaMinisterio'><img src='./img/iconos/tab_9.png'><div class='ztexto-lista'>Ministerio</div></a>" //contentString
-        });
+        mapBounds.extend(latLong);
+        var template = _.template("<a id='linkConsultaEstablecimiento'><span style='display:none;'><%=codigo%></span><span class='znombreMapa'><%=nombre%></span></a>");
+
+        var infowindow = new google.maps.InfoWindow({content: template(establecimiento)});
         google.maps.event.addListener(markerOne, 'click', function () {
             infowindow.open(map, markerOne);
         });
@@ -98,34 +105,34 @@ function GoogleMap(listaEstablecimiento) {
         * Muestra el mapa en el elemento html proporcionado.
         * @param {HTMLElement} htmlElement, elemento del DOM donde insertar el mapa.
         */
-    this.mostrarMapaEstablecimiento = function (model, htmlElement) {
-        if ((listaEstablecimiento !== undefined || listaEstablecimiento !== null) && listaEstablecimiento.length > 0) {
-            var establecimiento = listaEstablecimiento[0],
-                latLong = new google.maps.LatLng(establecimiento.latitud, establecimiento.longitud),
-                mapBounds = new google.maps.LatLngBounds();
+    //    this.mostrarMapaEstablecimiento = function (model, htmlElement) {
+    //        if ((listaEstablecimiento !== undefined || listaEstablecimiento !== null) && listaEstablecimiento.length > 0) {
+    //            var establecimiento = listaEstablecimiento[0],
+    //                latLong = new google.maps.LatLng(establecimiento.latitud, establecimiento.longitud),
+    //                mapBounds = new google.maps.LatLngBounds();
+    //
+    //            var nivelZoom = model.get("nivelZoom");
+    //            var map = this.showMap(latLong, htmlElement, nivelZoom);
+    //            mapBounds.extend(latLong);
+    //            this.addMarkersToMap(map, latLong);
+    //
+    //            //map.fitBounds(mapBounds);
+    //            //map.center(miPosicion.B, miPosicion.k);
+    //            var listener = google.maps.event.addListenerOnce(map, "idle", function () {
+    //                if (map.getZoom() > 16) {
+    //                    map.setZoom(16);
+    //                };
+    //            });
+    //        }
+    //
+    //        //model.trigger("mapaFinalizado");
+    //        setTimeout( function () { 
+    //            google.maps.event.trigger(map, 'resize');
+    //            map.setCenter(latLong);
+    //            map.setZoom(nivelZoom);
+    //        }, 2500 );
+    //    };
 
-            var nivelZoom = model.get("nivelZoom");
-            var map = this.showMap(latLong, htmlElement, nivelZoom);
-            mapBounds.extend(latLong);
-            this.addMarkersToMap(map, latLong);
-
-            //map.fitBounds(mapBounds);
-            //map.center(miPosicion.B, miPosicion.k);
-            var listener = google.maps.event.addListenerOnce(map, "idle", function () {
-                if (map.getZoom() > 16) {
-                    map.setZoom(16);
-                };
-            });
-        }
-
-        //model.trigger("mapaFinalizado");
-        setTimeout( function () { 
-            google.maps.event.trigger(map, 'resize');
-            map.setCenter(latLong);
-            map.setZoom(nivelZoom);
-        }, 2500 );
-    };
-    
     this.loadMap = function (position, htmlElement) {
         this.onSuccessPosicion(position, htmlElement);
     };

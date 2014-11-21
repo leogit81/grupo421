@@ -47,8 +47,10 @@ var BaseCollection = (function (common, Backbone, converter, Service, BaseModel)
                     "longitud": coordenadasDeMapaModel.latitud
                 };*/
                 
-                listaDeCoordenadas.push(coordenadasDeMapa);
+//                listaDeCoordenadas.push(coordenadasDeMapa);
+                listaDeCoordenadas.push(item.attributes);
             }
+            
         });
         
         return listaDeCoordenadas;
