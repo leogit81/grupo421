@@ -27,7 +27,7 @@ function GoogleMap(listaEstablecimiento) {
         var i;
         for (i = 0; i < listaEstablecimiento.length; i++) {
             this.addMarkersToMapEstablecimiento(map, mapBounds, listaEstablecimiento[i]);
-//            mapBounds.extend(latLong);
+            //            mapBounds.extend(latLong);
         }
         map.fitBounds(mapBounds);
         //map.center(miPosicion.B, miPosicion.k);
@@ -38,12 +38,12 @@ function GoogleMap(listaEstablecimiento) {
         });
         //af.trigger(this,"mapa_listo");
 
-//        setTimeout( function () { 
-//            google.maps.event.trigger(map, 'resize');
-//            //            map.setCenter(latLong);
-//            //            map.setZoom(14);
-//        }, 2500 );
-
+        //        setTimeout( function () { 
+        //            google.maps.event.trigger(map, 'resize');
+        //            //            map.setCenter(latLong);
+        //            //            map.setZoom(14);
+        //        }, 2500 );
+        $("#afui").undelegate("#linkConsultaNominalEstablecimiento", "click").delegate("#linkConsultaNominalEstablecimiento", "click", this.ejecutarNominal);
         return map;
     };
 
@@ -71,13 +71,18 @@ function GoogleMap(listaEstablecimiento) {
             //draggable: true,
         });
         mapBounds.extend(latLong);
-        var template = _.template("<a id='linkConsultaEstablecimiento'><span style='display:none;'><%=codigo%></span><span class='znombreMapa'><%=nombre%></span></a>");
+        var template = _.template("<a id='linkConsultaNominalEstablecimiento'><span class='codigoEstablecimiento' style='display:none;'><%=codigo%></span><span class='znombreMapa'><%=nombre%></span></a>");
 
         var infowindow = new google.maps.InfoWindow({content: template(establecimiento)});
         google.maps.event.addListener(markerOne, 'click', function () {
             infowindow.open(map, markerOne);
         });
 
+    };
+
+    this.ejecutarNominal = function (eventData) {
+        var establecimientoNominal = new EstablecimientoCollectionView();
+        establecimientoNominal.busquedaNominalEstablecimiento(eventData);
     };
 
     /**
