@@ -1,68 +1,109 @@
 var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseView) {
-    "use strict";
+	"use strict";
 
-    var reporteEstablecimientoNominalView = BaseView.extend({
-        tagName: 'div',
-        className: 'panel consulta-detallada',
+	var reporteEstablecimientoNominalView = BaseView.extend({
+		tagName: 'div',
+		className: 'panel consulta-detallada',
 
-        attributes: {
-            'id': 'reporteEstablecimientoNominal'
-        },
+		attributes: {
+			'id': 'reporteEstablecimientoNominal'
+		},
 
-        template : _.template(
-            "<div><h2>Reporte de Establecimientos</h2></div></br>" +
-            "<div><label>Cantidad total</label><%=cantidadTotal%></div></br>" +
-//            "<div><label>Porcentaje total</label><%=porcentajeTotal%></div></br>" +
-            "<% if (ItemList) { %><div id='itemList'><h2>Distribución</h2><%=ItemList%><% } %></div>"
-        ),
+		template : _.template(
+			"<canvas id='myChart'></canvas>" +
+			"<div><h2>Reporte de Establecimientos</h2></div></br>" +
+			"<div><label>Cantidad total</label><%=cantidadTotal%></div></br>" +
+			//            "<div><label>Porcentaje total</label><%=porcentajeTotal%></div></br>" +
+			"<% if (ItemList) { %><div id='itemList'><h2>Distribución</h2><%=ItemList%><% } %></div>"
+		),
 
-        initialize: function (attributes, options) {
-            options = options || {};
-            options.renderer = renderer;
-            BaseView.prototype.initialize.call(this, attributes, options);
-        }
-    });
+		initialize: function (attributes, options) {
+			options = options || {};
+			options.renderer = renderer;
+			BaseView.prototype.initialize.call(this, attributes, options);
+		},
 
-    reporteEstablecimientoNominalView.prototype.getModelDefault = function () {
-        if (common.isEmpty(this.model) || common.isEmpty(this.model.defaults)) {
-            return {
-                nombre: null,
-                cantidadTotal: null,
-                codigo: null,
-                porcentajeTotal: null,
-                ItemList: null
-            };
-        }
+		render: function (){
+			BaseView.prototype.render.call(this);
 
-        if (_.isFunction(this.model.defaults)){
-            return this.model.defaults();
-        };
-        return this.model.defaults;
-    };
+			var ctx = jQuery("#myChart").get(0); //	.getContext("2d");
 
+			ctx.width = window.innerWidth;
+			ctx.height = window.innerHeight * 0.5;
 
-    reporteEstablecimientoNominalView.prototype.replaceTemplateWithData = function (jsonData) {
-        var itemList = this.model.get("ItemList").item;
-        if (common.isEmpty(jsonData)) {
-            jsonData = {};
-        }
-        if (itemList){
-            var itemListLen = itemList.length;
-            var itemListString = '';
-            var i;
-            for (i = 0 ; i < itemListLen ; i++) { 
-                itemListString += 
-                    "<span class='descItemReporte'>" + itemList[i].descripcion + "</span></br>" +
-                    "<div>Cantidad: <span class='cantidadItemReporte'>" + itemList[i].cantidad + "</span></br>" +
-                    "<span class='idItemReporte'>ID: " + itemList[i].id + "</br></span>" +
-                    "Porcentaje:<span class='porcetajeItemReporte'> " + itemList[i].porcentaje + "%</span></div></br>";
-            }
-            jsonData.ItemList = itemListString;
-        }
-        else {jsonData.ItemList = null};
+			var parsedData =  this.model.toJSON();
+			var data = [];
+			var c = 0;
 
-        return this.template(jsonData);
-    };
+			for(var i = 0; i < parsedData.ItemList.item.length; i++){	
 
-    return reporteEstablecimientoNominalView;
+				if( c >= BaseView.prototype.color.length ){
+					c = 0;						
+				};
+
+				var temp =({
+					value: parsedData.ItemList.item[i].cantidad,
+					color: BaseView.prototype.color[c],
+					highlight: "#D6EBFF",
+					label: parsedData.ItemList.item[i].descripcion
+				});
+
+				data.push(temp);
+				c++;
+
+			}
+
+			ctx = jQuery("#myChart").get(0).getContext("2d");
+			var camasChart = new Chart(ctx).Pie(data);
+
+			return this;
+		}
+	});
+
+	reporteEstablecimientoNominalView.prototype.getModelDefault = function () {
+		if (common.isEmpty(this.model) || common.isEmpty(this.model.defaults)) {
+			return {
+				nombre: null,
+				cantidadTotal: null,
+				codigo: null,
+				porcentajeTotal: null,
+				ItemList: null
+			};
+		}
+
+		if (_.isFunction(this.model.defaults)){
+			return this.model.defaults();
+		};
+		return this.model.defaults;
+	};
+
+	reporteEstablecimientoNominalView.prototype.replaceTemplateWithData = function (jsonData) {
+		var itemList = this.model.get("ItemList").item;
+		if (common.isEmpty(jsonData)) {
+			jsonData = {};
+		}
+		if (itemList){
+			var itemListLen = itemList.length;
+			var itemListString = '';
+			var i;
+//			var c;
+			for (i = 0 ; i < itemListLen ; i++) { 
+//				if( c >= BaseView.prototype.color.length ){
+//					c = 0;						
+//				};
+				itemListString += 
+					"<div>Cantidad: " + itemList[i].cantidad + "</br>" +
+					"Descripción: " + itemList[i].descripcion + "</br>" +
+					"ID: " + itemList[i].id + "</br>" +
+					"Porcentaje: " + itemList[i].porcentaje + "</div></br>";
+//				c++;
+			}
+			jsonData.ItemList = itemListString;
+		}
+		else {jsonData.ItemList = null};
+
+		return this.template(jsonData);
+	};
+
+	return reporteEstablecimientoNominalView;
 }(af, common, _, AppFrameworkRenderer, BaseView));

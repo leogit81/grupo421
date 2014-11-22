@@ -8,6 +8,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         template : _.template("<div class='tabs'><ul></ul></div>" +
                               "<div id='selectedTab' class='selectedTab consulta-detallada'></div>" + 
                              "<div id='map_canvas' style='width:100%; height:100%; min-height:100%; overflow:auto;'></div>"),
+		
         /**
         * Array con la configuración de cada tab. Ver TabPanel para detalle de configuración.
         */

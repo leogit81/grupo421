@@ -50,7 +50,10 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
                 tabName: "Camas",
                 panelId: "establecimientoCamas",
                 viewClass: CamasCollectionView,
-				modelClass: CamasCollection
+
+				modelClass: CamasCollection,
+				titleCSSClass: "camasTabViewClass"
+
             }
         ],
         
@@ -112,9 +115,12 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
     establecimientoNominalView.prototype.loadCamasTab = function (selectedTabPanelId) {
         var tabCamas = this.findTab("panelId", selectedTabPanelId);
         if (common.isEmpty(tabCamas.isLoaded) || !tabCamas.isLoaded) {
-            tabCamas.view.model.load(this.codigoEstablecimiento);
+			tabCamas.view.model.load(this.codigoEstablecimiento);
             tabCamas.isLoaded = true;
-        }
+        }else{
+			tabCamas.view.render();
+		}
+		//Clase para agregarle los CCS. Por ahi estaria bueno hacer una sola class para todos los tabs.
         $(this.getViewSelector()).addClass("consultaNominalEstablecimiento");
     };
 	

@@ -120,8 +120,17 @@ var TabPanel = (function ($, common) {
                     }
                 }
             }
-
-            self.isLoaded = true;
+			
+//            if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
+//                //Si el tab no esta cargado, realiza la consulta y hace el render.
+//				self.view.model.load(_.result(self, "filtroConsulta"));
+//                self.isLoaded = true;
+//            } else {
+//				//Si el tab ya tiene el model caragado, solo realiza el render y lo muestra.
+//                self.tabPanelView.showPanel(self.view);
+//				self.view.render();
+//            }
+//            self.isLoaded = true;
         }
         
         self.loadConfig = loadConfig;
