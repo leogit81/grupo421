@@ -107,22 +107,11 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         
         loadMapaView: function (esUbicacionDispositivo) {
             this.showPanel();
-            $(this.getViewSelector()).find("#map_canvas").on('resize', _.bind(this.onMapaResize, this));
             var coordenadasModel = this.getCoordenadasMapaModel();
             coordenadasModel.esUbicacionDispositivo = esUbicacionDispositivo;
             this.selectedTab.view.setModel(coordenadasModel);
             this.selectedTab.view.render();
-        },
-        
-        /**
-        * Setea la posicion central del mapa.
-        */
-        /*setCenterPositionMapView: function () {
-            this.selectedTab.view.setPosicion(this.getCoordenadasEstablecimiento());
-        },*/
-        
-        onMapaResize: function () {
-            google.maps.event.trigger(this.selectedTab.googleMap, 'resize');
+            $(this.getViewSelector() +" #map_canvas").resize();
         },
         
         /**

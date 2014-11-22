@@ -13,24 +13,16 @@ var GoogleMapView = (function ($, BaseView, renderer) {
         template : _.template(
             "<div><span class='mapaDefaultMessage'>Lo sentimos, no se puede visualizar el mapa porque no hay información disponible de las coordenadas.</div>"),
         
+        /**
+        * Una instancia de google.maps.Map
+        */
+        googleMap: null,
+        
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
 		    BaseView.prototype.initialize.call(this, attributes, options);
         },
-        
-        /*setModel: function (model) {
-            BaseView.prototype.setModel.call(this, model);
-            //this.model.on("mapaFinalizado", _.bind(this.mapaFinalizadoHandler, this));
-        },*/
-        
-        /*preRender: function () {            
-            //Para poder funcionar necesita tener un DIV en el DOM donde insertar el mapa.
-            // Así que cuando se contruye el objeto nos aseguramos que esté.
-            if ($("#"+this.attributes.id).length == 0) {
-                $.ui.addContentDiv(this.attributes.id, this.$el[0]);
-            }
-        },*/
         
         render: function () {
             var latLong = this.getCenterPosicion();
@@ -54,20 +46,16 @@ var GoogleMapView = (function ($, BaseView, renderer) {
         * actual con un color azul, para diferencialo del resto.
         */
         mostrarMapa: function (centerPosition, listaDeCoordenadas, esUbicacionDispositivo) {
-            //BaseView.prototype.armarHtmlConData.call(this);
-            //var nuevoMapa = new GoogleMap([latLong]);
             var nuevoMapa = new GoogleMap(listaDeCoordenadas);
             var mapaCanvas = $(this.parent.getViewSelector() + " div#map_canvas");
-            //nuevoMapa.mostrarMapaEstablecimiento(this.model, mapaCanvas[0]);
-            nuevoMapa.loadMap(centerPosition, mapaCanvas[0], esUbicacionDispositivo);
+            mapaCanvas.on('resize', _.bind(this.onMapaResize, this));
             mapaCanvas.css("height", mapaCanvas.parent().height());
-            this.parent.selectedTab.googleMap = nuevoMapa;
-            this.trigger("viewRendered", this);
+            this.googleMap = nuevoMapa.loadMap(centerPosition, mapaCanvas[0], esUbicacionDispositivo);
         },
         
-        /*mapaFinalizadoHandler: function () {
-            this.trigger("viewRendered", this);
-        },*/
+        onMapaResize: function () {
+            google.maps.event.trigger(this.googleMap, 'resize');
+        },
         
         /**
         * Devuelve la lista de coordenadas para la cual se agregarán marcadores en el mapa.
