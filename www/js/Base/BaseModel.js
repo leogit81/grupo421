@@ -152,6 +152,8 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
         return coordenadas;
     };
     
+    baseModel.prototype.esUbicacionDispositivo = null;    
+    
     _.extend(baseModel, Backbone.Singleton);
 
     return baseModel;

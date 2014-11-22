@@ -104,10 +104,11 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
             //}
         },
         
-        loadMapaView: function () {
+        loadMapaView: function (esUbicacionDispositivo) {
             this.showPanel();
             $(this.getViewSelector()).find("#map_canvas").on('resize', _.bind(this.onMapaResize, this));
             var coordenadasModel = this.getCoordenadasMapaModel();
+            coordenadasModel.esUbicacionDispositivo = esUbicacionDispositivo;
             this.selectedTab.view.setModel(coordenadasModel);
             this.selectedTab.view.render();
         },

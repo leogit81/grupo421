@@ -21,7 +21,7 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
                 tabName: "Mapa",
                 panelId: "establecimientosCercanosMapa",
                 viewClass: GoogleMapView,
-                esMapa: true
+                esMapa: true,
             }
         ],
         
@@ -39,7 +39,6 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
             options = options || {};
             options.renderer = renderer;
             this.setFiltrosServicio(attributes.filtrosServicio);
-            			
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "establecimientosCercanos").filtroConsulta = _.bind(this.getFiltrosServicio, this);
@@ -72,7 +71,11 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
         getCoordenadasMapaModel: function () {
             var tabEstablecimientosCercanos = this.findTab("panelId", "establecimientosCercanos");
             return tabEstablecimientosCercanos.view.model;
-        }
+        },
+        
+        loadMapaView: function () {
+            TabPanelView.prototype.loadMapaView.call(this, true);
+        },
 	});
 	
 	return establecimientosCercanosView;

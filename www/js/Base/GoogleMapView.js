@@ -33,11 +33,6 @@ var GoogleMapView = (function ($, BaseView, renderer) {
         },*/
         
         render: function () {
-            /*var latLong = {
-                latitud: this.model.get("latitud"),
-                longitud: this.model.get("longitud")
-            };*/
-            
             var latLong = this.getCenterPosicion();
             
             //Cuando no hay información de coordenadas muestra una vista por defecto sin mapa.
@@ -46,22 +41,25 @@ var GoogleMapView = (function ($, BaseView, renderer) {
                 BaseView.prototype.render.call(this);
                 this.parent.updateHTMLSubVista(this);
             } else {
-                /*if (common.isEmpty(this.model.get("nivelZoom")))
-                {
-                    this.model.set("nivelZoom", 14);
-                }*/
                 var listaDeCoordenadas = this.getModelData();
-                this.mostrarMapa(latLong, listaDeCoordenadas);
+                this.mostrarMapa(latLong, listaDeCoordenadas, this.model.esUbicacionDispositivo);
             }
          },
         
-        mostrarMapa: function (centerPosition, listaDeCoordenadas) {
+        /**
+        * Muestra el mapa centrado en la centerPosition. Agrega marcadores para c/u
+        * de las coordenadas pasadas en el array listaDeCoordenadas.
+        * El 3° parámetro es un flag que indica si la centerPosicion es la ubicación
+        * del dispositivo. En caso de ser true, se pinta el marcador para la ubicación
+        * actual con un color azul, para diferencialo del resto.
+        */
+        mostrarMapa: function (centerPosition, listaDeCoordenadas, esUbicacionDispositivo) {
             //BaseView.prototype.armarHtmlConData.call(this);
             //var nuevoMapa = new GoogleMap([latLong]);
             var nuevoMapa = new GoogleMap(listaDeCoordenadas);
             var mapaCanvas = $(this.parent.getViewSelector() + " div#map_canvas");
             //nuevoMapa.mostrarMapaEstablecimiento(this.model, mapaCanvas[0]);
-            nuevoMapa.loadMap(centerPosition, mapaCanvas[0]);
+            nuevoMapa.loadMap(centerPosition, mapaCanvas[0], esUbicacionDispositivo);
             mapaCanvas.css("height", mapaCanvas.parent().height());
             this.parent.selectedTab.googleMap = nuevoMapa;
             this.trigger("viewRendered", this);
