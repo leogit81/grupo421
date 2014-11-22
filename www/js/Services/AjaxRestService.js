@@ -94,6 +94,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         var xhr = new XMLHttpRequest();
         if ("withCredentials" in xhr) {
             // XHR for Chrome/Firefox/Opera/Safari.
+			
             xhr.open(method, url, true);
         } else if (typeof XDomainRequest !== "undefined") {
             // XDomainRequest for IE.
