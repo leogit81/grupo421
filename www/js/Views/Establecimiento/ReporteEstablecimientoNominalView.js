@@ -83,26 +83,21 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 			jsonData = {};
 		}
 		if (itemList){
-			var itemListLen = itemList.length;
-			var itemListString = '';
-			var i;
-//			var c;
-			for (i = 0 ; i < itemListLen ; i++) { 
-//				if( c >= BaseView.prototype.color.length ){
-//					c = 0;						
-//				};
-				itemListString += 
-					"<div>Cantidad: " + itemList[i].cantidad + "</br>" +
-					"Descripción: " + itemList[i].descripcion + "</br>" +
-					"ID: " + itemList[i].id + "</br>" +
-					"Porcentaje: " + itemList[i].porcentaje + "</div></br>";
-//				c++;
-			}
-			jsonData.ItemList = itemListString;
-		}
-		else {jsonData.ItemList = null};
+            var itemListLen = itemList.length;
+            var itemListString = '';
+            var i;
+            for (i = 0 ; i < itemListLen ; i++) { 
+                itemListString += 
+                    "<span class='descItemReporte'>" + itemList[i].descripcion + "</span></br>" +
+                    "<div>Cantidad: <span class='cantidadItemReporte'>" + itemList[i].cantidad + "</span></br>" +
+                    "<span class='idItemReporte'>ID: " + itemList[i].id + "</br></span>" +
+                    "Porcentaje:<span class='porcetajeItemReporte'> " + itemList[i].porcentaje + "%</span></div></br>";
+            }
+            jsonData.ItemList = itemListString;
+        }
+        else {jsonData.ItemList = null};
 
-		return this.template(jsonData);
+        return this.template(jsonData);
 	};
 
 	return reporteEstablecimientoNominalView;

@@ -75,7 +75,7 @@
 	<gap:splash src="res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:density="mdpi" />
 	<gap:splash src="res/screen/android/screen-hdpi-portrait.png"  gap:platform="android" gap:density="hdpi" />
 	<gap:splash src="res/screen/android/screen-xhdpi-portrait.png" gap:platform="android" gap:density="xhdpi" />
-	<rim:splash src="res/screen/blackberry/screen-225.png"         gap:platform="blackberry" />
+<!--	<rim:splash src="res/screen/blackberry/screen-225.png"         gap:platform="blackberry" />-->
 	<gap:splash src="res/screen/ios/screen-iphone-portrait.png"    gap:platform="ios"     width="320" height="480" />
 	<gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios"     width="640" height="960" />
 	<gap:splash src="res/screen/ios/screen-ipad-portrait.png"      gap:platform="ios"     width="768" height="1024" />
@@ -83,11 +83,13 @@
 	<gap:splash src="res/screen/windows-phone/screen-portrait.png" gap:platform="winphone" />
 
 
+<!--
 	<feature id="blackberry.app" required="true" version="1.0.0.0" />
 	<rim:permissions>
 		<rim:permit>read_geolocation</rim:permit>
 		<rim:permit>read_device_identifying_information</rim:permit>
 	</rim:permissions>
+-->
 
 	<!--
 		Define access to external domains.
