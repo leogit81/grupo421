@@ -16,7 +16,6 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 				"#47d6d4",
 				"#6366e8",
 				"#999999",
-				"#6366e8",
 				"#00aedb",	
 				"#a200ff",	
 				"#f47835",	

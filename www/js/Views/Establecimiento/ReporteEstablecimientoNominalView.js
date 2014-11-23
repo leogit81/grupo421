@@ -54,7 +54,7 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 			}
 
 			ctx = jQuery(this.getViewSelector() + " #myChart").get(0).getContext("2d");
-			var camasChart = new Chart(ctx).Pie(data);
+			var camasChart = new Chart(ctx).Pie(data,{tooltipFontStyle: "normal"});
 
 			return this;
 		}
@@ -96,7 +96,7 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
             jsonData.ItemList = itemListString;
         }
         else {jsonData.ItemList = null};
-
+		
         return this.template(jsonData);
 	};
 
