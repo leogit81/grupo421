@@ -3,6 +3,7 @@
         "../libraries/xmltojson.js",
         "C:/Users/Leo/PhoneGap/Projects/gov.msal.siisamovil/www/js/app.js",
         "C:/Users/Leo/PhoneGap/Projects/gov.msal.siisamovil/platforms/android/cordova/lib/appinfo.js",
-        "C:/Users/Leo/PhoneGap/Projects/gov.msal.siisamovil/www/js/Services/ServiceConfig.js"
+        "C:/Users/Leo/PhoneGap/Projects/gov.msal.siisamovil/www/js/Services/ServiceConfig.js",
+        "C:/Documents and Settings/Santiago/Escritorio/grupo421/trunk/www/js/Models/Establecimiento/CamasCollection.js"
     ]
 }
