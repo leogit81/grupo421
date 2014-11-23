@@ -125,18 +125,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 			if(ServiceConfig.usuario != null ){
 				//Si la persona tiene una sesion inicializada...
 				//Aca habria que preguntar por los permisos del usuario.
-				$('div').each(function(){
-					$('input').each(function() {
-						if ($(this).attr('disabled')) {
-							$(this).removeAttr('disabled');
-						}
-						else {
-							$(this).attr({
-								'disabled': 'disabled'
-							});
-						}
-					});
-				});
+				$('.reportInput').removeAttr('disabled'); //Habilito los imput
 				jQuery("#habilitarModCamas").css('display','none');
 				jQuery("#submitCamas").css('display','');
 			}else{
@@ -149,7 +138,8 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 			var data = {"idEstablecimiento": 10260632129033,"credenciales":{"usuario":"uutn","clave":"UJR9KM4R5Q"},"camasCuidadosEspeciales":{},"camasGenerales":{"disponibles":6,"libres":6, "habilitadas":8}};
 
 			this.model.update(data,"https://dev.sisa.msal.gov.ar/sisadev/services/rest/establecimiento/modificarCamas");
-
+			
+			$('.reportInput').attr('disabled', 'disabled'); //Disable
 			jQuery("#submitCamas").css('display','none');
 			jQuery("#habilitarModCamas").css('display','');
 		}
