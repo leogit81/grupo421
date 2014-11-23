@@ -22,32 +22,37 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
         
         tabsConfig: [
             {
-                tabName: "General",
+//                tabName: "General",
+                tabName: "<img src='../img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "establecimientoGeneral",
                 viewClass: EstablecimientoNominalGeneralView,
                 modelClass: EstablecimientoNominal
             },
             {
-                tabName: "Prestaciones",
+//                tabName: "Prestaciones",
+                tabName: "<img src='../img/pestanas/accesosA_prestaciones-24-px.png'>",
                 panelId: "establecimientoPrestaciones",
                 viewClass: PrestacionCollectionView,
                 modelClass: PrestacionCollection,
                 titleCSSClass: "prestacionesTabViewClass"
             },
             {
-                tabName: "Imágenes",
+//                tabName: "Imágenes",
+                tabName: "<img src='../img/pestanas/accesosA_imagenes-24-px.png'>",
                 panelId: "establecimientoImagenes",
                 viewClass: ImagenesView,
                 customLoadView: function () { this.view.render(); }
             },
             {
-                tabName: "Mapa",
+//                tabName: "Mapa",
+                tabName: "<img src='../img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "establecimientoMapas",
                 viewClass: GoogleMapView,
                 esMapa: true
             },
 			{
-                tabName: "Camas",
+//                tabName: "Camas",
+                tabName: "<img src='../img/pestanas/accesosA_camas-24-px.png'>",
                 panelId: "establecimientoCamas",
                 viewClass: CamasCollectionView,
 
