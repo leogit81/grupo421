@@ -41,7 +41,6 @@ var AppFrameworkRenderer = (function (_, $, logger) {
         
         //agrego esta clase para poder aplicar estilos CSS
         //$("#" + view.attributes.id).addClass("consulta-detallada");
-        $(view.getViewSelector()).show();
         $(view.getViewSelector()).trigger("orientationchange");
         return this;
     };    
