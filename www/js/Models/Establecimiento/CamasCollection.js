@@ -2,6 +2,7 @@ var CamasCollection = (function (common, Backbone, converter, Service) {
 	"use strict";
 
 	var camasCollection = BaseCollection.extend({
+		
 		initialize: function (attributes, options) {
 			BaseCollection.prototype.initialize.call(this, attributes, options);
 			this.service.loadConfig(this.getServiceConfig());

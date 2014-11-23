@@ -15,6 +15,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         //valores por defecto que toma cuando se construye el objeto si no se pasa config.
         //Son configurables mediante el objeto config pasado por parámetro.
         this.baseUrl = "";
+		this.postUrl = "";
         this.url = "";
         this.method = 'GET';
         this.enableCors = false;
@@ -40,6 +41,7 @@ var AjaxRestService = (function (logger, common, _, ServiceConfig, jQuery) {
         this.config = config || {};
         this.baseUrl = config.baseUrl || ServiceConfig.baseUrl || this.baseUrl;
         this.url = config.url || this.url;
+		this.postUrl = config.postUrl || this.postUrl;
         this.enableCors = config.enableCors || ServiceConfig.enableCors || this.enableCors;
         this.serviceProvider = config.serviceProvider || ServiceConfig.serviceProvider || this.serviceProvider;
         this.timeout = config.timeout || ServiceConfig.timeout || this.timeout;

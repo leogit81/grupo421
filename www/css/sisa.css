@@ -296,6 +296,9 @@ div#splashscreen h1 {
 .tituloCamas {
     font-weight: bolder;
 }
+.titulosReportes{
+	text-align: center;
+}
 
 .nombreEstablecimientoCercano{
     font-weight: bold;
@@ -303,4 +306,7 @@ div#splashscreen h1 {
 
 .distanciaEstablecimientoCercano label{
     font-weight: bold;
+}
+.reportInput{
+	
 }
