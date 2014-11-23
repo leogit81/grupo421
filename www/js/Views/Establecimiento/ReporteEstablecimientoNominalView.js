@@ -26,7 +26,7 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 		render: function (){
 			BaseView.prototype.render.call(this);
 
-			var ctx = jQuery("#myChart").get(0); //	.getContext("2d");
+			var ctx = jQuery(this.getViewSelector() + " #myChart").get(0); //	.getContext("2d");
 
 			ctx.width = window.innerWidth;
 			ctx.height = window.innerHeight * 0.5;
@@ -53,7 +53,7 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 
 			}
 
-			ctx = jQuery("#myChart").get(0).getContext("2d");
+			ctx = jQuery(this.getViewSelector() + " #myChart").get(0).getContext("2d");
 			var camasChart = new Chart(ctx).Pie(data);
 
 			return this;
