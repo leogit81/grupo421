@@ -9,9 +9,13 @@ var InstFormCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
             'id': 'resultadoConsultaGeneralInstForm',
             'data-nav': "consultas_nav"
         },
-        
-        itemTemplateString: "<li><a><span class='znombre'><%=nombre%></span></br><span class='codigoInstForm'><%=codigoSISA%></span></li>",
-//- <% if (provincia) { %><%=provincia%></a><% } %>
+
+        itemTemplate: function (item) {
+            item.provincia = item.provincia || null;
+            BaseCollectionView.prototype.itemTemplate.call(this,item);            
+        },
+
+        itemTemplateString: "<li><a><span class='znombre'><%=nombre%></span></br><span class='codigoInstForm'><%=codigoSISA%></span> - <% if (provincia) { %><%=provincia%></a><% } %></li>",
         busquedaNominalInstForm: function (eventData) {
             var codigoInstForm = this.getCodigoInstFormFromSelectedItem(eventData.currentTarget.outerHTML),
                 instFormNominalView = new InstFormNominalView({codigo: codigoInstForm});
