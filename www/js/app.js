@@ -1,7 +1,6 @@
 /*Variable global para el slider de noticias*/
 var owl;
 
-
 /**
  * Aplicación PhoneGap. Cuando se inicializa la misma se bindean los eventos, el más importante de ellos es deviceready.
  * Una vez que se produjo este quiere decir que se puede llamar con seguridad a las funciones de la API de PhoneGap. 
@@ -47,7 +46,7 @@ var app = (function ($, jquery, logger) {
 		ServiceConfig.usuario = localStorage.getItem("usuario");
 		ServiceConfig.clave = localStorage.getItem("clave");
 		loadApp();
-	};
+	}
 
     function loadApp () {
         launchAppFramework();
@@ -60,11 +59,11 @@ var app = (function ($, jquery, logger) {
         consultasView.render();
 
 		//es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
-		$("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
+		//$("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
 		$("#afui").delegate("a.button.icon.close", "click", onClickCloseButtonHandler);
 		$("#afui").delegate("#loginButton", "click", onClickLoginButtonHandler);
 		$("#afui").delegate("#logoutButton", "click", onClickLogoutButtonHandler);
-	};
+	}
 
 	function wp8DesktopBrowser () {
 		if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
@@ -72,7 +71,27 @@ var app = (function ($, jquery, logger) {
 			script.src = "libraries/plugins/af.desktopBrowsers.js";
 			var tag = $("head").append(script);
 		}
-	};
+	}
+    
+    function setBackButtonClickHandler () {
+        //removemos el handler que agregó al app framework para el clic del back button
+        $(document).undelegate("#header .backButton", "click");
+        $(document).on("click", "#header .backButton", onClickBackButtonHandler);
+    }
+    
+    function onClickBackButtonHandler (e) {
+        e.preventDefault();
+        $($.ui.activeDiv).on("unloadpanelcomplete", removePreviousPanel);
+        $.ui.goBack();
+        $.ui.hideMask();
+    }
+    
+    /**
+     * Borra el panel anterior, es el que se deja atrás cuando se hace clic en el back button.
+     */
+	function removePreviousPanel (e) {
+		$(e.currentTarget).remove();
+	}
 
     function googleMapLoadSrc () {
         var script = document.createElement('script');
@@ -81,10 +100,9 @@ var app = (function ($, jquery, logger) {
             'callback=dummyFunction';
         document.body.appendChild(script);
         window.dummyFunction = function () {};        
-    };
+    }
     
     /*
-
      * POPUP para iniciar sesión
      */
 	function onClickLoginButtonHandler () {
@@ -93,15 +111,6 @@ var app = (function ($, jquery, logger) {
 
 	function onClickLogoutButtonHandler () {
 		var cerrarSesion = new CierreSesionView();
-	};
-
-	/**
-     * Se ejecuta al hacer click en el icono de las tres rayitas que muestra el menú lateral.  
-     */
-	function onClickBackButtonHandler (e) {
-		af.ui.hideMask();
-		var activeDiv = af.ui.activeDiv;
-		setTimeout( function () {activeDiv.remove()} , 250);
 	}
 
 	function onClickCloseButtonHandler (e) {
@@ -111,7 +120,6 @@ var app = (function ($, jquery, logger) {
 	function onClickMenuBadge() {
 		af.ui.toggleSideMenu();
 	}
-
 
 	function launchAppFramework() {
 		resolverConflictos();
@@ -125,8 +133,9 @@ var app = (function ($, jquery, logger) {
             $.ui.updateBadge("#afui","3","tr");
             $("footer#defaultNav").css("display", "none");
             $.ui.backButtonText = "Atrás"; /*esto cambia el texto del backbutton para todos los paneles de la aplicación*/
+            setBackButtonClickHandler();
         });
-    };
+    }
 
 	function launchNoticiasSlider () {
 		var glow = $('.zcargando');
@@ -142,7 +151,7 @@ var app = (function ($, jquery, logger) {
 			paginationSpeed : 400,
 			singleItem:true
 		});
-	};
+	}
 
 	/**
      * Resuelve conflictos que pudiera haber entre el appframework y jQuery con la variable $ en el espacio de nombres global. 

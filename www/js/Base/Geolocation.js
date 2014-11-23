@@ -4,7 +4,7 @@ var Geolocation = (function (Logger) {
     var geolocation = {},
         defaultOptions = {
             maximumAge: 3000,
-            timeout: 3000,
+            timeout: 60000,
             enableHighAccuracy: true
         };
     

@@ -5,7 +5,7 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         tagName: 'div',
 
         attributes: {
-            'id': 'consultaEstablecimiento',
+            'id': 'listadoEstablecimiento',
             'class': 'panel',
             'data-nav': 'consultas_nav'
         },
