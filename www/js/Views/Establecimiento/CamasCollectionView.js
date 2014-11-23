@@ -73,7 +73,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 
 		render: function (){
 			BaseView.prototype.render.call(this);
-			var ctx = jQuery(this.getViewSelector() + " #myChart").get(0); //	.getContext("2d");
+			var ctx = jQuery("#myChart").get(0); //	.getContext("2d");
 
 			ctx.width = window.innerWidth;
 			ctx.height = window.innerHeight * 0.5;
@@ -103,7 +103,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 				}
 			}, data);
 
-			ctx = jQuery(this.getViewSelector() + " #myChart").get(0).getContext("2d");
+			ctx = jQuery("#myChart").get(0).getContext("2d");
 			var camasChart = new Chart(ctx).Doughnut(data);
 
 			return this;
