@@ -135,14 +135,36 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 		},
 
 		ejecutarSubmitCamas:function(){		
-			var data = {"idEstablecimiento": 10260632129033,"credenciales":{"usuario":"uutn","clave":"UJR9KM4R5Q"},"camasCuidadosEspeciales":{},"camasGenerales":{"disponibles":6,"libres":6, "habilitadas":8}};
+			var data = {"idEstablecimiento": 10260632129033,"credenciales":{"usuario":"uutn","clave":"UJR9KM4R5Q"},"camasCuidadosEspeciales":{},"camasGenerales":{"disponibles":6,"libres":6, "habilitadas":10}};
 
 			this.model.update(data,"https://dev.sisa.msal.gov.ar/sisadev/services/rest/establecimiento/modificarCamas");
+		},
+
+		updateOk: function(){
 			
 			$('.reportInput').attr('disabled', 'disabled'); //Disable
 			jQuery("#submitCamas").css('display','none');
 			jQuery("#habilitarModCamas").css('display','');
-		}
+			
+			
+			$("#afui").popup(
+				{
+					title: "Actualizacion de camas",
+					message: "Actualización de camas OK",
+					cancelText: "Aceptar",
+                	cancelCallback: function (json) {
+						/*Actualizo el model para realizar el render de la vista con los nuevos datos.*/
+						//this.model.set();
+						alert("Lleamos al final del camino, Alice...");						
+					},
+//					doneText: "Aceptar",
+//					doneCallback: function (json) {},
+					cancelOnly: true
+				}
+			);
+
+		},
+
 	});
 
 

@@ -94,6 +94,8 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
 				this.service.get(options);
 			}
 			else if ( method === 'update') {
+				this.service.update(options, otraUrl);
+			}else if ( method === 'post') {
 				this.service.post(options, otraUrl);
 			}
 		}
@@ -113,6 +115,10 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
 	//Se agrega el parametro "otraUrl" poque hoy en dia las baseUrl para "Get" y "post" son distintas
 	baseModel.prototype.update = function (data, otraUrl) {
 		this.sync('update', this, data, otraUrl);
+	};
+	//Se agrega el parametro "otraUrl" poque hoy en dia las baseUrl para "Get" y "post" son distintas
+	baseModel.prototype.post = function (data, otraUrl) {
+		this.sync('post', this, data, otraUrl);
 	};
 	/**
     * Devuelve un objeto con la configuración del servicio del model. Por ejemplo, URL del webservice.
@@ -145,18 +151,18 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
     * Obtiene la posición en la cual se centrará el mapa.
     */
 
-    baseModel.prototype.getCenterPosition = function () {
-        var coordenadas = {
-                "latitud": this.get("latitud"),
-                "longitud": this.get("longitud")
-            };
-        
-        return coordenadas;
-    };
-    
-    baseModel.prototype.esUbicacionDispositivo = null;    
-    
-    _.extend(baseModel, Backbone.Singleton);
+	baseModel.prototype.getCenterPosition = function () {
+		var coordenadas = {
+			"latitud": this.get("latitud"),
+			"longitud": this.get("longitud")
+		};
+
+		return coordenadas;
+	};
+
+	baseModel.prototype.esUbicacionDispositivo = null;    
+
+	_.extend(baseModel, Backbone.Singleton);
 
 	return baseModel;
 }(common, Backbone, _, XmlToJSONConverter, AjaxRestService));

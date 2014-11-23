@@ -17,7 +17,7 @@ var InicioSesionView = (function ($, common, _, InicioSesion) {
                     var iniciarSesion = new InicioSesion();
                     iniciarSesion.set("usuario", user);
                     iniciarSesion.set("clave", pass);
-                    iniciarSesion.update(dataWS);
+                    iniciarSesion.post(dataWS);
                 },
                 cancelOnly: false
             }

@@ -2,7 +2,7 @@ var CamasCollection = (function (common, Backbone, converter, Service) {
 	"use strict";
 
 	var camasCollection = BaseCollection.extend({
-		
+
 		initialize: function (attributes, options) {
 			BaseCollection.prototype.initialize.call(this, attributes, options);
 			this.service.loadConfig(this.getServiceConfig());
@@ -11,7 +11,7 @@ var CamasCollection = (function (common, Backbone, converter, Service) {
 
 	camasCollection.prototype.parse = function (parsedData) {
 		var camasDisponibles = _.each(parsedData.camasEstablecimiento, function(item){
-			
+
 			return _.keys(item);
 		}, this);
 		return camasDisponibles;
@@ -19,7 +19,11 @@ var CamasCollection = (function (common, Backbone, converter, Service) {
 
 	camasCollection.prototype.getServiceConfig = function () {
 		return {
-			url: 'establecimiento/camas'
+			url: 'establecimiento/camas',
+			postUrl: 'establecimiento/modificarCamas',
+			updateCallback: _.bind(function(data){
+				this.trigger('updateOk');
+			},this)
 		};
 	};
 
