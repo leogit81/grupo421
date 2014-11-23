@@ -11,11 +11,11 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
         },
 
         codigoInstForm: null,
-        
+
         setCodigoInstForm: function (codigoInstForm) {
             this.codigoInstForm = codigoInstForm;
         },
-        
+
         getCodigoInstForm: function (codigoInstForm) {
             return this.codigoInstForm;
         },
@@ -50,22 +50,6 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
             this.findTab("panelId", "instFormGeneral").filtroConsulta = _.bind(this.getCodigoInstForm, this);
         },
 
-        /*mostrarTabEstablecimientoGeneral: function () {
-            var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
-            tabGeneral.view.model.load(this.codigoEstablecimiento);
-        },*/
-
-        /**
-        * Setea el modelo para la vista y también actualiza los modelos de las vistas de los tabs.
-        */
-        setModel: function (model) {
-            this.getViewByName("General").setModel(model);
-            this.getViewByName("Mapas").setModel(model.get("coordenadas"));
-            /**
-        * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
-        * @param {String} tabName, nombre del tab, a partir de este se obtiene el modelo
-        */
-        },
         getModelOrDefault: function (tabName) {
             var tab = this.findTab("tabName", tabName);
             return tab.view.model;
@@ -94,6 +78,30 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
             TabPanelView.prototype.renderSelectedTab.call(this, args);
         }
         $("#" + this.attributes.id).addClass("consultaNominalInstForm");
+    };
+
+    /**
+    * Obtiene el modelo de coordenadas a partir del modelo de institucion formadora nominal.
+    */
+    instFormNominalView.prototype.getCoordenadasMapaModel = function () {
+        var tabGeneral = this.findTab("panelId", "instFormGeneral");
+
+        /*
+        *EN TODOS LOS DEMAS SERVICIOS, SE DEVUELVEN LAS COORDENADAS BAJO EL TAG coordenadasDeMapa.
+        *EN INSTITUCIONES FORMADORAS, LOS DEVUELVE BAJO EL TAG coordenadas.
+        */
+        return tabGeneral.view.model.get("coordenadas");
+        //        return tabGeneral.view.model.get("coordenadasDeMapa"); 
+    };
+
+    instFormNominalView.prototype.onGoogleMapViewRendered = function () {
+        //Si se hizo clic en el tab de mapas, se carga el mapa de forma diferente, no se muestra dentro del tab
+
+        if (this.selectedTab.panelId === "instFormMapas") {
+            var tabMapa = this.findTab("panelId", "instFormMapas");
+            $.ui.loadContent(tabMapa.view.getViewId(), false, false, "pop");
+            return;
+        }
     };
 
     return instFormNominalView;
