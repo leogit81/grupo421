@@ -54,7 +54,7 @@ var GoogleMapView = (function ($, BaseView, renderer) {
             *Se restan 35px de la altura de los tabs 
             *para evitar overflow de scrolling
             */
-            mapaCanvas.css("height", (mapaCanvas.parent().height() - 35)); 
+            mapaCanvas.css("height", (mapaCanvas.parent().height() - 39)); 
             this.googleMap = nuevoMapa.loadMap(centerPosition, mapaCanvas[0], esUbicacionDispositivo);
         },
         

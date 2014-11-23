@@ -84,6 +84,11 @@ ul li a div h3 {
     border-style: solid;
     display: block;
     font-weight: bold;
+    border-right: 0;
+    border-left: 0;
+/*    border-bottom: 0;*/
+    border-top: 0;
+    border-bottom: 4px solid rgb(49, 153, 248);
 }
 
 .tabs ul li a img {
@@ -137,7 +142,7 @@ ul li a div h3 {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
-    margin-top: 10px;
+    padding-top: 10px;
 }
 
 span.prestacionesTabViewClass {
