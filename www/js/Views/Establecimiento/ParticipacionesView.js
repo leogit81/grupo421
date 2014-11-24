@@ -21,7 +21,7 @@ var ParticipacionesView = (function (_, BaseView) {
             var cuentaDeSI = 0;
             
             _.each(this.model.attributes, function (value, key, list) {
-                if (!common.isEmpty(list[key]) && list[key].toUpperCase() === "SI") {
+                if (!common.isEmpty(list[key]) && list[key].toString().toUpperCase() === "SI") {
                     cuentaDeSI++;
                 }
             });
