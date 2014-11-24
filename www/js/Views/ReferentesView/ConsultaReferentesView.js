@@ -36,7 +36,7 @@ var ConsultaReferentesView = (function(jquery, $, renderer, BaseView, Referentes
         */
         renderVistaDeDatos: function (data) {
             var referentesModel = new Referentes();
-            var referentesView = ReferentesView.getInstance();
+            var referentesView = new ReferentesView();
             referentesView.setModel({model: referentesModel});
             referentesModel.processData(data);
         },
