@@ -134,6 +134,7 @@ var app = (function ($, jquery, logger) {
             $("footer#defaultNav").css("display", "none");
             $.ui.backButtonText = "Atrás"; /*esto cambia el texto del backbutton para todos los paneles de la aplicación*/
             setBackButtonClickHandler();
+            $.ui.loadingText = "Cargando...";
         });
     }
 

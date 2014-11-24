@@ -21,10 +21,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         
         initialize: function (attributes, options) {
             BaseView.prototype.initialize.call(this, attributes, options);
-            //this.wrapTabsInFunction();
             this.tabs = this.createTabs();
-            //this.wrapTabsConfigInFunction(),
-            //this.tabsConfig = this.createTabsConfig();
             this.loadTabsConfig();
             this.createNestedViewsDictionary();
             this.initializeTabs();
@@ -93,16 +90,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         * produzca el evento viewRendered para mostrar el contenido.
         */
         loadSelectedTab: function () {
-            /*if (common.isEmpty(this.selectedTab.isLoaded) || !this.selectedTab.isLoaded) {
-                this.selectedTab.view.model.load(_.result(this.selectedTab, "filtroConsulta"));
-                this.selectedTab.isLoaded = true;
-            } else {
-                this.renderFromData();
-            }*/
             this.selectedTab.loadView();
-            //if (this.selectedTab.isLoaded) {
-                //this.showPanel();
-            //}
         },
         
         loadMapaView: function (esUbicacionDispositivo) {
@@ -150,22 +138,15 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     * de los establecimientos y del dispositivo.
     */
     tabPanelView.prototype.getCoordenadasMapaModel = function () {
-        //var tabMapa = this.findTab("esMapa", true);
-        var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
-        return tabGeneral.view.model.get("coordenadasDeMapa");
+        //Obtiene el tab que tiene el modelo de coordenadas de mapa.
+        var tabQueTieneModeloCoordenadasDeMapa = this.findTab("tieneCoordenadasDeMapa", true),
+            nombreAtributoCoordenadasDeMapaModel;
+        //var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
+        //return tabGeneral.view.model.get("coordenadasDeMapa");
+        //obtiene el nombre del atributo que tiene una referencia al model de coordenadas de mapa
+        nombreAtributoCoordenadasDeMapaModel = tabQueTieneModeloCoordenadasDeMapa.nombreAtributoCoordenadasDeMapaModel || "coordenadasDeMapa";
+        return tabQueTieneModeloCoordenadasDeMapa.view.model.get(nombreAtributoCoordenadasDeMapaModel);
     };
-    
-    /**
-    * Obtiene las coordenadas del establecimiento.
-    */
-    /*tabPanelView.prototype.getCoordenadasEstablecimiento = function () {
-        var coordenadasModel = this.getCoordenadasMapaModel();
-        var coordenadas = {
-            "latitud": coordenadasModel.get("latitud"),
-            "longitud": coordenadasModel.get("longitud")
-        };
-        return coordenadas;
-    };*/
     
     tabPanelView.prototype.hideLoadingMask = function () { };
     
@@ -176,7 +157,6 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     };
     
     tabPanelView.prototype.selectedTabEl = function () {
-        //return $("#selectedTab");
         return $(this.getViewSelector() + " div#selectedTab");
     };
     
@@ -192,8 +172,6 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         this.loadTabs();
         this.setTabWidth();
         this.armarHtmlSelectedTab();
-        //$(this.$el[0]).css("style", "width:100%; height:100%;");
-        //$("#map_canvas").attr("data-touchlayer", "ignore");
     };
     
     /**
@@ -260,15 +238,10 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         var tabList = $(".tabs ul li", this.el),
             //el ancho porcentual de cada tab dentro del panel
             porcAnchoTab = Number((100 / tabList.length).toFixed(2)),
-        //el ancho porcentual de cada tab dentro del afui
-            /*afuiEl = $("#afui"),
-            afuiWidth = Number(common.trimRight(afuiEl.css("width"), "px")),
-            porcAnchoTab = Number((afuiWidth / tabList.length).toFixed(0)),*/
             i;
         
         for (i = 0; i < tabList.length; i++) {
             $(tabList[i]).css("width", porcAnchoTab + "%");
-            //$(tabList[i]).css("width", porcAnchoTab + "px");
         }
     };
     
@@ -360,7 +333,6 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     tabPanelView.prototype.attachEvents = function() {
         BaseView.prototype.attachEvents.call(this);
         //bindea un handler para el click de cada tab de la vista
-        //$("#afui").delegate("#" + this.attributes.id + " ul li a", "click", _.bind(this.renderSelectedTab, this));
         $("#afui").delegate(this.getViewSelector() + " ul li a", "click", _.bind(this.onSelectedTab, this));
     };
     
@@ -372,10 +344,6 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
             var tab = this.initializeTab(tabConfig, index);
             this.addTab(tab);
         }, this);
-        
-        /*if (tabsConfigAdicional !== undefined) {
-            this.addTabRange(tabsConfigAdicional);
-        }*/
 
         if (!common.isEmpty(this.tabs) && this.tabs.length > 0) {
             this.selectedTab = this.tabs[0];

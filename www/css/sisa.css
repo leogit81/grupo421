@@ -366,3 +366,30 @@ div.acercaDe div.row{
 div.acercaDe .logo{
     margin-bottom: 25px;
 }
+
+div.ministerio {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-top: 15px;
+    text-align: left;
+}
+
+#afui div.ministerio label{
+    font-weight: bold;
+    color: #0088D1;
+}
+
+div.ministerio .nombreMinisterio{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+div.ministerio div.row{
+    margin-top: 10px;
+}
+
+div.ministerio label.tipo{
+    margin-right: 10px;
+}
