@@ -62,7 +62,7 @@ var AyudaView = (function ($, BaseView, renderer) {
         render: function () {
             BaseView.prototype.render.call(this);
             this.carousel = jQuery("#ayudaCarousel").owlCarousel({
-                navigation : true, // Show next and prev buttons
+                navigation : false, // Show next and prev buttons
                 navigationText: ["anterior", "siguiente"],
                 autoPlay: false,
                 rewindSpeed: 500,
@@ -71,11 +71,12 @@ var AyudaView = (function ($, BaseView, renderer) {
                 paginationSpeed : 400,
                 singleItem:true
             });
-            this.carousel.data('owlCarousel').removeItem(0);
-            this.carousel.data('owlCarousel').addItem(this.renderedHtml);
-            jQuery("#ayudaCarousel .owl-item").css("height",(window.innerHeight*0.80));
+            var carouselData = this.carousel.data('owlCarousel');
+            carouselData.addItem(this.renderedHtml);
+            carouselData.removeItem(carouselData.maximumItem);
+            jQuery("#ayudaCarousel .owl-item").css("height",(window.innerHeight*0.885));
             jQuery("#ayudaCarousel .owl-controls").css("margin-top","0");
-            $.ui.hideMask();
+            $(this.getViewSelector()).on("loadpanelcomplete", function () {$.ui.hideMask();});
         }
     });
     return ayudaView;
