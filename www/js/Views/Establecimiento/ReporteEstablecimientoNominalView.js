@@ -79,6 +79,9 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 
 	reporteEstablecimientoNominalView.prototype.replaceTemplateWithData = function (jsonData) {
 		var itemList = this.model.get("ItemList").item;
+        if(!_.isArray(itemList)){
+            itemList = [itemList]
+        };
 		if (common.isEmpty(jsonData)) {
 			jsonData = {};
 		}
