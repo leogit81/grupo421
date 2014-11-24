@@ -312,6 +312,29 @@ div#splashscreen h1 {
 .distanciaEstablecimientoCercano label{
     font-weight: bold;
 }
+
 .reportInput{
 	
+}
+
+div .contacto {
+    text-align: center;
+    margin-top: 25px;
+}
+
+div.contacto div.row{
+    margin-top: 10px;
+}
+
+div.contacto span{
+    color: #0088d1;
+}
+
+div.contacto a{
+    color: #0088d1;
+}
+
+div.contacto .nombreMinisterioSalud{
+    font-size: 1em;
+    font-weight: bold;
 }
