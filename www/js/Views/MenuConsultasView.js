@@ -38,6 +38,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaReferentes").on("click", _.bind(this.showConsultaReferentes, this));
             jquery("#linkConsultaInstForm").on("click", _.bind(this.showConsultaInstForm, this));
             jquery("#linkConsultaGeorefes").on("click", _.bind(this.showConsultaGeorefes, this));
+            jquery("#linkContacto").on("click", _.bind(this.showContacto, this));
             //esto es para el menú lateral
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
@@ -50,10 +51,10 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaReferentesSideMenu").on("click", _.bind(this.showConsultaReferentes, this));
             jquery("#linkConsultaInstFormSideMenu").on("click", _.bind(this.showConsultaInstForm, this));
             jquery("#linkConsultaGeorefesSideMenu").on("click", _.bind(this.showConsultaGeorefes, this));
+            jquery("#linkContactoSideMenu").on("click", _.bind(this.showContacto, this));
         },
         
         showConsultaMinisterio: function(e){
-            //var consultaMinisterioView = ConsultaMinisterioView.getInstance();
             var consultaMinisterioView = new ConsultaMinisterioView();
             consultaMinisterioView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_9.png' class='zimagen_header'>");
@@ -77,39 +78,44 @@ var MenuConsultasView = (function(BaseView, jquery){
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_5.png' class='zimagen_header'>");
         },
         showConsultaDroguerias: function(e){
-            var consultaDrogueriasView = ConsultaDrogueriasView.getInstance();
+            var consultaDrogueriasView = new ConsultaDrogueriasView();
             consultaDrogueriasView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_6.png' class='zimagen_header'>");
         },
         showConsultaNomivac: function(e){
-            var consultaNomivacView = ConsultaNomivacView.getInstance();
+            var consultaNomivacView = new ConsultaNomivacView();
             consultaNomivacView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_4.png' class='zimagen_header'>");
         },
         showConsultaRedos: function(e){
-            var consultaRedosView = ConsultaRedosView.getInstance();
+            var consultaRedosView = new ConsultaRedosView();
             consultaRedosView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_8.png' class='zimagen_header'>");
         },
         showConsultaRemediar: function(e){
-            var consultaRemediarView = ConsultaRemediarView.getInstance();
+            var consultaRemediarView = new ConsultaRemediarView();
             consultaRemediarView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_7.png' class='zimagen_header'>");
         },
         showConsultaReferentes: function(e){
-            var consultaReferentesView = ConsultaReferentesView.getInstance();
+            var consultaReferentesView = new ConsultaReferentesView();
             consultaReferentesView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_17.png' class='zimagen_header'>");
         },
         showConsultaInstForm: function(e){
-            var consultaInstFormView = ConsultaInstFormView.getInstance();
+            var consultaInstFormView = new ConsultaInstFormView();
             consultaInstFormView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_10.png' class='zimagen_header'>");
         },
         showConsultaGeorefes: function(e){
-            var consultaGeorefesView = ConsultaGeorefesView.getInstance();
+            var consultaGeorefesView = new ConsultaGeorefesView();
             consultaGeorefesView.render();
             af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_11.png' class='zimagen_header'>");
+        },
+        showContacto: function(e){
+            var contactoView = new ContactoView();
+            contactoView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_12.png' class='zimagen_header'>");
         },
 	});
     
