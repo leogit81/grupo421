@@ -39,6 +39,7 @@ var MenuConsultasView = (function($, BaseView, jquery){
             jquery("#linkConsultaInstForm").on("click", _.bind(this.showConsultaInstForm, this));
             jquery("#linkConsultaGeorefes").on("click", _.bind(this.showConsultaGeorefes, this));
             jquery("#linkContacto").on("click", _.bind(this.showContacto, this));
+            jquery("#linkAyuda").on("click", _.bind(this.showAyuda, this));
             jquery("#linkAcercaDe").on("click", _.bind(this.showAcercaDe, this));
             
             /**
@@ -56,6 +57,7 @@ var MenuConsultasView = (function($, BaseView, jquery){
             jquery("#linkConsultaInstFormSideMenu").on("click", _.bind(this.showConsultaInstForm, this));
             jquery("#linkConsultaGeorefesSideMenu").on("click", _.bind(this.showConsultaGeorefes, this));
             jquery("#linkContactoSideMenu").on("click", _.bind(this.showContacto, this));
+            jquery("#linkAyudaSideMenu").on("click", _.bind(this.showAyuda, this));
         },
         
         showConsultaMinisterio: function(e){
@@ -120,6 +122,12 @@ var MenuConsultasView = (function($, BaseView, jquery){
             var contactoView = new ContactoView();
             contactoView.render();
             $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_12.png' class='zimagen_header'>");
+        },
+        showAyuda: function(e){
+            $.ui.showMask();
+            var ayudaView = new AyudaView();
+            ayudaView.render();
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_14.png' class='zimagen_header'>");
         },
         showAcercaDe: function(e){
             var acercaDeView = new AcercaDeView({"model": new AppVersion()});
