@@ -13,7 +13,10 @@ var ReporteEstablecimientoCamasView = (function ($, renderer, BaseView, ReporteE
         template : _.template(
             '<div class="formGroupHead">Complete uno o varios filtros para crear el reporte de camas de establecimientos.</div>' +
             '<select id="catTipologiaEstablecimiento" name="catTipologiaEstablecimiento"></select>' +
+            '<select id="tipologiaEstablecimiento" name="tipologiaEstablecimiento"></select>' +
+            '<select id="especialidadEstablecimiento" name="especialidadEstablecimiento"></select>' +
             '<select id="dependenciaEstablecimiento" name="dependenciaEstablecimiento"></select>' +
+            '<select id="regionPaisEstablecimiento" name="regionPaisEstablecimiento"></select>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
             '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
@@ -22,7 +25,10 @@ var ReporteEstablecimientoCamasView = (function ($, renderer, BaseView, ReporteE
         render: function() {
             BaseView.prototype.render.call(this);
             $(this.getViewSelector() + " select#catTipologiaEstablecimiento")[0].innerHTML = listaCompletaCatTipologias;
+            $(this.getViewSelector() + " select#tipologiaEstablecimiento")[0].innerHTML = listaCompletaTipologias;
+            $(this.getViewSelector() + " select#especialidadEstablecimiento")[0].innerHTML = listaCompletaEspecialidades;
             $(this.getViewSelector() + " select#dependenciaEstablecimiento")[0].innerHTML = listaCompletaDependencias;
+            $(this.getViewSelector() + " select#regionPaisEstablecimiento")[0].innerHTML = listaCompletaRegionPais;
             $(this.getViewSelector() + " select#provinciaEstablecimiento")[0].innerHTML = listaCompletaProvincias;
             $(this.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
             $(this.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
@@ -38,14 +44,20 @@ var ReporteEstablecimientoCamasView = (function ($, renderer, BaseView, ReporteE
 
         ejecutarReporteEstablecimiento: function () {
             var catTipologiaEstablecimiento = $(this.getViewSelector() + " select#catTipologiaEstablecimiento").val();
+            var tipologiaEstablecimiento = $(this.getViewSelector() + " select#tipologiaEstablecimiento").val();
+            var especialidadEstablecimiento = $(this.getViewSelector() + " select#especialidadEstablecimiento").val();
             var dependenciaEstablecimiento = $(this.getViewSelector() + " select#dependenciaEstablecimiento").val();
+            var regionPaisEstablecimiento = $(this.getViewSelector() + " select#regionPaisEstablecimiento").val();
             var provinciaEstablecimiento = $(this.getViewSelector() + " select#provinciaEstablecimiento").val();
             var departamentoEstablecimiento = $(this.getViewSelector() + " select#departamentoEstablecimiento").val();
             var localidadEstablecimiento = $(this.getViewSelector() + " select#localidadEstablecimiento").val();
 
             this.modelDataSource.getModelData(ReporteEstablecimientoCamasGeneral, {
                 "categoriaTipologia": catTipologiaEstablecimiento,
+                "tipologia": tipologiaEstablecimiento,
+                "especialidad": especialidadEstablecimiento,
                 "dependencia": dependenciaEstablecimiento,
+                "regionPais": regionPaisEstablecimiento,
                 "provincia": provinciaEstablecimiento,
                 "depto": departamentoEstablecimiento,
                 "localidad": localidadEstablecimiento
