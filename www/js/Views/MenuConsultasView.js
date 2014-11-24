@@ -58,6 +58,7 @@ var MenuConsultasView = (function($, BaseView, jquery){
             jquery("#linkConsultaGeorefesSideMenu").on("click", _.bind(this.showConsultaGeorefes, this));
             jquery("#linkContactoSideMenu").on("click", _.bind(this.showContacto, this));
             jquery("#linkAyudaSideMenu").on("click", _.bind(this.showAyuda, this));
+            jquery("#linkAcercaDeSideMenu").on("click", _.bind(this.showAcercaDe, this));
         },
 
         showConsultaMinisterio: function(e){
