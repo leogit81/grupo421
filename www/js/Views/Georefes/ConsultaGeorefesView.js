@@ -13,11 +13,11 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView) {
         template : _.template(
             '<div class="formGroupHead">Centros de salud cercanos. Seleccione la opción deseada.</div>' +
             '<div>' +
-            '<a id="submitBusquedaEstablecimientosCercanos" class="button">Búsqueda establecimientos cercanos</a>' +
+            '<a id="submitBusquedaEstablecimientosCercanos" class="button">Búsqueda de establecimientos cercanos</a>' +
 			'</br>' +
-            '<a id="submitBusquedaFarmaciaCercana" class="button">Búsqueda farmacias cercanas</a>' +
+            '<a id="submitBusquedaFarmaciaCercana" class="button">Búsqueda de farmacias cercanas</a>' +
             '</br>' +
-            '<a id="submitBusquedaDrogueriaCercana" class="button">Búsqueda droguerías cercanas</a>' +
+            '<a id="submitBusquedaDrogueriaCercana" class="button">Búsqueda de droguerías cercanas</a>' +
             '</div>'
         ),
 

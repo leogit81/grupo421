@@ -17,6 +17,16 @@ var CamasCollection = (function (common, Backbone, converter, Service) {
 		return camasDisponibles;
 	};
 
+	camasCollection.prototype.setParsedData = function(parsedData) {
+		//Si entra la primera vez, carga el model con la data. Si entra por segunda vez,
+		//pisa el model con la nueva data. Habria que haber usado, BaseModel en vez de BaseCollection.
+		if(this.models.length > 0){	
+			this.models[0].set(parsedData);
+		}else{
+			this.set(parsedData);
+		}
+	};
+
 	camasCollection.prototype.getServiceConfig = function () {
 		return {
 			url: 'establecimiento/camas',

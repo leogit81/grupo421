@@ -1,4 +1,4 @@
-var GeorefesEstablecimientoCollectionView = (function ($, BaseCollectionView) {
+var GeorefesDrogueriasCollectionView = (function ($, BaseCollectionView) {
     "use strict";
     
     var georefesEstablecimientoCollectionView = BaseCollectionView.extend({
@@ -6,17 +6,17 @@ var GeorefesEstablecimientoCollectionView = (function ($, BaseCollectionView) {
         className: 'panel consulta-detallada',
         
         attributes: {
-            'id': 'resultadoGeorefesEstablecimientoGeneral',
+            'id': 'resultadoGeorefesDrogueriasGeneral',
             'data-nav': "consultas_nav"
         },
         
         itemTemplateString : "<li>" +
-            "<div class='georefesEstablecimientoCercanoItem'>" +
-                "<div><span class='nombreEstablecimientoCercano'><%=nombre%></span></div>" +
+            "<div class='georefesDrogueriasCercanasItem'>" +
+                "<div><span class='nombreDrogueriaCercana'><%=nombre%></span></div>" +
                 "<div><span><%=dependencia%></span></div>" +
                 "<div><span><%=provincia%></span></div>" +
                 "<div><span><%=tipologia%></span></div>" +
-                "<div class='distanciaEstablecimientoCercano'><label>Distancia:</label><span><%=distancia%></span></div>" +
+                "<div class='distanciaDrogueriaCercana'><label>Distancia:</label><span><%=distancia%></span></div>" +
             "</div>" +
         "</li>"
 	});

@@ -1,6 +1,63 @@
 var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView, Chart) {
 	"use strict";
-	var estaRenderizado = 0;
+	var parsedData;
+	var jsonForUpdate = {
+			"idEstablecimiento": null,
+			"credenciales":{
+				"usuario": null,
+				"clave": null
+			},
+			"camasCuidadosEspeciales":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			},
+			"camasGenerales":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			},
+			"camasInternacionProlongada":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			},
+			"camasMaternidad":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			},
+			"camasNeonatologia":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			},
+			"camasNoDiscriminadas":{
+				"habilitadas": null,
+				"disponibles": null
+			},
+			"camasPediatricas":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			},
+			"camasTerapiaIntensivaAdultos":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			},
+			"camasTerapiaIntensivaPediatricas":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			},
+			"camasUsoTransitorio":{
+				"habilitadas": null,
+				"disponibles": null,
+				"libres": null
+			}
+		};
+
 	var camasCollectionView = BaseCollectionView.extend({
 		tagName: 'div',
 		className: 'panel consulta-detallada',
@@ -14,60 +71,60 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 
 		itemTemplateString :
 		"<canvas id='myChart'></canvas>" +
-		"<div><span class = 'titulosReportes'><h2>Total de camas del establecimiento</h2></span><ul class='list inset'>" +
+		"<div ><span class = 'titulosReportes'><h2>Total de camas del establecimiento</h2></span><ul class='list inset'>" +
 		"<li>Camas disponibles:<span><%=totalCamasDisponibles%></span></li>"+
 		"<li>Camas habilitadas: <span><%=totalCamasHabilitadas%></span></li>"+
 		"<li>Camas libres: <span><%=totalCamasLibres%></span></li>" +
 		"</ul></div><br>" +
 		"<h2 class='titulosReportes'>Detalle de los tipos de camas</h2><br>" +
-		"<div><span class='tituloCamas'>Cuidados especiales</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasCuidadosEspecialesDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasCuidadosEspecialesHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasCuidadosEspecialesLibres%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasCuidadosEspeciales'><span class='tituloCamas'>Cuidados especiales</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasCuidadosEspecialesDisponibles' value='<%=camasCuidadosEspecialesDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasCuidadosEspecialesHabilitadas' value='<%=camasCuidadosEspecialesHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasCuidadosEspecialesLibres' value='<%=camasCuidadosEspecialesLibres%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>Generales</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasGeneralesDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasGeneralesHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasGeneralesLibres%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasGenerales'><span class='tituloCamas'>Generales</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasGeneralesDisponibles' value='<%=camasGeneralesDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasGeneralesHabilitadas' value='<%=camasGeneralesHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasGeneralesLibres' value='<%=camasGeneralesLibres%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>Internación prolongada</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasInternacionProlongadaDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasInternacionProlongadaHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasInternacionProlongadaLibres%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasInternacionProlongada'><span class='tituloCamas'>Internación prolongada</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasInternacionProlongadaDisponibles' value='<%=camasInternacionProlongadaDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasInternacionProlongadaHabilitadas' value='<%=camasInternacionProlongadaHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasInternacionProlongadaLibres' value='<%=camasInternacionProlongadaLibres%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>Maternidad</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasMaternidadDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasMaternidadHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasMaternidadLibres%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasMaternidad'><span class='tituloCamas'>Maternidad</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasMaternidadDisponibles' value='<%=camasMaternidadDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasMaternidadHabilitadas' value='<%=camasMaternidadHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasMaternidadLibres' value='<%=camasMaternidadLibres%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>Neonatología</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasNeonatologiaDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasNeonatologiaHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasNeonatologiaLibres%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasNeonatologia'><span class='tituloCamas'>Neonatología</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasNeonatologiaDisponibles' value='<%=camasNeonatologiaDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasNeonatologiaHabilitadas' value='<%=camasNeonatologiaHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasNeonatologiaLibres' value='<%=camasNeonatologiaLibres%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>No discriminadas</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasNoDiscriminadasDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasNoDiscriminadasHabilitadas%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasNoDiscriminadas'><span class='tituloCamas'>No discriminadas</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasNoDiscriminadasDisponibles' value='<%=camasNoDiscriminadasDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasNoDiscriminadasHabilitadas' value='<%=camasNoDiscriminadasHabilitadas%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>Pediátricas</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasPediatricasDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasPediatricasHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasPediatricasLibres%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasPediatricas'><span class='tituloCamas'>Pediátricas</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasPediatricasDisponibles' value='<%=camasPediatricasDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasPediatricasHabilitadas' value='<%=camasPediatricasHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasPediatricasLibres' value='<%=camasPediatricasLibres%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>Terapia intensiva adultos</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasTerapiaIntensivaAdultosDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasTerapiaIntensivaAdultosHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasTerapiaIntensivaAdultosLibres%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasTerapiaIntensivaAdultos'><span class='tituloCamas'>Terapia intensiva adultos</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasTerapiaIntensivaAdultosDisponibles' value='<%=camasTerapiaIntensivaAdultosDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasTerapiaIntensivaAdultosHabilitadas' value='<%=camasTerapiaIntensivaAdultosHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasTerapiaIntensivaAdultosLibres' value='<%=camasTerapiaIntensivaAdultosLibres%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>Terapia intensiva pediátricas</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasTerapiaIntensivaPediatricasDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasTerapiaIntensivaPediatricasHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasTerapiaIntensivaPediatricasLibres%>' disabled='disable'></input></li>"+
+		"<div class='categoriaCama' id='camasTerapiaIntensivaPediatricas'><span class='tituloCamas'>Terapia intensiva pediátricas</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasTerapiaIntensivaPediatricasDisponibles' value='<%=camasTerapiaIntensivaPediatricasDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasTerapiaIntensivaPediatricasHabilitadas' value='<%=camasTerapiaIntensivaPediatricasHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasTerapiaIntensivaPediatricasLibres' value='<%=camasTerapiaIntensivaPediatricasLibres%>' disabled='disable'></input></li>"+
 		"</ul></div><br>" +
-		"<div><span class='tituloCamas'>Uso transitorio</span><ul class='list inset'>" +
-		"<li>Disponibles: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasUsoTransitorioDisponibles%>' disabled='disable'></input></li>"+
-		"<li>Habilitadas: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasUsoTransitorioHabilitadas%>' disabled='disable'></input></li>"+
-		"<li>Libres: <input class='reportInput' type='number' name='camasDisponibles' value='<%=camasUsoTransitorioLibres%>' disabled='disable'></input></li>" +
+		"<div class='categoriaCama' id='camasUsoTransitorio'><span class='tituloCamas'>Uso transitorio</span><ul class='list inset'>" +
+		"<li>Disponibles: <input class='reportInput disponibles' type='number' id='camasUsoTransitorioDisponibles' value='<%=camasUsoTransitorioDisponibles%>' disabled='disable'></input></li>"+
+		"<li>Habilitadas: <input class='reportInput habilitadas' type='number' id='camasUsoTransitorioHabilitadas' value='<%=camasUsoTransitorioHabilitadas%>' disabled='disable'></input></li>"+
+		"<li>Libres: <input class='reportInput libres' type='number' id='camasUsoTransitorioLibres' value='<%=camasUsoTransitorioLibres%>' disabled='disable'></input></li>" +
 		"</ul></div>"+
 		"<a id='habilitarModCamas' class='button'> Modificar Camas del Establecimiento</a>"+
 		"<a id='submitCamas' class='button' style='display: none;'> Enviar </a>",
@@ -80,7 +137,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 			ctx.width = window.innerWidth;
 			ctx.height = window.innerHeight * 0.5;
 
-			var parsedData =  this.model.toJSON();
+			parsedData =  this.model.toJSON();
 			var data = [];
 			var i = 0;
 
@@ -130,14 +187,15 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 				jQuery("#submitCamas").css('display','');
 			}else{
 				//La persona no esta inicializada
-				alert('LOGUEATE FORRO, QUE TE CREES?!?');
+				alert('Debe inciar sesion');
 			}
 		},
 
-		ejecutarSubmitCamas:function(){		
-			var data = {"idEstablecimiento": 10260632129033,"credenciales":{"usuario":"uutn","clave":"UJR9KM4R5Q"},"camasCuidadosEspeciales":{},"camasGenerales":{"disponibles":6,"libres":6, "habilitadas":10}};
-
-			this.model.update(data,"https://dev.sisa.msal.gov.ar/sisadev/services/rest/establecimiento/modificarCamas");
+		ejecutarSubmitCamas:function(){
+			
+			this.modelToJsonUpdate();
+			
+			this.model.update(jsonForUpdate,"https://dev.sisa.msal.gov.ar/sisadev/services/rest/establecimiento/modificarCamas");
 		},
 
 		updateOk: function(){
@@ -152,11 +210,11 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 					title: "Actualizacion de camas",
 					message: "Actualización de camas OK",
 					cancelText: "Aceptar",
-                	cancelCallback: function (json) {
-						/*Actualizo el model para realizar el render de la vista con los nuevos datos.*/
-						//this.model.set();
-						alert("Lleamos al final del camino, Alice...");						
-					},
+                	cancelCallback: _.bind(function (json) {
+						//Ejecuto nuevamente la consulta de camas para traer los datos impactados.	
+						this.parent.findTab("panelId", "establecimientoCamas").isLoaded = false;
+						this.parent.loadSelectedTab();
+					},this),
 //					doneText: "Aceptar",
 //					doneCallback: function (json) {},
 					cancelOnly: true
@@ -164,6 +222,24 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 			);
 
 		},
+		
+		modelToJsonUpdate: function(){
+			
+//			jsonForUpdate.credenciales.usuario = ServiceConfig.usuario;
+			jsonForUpdate.credenciales.usuario = "uutn"
+//			jsonForUpdate.credenciales.clave = ServiceConfig.clave;
+			jsonForUpdate.credenciales.clave = "UJR9KM4R5Q"
+			jsonForUpdate.idEstablecimiento = parsedData[0].codigo;
+
+			$('.categoriaCama').each(function(idx, el){
+				jsonForUpdate[el.id].habilitadas = $(el).find('.habilitadas').val();
+				jsonForUpdate[el.id].disponibles = $(el).find('.disponibles').val();
+				
+				if( el.id != "camasNoDiscriminadas"){
+					jsonForUpdate[el.id].libres = $(el).find('.libres').val();
+				}
+			})
+		}
 
 	});
 

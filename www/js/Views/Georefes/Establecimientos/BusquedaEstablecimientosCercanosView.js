@@ -82,11 +82,11 @@ var BusquedaEstablecimientosCercanosView = (function (jquery, $, renderer, BaseV
         },
         
         actualizarListaDepartamentos: function () {
-            deptos.actualizarDepartamentosDeLaVista(this);
+            deptos.actualizarDepartamentosDeLaVista(this, "provinciaEstablecimiento", "departamentoEstablecimiento", "localidadEstablecimiento");
         },
         
         actualizarListaLocalidades: function () {
-            localidades.actualizarLocalidadesDeLaVista(this);
+            localidades.actualizarLocalidadesDeLaVista(this, "provinciaEstablecimiento", "departamentoEstablecimiento", "localidadEstablecimiento");
         }
     });
 

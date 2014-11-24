@@ -1,27 +1,27 @@
-var BusquedaEstablecimientosCercanosView = (function (jquery, $, renderer, BaseView, EstablecimientosCercanosView) {
+var BusquedaDrogueriasCercanasView = (function (jquery, $, renderer, BaseView, DrogueriasCercanasView) {
     "use strict";
 
-    var busquedaEstablecimientosCercanosView = BaseView.extend({
+    var busquedaDrogueriasCercanasView = BaseView.extend({
         tagName: 'div',
 
         attributes: {
-            'id': 'busquedaEstablecimientosCercanos',
+            'id': 'busquedaDrogueriasCercanas',
             'class': 'panel',
             'data-nav':"consultas_nav",    
         },
 
-        cantidadDeEstablecimientosCercanosPorDefecto: 10,
+        cantidadDeDrogueriasCercanasPorDefecto: 10,
         filtrosServicio: null,
 
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
-            '<label>Cantidad de establecimientos cercanos</label>' +
-            '<input id="cantidadEstablecimientosCercanos" type="number" name="cantidadEstablecimientosCercanos"></input></br>' +
-            '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
-            '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
-            '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
-            '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
-            '<a id="submitConsultaEstablecimiento" class="button">Enviar</a>'
+            '<label>Cantidad de droguerías cercanas</label>' +
+            '<input id="cantidadDrogueriasCercanas" type="number" name="cantidadDrogueriasCercanas"></input></br>' +
+            '<input id="nombreDroguerias" type="text" placeholder="Nombre de la droguería"/>' +
+            '<select id="provinciaDrogueria" name="provinciaDrogueria"></select>' +
+            '<select id="departamentoDrogueria" name="departamentoDrogueria"></select>' +
+            '<select id="localidadDrogueria" name="localidadDrogueria"></select>' +
+            '<a id="submitConsultaDrogueria" class="button">Enviar</a>'
         ),
         
         initialize: function(attributes, options) {
@@ -34,27 +34,27 @@ var BusquedaEstablecimientosCercanosView = (function (jquery, $, renderer, BaseV
         
         render: function () {
             BaseView.prototype.render.call(this);            
-            $(this.getViewSelector() + " select#provinciaEstablecimiento")[0].innerHTML = listaCompletaProvincias;
-            $(this.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
-            $(this.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
-            $(this.getViewSelector() + " #cantidadEstablecimientosCercanos").val(this.cantidadDeEstablecimientosCercanosPorDefecto);
+            $(this.getViewSelector() + " select#provinciaDrogueria")[0].innerHTML = listaCompletaProvincias;
+            $(this.getViewSelector() + " select#departamentoDrogueria")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
+            $(this.getViewSelector() + " select#localidadDrogueria")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
+            $(this.getViewSelector() + " #cantidadDrogueriasCercanas").val(this.cantidadDeDrogueriasCercanasPorDefecto);
         },
 
         /**
         * Handler que se ejecuta cuando se hace clic en el botón enviar, para ejecutar la consulta.
         */
-        onSubmitConsultaEstablecimientoClick: function (e) {
+        onSubmitConsultaDrogueriaClick: function (e) {
             $.ui.showMask("Cargando...");
-            Geolocation.obtenerPosicion(_.bind(this.ejecutarBusquedaEstablecimientosCercanos, this));
+            Geolocation.obtenerPosicion(_.bind(this.ejecutarBusquedaDrogueriasCercanas, this));
         },
         
-        ejecutarBusquedaEstablecimientosCercanos: function(posicion){
+        ejecutarBusquedaDrogueriasCercanas: function(posicion){
             this.obtenerDatosFiltroServicio(posicion);
-            var establecimientosCercanosView = new EstablecimientosCercanosView({
+            var drogueriasCercanasView = new DrogueriasCercanasView({
                 "filtrosServicio": this.filtrosServicio
             });
             af.ui.showMask("Cargando...");
-            establecimientosCercanosView.loadDefaultView();
+            drogueriasCercanasView.loadDefaultView();
         },
         
         obtenerDatosFiltroServicio: function (position) {
@@ -63,11 +63,11 @@ var BusquedaEstablecimientosCercanosView = (function (jquery, $, renderer, BaseV
                 "latitud": position.coords.latitude
             };
 
-            this.filtrosServicio.nombre = $(this.getViewSelector() + " input#nombreEstablecimiento").val();
-            this.filtrosServicio.provincia = $(this.getViewSelector() + " select#provinciaEstablecimiento").val();
-            this.filtrosServicio.depto = $(this.getViewSelector() + " select#departamentoEstablecimiento").val();
-            this.filtrosServicio.localidad = $(this.getViewSelector() + " select#localidadEstablecimiento").val();
-            this.filtrosServicio.cantidad = $(this.getViewSelector() + " #cantidadEstablecimientosCercanos").val();
+            this.filtrosServicio.nombre = $(this.getViewSelector() + " input#nombreDrogueria").val();
+            this.filtrosServicio.provincia = $(this.getViewSelector() + " select#provinciaDrogueria").val();
+            this.filtrosServicio.depto = $(this.getViewSelector() + " select#departamentoDrogueria").val();
+            this.filtrosServicio.localidad = $(this.getViewSelector() + " select#localidadDrogueria").val();
+            this.filtrosServicio.cantidad = $(this.getViewSelector() + " #cantidadDrogueriasCercanas").val();
         },
 
         /**
@@ -76,19 +76,19 @@ var BusquedaEstablecimientosCercanosView = (function (jquery, $, renderer, BaseV
          */
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
-            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaEstablecimiento", "click", _.bind(this.onSubmitConsultaEstablecimientoClick, this));
-            $("#afui").delegate(this.getViewSelector() + " select#provinciaEstablecimiento", "change", _.bind(this.actualizarListaDepartamentos, this));
-            $("#afui").delegate(this.getViewSelector() +" select#departamentoEstablecimiento", "change", _.bind(this.actualizarListaLocalidades, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitConsultaDrogueria", "click", _.bind(this.onSubmitConsultaDrogueriaClick, this));
+            $("#afui").delegate(this.getViewSelector() + " select#provinciaDrogueria", "change", _.bind(this.actualizarListaDepartamentos, this));
+            $("#afui").delegate(this.getViewSelector() +" select#departamentoDrogueria", "change", _.bind(this.actualizarListaLocalidades, this));
         },
         
         actualizarListaDepartamentos: function () {
-            deptos.actualizarDepartamentosDeLaVista(this);
+            deptos.actualizarDepartamentosDeLaVista(this, "provinciaDrogueria", "departamentoDrogueria", "localidadDrogueria");
         },
         
         actualizarListaLocalidades: function () {
-            localidades.actualizarLocalidadesDeLaVista(this);
+            localidades.actualizarLocalidadesDeLaVista(this, "provinciaDrogueria", "departamentoDrogueria", "localidadDrogueria");
         }
     });
 
-    return busquedaEstablecimientosCercanosView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, EstablecimientosCercanosView);
+    return busquedaDrogueriasCercanasView;
+})(jQuery, af, AppFrameworkRenderer, BaseView, DrogueriasCercanasView);

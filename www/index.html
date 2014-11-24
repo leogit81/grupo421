@@ -3,7 +3,7 @@
     <head>
         <title>SISA Móvil</title>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-<!--		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+        <!--		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -30,14 +30,14 @@
 
             <!--SISA Móvil-->
             <link rel="stylesheet" type="text/css" href="css/sisa.css" />
-<!--            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz43FjcTt7PYeUpxk-RzVR__kSyooWcBg&sensor=false"></script>-->
+            <!--            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz43FjcTt7PYeUpxk-RzVR__kSyooWcBg&sensor=false"></script>-->
             <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 
             <script type="text/javascript" charset="utf-8" src="libraries/jquery.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/underscore.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/backbone.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/xmltojson.js"></script>
-			<script type="text/javascript" charset="utf-8" src="libraries/Chart.js"></script>
+            <script type="text/javascript" charset="utf-8" src="libraries/Chart.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Converter/XmlToJsonConverter.js"></script>
 
             <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
@@ -61,7 +61,6 @@
             <script type="text/javascript" charset="utf-8" src="js/Base/ModelDataSource.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Imagen.js"></script>
 
-            <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/Cama.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/CamasCollection.js"></script>
 
             <script type="text/javascript" charset="utf-8" src="js/Models/Establecimiento/Prestacion.js"></script>
@@ -71,6 +70,8 @@
             <script type="text/javascript" charset="utf-8" src="js/Models/Domicilio.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/Telefono.js"></script>
 
+            <script type="text/javascript" charset="utf-8" src="js/Codificacion/CategoriaTipologia.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Codificacion/Tipologia.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Provincias.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Departamentos.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Codificacion/Localidades.js"></script>
@@ -164,7 +165,6 @@
             <script type="text/javascript" charset="utf-8" src="js/Views/NoticiasView/ListadoNoticiasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/MenuConsultasView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ConsultasView.js"></script>
-            
             <script type="text/javascript" charset="utf-8" src="js/Models/Georefes/Establecimiento/GeorefesEstablecimientoCollection.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Georefes/Establecimientos/GeorefesEstablecimientoCollectionView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/Georefes/Establecimientos/EstablecimientosCercanosView.js"></script>
@@ -184,8 +184,10 @@
             <script type="text/javascript" charset="utf-8" src="js/Models/InicioSesion.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/AutenticacionView/InicioSesionView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/ContactoView.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/Views/AyudaView.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Models/AppVersion.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/Views/AcercaDeView.js"></script>
+
 
             <link rel="stylesheet" href="css/owl/owl.carousel.css">
             <link rel="stylesheet" href="css/owl/owl.theme.css">
@@ -194,6 +196,12 @@
             <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/app-debug.js"></script>
             <script type="text/javascript" charset="utf-8" src="main.js"></script>
+            <!--<script>
+                window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
+                    alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber
+                          + ' Column: ' + column + ' StackTrace: ' +  errorObj);
+                }
+            </script>-->
             </head>
         <body>
             <div class="app">
@@ -208,7 +216,7 @@
                         <a id='menubadge' class='menuButton'></a>
                     </div>
                     <div id="content">
-					
+
                         <!--Paneles usados para navegar por la aplicación-->
                         <div id="home" class="panel" data-title="<img src='./img/sisaMobile.png' class='zimagen_header'>" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias" data-load="common.homeLoad" data-unload="common.homeUnload">
                             <ul class="list">
@@ -331,7 +339,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="item_menu">
+                                    <a id="linkAyuda" class="item_menu">
                                         <div class="ztexto-lista">
                                             <img src="./img/iconos/tab_14.png">
                                             <h3>AYUDA EN LÍNEA</h3>
@@ -365,8 +373,8 @@
                                 <li><a id="linkConsultaInstFormSideMenu" class="item_menu" href="#"><img src="./img/iconos/con_ref/Formacion_48.png"></a></li>
                                 <li><a id="linkConsultaReferentesSideMenu" class="item_menu" href="#"><img src="./img/iconos/con_ref/Referentes_48.png"></a></li>
                                 <li><a id="linkContactoSideMenu" class="item_menu" href="#"><img src="./img/iconos/con_ref/Mensajes_48.png"></a></li>
-                                <li><a class="item_menu"><img src="./img/iconos/con_ref/SISAMOBILE_48.png"></a></li>
-                                <li><a class="item_menu"><img src="./img/iconos/con_ref/Ayuda_48.png"></a></li>
+                                <li><a id="linkAcercaDeSideMenu" class="item_menu"><img src="./img/iconos/con_ref/SISAMOBILE_48.png"></a></li>
+                                <li><a id="linkAyudaSideMenu" class="item_menu"><img src="./img/iconos/con_ref/Ayuda_48.png"></a></li>
                             </ul>
                         </nav>
                     </div>

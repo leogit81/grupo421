@@ -12,13 +12,17 @@ var ReporteEstablecimientoCamasView = (function ($, renderer, BaseView, ReporteE
 
         template : _.template(
             '<div class="formGroupHead">Complete uno o varios filtros para crear el reporte de camas de establecimientos.</div>' +
+            '<select id="catTipologiaEstablecimiento" name="catTipologiaEstablecimiento"></select>' +
+            '<select id="dependenciaEstablecimiento" name="dependenciaEstablecimiento"></select>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
             '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
             '<a id="submitReporteEstablecimiento" class="button">Crear reporte</a>'
         ),
         render: function() {
-            BaseView.prototype.render.call(this);            
+            BaseView.prototype.render.call(this);
+            $(this.getViewSelector() + " select#catTipologiaEstablecimiento")[0].innerHTML = listaCompletaCatTipologias;
+            $(this.getViewSelector() + " select#dependenciaEstablecimiento")[0].innerHTML = listaCompletaDependencias;
             $(this.getViewSelector() + " select#provinciaEstablecimiento")[0].innerHTML = listaCompletaProvincias;
             $(this.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
             $(this.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
@@ -33,11 +37,15 @@ var ReporteEstablecimientoCamasView = (function ($, renderer, BaseView, ReporteE
         },
 
         ejecutarReporteEstablecimiento: function () {
+            var catTipologiaEstablecimiento = $(this.getViewSelector() + " select#catTipologiaEstablecimiento").val();
+            var dependenciaEstablecimiento = $(this.getViewSelector() + " select#dependenciaEstablecimiento").val();
             var provinciaEstablecimiento = $(this.getViewSelector() + " select#provinciaEstablecimiento").val();
             var departamentoEstablecimiento = $(this.getViewSelector() + " select#departamentoEstablecimiento").val();
             var localidadEstablecimiento = $(this.getViewSelector() + " select#localidadEstablecimiento").val();
 
             this.modelDataSource.getModelData(ReporteEstablecimientoCamasGeneral, {
+                "categoriaTipologia": catTipologiaEstablecimiento,
+                "dependencia": dependenciaEstablecimiento,
                 "provincia": provinciaEstablecimiento,
                 "depto": departamentoEstablecimiento,
                 "localidad": localidadEstablecimiento

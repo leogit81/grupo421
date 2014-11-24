@@ -1,25 +1,25 @@
-var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, GeorefesEstablecimientoCollectionView, GeorefesEstablecimientoCollection, GoogleMapView) {
+var DrogueriasCercanasView = (function ($, renderer, TabPanelView, GeorefesDrogueriasCollectionView, GeorefesDrogueriasCollection, GoogleMapView) {
     "use strict";
     
-    var establecimientosCercanosView = TabPanelView.extend({
+    var drogueriasCercanasView = TabPanelView.extend({
         tagName: 'div',
         className: 'panel consulta-detallada',
                                                          
         attributes: {
-            'id': 'resultadoConsultaEstablecimientosCercanos',
+            'id': 'resultadoConsultaDrogueriasCercanas',
             'data-nav': 'consultas_nav'
         },
         
         tabsConfig: [
             {
-                tabName: "Establecimientos",
-                panelId: "establecimientosCercanos",
-                viewClass: GeorefesEstablecimientoCollectionView,
-                modelClass: GeorefesEstablecimientoCollection
+                tabName: "Droguerias",
+                panelId: "drogueriasCercanas",
+                viewClass: GeorefesDrogueriasCollectionView,
+                modelClass: GeorefesDrogueriasCollection
             },
             {
                 tabName: "Mapa",
-                panelId: "establecimientosCercanosMapa",
+                panelId: "drogueriasCercanasMapa",
                 viewClass: GoogleMapView,
                 esMapa: true,
             }
@@ -41,7 +41,7 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
             this.setFiltrosServicio(attributes.filtrosServicio);
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
-            this.findTab("panelId", "establecimientosCercanos").filtroConsulta = _.bind(this.getFiltrosServicio, this);
+            this.findTab("panelId", "drogueriasCercanas").filtroConsulta = _.bind(this.getFiltrosServicio, this);
             this.setCoordenadasModel(attributes.filtrosServicio.latitud, attributes.filtrosServicio.longitud);
         },
         
@@ -69,8 +69,8 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
         * de los establecimientos y del dispositivo.
         */
         getCoordenadasMapaModel: function () {
-            var tabEstablecimientosCercanos = this.findTab("panelId", "establecimientosCercanos");
-            return tabEstablecimientosCercanos.view.model;
+            var tabDrogueriasCercanas = this.findTab("panelId", "drogueriasCercanas");
+            return tabDrogueriasCercanas.view.model;
         },
         
         loadMapaView: function () {
@@ -78,5 +78,5 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
         },
 	});
 	
-	return establecimientosCercanosView;
-}(af, AppFrameworkRenderer, TabPanelView, GeorefesEstablecimientoCollectionView, GeorefesEstablecimientoCollection, GoogleMapView));
+	return drogueriasCercanasView;
+}(af, AppFrameworkRenderer, TabPanelView, GeorefesDrogueriasCollectionView, GeorefesDrogueriasCollection, GoogleMapView));

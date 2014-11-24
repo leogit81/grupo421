@@ -4,11 +4,11 @@ var MenuConsultasView = (function($, BaseView, jquery){
      */
     menuConsultasView = BaseView.extend({
         tagName: 'nav',
-        
+
         attributes: {
             'id': 'consultas_nav'
         },
-        
+
         /*template: _.template('<ul class="list">' +
                                 '<li>' + 
                                     '<a id="linkConsultaMinisterio" class="icon" href="#">Ministerio</a>' +
@@ -17,11 +17,11 @@ var MenuConsultasView = (function($, BaseView, jquery){
                                     '<a id="linkConsultaEstablecimiento" class="icon" href="#">Establecimiento</a>' +
                                 '</li>' +
                             '</ul>'),
-        
+
         render: function(){
             BaseView.prototype.render.call(this);
         },*/
-        
+
         /**
          * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
          */
@@ -39,8 +39,9 @@ var MenuConsultasView = (function($, BaseView, jquery){
             jquery("#linkConsultaInstForm").on("click", _.bind(this.showConsultaInstForm, this));
             jquery("#linkConsultaGeorefes").on("click", _.bind(this.showConsultaGeorefes, this));
             jquery("#linkContacto").on("click", _.bind(this.showContacto, this));
+            jquery("#linkAyuda").on("click", _.bind(this.showAyuda, this));
             jquery("#linkAcercaDe").on("click", _.bind(this.showAcercaDe, this));
-            
+
             /**
             * ESTO ES PARA EL MENÚ LATERAL
             */
@@ -56,14 +57,16 @@ var MenuConsultasView = (function($, BaseView, jquery){
             jquery("#linkConsultaInstFormSideMenu").on("click", _.bind(this.showConsultaInstForm, this));
             jquery("#linkConsultaGeorefesSideMenu").on("click", _.bind(this.showConsultaGeorefes, this));
             jquery("#linkContactoSideMenu").on("click", _.bind(this.showContacto, this));
+            jquery("#linkAyudaSideMenu").on("click", _.bind(this.showAyuda, this));
+            jquery("#linkAcercaDeSideMenu").on("click", _.bind(this.showAcercaDe, this));
         },
-        
+
         showConsultaMinisterio: function(e){
             var consultaMinisterioView = new ConsultaMinisterioView();
             consultaMinisterioView.render();
             $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_9.png' class='zimagen_header'>");
         },
-		showConsultaEstablecimiento: function(e){
+        showConsultaEstablecimiento: function(e){
             //var consultaEstablecimientoView = ConsultaEstablecimientoView.getInstance();
             var consultaEstablecimientoView = new ConsultaEstablecimientoView();
             consultaEstablecimientoView.render();
@@ -121,12 +124,17 @@ var MenuConsultasView = (function($, BaseView, jquery){
             contactoView.render();
             $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_12.png' class='zimagen_header'>");
         },
+        showAyuda: function(e){
+            $.ui.showMask("Cargando...");
+            setTimeout(function () {var ayudaView = new AyudaView(); ayudaView.render();},200);
+            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_14.png' class='zimagen_header'>");
+        },
         showAcercaDe: function(e){
             var acercaDeView = new AcercaDeView({"model": new AppVersion()});
             acercaDeView.render();
             $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_13.png' class='zimagen_header'>");
         }
-	});
-    
+    });
+
     return menuConsultasView;
 })(af, BaseView, jQuery);
