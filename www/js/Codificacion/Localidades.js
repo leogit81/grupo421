@@ -5277,12 +5277,12 @@ function Localidades() {
         document.getElementById(locDiv.id).innerHTML = localidadesHTML;
     };
     
-    this.actualizarLocalidadesDeLaVista = function (view) {
+    this.actualizarLocalidadesDeLaVista = function (view, provinciaId, departamentoId, localidadId) {
         var i;
         var localidadesHTML;
         var len = listaLocalidades.length;
-        var idProvinciaSeleccionada = af(view.getViewSelector() + " select#provinciaEstablecimiento").val();
-        var idDepartamentoSeleccionado = af(view.getViewSelector() + " select#departamentoEstablecimiento").val();
+        var idProvinciaSeleccionada = af(view.getViewSelector() + " select#" + provinciaId).val();
+        var idDepartamentoSeleccionado = af(view.getViewSelector() + " select#" + departamentoId).val();
         localidadesHTML += "<option value =''>Seleccione una localidad...</option>";
         for (i = 0; i < len; i++) {
             if ( ( listaLocalidades[i].idProvincia == idProvinciaSeleccionada ) &&
@@ -5291,7 +5291,7 @@ function Localidades() {
             };
         };
         
-        af(view.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = localidadesHTML;
+        af(view.getViewSelector() + " select#" + localidadId)[0].innerHTML = localidadesHTML;
     };
 };
 

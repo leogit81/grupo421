@@ -530,19 +530,19 @@ function Departamentos() {
         document.getElementById(locDiv.id).innerHTML = "<option value =''>Seleccione una localidad...</option>";
     };
     
-    this.actualizarDepartamentosDeLaVista = function (view) {
+    this.actualizarDepartamentosDeLaVista = function (view, provinciaId, departamentoId, localidadId) {
         var i;
         var dptosHTML;
         var len = listaDptos.length;
-        var idProvinciaSeleccionada = af(view.getViewSelector() + " select#provinciaEstablecimiento").val();
+        var idProvinciaSeleccionada = af(view.getViewSelector() + " select#" + provinciaId).val();
         dptosHTML += "<option value =''>Seleccione un departamento...</option>";
         for (i = 0; i < len; i++) {
             if ( listaDptos[i].idProv == idProvinciaSeleccionada ) {
                 dptosHTML += "<option value='" + listaDptos[i].idDpto + "'>" + listaDptos[i].departamento + "</option>";
             };
         };
-        af(view.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = dptosHTML;
-        af(view.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
+        af(view.getViewSelector() + " select#" + departamentoId)[0].innerHTML = dptosHTML;
+        af(view.getViewSelector() + " select#" + localidadId)[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
     };
 };
 
