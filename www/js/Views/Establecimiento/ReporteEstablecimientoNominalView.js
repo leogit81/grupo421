@@ -6,7 +6,8 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 		className: 'panel consulta-detallada',
 
 		attributes: {
-			'id': 'reporteEstablecimientoNominal'
+			'id': 'reporteEstablecimientoNominal',
+            'data-nav': 'consultas_nav'
 		},
 
 		template : _.template(
