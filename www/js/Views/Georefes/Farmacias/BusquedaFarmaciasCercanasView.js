@@ -16,7 +16,7 @@ var BusquedaFarmaciasCercanasView = (function (jquery, $, renderer, BaseView, Fa
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
             '<label>Cantidad de farmacias cercanas</label>' +
-            '<input id="cantidadFarmaciasCercanas" type="number" name="cantidadFarmaciasCercanas"></input></br>' +
+            '<input id="cantidadFarmaciasCercanas" type="tel" name="cantidadFarmaciasCercanas"></input></br>' +
             '<input id="nombreFarmacia" type="text" placeholder="Nombre de la farmacia"/>' +
             '<select id="provinciaFarmacia" name="provinciaFarmacia"></select>' +
             '<select id="departamentoFarmacia" name="departamentoFarmacia"></select>' +

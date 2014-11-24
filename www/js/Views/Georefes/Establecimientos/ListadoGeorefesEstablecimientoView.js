@@ -15,7 +15,7 @@ var ListadoGeorefesEstablecimientoView = (function ($, renderer, BaseView, Geore
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
             '<label>Cantidad de establecimientos cercanos</label>' +
-            '<input id="cantidadEstablecimientosCercanos" type="number" name="cantidadEstablecimientosCercanos"></input></br>' +
+            '<input id="cantidadEstablecimientosCercanos" type="tel" name="cantidadEstablecimientosCercanos"></input></br>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +

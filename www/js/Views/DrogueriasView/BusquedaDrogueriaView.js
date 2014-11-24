@@ -12,7 +12,7 @@ var BusquedaDrogueriaView = (function (jquery, $, renderer, BaseView, DrogueriaN
 
         template : _.template(
             '<div class="formGroupHead">Ingrese el código de la droguería que quiere buscar.</div>' +
-            '<input id="codigoDrogueria" type="number" name="codigoDrogueria" placeholder="Código de droguería"></input></br>' +
+            '<input id="codigoDrogueria" type="tel" name="codigoDrogueria" placeholder="Código de droguería"></input></br>' +
             '<a id="submitConsultaBusquedaDrogueria" class="button">Buscar</a>'
         ),
 

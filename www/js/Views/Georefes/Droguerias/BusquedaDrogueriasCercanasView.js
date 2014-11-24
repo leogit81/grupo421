@@ -16,7 +16,7 @@ var BusquedaDrogueriasCercanasView = (function (jquery, $, renderer, BaseView, D
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
             '<label>Cantidad de droguerías cercanas</label>' +
-            '<input id="cantidadDrogueriasCercanas" type="number" name="cantidadDrogueriasCercanas"></input></br>' +
+            '<input id="cantidadDrogueriasCercanas" type="tel" name="cantidadDrogueriasCercanas"></input></br>' +
             '<input id="nombreDroguerias" type="text" placeholder="Nombre de la droguería"/>' +
             '<select id="provinciaDrogueria" name="provinciaDrogueria"></select>' +
             '<select id="departamentoDrogueria" name="departamentoDrogueria"></select>' +

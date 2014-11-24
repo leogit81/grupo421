@@ -12,7 +12,7 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
 
         template : _.template(
             '<div class="formGroupHead">Ingrese el código de la farmacia que quiere buscar.</div>' +
-            '<input id="codigoFarmacia" type="number" name="codigoFarmacia" placeholder="Código de farmacia"></input></br>' +
+            '<input id="codigoFarmacia" type="tel" name="codigoFarmacia" placeholder="Código de farmacia"></input></br>' +
             '<a id="submitConsultaBusquedaFarmacia" class="button">Buscar</a>'
         ),
 

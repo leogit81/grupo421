@@ -12,7 +12,7 @@ var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, Esta
 
         template : _.template(
             '<div class="formGroupHead">Ingrese el código del establecimiento que desee buscar.</div>' +
-            '<input id="codigoEstablecimiento" type="number" name="codigoEstablecimiento" placeholder="Código de establecimiento"></input></br>' +
+            '<input id="codigoEstablecimiento" type="tel" name="codigoEstablecimiento" placeholder="Código de establecimiento"></input></br>' +
             '<a id="submitConsultaBusquedaEstablecimiento" class="button">Buscar</a>'
         ),
 

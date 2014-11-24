@@ -12,7 +12,7 @@ var BusquedaProfesionalView = (function (jquery, $, renderer, BaseView, Profesio
 
         template : _.template(
             '<div class="formGroupHead">Ingrese el código del profesional que quiere buscar.</div>' +
-            '<input id="codigoProfesional" type="number" name="codigoProfesional" placeholder="Código de profesional"></input></br>' +
+            '<input id="codigoProfesional" type="tel" name="codigoProfesional" placeholder="Código de profesional"></input></br>' +
             '<a id="submitConsultaBusquedaProfesional" class="button">Buscar</a>'
         ),
 
