@@ -22,14 +22,14 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
 
         tabsConfig: [
             {
-                //                tabName: "General",
                 tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "establecimientoGeneral",
                 viewClass: EstablecimientoNominalGeneralView,
-                modelClass: EstablecimientoNominal
+                modelClass: EstablecimientoNominal,
+                tieneCoordenadasDeMapa: true,
+                nombreAtributoCoordenadasDeMapaModel: "coordenadasDeMapa"
             },
             {
-                //                tabName: "Prestaciones",
                 tabName: "<img src='./img/pestanas/accesosA_prestaciones-24-px.png'>",
                 panelId: "establecimientoPrestaciones",
                 viewClass: PrestacionCollectionView,
@@ -37,14 +37,12 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
                 titleCSSClass: "prestacionesTabViewClass"
             },
             {
-                //                tabName: "Imágenes",
                 tabName: "<img src='./img/pestanas/accesosA_imagenes-24-px.png'>",
                 panelId: "establecimientoImagenes",
                 viewClass: ImagenesView,
                 customLoadView: function () { this.view.render(); }
             },
             {
-                //                tabName: "Mapa",
                 tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "establecimientoMapas",
                 viewClass: GoogleMapView,
@@ -61,12 +59,6 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
 
             }
         ],
-
-        /*ejecutarConsultaNominalEstablecimiento: function (codigoEstablecimiento) {
-            this.codigoEstablecimiento = codigoEstablecimiento;
-            var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
-            tabGeneral.view.model.load(this.codigoEstablecimiento);
-        },*/
 
         initialize: function (attributes, options) {
             options = options || {};
@@ -92,57 +84,11 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
         * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
         * @param {String} tabName, nombre del tab, a partir de este se obtiene el modelo
         */
-        getModelOrDefault: function (tabName) {
+        /*getModelOrDefault: function (tabName) {
             var tab = this.findTab("tabName", tabName);
             return tab.view.model;
-        }
+        }*/
     });
-
-    /**
-     * Devuelve una vista por nombre.
-     *  @param {String} , el nombre de la vista, si se quiere poder acceder a la misma mediante nombre. 
-     */
-    /*establecimientoNominalView.prototype.getViewByName = function (viewName) {
-        var tab = this.findTab("tabName", viewName);
-        return tab.view;
-    };*/
-
-    /**
-    * Carga la data del tab de prestaciones cuando el usuario hace clic sobre el mismo.
-    * Lo hace una vez y el resto de las veces que se seleccione el tab muestra la data que ya tiene cargada.
-    */
-    //    establecimientoNominalView.prototype.loadPrestacionesTab = function (selectedTabPanelId) {
-    //        var tabPrestaciones = this.findTab("panelId", selectedTabPanelId);
-    //        if (common.isEmpty(tabPrestaciones.isLoaded) || !tabPrestaciones.isLoaded) {
-    //            tabPrestaciones.view.model.load(this.codigoEstablecimiento);
-    //            tabPrestaciones.isLoaded = true;
-    //        }
-    //        $(this.getViewSelector()).addClass("consultaNominalEstablecimiento");
-    //    };
-
-    /**
-    * Carga la data del tab de camas de un establecimiento cuando el usuario hace clic sobre el mismo.
-    * Lo hace una vez y el resto de las veces que se seleccione el tab muestra la data que ya tiene cargada.
-    */
-    /*establecimientoNominalView.prototype.loadCamasTab = function (selectedTabPanelId) {
-        var tabCamas = this.findTab("panelId", selectedTabPanelId);
-        if (common.isEmpty(tabCamas.isLoaded) || !tabCamas.isLoaded) {
-			tabCamas.view.model.load(this.codigoEstablecimiento);
-            tabCamas.isLoaded = true;
-        }else{
-			tabCamas.view.render();
-		}
-		//Clase para agregarle los CCS. Por ahi estaria bueno hacer una sola class para todos los tabs.
-        $(this.getViewSelector()).addClass("consultaNominalEstablecimiento");
-    };*/
-
-    /**
-    * Obtiene el modelo de coordenadas a partir del modelo de establecimiento nominal.
-    */
-    /*establecimientoNominalView.prototype.getCoordenadasMapaModel = function () {
-        var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
-        return tabGeneral.view.model.get("coordenadasDeMapa");
-    };*/
 
     return establecimientoNominalView;
 }(af, AppFrameworkRenderer, TabPanelView, EstablecimientoNominalGeneralView, GoogleMapView, PrestacionCollectionView, CamasCollectionView));

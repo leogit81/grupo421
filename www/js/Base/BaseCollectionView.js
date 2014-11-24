@@ -99,6 +99,10 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
 		return this.collectionTemplate({"renderedHtml": this.renderedHtml});
 	};
 
+    /**
+    * Método que maneja el evento updateOk que dispara la BaseCollection luego de que se realizó
+    * el update del modelo sin errores.
+    */
 	baseCollectionView.prototype.updateOk = function (jsonData) {
 		/**METODO VACIO PARA SOBRE ESCRIBIR DESDE CADA VISTA**/
 	};

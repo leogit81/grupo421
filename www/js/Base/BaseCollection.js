@@ -1,3 +1,6 @@
+/**
+* Modelo para una colección de objetos. Extiende la colección de Backbone.
+*/
 var BaseCollection = (function (common, Backbone, converter, Service, BaseModel) {
 	"use strict";
 
@@ -42,12 +45,6 @@ var BaseCollection = (function (common, Backbone, converter, Service, BaseModel)
 			var coordenadasDeMapa = item.get("coordenadasDeMapa");
 
 			if (!common.isEmpty(coordenadasDeMapa)) {
-				/*var coordenadas = {
-                    "latitud": coordenadasDeMapaModel.latitud,
-                    "longitud": coordenadasDeMapaModel.latitud
-                };*/
-
-				//                listaDeCoordenadas.push(coordenadasDeMapa);
 				listaDeCoordenadas.push(item.attributes);
 			}
 
