@@ -1,4 +1,4 @@
-var MenuConsultasView = (function(BaseView, jquery){
+var MenuConsultasView = (function($, BaseView, jquery){
     /**
      * Menú de las consultas que se carga a la aplicación cuando la misma se lanza por primera vez, en vez de agregarlo en el HTML. 
      */
@@ -9,7 +9,7 @@ var MenuConsultasView = (function(BaseView, jquery){
             'id': 'consultas_nav'
         },
         
-        template: _.template('<ul class="list">' +
+        /*template: _.template('<ul class="list">' +
                                 '<li>' + 
                                     '<a id="linkConsultaMinisterio" class="icon" href="#">Ministerio</a>' +
                                 '</li>' +
@@ -20,7 +20,7 @@ var MenuConsultasView = (function(BaseView, jquery){
         
         render: function(){
             BaseView.prototype.render.call(this);
-        },
+        },*/
         
         /**
          * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
@@ -39,7 +39,11 @@ var MenuConsultasView = (function(BaseView, jquery){
             jquery("#linkConsultaInstForm").on("click", _.bind(this.showConsultaInstForm, this));
             jquery("#linkConsultaGeorefes").on("click", _.bind(this.showConsultaGeorefes, this));
             jquery("#linkContacto").on("click", _.bind(this.showContacto, this));
-            //esto es para el menú lateral
+            jquery("#linkAcercaDe").on("click", _.bind(this.showAcercaDe, this));
+            
+            /**
+            * ESTO ES PARA EL MENÚ LATERAL
+            */
             jquery("#linkConsultaMinisterio2").on("click", _.bind(this.showConsultaMinisterio, this));
             jquery("#linkConsultaEstablecimiento2").on("click", _.bind(this.showConsultaEstablecimiento, this));
             jquery("#linkConsultaProfesionalesSideMenu").on("click", _.bind(this.showConsultaProfesionales, this));
@@ -57,67 +61,72 @@ var MenuConsultasView = (function(BaseView, jquery){
         showConsultaMinisterio: function(e){
             var consultaMinisterioView = new ConsultaMinisterioView();
             consultaMinisterioView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_9.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_9.png' class='zimagen_header'>");
         },
 		showConsultaEstablecimiento: function(e){
             //var consultaEstablecimientoView = ConsultaEstablecimientoView.getInstance();
             var consultaEstablecimientoView = new ConsultaEstablecimientoView();
             consultaEstablecimientoView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_2.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_2.png' class='zimagen_header'>");
         },
         showConsultaProfesionales: function(e){
             //var consultaProfesionalesView = ConsultaProfesionalesView.getInstance();
             var consultaProfesionalesView = new ConsultaProfesionalesView();
             consultaProfesionalesView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_3.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_3.png' class='zimagen_header'>");
         },
         showConsultaFarmacias: function(e){
             //var consultaFarmaciasView = ConsultaFarmaciasView.getInstance();
             var consultaFarmaciasView = new ConsultaFarmaciasView();
             consultaFarmaciasView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_5.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_5.png' class='zimagen_header'>");
         },
         showConsultaDroguerias: function(e){
             var consultaDrogueriasView = new ConsultaDrogueriasView();
             consultaDrogueriasView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_6.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_6.png' class='zimagen_header'>");
         },
         showConsultaNomivac: function(e){
             var consultaNomivacView = new ConsultaNomivacView();
             consultaNomivacView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_4.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_4.png' class='zimagen_header'>");
         },
         showConsultaRedos: function(e){
             var consultaRedosView = new ConsultaRedosView();
             consultaRedosView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_8.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_8.png' class='zimagen_header'>");
         },
         showConsultaRemediar: function(e){
             var consultaRemediarView = new ConsultaRemediarView();
             consultaRemediarView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_7.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_7.png' class='zimagen_header'>");
         },
         showConsultaReferentes: function(e){
             var consultaReferentesView = new ConsultaReferentesView();
             consultaReferentesView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_17.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_17.png' class='zimagen_header'>");
         },
         showConsultaInstForm: function(e){
             var consultaInstFormView = new ConsultaInstFormView();
             consultaInstFormView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_10.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_10.png' class='zimagen_header'>");
         },
         showConsultaGeorefes: function(e){
             var consultaGeorefesView = new ConsultaGeorefesView();
             consultaGeorefesView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_11.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_11.png' class='zimagen_header'>");
         },
         showContacto: function(e){
             var contactoView = new ContactoView();
             contactoView.render();
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_12.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_12.png' class='zimagen_header'>");
         },
+        showAcercaDe: function(e){
+            var acercaDeView = new AcercaDeView({"model": new AppVersion()});
+            acercaDeView.render();
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_13.png' class='zimagen_header'>");
+        }
 	});
     
     return menuConsultasView;
-})(BaseView, jQuery);
+})(af, BaseView, jQuery);

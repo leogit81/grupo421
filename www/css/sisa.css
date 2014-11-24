@@ -338,3 +338,25 @@ div.contacto .nombreMinisterioSalud{
     font-size: 1em;
     font-weight: bold;
 }
+
+div.acercaDe span{
+    color: #0088d1;
+}
+
+div.acercaDe .nombreAplicacion{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+div.acercaDe {
+    text-align: center;
+    margin-top: 25px;
+}
+
+div.acercaDe div.row{
+    margin-top: 10px;
+}
+
+div.acercaDe .logo{
+    margin-bottom: 25px;
+}

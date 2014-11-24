@@ -1,7 +1,6 @@
 var ConsultasView = (function($, BaseView, MenuConsultasView, renderer){
     var consultasView = BaseView.extend({
         tagName: 'div',
-        asideMenu: null,
 
         attributes: {
             'id': 'consultas',
