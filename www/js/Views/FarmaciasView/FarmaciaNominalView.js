@@ -22,14 +22,14 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
         
         tabsConfig: [
             {
-                tabName: "General",
+                tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "farmaciaGeneral",
                 viewClass: FarmaciaNominalGeneralView,
                 modelClass: FarmaciaNominal
             },
 
             {
-                tabName: "Mapas",
+                tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "farmaciaMapas",
                 viewClass: GoogleMapView,
                 esMapa: true

@@ -22,14 +22,14 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
 
         tabsConfig: [
             {
-                tabName: "General",
+                tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "instFormGeneral",
                 viewClass: InstFormNominalGeneralView,
                 modelClass: InstFormNominal
             },
 
             {
-                tabName: "Mapas",
+                tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "instFormMapas",
                 viewClass: GoogleMapView,
                 esMapa: true

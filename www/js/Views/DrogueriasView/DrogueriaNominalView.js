@@ -22,7 +22,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
 
         tabsConfig: [
             {
-                tabName: "General",
+                tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "drogueriaGeneral",
                 viewClass: DrogueriaNominalGeneralView,
                 modelClass: DrogueriaNominal
@@ -40,7 +40,7 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
 //                modelClass: BaseModel
 //            },
             {
-                tabName: "Mapas",
+                tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "drogueriaMapas",
                 viewClass: GoogleMapView,
                 esMapa: true

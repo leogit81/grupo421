@@ -12,13 +12,15 @@ var DrogueriasCercanasView = (function ($, renderer, TabPanelView, GeorefesDrogu
         
         tabsConfig: [
             {
-                tabName: "Droguerias",
+                //tabName: "Droguerias",
+                tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "drogueriasCercanas",
                 viewClass: GeorefesDrogueriasCollectionView,
                 modelClass: GeorefesDrogueriasCollection
             },
             {
-                tabName: "Mapa",
+                //tabName: "Mapa",
+                tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "drogueriasCercanasMapa",
                 viewClass: GoogleMapView,
                 esMapa: true,

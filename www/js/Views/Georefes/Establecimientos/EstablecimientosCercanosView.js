@@ -12,13 +12,15 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
         
         tabsConfig: [
             {
-                tabName: "Establecimientos",
+                //tabName: "Establecimientos",
+                tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "establecimientosCercanos",
                 viewClass: GeorefesEstablecimientoCollectionView,
                 modelClass: GeorefesEstablecimientoCollection
             },
             {
-                tabName: "Mapa",
+                //tabName: "Mapa",
+                tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "establecimientosCercanosMapa",
                 viewClass: GoogleMapView,
                 esMapa: true,

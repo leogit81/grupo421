@@ -12,13 +12,15 @@ var FarmaciasCercanasView = (function ($, renderer, TabPanelView, GeorefesFarmac
         
         tabsConfig: [
             {
-                tabName: "Farmacias",
+                //tabName: "Farmacias",
+                tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "farmaciasCercanas",
                 viewClass: GeorefesFarmaciaCollectionView,
                 modelClass: GeorefesFarmaciaCollection
             },
             {
-                tabName: "Mapa",
+                //tabName: "Mapa",
+                tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "farmaciasCercanasMapa",
                 viewClass: GoogleMapView,
                 esMapa: true,
