@@ -34,6 +34,8 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 			var parsedData =  this.model.toJSON();
 			var data = [];
 			var c = 0;
+            
+            if(!_.isArray(parsedData.ItemList.item)) parsedData.ItemList.item = [parsedData.ItemList.item];
 
 			for(var i = 0; i < parsedData.ItemList.item.length; i++){	
 
