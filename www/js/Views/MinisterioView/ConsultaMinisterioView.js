@@ -42,12 +42,13 @@ var ConsultaMinisterioView = (function(jquery, $, renderer, BaseView, Ministerio
 
         ejecutarConsultaMinisterio: function(){
             var numeroMinisterio = $("#numeroMinisterio").val();
+            numeroMinisterio = numeroMinisterio || "0";
             this.modelDataSource.getModelData(Ministerio, numeroMinisterio);
         },
 
         render: function(){
             BaseView.prototype.render.call(this);
-            document.getElementById("numeroMinisterio").innerHTML = prov.listaProvinciasHTML();
+            document.getElementById("numeroMinisterio").innerHTML = listaCompletaProvincias;
             return this;
         },
 
