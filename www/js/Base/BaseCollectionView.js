@@ -1,48 +1,60 @@
 var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
-	"use strict";
+    "use strict";
 
-	var baseCollectionView = BaseView.extend({
-		tagName: 'div',
-		className: 'panel',
+    var baseCollectionView = BaseView.extend({
+        tagName: 'div',
+        className: 'panel',
 
         templateSinDatos: "<span class='coleccionSinDatos'>No hay datos disponibles.</span>",
-		/**
+        
+        /**
         * Template para la colecciÃ³n.
         */
-		collectionTemplate : _.template("<ul class='list'><%= renderedHtml %></ul>"),
-		/**
+        collectionTemplate : _.template("<div id='resultadoCollection'><input class='search' placeholder='Buscar en resultados...'/><ul class='list'><%= renderedHtml %></ul><div class='paginasCollection'><ul class='pagination'></ul></div></div>"),
+        /**
         * Template para un item de la colecciÃ³n.
         */
-		itemTemplateString: "<li></li>",
+        itemTemplateString: "<li></li>",
 
-		renderedHtml: null,
+        renderedHtml: null,
 
-		itemTemplate: function (item) {
-			this.renderedHtml += _.template(this.itemTemplateString, item);
-		},
+        itemTemplate: function (item) {
+            this.renderedHtml += _.template(this.itemTemplateString, item);
+        },
 
-		initialize: function (attributes, options) {
-			options = options || {};
-			options.renderer = renderer;
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
 
-			//la opcion asociadoBusquedaNominal indica si cada item de la colección
-			//"dispara" una búsqueda nominal al hacer clic sobre un item.
-			if (!common.isEmpty(options.asociadoBusquedaNominal)) {
-				this.asociadoBusquedaNominal = options.asociadoBusquedaNominal;
-			} else {
-				this.asociadoBusquedaNominal = true;
-			}
+            //la opcion asociadoBusquedaNominal indica si cada item de la colección
+            //"dispara" una búsqueda nominal al hacer clic sobre un item.
+            if (!common.isEmpty(options.asociadoBusquedaNominal)) {
+                this.asociadoBusquedaNominal = options.asociadoBusquedaNominal;
+            } else {
+                this.asociadoBusquedaNominal = true;
+            }
 
 			BaseView.prototype.initialize.call(this, attributes, options);
 		},
 
-		cantidadDeItems: 0,
+        cantidadDeItems: 0,
 
-		render: function (model, collection, options) {
-			BaseView.prototype.render.call(this);
+        render: function (model, collection, options) {
+            BaseView.prototype.render.call(this);
 
-			return this;
-		},
+            /*
+            *Creación de lista con filtro de búsqueda en resultados
+            */
+            var options = {
+                valueNames: [ 'znombre', 'codigoEstablecimiento' ],
+                page: 50,
+                plugins: [ ListPagination({}) ] 
+            };
+            var selector = this.getViewSelector() + " #resultadoCollection";
+            var listaConFiltro = new List(selector, options, false, true);
+
+            return this;
+        },
 
 		busquedaNominalItem: function (eventData) {
 			//override
@@ -97,16 +109,15 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
             return this.templateSinDatos;
         }
         return BaseView.prototype.replaceTemplateWithData.call(this, jsonData);
-    }
+    };
 
     /**
     * Método que maneja el evento updateOk que dispara la BaseCollection luego de que se realizó
     * el update del modelo sin errores.
     */
-	baseCollectionView.prototype.updateOk = function (jsonData) {
-		/**METODO VACIO PARA SOBRE ESCRIBIR DESDE CADA VISTA**/
-	};
+    baseCollectionView.prototype.updateOk = function (jsonData) {
+        /**METODO VACIO PARA SOBRE ESCRIBIR DESDE CADA VISTA**/
+    };
 
-
-	return baseCollectionView;
+    return baseCollectionView;
 }(af, common, _, AppFrameworkRenderer, BaseView));
