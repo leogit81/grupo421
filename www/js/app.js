@@ -48,14 +48,14 @@ var app = (function ($, jquery, logger) {
         ServiceConfig.clave = localStorage.getItem("clave");
         loadApp();
     }
-    
+
     /*
     *Si $.ui.history.length = 0, significa que está en el inicio.
     *Se valida por os, puesto que el objeto navigator.app sólo existe para android.
     */
     function onDeviceBackButtonClick () {
-        if($.ui.history.length == "0"){
-            if($.os.android || $.os.androidICS){
+        if($.os.android || $.os.androidICS){
+            if($.ui.history.length == "0"){
                 $("#afui").popup(
                     {
                         title: "Cerrar aplicación",

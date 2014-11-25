@@ -12,7 +12,7 @@ var GeorefesEstablecimientoCollectionView = (function ($, BaseCollectionView) {
         
         itemTemplateString : "<li>" +
             "<div class='georefesEstablecimientoCercanoItem'>" +
-                "<div><span class='nombreEstablecimientoCercano'><%=nombre%></span></div>" +
+                "<div><span class='znombre'><%=nombre%></span></div>" +
                 "<div><span><%=dependencia%></span></div>" +
                 "<div><span><%=provincia%></span></div>" +
                 "<div><span><%=tipologia%></span></div>" +
