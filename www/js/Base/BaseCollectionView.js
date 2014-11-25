@@ -5,6 +5,7 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
 		tagName: 'div',
 		className: 'panel',
 
+        templateSinDatos: "<span class='coleccionSinDatos'>No hay datos disponibles.</span>",
 		/**
         * Template para la colecciÃ³n.
         */
@@ -33,21 +34,11 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
 			}
 
 			BaseView.prototype.initialize.call(this, attributes, options);
-			//this.setModel(attributes);
 		},
 
 		cantidadDeItems: 0,
 
 		render: function (model, collection, options) {
-			//TODO: esto hay que corregirlo, es un parche para evitar que me haga un render para cada item que se agrega a la colecciÃ³n.
-			/*this.cantidadDeItems++;
-            if (this.cantidadDeItems < this.model.length) {
-                return;
-            } else {
-                this.cantidadDeItems = 0;
-            }*/
-			//fin del parche
-
 			BaseView.prototype.render.call(this);
 
 			return this;
@@ -76,6 +67,7 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
 		this.model.on('remove', this.onItemRemoved, this);
 		this.model.on('add', this.onItemAdded, this);
 		this.model.on('updateOk', this.updateOk, this);
+        this.model.on('registrosNoEncontrados', this.render, this);
 	};
 
 	baseCollectionView.prototype.onItemAdded = function (model, collection, options) {
@@ -98,6 +90,14 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
 		_.each(jsonData, this.itemTemplate, this);
 		return this.collectionTemplate({"renderedHtml": this.renderedHtml});
 	};
+    
+    baseCollectionView.prototype.replaceTemplateWithData = function(jsonData) {
+        //si la colección queda vacía muestra un mensaje informativo al usuario
+        if (this.model.length == 0) {
+            return this.templateSinDatos;
+        }
+        return BaseView.prototype.replaceTemplateWithData.call(this, jsonData);
+    }
 
     /**
     * Método que maneja el evento updateOk que dispara la BaseCollection luego de que se realizó

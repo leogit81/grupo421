@@ -17,6 +17,11 @@ var BaseCollection = (function (common, Backbone, converter, Service, BaseModel)
 	baseCollection.prototype.setJsonData = function (jsonData) {
 		var modelData = this.parse(jsonData);
 		this.setParsedData(modelData);
+        //si la colección se encuentra vacía actualmente, y además, luego de ejecutar
+        //el servicio tampoco se obtienen registros, se dispara un evento para indicar que no hay datos.
+        if (this.length == 0 && modelData.length == 0) {
+            this.trigger("registrosNoEncontrados");
+        }
 	};
 
 	baseCollection.prototype.sync = function (method, model, options, otraUrl) {
