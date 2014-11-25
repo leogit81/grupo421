@@ -9,8 +9,7 @@ var AyudaView = (function ($, BaseView, renderer) {
 
         imagenes: [{nombreImagen: '01.png'},
                    {nombreImagen: '02.png'},
-                   {nombreImagen: '03_1.png'},
-                   {nombreImagen: '03_2.png'},
+                   {nombreImagen: '03.png'},
                    {nombreImagen: '04.png'},
                    {nombreImagen: '05.png'},
                    {nombreImagen: '06.png'},
@@ -25,7 +24,26 @@ var AyudaView = (function ($, BaseView, renderer) {
                    {nombreImagen: '15.png'},
                    {nombreImagen: '16.png'},
                    {nombreImagen: '17.png'},
-                   {nombreImagen: '18.png'}
+                   {nombreImagen: '18.png'},
+                   {nombreImagen: '19.png'},
+                   {nombreImagen: '20.png'},
+                   {nombreImagen: '21.png'},
+                   {nombreImagen: '22.png'},
+                   {nombreImagen: '23.png'},
+                   {nombreImagen: '24.png'},
+                   {nombreImagen: '25.png'},
+                   {nombreImagen: '26.png'},
+                   {nombreImagen: '27.png'},
+                   {nombreImagen: '28.png'},
+                   {nombreImagen: '29.png'},
+                   {nombreImagen: '30.png'},
+                   {nombreImagen: '31.png'},
+                   {nombreImagen: '32.png'},
+                   {nombreImagen: '33.png'},
+                   {nombreImagen: '34.png'},
+                   {nombreImagen: '35.png'},
+                   {nombreImagen: '36.png'}
+                   
                   ],
 
         attributes: {
