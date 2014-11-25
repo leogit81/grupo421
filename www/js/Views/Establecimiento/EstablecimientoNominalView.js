@@ -49,7 +49,6 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
                 esMapa: true
             },
             {
-                //                tabName: "Camas",
                 tabName: "<img src='./img/pestanas/accesosA_camas-24-px.png'>",
                 panelId: "establecimientoCamas",
                 viewClass: CamasCollectionView,
@@ -61,23 +60,20 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
         ],
 
         initialize: function (attributes, options) {
+            var tabCamas;
+            
             options = options || {};
             options.renderer = renderer;
             this.setCodigoEstablecimiento(attributes.codigo);
-
-            //            if (attributes.codigo.toString().charAt(0) !== "1") {
-            //                this.tabsConfig.splice(this.tabsConfig.length - 1, 1);
-            //            };
-
+            
             TabPanelView.prototype.initialize.call(this, attributes, options);
-
+            
             this.findTab("panelId", "establecimientoGeneral").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             this.findTab("panelId", "establecimientoPrestaciones").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
-
-            //            if(this.findTab("panelId", "establecimientoCamas")){
-            this.findTab("panelId", "establecimientoCamas").filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
-            //            }
-            //this.findTab("panelId", "establecimientoMapas").miPosicion = this.getCoordenadasEstablecimiento();
+            tabCamas = this.findTab("panelId", "establecimientoCamas");
+            tabCamas.filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
+            //oculta el tab de camas según el primer dígito del código de establecimiento
+            tabCamas.isHidden = (this.getCodigoEstablecimiento().toString().charAt(0) !== "1");
         },
 
         /**

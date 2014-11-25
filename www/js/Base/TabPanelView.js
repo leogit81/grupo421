@@ -141,8 +141,6 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         //Obtiene el tab que tiene el modelo de coordenadas de mapa.
         var tabQueTieneModeloCoordenadasDeMapa = this.findTab("tieneCoordenadasDeMapa", true),
             nombreAtributoCoordenadasDeMapaModel;
-        //var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
-        //return tabGeneral.view.model.get("coordenadasDeMapa");
         //obtiene el nombre del atributo que tiene una referencia al model de coordenadas de mapa
         nombreAtributoCoordenadasDeMapaModel = tabQueTieneModeloCoordenadasDeMapa.nombreAtributoCoordenadasDeMapaModel || "coordenadasDeMapa";
         return tabQueTieneModeloCoordenadasDeMapa.view.model.get(nombreAtributoCoordenadasDeMapaModel);
@@ -214,7 +212,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
                 tab.titleCSSClass = "";
             }
             
-            if (!this.existeTabHtml(tab.tabName)) {
+            if (!tab.isHidden && !this.existeTabHtml(tab.tabName)) {
                 $(".tabs ul", this.el).append("<li id='tab" + tab.tabIndex + "'><a href='#" 
                                               + tab.panelId + "'><span class='" + tab.titleCSSClass + "'>" 
                                               + tab.tabName + "</span></a></li>");
@@ -357,19 +355,20 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     * @returns {TabPanel} devuelve el objeto tab panel que creó e inicializó con la configuración.
     */
     tabPanelView.prototype.initializeTab = function (tabConfig, index) {
+        var tab;
         tabConfig.insertElID = 'selectedTab';
         tabConfig.tabIndex = index;
         tabConfig.isLoaded = false;
         tabConfig.tabPanelView = this;
         
-        var tab = new TabPanel(tabConfig);
+        tab = new TabPanel(tabConfig);
         tab.initialize();
         this.nestedViewsDictionary[tab.tabName] = {
             view: tab.view,
             insertElID: (tab.esMapa ? "map_canvas" : "selectedTab")
         };
         tab.view.on("viewRendered", _.bind(tabConfig.onViewRenderedHandler || this.onViewRendered, this));
-         return tab;
+        return tab;
     };
     
     tabPanelView.prototype.showPanel = function () {
