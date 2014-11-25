@@ -13,8 +13,8 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         template : _.template(
             '<div class="formGroupHead">Complete uno o varios filtros para buscar establecimientos.</div>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
-            '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento"></select>' +
-            '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento"></select>' +
+            '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento" onchange="deptos.actualizar(provinciaEstablecimiento, departamentoEstablecimiento, localidadEstablecimiento)"></select>' +
+            '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento" onchange="localidades.actualizar(provinciaEstablecimiento, departamentoEstablecimiento, localidadEstablecimiento)"></select>' +
             '<select id="localidadEstablecimiento" name="localidadEstablecimiento"></select>' +
             '<a id="submitConsultaEstablecimiento" class="button">Buscar</a>'
         ),
@@ -77,17 +77,17 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate(this.getViewSelector() + " a#submitConsultaEstablecimiento", "click", _.bind(this.ejecutarConsultaEstablecimiento, this));
-            $("#afui").delegate(this.getViewSelector() + " select#provinciaEstablecimiento", "change", _.bind(this.actualizarListaDepartamentos, this));
-            $("#afui").delegate(this.getViewSelector() +" select#departamentoEstablecimiento", "change", _.bind(this.actualizarListaLocalidades, this));
+//            $("#afui").delegate(this.getViewSelector() + " select#provinciaEstablecimiento", "change", _.bind(this.actualizarListaDepartamentos, this));
+//            $("#afui").delegate(this.getViewSelector() +" select#departamentoEstablecimiento", "change", _.bind(this.actualizarListaLocalidades, this));
         },
         
-        actualizarListaDepartamentos: function () {
-            deptos.actualizarDepartamentosDeLaVista(this, "provinciaEstablecimiento", "departamentoEstablecimiento", "localidadEstablecimiento");
-        },
-        
-        actualizarListaLocalidades: function () {
-            localidades.actualizarLocalidadesDeLaVista(this, "provinciaEstablecimiento", "departamentoEstablecimiento", "localidadEstablecimiento");
-        }
+//        actualizarListaDepartamentos: function () {
+//            deptos.actualizarDepartamentosDeLaVista(this, "provinciaEstablecimiento", "departamentoEstablecimiento", "localidadEstablecimiento");
+//        },
+//        
+//        actualizarListaLocalidades: function () {
+//            localidades.actualizarLocalidadesDeLaVista(this, "provinciaEstablecimiento", "departamentoEstablecimiento", "localidadEstablecimiento");
+//        }
     });
 
     return listadoEstablecimientoView;

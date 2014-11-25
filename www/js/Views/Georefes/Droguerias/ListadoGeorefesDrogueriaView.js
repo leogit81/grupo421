@@ -15,7 +15,7 @@ var ListadoGeorefesDrogueriaView = (function ($, renderer, BaseView, GeorefesEst
         template : _.template(
             '<div class="formGroupHead">Filtros</div>' +
             '<label>Cantidad de droguerías cercanas</label>' +
-            '<input id="cantidadDrogueriasCercanas" type="number" name="cantidadDrogueriasCercanas"></input></br>' +
+            '<input id="cantidadDrogueriasCercanas" type="te" name="cantidadDrogueriasCercanas"></input></br>' +
             '<input id="nombreDrogueria" type="text" placeholder="Nombre de la droguería"/>' +
             '<select id="provinciaDrogueria" name="provinciaDrogueria"></select>' +
             '<select id="departamentoDrogueria" name="departamentoDrogueria"></select>' +

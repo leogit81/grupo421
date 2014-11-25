@@ -12,7 +12,7 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
 
         template : _.template(
             '<div class="formGroupHead">Ingrese el código de la institución formadora que quiere buscar.</div>' +
-            '<input id="codigoInstForm" type="number" name="codigoInstForm" placeholder="Código de Institución Formadora"></input></br>' +
+            '<input id="codigoInstForm" type="tel" name="codigoInstForm" placeholder="Código de Institución Formadora"></input></br>' +
             '<a id="submitConsultaBusquedaInstForm" class="button">Buscar</a>'
         ),
 
