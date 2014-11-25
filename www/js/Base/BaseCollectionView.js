@@ -52,6 +52,12 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
             };
             var selector = this.getViewSelector() + " #resultadoCollection";
             var listaConFiltro = new List(selector, options, false, true);
+            /*
+            *Si el primer y el último elemento de la lista paginada son iguales, se elimina el último
+            */
+            if(listaConFiltro.list.firstChild.innerHTML === listaConFiltro.list.lastChild.innerHTML) {
+                listaConFiltro.list.lastChild.remove();
+            };
 
             return this;
         },
