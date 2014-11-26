@@ -11,7 +11,7 @@ var ListadoResidenciaView = (function (jquery, $, renderer, BaseView, Residencia
         },
 
         template : _.template(
-            '<div class="formGroupHead">Complete uno o varios filtros para buscar instituciones formadoras.</div>' +
+            '<div class="formGroupHead">Complete uno o varios filtros para buscar residencias.</div>' +
             '<input id="nombreResidencia" type="text" placeholder="Nombre de Institución Formadora"/>' +
             '<select id="especialidadResidencia" name="especialidadResidencia"></select>' +
             '<select id="pciaResidencia" name="pciaResidencia" onchange="deptos.actualizar(pciaResidencia, dptoResidencia, locResidencia)"></select>' +
