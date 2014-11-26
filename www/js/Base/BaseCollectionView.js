@@ -47,7 +47,7 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
             */
             var options = {
                 valueNames: [ 'znombre', 'codigoEstablecimiento' ],
-                page: 50,
+                page: 25,
                 plugins: [ ListPagination({}) ] 
             };
             var selector = this.getViewSelector() + " #resultadoCollection";
@@ -58,7 +58,9 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
             if(listaConFiltro.list.firstChild.innerHTML === listaConFiltro.list.lastChild.innerHTML) {
                 listaConFiltro.list.lastChild.remove();
             };
-
+            
+            $(this.getViewSelector() + " div.paginasCollection").on("click",_.bind(this.scrollToTop, this));
+            
             return this;
         },
 
@@ -74,8 +76,13 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
 			BaseView.prototype.attachEvents.call(this);
 			if (this.asociadoBusquedaNominal){
 				$("#afui").delegate(this.getViewSelector() + " ul li a", "click", _.bind(this.busquedaNominalItem, this));
+//                $("#afui").delegate(this.getViewSelector() + " div.paginasCollection ul.pagination li a","click", _.bind(this.scrollToTop, this));
 			}
-		}
+		},
+        
+        scrollToTop: function () {
+            $.ui.scrollToTop(this.getViewId());
+        }
 
 	});
 
