@@ -1,4 +1,4 @@
-var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaInstFormView, ListadoInstFormView) { 
+var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaInstFormView, ListadoInstFormView, ListadoResidenciaView) { 
     "use strict";
 
     var consultaInstFormView = BaseView.extend({
@@ -16,6 +16,8 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
             '<a id="submitListadoInstForm" class="button">Búsqueda de instituciones formadoras</a>' +
             '<br>' +
             '<a id="submitBuscarInstForm" class="button">Buscar institución formadora por código</a>' +
+            '<br>' +
+            '<a id="submitListadoResidencia" class="button">Búsqueda de residencias</a>' +
             '</div>'
         ),
 
@@ -41,6 +43,11 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
             var listadoInstFormView = new ListadoInstFormView();
             listadoInstFormView.render();
         },
+        
+        ejecutarListadoResidencia: function(){
+            var listadoResidenciaView = new ListadoResidenciaView();
+            listadoResidenciaView.render();
+        },
 
         render: function(){
             BaseView.prototype.render.call(this);
@@ -55,7 +62,8 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
             BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate(this.getViewSelector() + " a#submitListadoInstForm", "click", _.bind(this.ejecutarListadoInstForm, this));
             $("#afui").delegate(this.getViewSelector() + " a#submitBuscarInstForm", "click", _.bind(this.ejecutarBuscarInstForm, this));
+            $("#afui").delegate(this.getViewSelector() + " a#submitListadoResidencia", "click", _.bind(this.ejecutarListadoResidencia, this));
         }
     });
     return consultaInstFormView;
-})(jQuery, af, AppFrameworkRenderer, BaseView, BusquedaInstFormView, ListadoInstFormView);
+})(jQuery, af, AppFrameworkRenderer, BaseView, BusquedaInstFormView, ListadoInstFormView, ListadoResidenciaView);

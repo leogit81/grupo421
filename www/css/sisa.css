@@ -444,3 +444,11 @@ div.ministerio label.tipo{
 .paginasCollection ul li.disabled a{
     pointer-events: none;
 }
+
+#afui input[type="checkbox"] + label:before {
+    position: initial !important;
+}
+
+label#lbl1, label#lbl2{
+    vertical-align: middle;
+}
