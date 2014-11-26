@@ -14,8 +14,8 @@ var GeorefesDrogueriasCollection = (function (BaseCollection) {
     
     georefesDrogueriasCollection.prototype.getServiceConfig = function () {
         return {
-            //baseUrl: 'https://qa.sisa.msal.gov.ar/sisaqa/services/rest',
-            url: 'droguerias/buscarCercanos'
+            baseUrl: 'https://dev.sisa.msal.gov.ar/sisadev/services/rest',
+            url: 'establecimiento/buscarDrogueriasCercanas'
         };
     };
     

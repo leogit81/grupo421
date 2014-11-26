@@ -53,7 +53,8 @@ var GeorefesFarmacia = (function (common, BaseModel, CoordenadasMapa) {
     
     georefesFarmacia.prototype.getServiceConfig = function () {
         return {
-            url: 'farmacia/buscarCercanos'
+            baseUrl: 'https://dev.sisa.msal.gov.ar/sisadev/services/rest',
+            url: 'establecimiento/buscarFarmaciasCercanas'
         };
     };
     

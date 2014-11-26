@@ -16,7 +16,7 @@ var GeorefesDrogueriasCollectionView = (function ($, BaseCollectionView) {
                 "<div><span><%=dependencia%></span></div>" +
                 "<div><span><%=provincia%></span></div>" +
                 "<div><span><%=tipologia%></span></div>" +
-                "<div class='distanciaDrogueriaCercana'><label>Distancia:</label><span><%=distancia%></span></div>" +
+                "<div class='distanciaDrogueriaCercana'><label>Distancia:</label><span><%=distancia%></span> KM</div>" +
             "</div>" +
         "</li>"
 	});

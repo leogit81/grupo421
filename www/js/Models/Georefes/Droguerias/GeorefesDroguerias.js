@@ -53,7 +53,8 @@ var GeorefesDroguerias = (function (common, BaseModel, CoordenadasMapa) {
     
     georefesDroguerias.prototype.getServiceConfig = function () {
         return {
-            url: 'droguerias/buscarCercanos'
+            baseUrl: 'https://dev.sisa.msal.gov.ar/sisadev/services/rest',
+            url: 'establecimiento/buscarDrogueriasCercanas'
         };
     };
     
