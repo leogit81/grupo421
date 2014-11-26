@@ -184,6 +184,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 				//Aca habria que preguntar por los permisos del usuario.
 				$('.reportInput').removeAttr('disabled'); //Habilito los imput
 				jQuery("#habilitarModCamas").css('display','none');
+				jQuery("#submitCamas").css('display','');
 			}else{
 				//La persona no esta inicializada
 				$("#afui").popup(
