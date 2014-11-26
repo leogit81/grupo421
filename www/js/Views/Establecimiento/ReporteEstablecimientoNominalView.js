@@ -12,7 +12,7 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 
 		template : _.template(
 			"<canvas id='myChart'></canvas>" +
-			"<div><h2>Reporte de Establecimientos</h2></div></br>" +
+			"<div><h2>Reporte Nominal</h2></div></br>" +
 			"<div><label>Cantidad total</label><%=cantidadTotal%></div></br>" +
 			//            "<div><label>Porcentaje total</label><%=porcentajeTotal%></div></br>" +
 			"<% if (ItemList) { %><div id='itemList'><h2>Distribución</h2><%=ItemList%><% } %></div>"
@@ -34,30 +34,30 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 
 			var parsedData =  this.model.toJSON();
 			var data = [];
-			var c = 0;
-            
-            if(!_.isArray(parsedData.ItemList.item)) parsedData.ItemList.item = [parsedData.ItemList.item];
 
-			for(var i = 0; i < parsedData.ItemList.item.length; i++){	
+			var listReport = $('.list_report');
 
-				if( c >= BaseView.prototype.color.length ){
-					c = 0;						
-				};
+			if(!_.isArray(parsedData.ItemList.item)) parsedData.ItemList.item = [parsedData.ItemList.item];
 
+			for(var i = 0; i < parsedData.ItemList.item.length; i++){
+				
+				jQuery(listReport[i]).style('border-left-color',BaseView.prototype.color[i],'important');
+				
 				var temp =({
 					value: parsedData.ItemList.item[i].cantidad,
-					color: BaseView.prototype.color[c],
+					color: BaseView.prototype.color[i],
 					highlight: "#D6EBFF",
 					label: parsedData.ItemList.item[i].descripcion
 				});
 
 				data.push(temp);
-				c++;
-
 			}
 
 			ctx = jQuery(this.getViewSelector() + " #myChart").get(0).getContext("2d");
-			var camasChart = new Chart(ctx).Pie(data,{tooltipFontStyle: "normal"});
+			var camasChart = new Chart(ctx).Pie(data);
+
+
+
 
 			return this;
 		}
@@ -82,28 +82,31 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 
 	reporteEstablecimientoNominalView.prototype.replaceTemplateWithData = function (jsonData) {
 		var itemList = this.model.get("ItemList").item;
-        if(!_.isArray(itemList)){
-            itemList = [itemList]
-        };
+		if(!_.isArray(itemList)){
+			itemList = [itemList]
+		};
 		if (common.isEmpty(jsonData)) {
 			jsonData = {};
 		}
 		if (itemList){
-            var itemListLen = itemList.length;
-            var itemListString = '';
-            var i;
-            for (i = 0 ; i < itemListLen ; i++) { 
-                itemListString += 
-                    "<span class='descItemReporte'>" + itemList[i].descripcion + "</span></br>" +
-                    "<div>Cantidad: <span class='cantidadItemReporte'>" + itemList[i].cantidad + "</span></br>" +
-                    "<span class='idItemReporte'>ID: " + itemList[i].id + "</br></span>" +
-                    "Porcentaje:<span class='porcetajeItemReporte'> " + itemList[i].porcentaje + "%</span></div></br>";
-            }
-            jsonData.ItemList = itemListString;
-        }
-        else {jsonData.ItemList = null};
-		
-        return this.template(jsonData);
+			var itemListLen = itemList.length;
+			var itemListString = '';
+			var i;
+			for (i = 0 ; i < itemListLen ; i++) { 
+				itemListString += 
+					"<ul class='list inset list_report'>"+
+					"<span class='descItemReporte'>" + itemList[i].descripcion + "</span></br></br>" +
+					"<div>Cantidad: <span class='cantidadItemReporte'>" + itemList[i].cantidad + "</span></br>" +
+					"<span class='idItemReporte'>ID: " + itemList[i].id + "</br></span>" +
+					"Porcentaje:<span class='porcetajeItemReporte'> " + itemList[i].porcentaje + "%</span></div></br>"+
+					"</ul>"
+				;
+			}
+			jsonData.ItemList = itemListString;
+		}
+		else {jsonData.ItemList = null};
+
+		return this.template(jsonData);
 	};
 
 	return reporteEstablecimientoNominalView;

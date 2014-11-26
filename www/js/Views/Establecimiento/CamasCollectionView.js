@@ -2,61 +2,61 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 	"use strict";
 	var parsedData;
 	var jsonForUpdate = {
-			"idEstablecimiento": null,
-			"credenciales":{
-				"usuario": null,
-				"clave": null
-			},
-			"camasCuidadosEspeciales":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			},
-			"camasGenerales":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			},
-			"camasInternacionProlongada":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			},
-			"camasMaternidad":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			},
-			"camasNeonatologia":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			},
-			"camasNoDiscriminadas":{
-				"habilitadas": null,
-				"disponibles": null
-			},
-			"camasPediatricas":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			},
-			"camasTerapiaIntensivaAdultos":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			},
-			"camasTerapiaIntensivaPediatricas":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			},
-			"camasUsoTransitorio":{
-				"habilitadas": null,
-				"disponibles": null,
-				"libres": null
-			}
-		};
+		"idEstablecimiento": null,
+		"credenciales":{
+			"usuario": null,
+			"clave": null
+		},
+		"camasCuidadosEspeciales":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		},
+		"camasGenerales":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		},
+		"camasInternacionProlongada":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		},
+		"camasMaternidad":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		},
+		"camasNeonatologia":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		},
+		"camasNoDiscriminadas":{
+			"habilitadas": null,
+			"disponibles": null
+		},
+		"camasPediatricas":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		},
+		"camasTerapiaIntensivaAdultos":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		},
+		"camasTerapiaIntensivaPediatricas":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		},
+		"camasUsoTransitorio":{
+			"habilitadas": null,
+			"disponibles": null,
+			"libres": null
+		}
+	};
 
 	var camasCollectionView = BaseCollectionView.extend({
 		tagName: 'div',
@@ -144,7 +144,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 			_.each(parsedData[0],function(itemValue, itemKey, list){	
 
 
-				if(itemKey != "codigo" && itemKey != "nombre" && itemKey != "resultado" ){
+				if(itemKey != "codigo" && itemKey != "nombre" && itemKey != "resultado" && itemValue !== 0){
 
 					if( i >= BaseView.prototype.color.length ){
 						i = 0;						
@@ -164,7 +164,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 
 			ctx = jQuery(this.parent.getViewSelector() + " #myChart").get(0).getContext("2d");
 
-			var camasChart = new Chart(ctx).Doughnut(data);
+			var camasChart = new Chart(ctx).Pie(data);
 
 			return this;
 		},
@@ -184,57 +184,66 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 				//Aca habria que preguntar por los permisos del usuario.
 				$('.reportInput').removeAttr('disabled'); //Habilito los imput
 				jQuery("#habilitarModCamas").css('display','none');
-				jQuery("#submitCamas").css('display','');
 			}else{
 				//La persona no esta inicializada
-				alert('Debe inciar sesion');
+				$("#afui").popup(
+					{
+						title: "Error de Autenticación",
+						message: "Para realizar la modificación de camas, debe iniciar sesión.",
+						cancelText: "Aceptar",
+						cancelCallback: function(){},
+						//					doneText: "Aceptar",
+						//					doneCallback: function (json) {},
+						cancelOnly: true
+					}
+				);
 			}
 		},
 
 		ejecutarSubmitCamas:function(){
-			
+
 			this.modelToJsonUpdate();
-			
+
 			this.model.update(jsonForUpdate,"https://dev.sisa.msal.gov.ar/sisadev/services/rest/establecimiento/modificarCamas");
 		},
 
 		updateOk: function(){
-			
+
 			$('.reportInput').attr('disabled', 'disabled'); //Disable
 			jQuery("#submitCamas").css('display','none');
 			jQuery("#habilitarModCamas").css('display','');
-			
-			
+
+
 			$("#afui").popup(
 				{
 					title: "Actualizacion de camas",
 					message: "Actualización de camas OK",
 					cancelText: "Aceptar",
-                	cancelCallback: _.bind(function (json) {
+					cancelCallback: _.bind(function (json) {
 						//Ejecuto nuevamente la consulta de camas para traer los datos impactados.	
 						this.parent.findTab("panelId", "establecimientoCamas").isLoaded = false;
 						this.parent.loadSelectedTab();
 					},this),
-//					doneText: "Aceptar",
-//					doneCallback: function (json) {},
+					//					doneText: "Aceptar",
+					//					doneCallback: function (json) {},
 					cancelOnly: true
 				}
 			);
 
 		},
-		
+
 		modelToJsonUpdate: function(){
-			
-//			jsonForUpdate.credenciales.usuario = ServiceConfig.usuario;
+
+			//			jsonForUpdate.credenciales.usuario = ServiceConfig.usuario;
 			jsonForUpdate.credenciales.usuario = "uutn"
-//			jsonForUpdate.credenciales.clave = ServiceConfig.clave;
+			//			jsonForUpdate.credenciales.clave = ServiceConfig.clave;
 			jsonForUpdate.credenciales.clave = "UJR9KM4R5Q"
 			jsonForUpdate.idEstablecimiento = parsedData[0].codigo;
 
 			$('.categoriaCama').each(function(idx, el){
 				jsonForUpdate[el.id].habilitadas = $(el).find('.habilitadas').val();
 				jsonForUpdate[el.id].disponibles = $(el).find('.disponibles').val();
-				
+
 				if( el.id != "camasNoDiscriminadas"){
 					jsonForUpdate[el.id].libres = $(el).find('.libres').val();
 				}

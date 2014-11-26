@@ -369,6 +369,17 @@ div.acercaDe div.row{
 
 div.acercaDe .logo{
     margin-bottom: 25px;
+	
+}
+
+
+.list_report{
+	padding: 20px 20px 20px 20px !important;
+	border-left: 11px solid !important;
+	border-bottom-left-radius: 15px !important;
+	border-top-left-radius: 15px !important;
+}
+
 }
 
 div.ministerio {
