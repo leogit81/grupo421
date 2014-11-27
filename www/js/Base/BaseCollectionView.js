@@ -17,6 +17,11 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
         itemTemplateString: "<li></li>",
 
         renderedHtml: null,
+        
+        /**
+        * Cuando la colección tiene un parent devuelve el view selector de este.
+        */
+        viewSelector: null,
 
         itemTemplate: function (item) {
             this.renderedHtml += _.template(this.itemTemplateString, item);
@@ -42,6 +47,12 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
         render: function (model, collection, options) {
             BaseView.prototype.render.call(this);
 
+            if (!common.isEmpty(this.parent)){
+                this.viewSelector = this.parent.getViewSelector();
+            } else {
+                this.viewSelector = this.getViewSelector();
+            }
+            
             /*
             *Creación de lista con filtro de búsqueda en resultados
             */
@@ -49,8 +60,15 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
                 valueNames: [ 'znombre', 'codigoEstablecimiento' ],
                 page: 25,
                 plugins: [ ListPagination({}) ] 
-            };
-            var selector = this.getViewSelector() + " #resultadoCollection";
+            },
+                selector = this.viewSelector + " #resultadoCollection";
+            
+            /*if (!common.isEmpty(this.parent)){
+                selector = this.parent.getViewSelector() + " #resultadoCollection";
+            } else {
+                selector = this.getViewSelector() + " #resultadoCollection";
+            }*/
+            
             var listaConFiltro = new List(selector, options, false, true);
             /*
             *Si el primer y el último elemento de la lista paginada son iguales, se elimina el último
@@ -59,7 +77,7 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
                 listaConFiltro.list.lastChild.remove();
             };
             
-            $(this.getViewSelector() + " div.paginasCollection").on("click",_.bind(this.scrollToTop, this));
+            $(this.viewSelector + " #resultadoCollection div.paginasCollection").on("click", _.bind(this.scrollToTop, this));
             
             return this;
         },
@@ -76,12 +94,15 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
 			BaseView.prototype.attachEvents.call(this);
 			if (this.asociadoBusquedaNominal){
 				$("#afui").delegate(this.getViewSelector() + " ul li a", "click", _.bind(this.busquedaNominalItem, this));
-//                $("#afui").delegate(this.getViewSelector() + " div.paginasCollection ul.pagination li a","click", _.bind(this.scrollToTop, this));
 			}
 		},
         
         scrollToTop: function () {
-            $.ui.scrollToTop(this.getViewId());
+            if (!common.isEmpty(this.parent)){
+                $.ui.scrollToTop(this.parent.getViewId());
+            } else {
+                $.ui.scrollToTop(this.getViewId());
+            }
         }
 
 	});

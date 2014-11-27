@@ -186,8 +186,6 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     * Bindea los handlers para los eventos de la vista.
     */
 	baseView.prototype.attachEvents = function () {
-		//jquery(AjaxRestService).bind("beforeCallRestService", _.bind(this.showLoadingMask, this));
-		//jquery(AjaxRestService).bind("callRestServiceError", _.bind(this.logError, this));
 	};
 
 	baseView.prototype.showLoadingMask = function (loadingMessage) {
@@ -210,6 +208,7 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
      */
 	baseView.prototype.setParent = function (parent) {
 		this.parent = parent;
+        //TODO: CAMBIAR EL VIEW SELECTOR DE LA VISTA Y VER SI HAY QUE VOLVER A HACER ATTACH DE LOS EVENTOS
 	};
 
 	/**
