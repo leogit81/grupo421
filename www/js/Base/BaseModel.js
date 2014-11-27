@@ -130,7 +130,7 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
 	baseModel.prototype.processData = function (data) {    
 		/*Chequeo para las consultas privadas, si la consulta devuelve un error de autenticación, muestra el popup de login*/
 		if (this.service.resultadoUltimaEjecucion === "ERROR_AUTENTICACION") {
-			Logger.log({status:this.service.resultadoUltimaEjecucion});
+			Logger.logServiceError({status:this.service.resultadoUltimaEjecucion});
 			var iniciarSesion = new InicioSesionView();
 			return false;
 		}
