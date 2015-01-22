@@ -6535,7 +6535,7 @@ if (!Date.now)
  */
 /* global af*/
 
-(function($) {
+/*(function($) {
     "use strict";
 
     if (!$) {
@@ -6695,4 +6695,4 @@ if (!Date.now)
             wire8Tiles();
         });
     }
-})(af);
+})(af);*/
