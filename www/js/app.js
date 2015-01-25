@@ -207,6 +207,10 @@ var app = (function ($, jquery, logger) {
     * @param {string} pathImagen, path relativo donde se encuentra la imagen a mostrar.
     */
     function cambiarImagenProgramaMinisterio (pathImagen) {
+        if ($.os.ie || $.os.ieTouch){
+            var imgSrc = window.location.protocol + 'www/' + pathImagen;
+            document.getElementById('imagenProgramaMinisterio').src = imgSrc;
+        }
         document.getElementById('imagenProgramaMinisterio').src = pathImagen;
     }
     
