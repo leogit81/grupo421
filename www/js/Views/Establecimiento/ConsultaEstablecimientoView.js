@@ -27,14 +27,9 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             options = options || {};
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
-
-            //this.initializeModelDataSource();
+            
+            this.pathImagen = './img/iconos/tab_2.png';
         },
-
-        /*initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },*/
         
         ejecutarBuscarEstablecimiento: function(){
             var busquedaEstablecimientoView = new BusquedaEstablecimientoView();
@@ -58,7 +53,9 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
 
 
         render: function(){
-            BaseView.prototype.render.call(this);   
+            BaseView.prototype.render.call(this); 
+            /*app.cambiarImagenProgramaMinisterio(this.pathImagen);
+            app.cambiarVisibilidadImagenProgramaMinisterio(true);*/
             return this;
         },
 
@@ -74,5 +71,6 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             $("#afui").delegate(this.getViewSelector() + " a#submitReporteCamas", "click", _.bind(this.ejecutarReporteCamas, this));
         }
     });
+    
     return consultaEstablecimientoView;
 })(jQuery, af, AppFrameworkRenderer, BaseView, ListadoEstablecimientoView, BusquedaEstablecimientoView, ReporteEstablecimientoView);

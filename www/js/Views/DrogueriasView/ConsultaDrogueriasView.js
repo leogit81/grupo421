@@ -7,7 +7,7 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
         attributes: {
             'id': 'consultaDroguerias',
             'class': 'panel',
-            'data-nav':"consultas_nav",    
+            'data-nav':"consultas_nav",
         },
 
         template : _.template(
@@ -24,13 +24,15 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.initializeModelDataSource();
+            this.pathImagen = './img/iconos/tab_6.png';
+            
+            /*this.initializeModelDataSource();*/
         },
 
-        initializeModelDataSource: function () {
+        /*initializeModelDataSource: function () {
             this.modelDataSource = new ModelDataSource ({view: this});
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },
+        },*/
         
         ejecutarBuscarDrogueria: function(){
             var busquedaDrogueriaView = new BusquedaDrogueriaView();
@@ -57,5 +59,6 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
             $("#afui").delegate(this.getViewSelector() + " a#submitBuscarDrogueria", "click", _.bind(this.ejecutarBuscarDrogueria, this));
         }
     });
+    
     return consultaDrogueriasView;
 })(jQuery, af, AppFrameworkRenderer, BaseView, ListadoDrogueriasView, BusquedaDrogueriaView);

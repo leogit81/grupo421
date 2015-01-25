@@ -162,8 +162,16 @@ var app = (function ($, jquery, logger) {
             $.ui.backButtonText = "Atrás"; /*esto cambia el texto del backbutton para todos los paneles de la aplicación*/
             setBackButtonClickHandler();
             $.ui.loadingText = "Cargando...";
+            $("#home").on("loadpanelcomplete", onLoadHome);
         });
     }
+    
+    /**
+    * Handler que se ejecuta cuando se carga la home.
+    */
+    function onLoadHome () {
+        cambiarVisibilidadImagenProgramaMinisterio(false);
+    };
 
     function launchNoticiasSlider () {
         var glow = $('.zcargando');
@@ -193,9 +201,31 @@ var app = (function ($, jquery, logger) {
             }
         }
     }
+    
+    /**
+    * Cambia la imagen que se muestra en el title para cada programa del ministerio.
+    * @param {string} pathImagen, path relativo donde se encuentra la imagen a mostrar.
+    */
+    function cambiarImagenProgramaMinisterio (pathImagen) {
+        document.getElementById('imagenProgramaMinisterio').src = pathImagen;
+    }
+    
+    /**
+    * Cambia la visibilidad de la imagen que se muestra en el title para cada programa del ministerio.
+    * @param {boolean} mostrar, true: muestra la imagen. false: oculta la imagen.
+    */
+    function cambiarVisibilidadImagenProgramaMinisterio (mostrar) {
+        if (mostrar) {
+            document.getElementById('imagenProgramaMinisterio').style.visibility = 'visible';
+            return;
+        }
+        document.getElementById('imagenProgramaMinisterio').style.visibility = 'hidden';
+    }
 
     return {
         onDeviceReady: onDeviceReady,
-        initialize: initialize
+        initialize: initialize,
+        cambiarVisibilidadImagenProgramaMinisterio: cambiarVisibilidadImagenProgramaMinisterio,
+        cambiarImagenProgramaMinisterio: cambiarImagenProgramaMinisterio
     };
 })(af, jQuery, Logger);

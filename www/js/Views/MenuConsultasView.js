@@ -28,7 +28,7 @@ var MenuConsultasView = (function($, BaseView, jquery){
         attachEvents: function(){
             BaseView.prototype.attachEvents.call(this);
             jquery("#linkConsultaMinisterio").on("click", _.bind(this.showConsultaMinisterio, this));
-            jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));
+            jquery("#linkConsultaEstablecimiento").on("click", _.bind(this.showConsultaEstablecimiento, this));            
             jquery("#linkConsultaProfesionales").on("click", _.bind(this.showConsultaProfesionales, this));
             jquery("#linkConsultaFarmacias").on("click", _.bind(this.showConsultaFarmacias, this));
             jquery("#linkConsultaDroguerias").on("click", _.bind(this.showConsultaDroguerias, this));
@@ -61,78 +61,105 @@ var MenuConsultasView = (function($, BaseView, jquery){
             jquery("#linkAcercaDeSideMenu").on("click", _.bind(this.showAcercaDe, this));
         },
 
+        /**
+        * Muestra la consulta correspondiente al programa del ministerio seleccionado del menú.
+        * @param {BaseView} consultaView, la vista de la consulta que se quiere mostrar.
+        * @param {string} pathImagen, el path de la imagen que se quiere mostrar en el title para
+        * la consulta seleccionada.
+        */
+        showConsultaProgramaMinisterio: function (consultaView, pathImagen) {
+            var consultaViewInstance = new consultaView();
+            consultaViewInstance.render();
+            /*app.cambiarImagenProgramaMinisterio(pathImagen);
+            app.cambiarVisibilidadImagenProgramaMinisterio(true);*/
+        },
+        
         showConsultaMinisterio: function(e){
-            var consultaMinisterioView = new ConsultaMinisterioView();
+            /*var consultaMinisterioView = new ConsultaMinisterioView();
             consultaMinisterioView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_9.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_9.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaMinisterioView, './img/iconos/tab_9.png');
         },
         showConsultaEstablecimiento: function(e){
-            //var consultaEstablecimientoView = ConsultaEstablecimientoView.getInstance();
-            var consultaEstablecimientoView = new ConsultaEstablecimientoView();
+            /*var consultaEstablecimientoView = new ConsultaEstablecimientoView();
             consultaEstablecimientoView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_2.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_2.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaEstablecimientoView, './img/iconos/tab_2.png');
         },
         showConsultaProfesionales: function(e){
-            //var consultaProfesionalesView = ConsultaProfesionalesView.getInstance();
-            var consultaProfesionalesView = new ConsultaProfesionalesView();
+            /*var consultaProfesionalesView = new ConsultaProfesionalesView();
             consultaProfesionalesView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_3.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_3.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaProfesionalesView, './img/iconos/tab_3.png');
         },
         showConsultaFarmacias: function(e){
-            //var consultaFarmaciasView = ConsultaFarmaciasView.getInstance();
-            var consultaFarmaciasView = new ConsultaFarmaciasView();
+            /*var consultaFarmaciasView = new ConsultaFarmaciasView();
             consultaFarmaciasView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_5.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_5.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaFarmaciasView, './img/iconos/tab_5.png');
         },
         showConsultaDroguerias: function(e){
-            var consultaDrogueriasView = new ConsultaDrogueriasView();
+            /*var consultaDrogueriasView = new ConsultaDrogueriasView();
             consultaDrogueriasView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_6.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_6.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaDrogueriasView, './img/iconos/tab_6.png');
         },
         showConsultaNomivac: function(e){
-            var consultaNomivacView = new ConsultaNomivacView();
+            /*var consultaNomivacView = new ConsultaNomivacView();
             consultaNomivacView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_4.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_4.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaNomivacView, './img/iconos/tab_4.png');
         },
         showConsultaRedos: function(e){
-            var consultaRedosView = new ConsultaRedosView();
+            /*var consultaRedosView = new ConsultaRedosView();
             consultaRedosView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_8.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_8.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaRedosView, './img/iconos/tab_8.png');
         },
         showConsultaRemediar: function(e){
+            /*
             var consultaRemediarView = new ConsultaRemediarView();
             consultaRemediarView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_7.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_7.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaRemediarView, './img/iconos/tab_7.png');
         },
         showConsultaReferentes: function(e){
-            var consultaReferentesView = new ConsultaReferentesView();
+            /*var consultaReferentesView = new ConsultaReferentesView();
             consultaReferentesView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_17.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_17.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaReferentesView, './img/iconos/tab_17.png');
         },
         showConsultaInstForm: function(e){
-            var consultaInstFormView = new ConsultaInstFormView();
+            /*var consultaInstFormView = new ConsultaInstFormView();
             consultaInstFormView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_10.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_10.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaInstFormView, './img/iconos/tab_10.png');
         },
         showConsultaGeorefes: function(e){
-            var consultaGeorefesView = new ConsultaGeorefesView();
+            /*var consultaGeorefesView = new ConsultaGeorefesView();
             consultaGeorefesView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_11.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_11.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ConsultaGeorefesView, './img/iconos/tab_11.png');
         },
         showContacto: function(e){
-            var contactoView = new ContactoView();
+            /*var contactoView = new ContactoView();
             contactoView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_12.png' class='zimagen_header'>");
+            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_12.png' class='zimagen_header'>");*/
+            this.showConsultaProgramaMinisterio(ContactoView, './img/iconos/tab_12.png');
         },
         showAyuda: function(e){
             $.ui.showMask("Cargando...");
             setTimeout(function () {var ayudaView = new AyudaView(); ayudaView.render();},200);
-            af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_14.png' class='zimagen_header'>");
+            /*af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_14.png' class='zimagen_header'>");*/
+            app.cambiarImagenProgramaMinisterio('./img/iconos/tab_14.png');
+            app.cambiarVisibilidadImagenProgramaMinisterio(true);
         },
         showAcercaDe: function(e){
             var acercaDeView = new AcercaDeView({"model": new AppVersion()});
             acercaDeView.render();
-            $.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_13.png' class='zimagen_header'>");
+            /*$.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_13.png' class='zimagen_header'>");*/
+            app.cambiarImagenProgramaMinisterio('./img/iconos/tab_13.png');
+            app.cambiarVisibilidadImagenProgramaMinisterio(true);
         }
     });
 

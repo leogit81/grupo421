@@ -88,6 +88,11 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 	baseView.prototype.model = null;
 	baseView.prototype.scroller = null;
 	baseView.prototype.renderedHtml = null;
+    
+    /**
+    * Path de la imagen que se muestra en el title de la aplicación.
+    */
+    baseView.prototype.pathImagen = null;
 
 	/**
     * Sobreescribe el valor del atributo ID en el elemento HTML generado para la vista con uno que es único.
@@ -186,6 +191,7 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     * Bindea los handlers para los eventos de la vista.
     */
 	baseView.prototype.attachEvents = function () {
+        $("#afui").delegate(this.getViewSelector(), "loadpanelcomplete", _.bind(this.actualizarTitle, this));
 	};
 
 	baseView.prototype.showLoadingMask = function (loadingMessage) {
@@ -264,6 +270,11 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 
 		return {};
 	};
+    
+    baseView.prototype.actualizarTitle = function () {
+        app.cambiarImagenProgramaMinisterio(this.pathImagen);
+        app.cambiarVisibilidadImagenProgramaMinisterio(true);
+    };
 
 	_.extend(baseView, Backbone.Singleton);
 
