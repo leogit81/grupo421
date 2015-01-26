@@ -1,26 +1,40 @@
-var MenuConsultasView = (function($, BaseView, jquery){
+var MenuConsultasView = (function($, BaseView, jquery, renderer){
     /**
      * Menú de las consultas que se carga a la aplicación cuando la misma se lanza por primera vez, en vez de agregarlo en el HTML. 
      */
     menuConsultasView = BaseView.extend({
         tagName: 'nav',
 
+        /**
+        * HTML con las imágenes que se mostrarán por cada una de las opciones del menú en la barra de título de la aplicación.
+        */
+        imagesHtml: "<img id='sisaMobileLogo' src='./img/sisaMobile.png' class='zimagen_header'>" +
+        "<img id='imagenEstablecimientos' src='./img/iconos/tab_2.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenProfesionales' src='./img/iconos/tab_3.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenNomivac' src='./img/iconos/tab_4.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenFarmacias' src='./img/iconos/tab_5.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenDroguerias' src='./img/iconos/tab_6.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenRemediar' src='./img/iconos/tab_7.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenRedos' src='./img/iconos/tab_8.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenMinisterio' src='./img/iconos/tab_9.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenInstFormadoras' src='./img/iconos/tab_10.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenGeorefes' src='./img/iconos/tab_11.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenContacto' src='./img/iconos/tab_12.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenAcercaDe' src='./img/iconos/tab_13.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenAyuda' src='./img/iconos/tab_14.png' class='zimagen_header' style='visibility: hidden;'>" +
+        "<img id='imagenReferentes' src='./img/iconos/tab_17.png' class='zimagen_header' style='visibility: hidden;'>";
+        
         attributes: {
             'id': 'consultas_nav'
         },
 
-        /*template: _.template('<ul class="list">' +
-                                '<li>' + 
-                                    '<a id="linkConsultaMinisterio" class="icon" href="#">Ministerio</a>' +
-                                '</li>' +
-								'<li>' + 
-                                    '<a id="linkConsultaEstablecimiento" class="icon" href="#">Establecimiento</a>' +
-                                '</li>' +
-                            '</ul>'),
-
-        render: function(){
-            BaseView.prototype.render.call(this);
-        },*/
+        initialize: function(attributes, options){
+            options = options || {};
+            options.renderer = renderer;
+            BaseView.prototype.initialize.call(this, attributes, options);
+            
+            $.ui.setTitle(this.imagesHtml);
+        },
 
         /**
          * Usado para bindear eventos a los controles del formulario. Se ejecuta después del render cuando los controles se encuentran cargados en la página. 
@@ -150,18 +164,18 @@ var MenuConsultasView = (function($, BaseView, jquery){
         showAyuda: function(e){
             $.ui.showMask("Cargando...");
             setTimeout(function () {var ayudaView = new AyudaView(); ayudaView.render();},200);
-            /*af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_14.png' class='zimagen_header'>");*/
+            /*af.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_14.png' class='zimagen_header'>");
             app.cambiarImagenProgramaMinisterio('./img/iconos/tab_14.png');
-            app.cambiarVisibilidadImagenProgramaMinisterio(true);
+            app.cambiarVisibilidadImagenProgramaMinisterio(true);*/
         },
         showAcercaDe: function(e){
             var acercaDeView = new AcercaDeView({"model": new AppVersion()});
             acercaDeView.render();
-            /*$.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_13.png' class='zimagen_header'>");*/
+            /*$.ui.setTitle("<img src='./img/sisaMobile.png' class='zimagen_header'><img src='./img/iconos/tab_13.png' class='zimagen_header'>");
             app.cambiarImagenProgramaMinisterio('./img/iconos/tab_13.png');
-            app.cambiarVisibilidadImagenProgramaMinisterio(true);
+            app.cambiarVisibilidadImagenProgramaMinisterio(true);*/
         }
     });
 
     return menuConsultasView;
-})(af, BaseView, jQuery);
+})(af, BaseView, jQuery, AppFrameworkRenderer);

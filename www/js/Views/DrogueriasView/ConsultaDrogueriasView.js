@@ -24,7 +24,8 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.pathImagen = './img/iconos/tab_6.png';
+            /*this.pathImagen = './img/iconos/tab_6.png';*/
+            this.pathImagen = 'imagenEstablecimientos';
             
             /*this.initializeModelDataSource();*/
         },

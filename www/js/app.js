@@ -207,11 +207,13 @@ var app = (function ($, jquery, logger) {
     * @param {string} pathImagen, path relativo donde se encuentra la imagen a mostrar.
     */
     function cambiarImagenProgramaMinisterio (pathImagen) {
-        if ($.os.ie || $.os.ieTouch){
+        /*if ($.os.ie || $.os.ieTouch){
             var imgSrc = window.location.protocol + 'www/' + pathImagen;
             document.getElementById('imagenProgramaMinisterio').src = imgSrc;
+            alert('img src: ' + document.getElementById('imagenProgramaMinisterio').src);
         }
-        document.getElementById('imagenProgramaMinisterio').src = pathImagen;
+        document.getElementById('imagenProgramaMinisterio').src = pathImagen;*/
+        document.getElementById(pathImagen).style.visibility = 'visible';
     }
     
     /**
