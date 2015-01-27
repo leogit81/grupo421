@@ -454,3 +454,7 @@ div.ministerio label.tipo{
 label#lbl1, label#lbl2{
     vertical-align: middle;
 }
+
+#afui div.header img:not(#sisaMobileLogo) {
+    position: absolute;
+}

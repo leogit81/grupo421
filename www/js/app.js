@@ -162,7 +162,7 @@ var app = (function ($, jquery, logger) {
             $.ui.backButtonText = "Atrás"; /*esto cambia el texto del backbutton para todos los paneles de la aplicación*/
             setBackButtonClickHandler();
             $.ui.loadingText = "Cargando...";
-            $("#home").on("loadpanelcomplete", onLoadHome);
+            //$("#home").on("loadpanelcomplete", onLoadHome);
         });
     }
     
@@ -170,7 +170,8 @@ var app = (function ($, jquery, logger) {
     * Handler que se ejecuta cuando se carga la home.
     */
     function onLoadHome () {
-        cambiarVisibilidadImagenProgramaMinisterio(false);
+        /*cambiarVisibilidadImagenProgramaMinisterio(false);*/
+        ocultarVisibilidadImagenProgramaMinisterio();
     };
 
     function launchNoticiasSlider () {
@@ -207,31 +208,38 @@ var app = (function ($, jquery, logger) {
     * @param {string} pathImagen, path relativo donde se encuentra la imagen a mostrar.
     */
     function cambiarImagenProgramaMinisterio (pathImagen) {
-        /*if ($.os.ie || $.os.ieTouch){
+        if ($.os.ie || $.os.ieTouch){
             var imgSrc = window.location.protocol + 'www/' + pathImagen;
             document.getElementById('imagenProgramaMinisterio').src = imgSrc;
             alert('img src: ' + document.getElementById('imagenProgramaMinisterio').src);
         }
-        document.getElementById('imagenProgramaMinisterio').src = pathImagen;*/
-        document.getElementById(pathImagen).style.visibility = 'visible';
+        document.getElementById('imagenProgramaMinisterio').src = pathImagen;
     }
     
     /**
-    * Cambia la visibilidad de la imagen que se muestra en el title para cada programa del ministerio.
+    * Oculta cualquier imagen que se muestre en el title para cada programa del ministerio, excepto el logo del SISA Mobile.
     * @param {boolean} mostrar, true: muestra la imagen. false: oculta la imagen.
     */
-    function cambiarVisibilidadImagenProgramaMinisterio (mostrar) {
-        if (mostrar) {
-            document.getElementById('imagenProgramaMinisterio').style.visibility = 'visible';
-            return;
-        }
-        document.getElementById('imagenProgramaMinisterio').style.visibility = 'hidden';
+    function ocultarImagenProgramaMinisterio () {
+        $("#defaultHeader img").each(function (index, el) {
+           if (el.id !== 'sisaMobileLogo') { el.style.visibility = 'hidden'}
+       } );
+    }
+    
+    /**
+    * Muestra la imagen que se muestra en el title para cada programa del ministerio.
+    * @param {string} idImagen, id del elemento img donde se muestra la imagen del programa correspondiente.
+    */
+    function mostrarImagenProgramaMinisterio (idImagen) {
+        $("#defaultHeader img").each(function (index, el) {
+           if (el.id === idImagen) { el.style.visibility = 'visible'}
+       } );
     }
 
     return {
         onDeviceReady: onDeviceReady,
         initialize: initialize,
-        cambiarVisibilidadImagenProgramaMinisterio: cambiarVisibilidadImagenProgramaMinisterio,
-        cambiarImagenProgramaMinisterio: cambiarImagenProgramaMinisterio
+        mostrarImagenProgramaMinisterio: mostrarImagenProgramaMinisterio,
+        ocultarImagenProgramaMinisterio: ocultarImagenProgramaMinisterio
     };
 })(af, jQuery, Logger);

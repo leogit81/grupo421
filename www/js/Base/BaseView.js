@@ -92,7 +92,11 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     /**
     * Path de la imagen que se muestra en el title de la aplicación.
     */
-    baseView.prototype.pathImagen = null;
+    /*baseView.prototype.pathImagen = null;*/
+    /**
+    * Id de la imagen que se muestra en el title de la aplicación.
+    */
+    baseView.prototype.idImagen = null;
 
 	/**
     * Sobreescribe el valor del atributo ID en el elemento HTML generado para la vista con uno que es único.
@@ -272,8 +276,10 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 	};
     
     baseView.prototype.actualizarTitle = function () {
-        app.cambiarImagenProgramaMinisterio(this.pathImagen);
-        app.cambiarVisibilidadImagenProgramaMinisterio(true);
+        /*app.cambiarImagenProgramaMinisterio(this.pathImagen);
+        app.cambiarVisibilidadImagenProgramaMinisterio(true);*/
+        app.ocultarImagenProgramaMinisterio();
+        app.mostrarImagenProgramaMinisterio(this.idImagen);
     };
 
 	_.extend(baseView, Backbone.Singleton);

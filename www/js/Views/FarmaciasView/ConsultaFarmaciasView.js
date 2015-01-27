@@ -24,14 +24,8 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.pathImagen = './img/iconos/tab_5.png';
-            //this.initializeModelDataSource();
+            this.idImagen = 'imagenFarmacias';
         },
-
-        /*initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },*/
 
         ejecutarBuscarFarmacia: function(){
             var busquedaFarmaciaView = new BusquedaFarmaciaView();
@@ -45,8 +39,6 @@ var ConsultaFarmaciasView = (function (jquery, $, renderer, BaseView, ListadoFar
 
         render: function(){
             BaseView.prototype.render.call(this);
-            /*app.cambiarImagenProgramaMinisterio(this.pathImagen);
-            app.cambiarVisibilidadImagenProgramaMinisterio(true);*/
             return this;
         },
 

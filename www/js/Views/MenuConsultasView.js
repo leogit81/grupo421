@@ -4,25 +4,6 @@ var MenuConsultasView = (function($, BaseView, jquery, renderer){
      */
     menuConsultasView = BaseView.extend({
         tagName: 'nav',
-
-        /**
-        * HTML con las imágenes que se mostrarán por cada una de las opciones del menú en la barra de título de la aplicación.
-        */
-        imagesHtml: "<img id='sisaMobileLogo' src='./img/sisaMobile.png' class='zimagen_header'>" +
-        "<img id='imagenEstablecimientos' src='./img/iconos/tab_2.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenProfesionales' src='./img/iconos/tab_3.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenNomivac' src='./img/iconos/tab_4.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenFarmacias' src='./img/iconos/tab_5.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenDroguerias' src='./img/iconos/tab_6.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenRemediar' src='./img/iconos/tab_7.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenRedos' src='./img/iconos/tab_8.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenMinisterio' src='./img/iconos/tab_9.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenInstFormadoras' src='./img/iconos/tab_10.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenGeorefes' src='./img/iconos/tab_11.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenContacto' src='./img/iconos/tab_12.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenAcercaDe' src='./img/iconos/tab_13.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenAyuda' src='./img/iconos/tab_14.png' class='zimagen_header' style='visibility: hidden;'>" +
-        "<img id='imagenReferentes' src='./img/iconos/tab_17.png' class='zimagen_header' style='visibility: hidden;'>";
         
         attributes: {
             'id': 'consultas_nav'
@@ -32,8 +13,6 @@ var MenuConsultasView = (function($, BaseView, jquery, renderer){
             options = options || {};
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
-            
-            $.ui.setTitle(this.imagesHtml);
         },
 
         /**

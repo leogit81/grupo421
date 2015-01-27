@@ -28,7 +28,7 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
             
-            this.pathImagen = './img/iconos/tab_2.png';
+            this.idImagen = 'imagenEstablecimientos';
         },
         
         ejecutarBuscarEstablecimiento: function(){
@@ -54,8 +54,6 @@ var ConsultaEstablecimientoView = (function (jquery, $, renderer, BaseView, List
 
         render: function(){
             BaseView.prototype.render.call(this); 
-            /*app.cambiarImagenProgramaMinisterio(this.pathImagen);
-            app.cambiarVisibilidadImagenProgramaMinisterio(true);*/
             return this;
         },
 

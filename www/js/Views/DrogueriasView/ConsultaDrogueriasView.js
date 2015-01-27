@@ -24,16 +24,8 @@ var ConsultaDrogueriasView = (function (jquery, $, renderer, BaseView, ListadoDr
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            /*this.pathImagen = './img/iconos/tab_6.png';*/
-            this.pathImagen = 'imagenEstablecimientos';
-            
-            /*this.initializeModelDataSource();*/
+            this.idImagen = 'imagenDroguerias';
         },
-
-        /*initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },*/
         
         ejecutarBuscarDrogueria: function(){
             var busquedaDrogueriaView = new BusquedaDrogueriaView();
