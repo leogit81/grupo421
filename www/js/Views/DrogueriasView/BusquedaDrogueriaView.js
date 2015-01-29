@@ -21,13 +21,15 @@ var BusquedaDrogueriaView = (function (jquery, $, renderer, BaseView, DrogueriaN
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.initializeModelDataSource();
+            //this.initializeModelDataSource();
+            
+            this.idImagen = 'imagenDroguerias';
         },
 
-        initializeModelDataSource: function () {
+        /*initializeModelDataSource: function () {
             this.modelDataSource = new ModelDataSource ({view: this});
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },
+        },*/
 
         ejecutarBusquedaDrogueria: function(){
             var codigoDrogueria = $("#codigoDrogueria").val();

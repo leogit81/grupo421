@@ -17,7 +17,16 @@ var ReferentesView = (function ($, common, Backbone, _, renderer, BaseView) {
             "<div><label>Mail: </label><a href='mailto:<%=email%>'><%=email%></a></div></br>" +
             "<div><label>Teléfono: </label><span><%=telefono%></span></div></br>" +
             "<div><label>Registro: </label><span><%=registro%></span></div></br>" +
-            "</li>"
+            "</li>",
+        
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+            this.idImagen = 'imagenReferentes';
+
+            BaseCollectionView.prototype.initialize.call(this, attributes, options);
+        }
     });
     return referentesView;
 }(af, common, Backbone, _, AppFrameworkRenderer, BaseView));

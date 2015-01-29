@@ -24,6 +24,9 @@ var ListadoProfesionalesView = (function (jquery, $, renderer, BaseView, Profesi
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenProfesionales';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();

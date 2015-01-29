@@ -65,6 +65,7 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
             options = options || {};
             options.renderer = renderer;
             this.setCodigoEstablecimiento(attributes.codigo);
+            this.idImagen = 'imagenEstablecimientos';
             
             TabPanelView.prototype.initialize.call(this, attributes, options);
             

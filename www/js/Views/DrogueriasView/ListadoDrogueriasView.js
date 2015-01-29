@@ -23,6 +23,8 @@ var ListadoDrogueriasView = (function (jquery, $, renderer, BaseView, DrogueriaC
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();
+            
+            this.idImagen = 'imagenDroguerias';
         },
 
         initializeModelDataSource: function () {

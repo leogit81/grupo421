@@ -16,7 +16,16 @@ var ResidenciaCollectionView = (function ($, common, Backbone, _, renderer, Base
             "<div><label>Localidad: </label><span><%=localidad%></span></div></br>" +
             "<div><label>Dependencia: </label><span><%=dependenciaEstablecimiento%></span></div></br>" +
             "<div><label>Categoria: </label><span><%=categoria%></span></div></br>" +
-            "</li>"
+            "</li>",
+        
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+            this.idImagen = 'imagenInstFormadoras';
+            
+			BaseCollectionView.prototype.initialize.call(this, attributes, options);
+		}
     });
     return residenciaView;
 }(af, common, Backbone, _, AppFrameworkRenderer, BaseView));

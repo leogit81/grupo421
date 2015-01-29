@@ -18,6 +18,9 @@ var ConsultaMinisterioView = (function(jquery, $, renderer, BaseView, Ministerio
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenMinisterio';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
         },
 

@@ -33,6 +33,8 @@ var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, E
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();
+            
+            this.idImagen = 'imagenRedos';
         },
 
         setNombreEstablecimiento: function (e) {

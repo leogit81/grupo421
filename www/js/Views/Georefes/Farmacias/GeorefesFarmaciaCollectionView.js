@@ -1,4 +1,4 @@
-var GeorefesFarmaciaCollectionView = (function ($, BaseCollectionView) {
+var GeorefesFarmaciaCollectionView = (function ($, renderer, BaseCollectionView) {
     "use strict";
     
     var georefesFarmaciaCollectionView = BaseCollectionView.extend({
@@ -18,8 +18,17 @@ var GeorefesFarmaciaCollectionView = (function ($, BaseCollectionView) {
                 "<div><span><%=tipologia%></span></div>" +
                 "<div class='distanciaFarmaciaCercana'><label>Distancia:</label><span><%=distancia%></span> KM</div>" +
             "</div>" +
-        "</li>"
+        "</li>",
+        
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+			BaseCollectionView.prototype.initialize.call(this, attributes, options);
+            
+            this.idImagen = 'imagenGeorefes';
+		}
 	});
 	
 	return georefesFarmaciaCollectionView;
-}(af, BaseCollectionView));
+}(af, AppFrameworkRenderer, BaseCollectionView));

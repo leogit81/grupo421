@@ -1,4 +1,4 @@
-var EstablecimientoCollectionView = (function ($, common, BaseCollectionView, EstablecimientoNominalView) {
+var EstablecimientoCollectionView = (function ($, common, renderer, BaseCollectionView, EstablecimientoNominalView) {
     "use strict";
     
     var establecimientoCollectionView = BaseCollectionView.extend({
@@ -9,6 +9,15 @@ var EstablecimientoCollectionView = (function ($, common, BaseCollectionView, Es
         
         itemTemplateString : "<li><a><span class='znombre'><%=nombre%></span></br><span class='codigoEstablecimiento'> <%=codigo%> </span> - <%=provincia%></a></li>",
 
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+			BaseCollectionView.prototype.initialize.call(this, attributes, options);
+            
+            this.idImagen = 'imagenEstablecimientos';
+		},
+        
         busquedaNominalEstablecimiento: function (eventData) {
             var codigoEstablecimiento = this.getCodigoEstablecimientoFromSelectedItem(eventData.currentTarget.outerHTML),
                 establecimientoView = new EstablecimientoNominalView({codigo: codigoEstablecimiento});
@@ -25,4 +34,4 @@ var EstablecimientoCollectionView = (function ($, common, BaseCollectionView, Es
     };
 	
 	return establecimientoCollectionView;
-}(af, common, BaseCollectionView, EstablecimientoNominalView));
+}(af, common, AppFrameworkRenderer, BaseCollectionView, EstablecimientoNominalView));

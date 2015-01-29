@@ -203,19 +203,6 @@ var app = (function ($, jquery, logger) {
     }
     
     /**
-    * Cambia la imagen que se muestra en el title para cada programa del ministerio.
-    * @param {string} pathImagen, path relativo donde se encuentra la imagen a mostrar.
-    */
-    function cambiarImagenProgramaMinisterio (pathImagen) {
-        if ($.os.ie || $.os.ieTouch){
-            var imgSrc = window.location.protocol + 'www/' + pathImagen;
-            document.getElementById('imagenProgramaMinisterio').src = imgSrc;
-            alert('img src: ' + document.getElementById('imagenProgramaMinisterio').src);
-        }
-        document.getElementById('imagenProgramaMinisterio').src = pathImagen;
-    }
-    
-    /**
     * Oculta cualquier imagen que se muestre en el title para cada programa del ministerio, excepto el logo del SISA Mobile.
     * @param {boolean} mostrar, true: muestra la imagen. false: oculta la imagen.
     */

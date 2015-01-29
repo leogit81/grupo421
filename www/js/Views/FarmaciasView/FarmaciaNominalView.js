@@ -46,6 +46,9 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
             options = options || {};
             options.renderer = renderer;
             this.setCodigoFarmacia(attributes.codigo);
+            
+            this.idImagen = 'imagenFarmacias';
+            
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "farmaciaGeneral").filtroConsulta = _.bind(this.getCodigoFarmacia, this);

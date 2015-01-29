@@ -34,6 +34,9 @@ var ListadoGeorefesDrogueriaView = (function ($, renderer, BaseView, GeorefesEst
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenGeorefes';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();

@@ -19,6 +19,9 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenInstFormadoras';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();

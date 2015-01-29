@@ -12,14 +12,12 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
         
         tabsConfig: [
             {
-                //tabName: "Establecimientos",
                 tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "establecimientosCercanos",
                 viewClass: GeorefesEstablecimientoCollectionView,
                 modelClass: GeorefesEstablecimientoCollection
             },
             {
-                //tabName: "Mapa",
                 tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "establecimientosCercanosMapa",
                 viewClass: GoogleMapView,
@@ -41,6 +39,9 @@ var EstablecimientosCercanosView = (function ($, renderer, TabPanelView, Georefe
             options = options || {};
             options.renderer = renderer;
             this.setFiltrosServicio(attributes.filtrosServicio);
+            
+            this.idImagen = 'imagenGeorefes';
+            
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "establecimientosCercanos").filtroConsulta = _.bind(this.getFiltrosServicio, this);

@@ -22,6 +22,15 @@ var InstFormCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
             instFormNominalView.loadDefaultView();
         },
 
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+            this.idImagen = 'imagenInstFormadoras';
+            
+			BaseCollectionView.prototype.initialize.call(this, attributes, options);
+		},
+        
         getCodigoInstFormFromSelectedItem: function (selectedItem) {
             return common.trim($(selectedItem).find("span.codigoInstForm").html());
         }

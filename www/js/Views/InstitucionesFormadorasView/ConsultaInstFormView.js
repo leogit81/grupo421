@@ -26,12 +26,7 @@ var ConsultaInstFormView = (function (jquery, $, renderer, BaseView, BusquedaIns
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.initializeModelDataSource();
-        },
-
-        initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
+            this.idImagen = 'imagenInstFormadoras';
         },
 
         ejecutarBuscarInstForm: function(){

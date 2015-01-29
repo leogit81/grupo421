@@ -19,15 +19,18 @@ var BusquedaProfesionalView = (function (jquery, $, renderer, BaseView, Profesio
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenProfesionales';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.initializeModelDataSource();
+            //this.initializeModelDataSource();
         },
 
-        initializeModelDataSource: function () {
+        /*initializeModelDataSource: function () {
             this.modelDataSource = new ModelDataSource ({view: this});
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },
+        },*/
 
         ejecutarBusquedaProfesional: function(){
             var codigoProfesional = $("#codigoProfesional").val();

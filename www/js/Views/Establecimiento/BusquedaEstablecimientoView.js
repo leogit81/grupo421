@@ -22,6 +22,8 @@ var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, Esta
             BaseView.prototype.initialize.call(this, attributes, options);
 
             //this.initializeModelDataSource();
+            
+            this.idImagen = 'imagenEstablecimientos';
         },
 
         /*initializeModelDataSource: function () {

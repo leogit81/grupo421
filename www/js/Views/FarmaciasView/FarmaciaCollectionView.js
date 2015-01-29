@@ -12,6 +12,15 @@ var FarmaciaCollectionView = (function ($, common, Backbone, _, renderer, BaseVi
         
         itemTemplateString : "<li><a><span class='znombre'><%=nombre%></span></br><span class='codigoFarmacia'> <%=codigo%> </span> - <%=provincia%></a></li>",
  
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+			BaseCollectionView.prototype.initialize.call(this, attributes, options);
+            
+            this.idImagen = 'imagenFarmacias';
+		},
+        
         busquedaNominalFarmacia: function (eventData) {
             var codigoFarmacia = this.getCodigoFarmaciaFromSelectedItem(eventData.currentTarget.outerHTML),
                 farmaciaNominalView = new FarmaciaNominalView({codigo: codigoFarmacia});

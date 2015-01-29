@@ -46,6 +46,9 @@ var InstFormNominalView = (function ($, renderer, BaseView, InstFormNominalGener
             options = options || {};
             options.renderer = renderer;
             this.setCodigoInstForm(attributes.codigo);
+            
+            this.idImagen = 'imagenInstFormadoras';
+            
             TabPanelView.prototype.initialize.call(this, attributes, options);
             this.findTab("panelId", "instFormGeneral").filtroConsulta = _.bind(this.getCodigoInstForm, this);
         },

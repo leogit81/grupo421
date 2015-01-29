@@ -24,6 +24,9 @@ var ListadoResidenciaView = (function (jquery, $, renderer, BaseView, Residencia
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenInstFormadoras';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();

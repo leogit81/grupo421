@@ -41,6 +41,8 @@ var MinisterioNominalView = (function ($, renderer, TabPanelView, MinisterioView
             options = options || {};
             options.renderer = renderer;
             this.setCodigoMinisterio(attributes.codigo);
+            
+            this.idImagen = 'imagenMinisterio';
 
             TabPanelView.prototype.initialize.call(this, attributes, options);
 

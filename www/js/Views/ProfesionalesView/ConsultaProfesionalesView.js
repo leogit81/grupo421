@@ -22,14 +22,10 @@ var ConsultaProfesionalesView = (function (jquery, $, renderer, BaseView, Listad
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenProfesionales';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
-
-            this.initializeModelDataSource();
-        },
-
-        initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
         },
         
         ejecutarBuscarProfesional: function(){

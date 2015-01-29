@@ -27,6 +27,9 @@ var BusquedaDrogueriasCercanasView = (function (jquery, $, renderer, BaseView, D
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenGeorefes';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             //this.initializeModelDataSource();

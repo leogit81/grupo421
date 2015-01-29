@@ -25,6 +25,8 @@ var ConsultaGeorefesView = (function (jquery, $, renderer, BaseView) {
             options = options || {};
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
+            
+            this.idImagen = 'imagenGeorefes';
         },
         
         ejecutarBusquedaEstablecimientoCercano: function(){

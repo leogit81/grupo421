@@ -19,6 +19,9 @@ var ConsultaReferentesView = (function(jquery, $, renderer, BaseView, Referentes
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenReferentes';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();

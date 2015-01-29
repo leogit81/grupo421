@@ -19,15 +19,18 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenFarmacias';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
-            this.initializeModelDataSource();
+            //this.initializeModelDataSource();
         },
 
-        initializeModelDataSource: function () {
+        /*initializeModelDataSource: function () {
             this.modelDataSource = new ModelDataSource ({view: this});
             this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },
+        },*/
 
         ejecutarBusquedaFarmacia: function(){
             var codigoFarmacia = $("#codigoFarmacia").val();

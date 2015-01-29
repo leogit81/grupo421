@@ -33,6 +33,8 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();
+            
+            this.idImagen = 'imagenNomivac';
         },
 
         setNombreEstablecimiento: function (e) {
@@ -80,8 +82,6 @@ var ConsultaNomivacView = (function ($, renderer, BaseView, ProgramasCollection,
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate(this.getViewSelector() + " a#submitConsultaNomivac", "click", _.bind(this.ejecutarConsultaNomivac, this));
-//            $("#afui").delegate(this.getViewSelector() + " select#pciaNomivac", "change", _.bind(this.actualizarListaDepartamentos, this));
-//            $("#afui").delegate(this.getViewSelector() +" select#dptoNomivac", "change", _.bind(this.actualizarListaLocalidades, this));
         },
         
         actualizarListaDepartamentos: function () {

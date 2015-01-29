@@ -9,6 +9,15 @@ var DrogueriaCollectionView = (function ($, common, Backbone, _, renderer, BaseV
             'id': 'resultadoConsultaGeneralDrogueria',
             'data-nav': "consultas_nav"
         },
+        
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+			BaseCollectionView.prototype.initialize.call(this, attributes, options);
+            
+            this.idImagen = 'imagenDroguerias';
+		},
 
         itemTemplateString: "<li><a><span class='znombre'><%=nombre%></span></br><span class='codigoDrogueria'> <%=codigo%> </span> - <%=provincia%></a></li>",
 

@@ -12,14 +12,12 @@ var DrogueriasCercanasView = (function ($, renderer, TabPanelView, GeorefesDrogu
         
         tabsConfig: [
             {
-                //tabName: "Droguerias",
                 tabName: "<img src='./img/pestanas/accesosA_general-24-px.png'>",
                 panelId: "drogueriasCercanas",
                 viewClass: GeorefesDrogueriasCollectionView,
                 modelClass: GeorefesDrogueriasCollection
             },
             {
-                //tabName: "Mapa",
                 tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "drogueriasCercanasMapa",
                 viewClass: GoogleMapView,
@@ -41,6 +39,9 @@ var DrogueriasCercanasView = (function ($, renderer, TabPanelView, GeorefesDrogu
             options = options || {};
             options.renderer = renderer;
             this.setFiltrosServicio(attributes.filtrosServicio);
+            
+            this.idImagen = 'imagenGeorefes';
+            
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "drogueriasCercanas").filtroConsulta = _.bind(this.getFiltrosServicio, this);

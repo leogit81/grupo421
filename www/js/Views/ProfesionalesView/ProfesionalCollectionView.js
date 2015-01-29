@@ -11,6 +11,15 @@ var ProfesionalCollectionView = (function ($, common, Backbone, _, renderer, Bas
         },
 
         itemTemplateString: "<li><a><span class='znombre'><%=nombre%> <%=apellido%></span></br><span class='codigoProfesional'><%=codigo%></span></a></li>",
+        
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+            this.idImagen = 'imagenProfesionales';
+            
+			BaseCollectionView.prototype.initialize.call(this, attributes, options);
+		},
 
         busquedaNominalProfesional: function (eventData) {
             var codigoProfesional = this.getCodigoProfesionalFromSelectedItem(eventData.currentTarget.outerHTML),

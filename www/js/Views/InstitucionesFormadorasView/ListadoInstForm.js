@@ -23,6 +23,9 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
         initialize: function(attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenInstFormadoras';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();

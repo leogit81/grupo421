@@ -1,4 +1,4 @@
-var GeorefesEstablecimientoCollectionView = (function ($, BaseCollectionView) {
+var GeorefesEstablecimientoCollectionView = (function ($, renderer, BaseCollectionView) {
     "use strict";
     
     var georefesEstablecimientoCollectionView = BaseCollectionView.extend({
@@ -18,8 +18,17 @@ var GeorefesEstablecimientoCollectionView = (function ($, BaseCollectionView) {
                 "<div><span><%=tipologia%></span></div>" +
                 "<div class='distanciaEstablecimientoCercano'><label>Distancia:</label><span><%=distancia%></span> KM</div>" +
             "</div>" +
-        "</li>"
+        "</li>",
+        
+        initialize: function (attributes, options) {
+            options = options || {};
+            options.renderer = renderer;
+
+			BaseCollectionView.prototype.initialize.call(this, attributes, options);
+            
+            this.idImagen = 'imagenGeorefes';
+		}
 	});
 	
 	return georefesEstablecimientoCollectionView;
-}(af, BaseCollectionView));
+}(af, AppFrameworkRenderer, BaseCollectionView));

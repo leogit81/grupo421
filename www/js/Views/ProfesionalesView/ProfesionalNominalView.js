@@ -65,6 +65,9 @@ var ProfesionalNominalView = (function ($, renderer, BaseView, ProfesionalNomina
             this.setCodigoProfesional(attributes.codigo);
             this.setUsuario(attributes.usuario);
             this.setClave(attributes.clave);
+            
+            this.idImagen = 'imagenProfesionales';
+            
             TabPanelView.prototype.initialize.call(this, attributes, options);
 
             this.findTab("panelId", "profesionalGeneral").filtroConsulta = _.bind(this.parametrosConsulta, this);

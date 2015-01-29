@@ -63,6 +63,8 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
             var mapaDrogueriaTab = this.findTab("panelId", "drogueriaMapas");
             mapaDrogueriaTab.onViewRenderedHandler = _.bind(this.onGoogleMapViewRendered, this);
             mapaDrogueriaTab.modelClass = this.getCoordenadasMapaModel();
+            
+            this.idImagen = 'imagenDroguerias';
         },
         
         /*mostrarTabEstablecimientoGeneral: function () {

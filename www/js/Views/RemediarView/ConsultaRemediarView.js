@@ -33,6 +33,8 @@ var ConsultaRemediarView = (function ($, renderer, BaseView, ProgramasCollection
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();
+            
+            this.idImagen = 'imagenRemediar';
         },
 
         setNombreEstablecimiento: function (e) {

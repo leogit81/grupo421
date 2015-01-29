@@ -41,6 +41,9 @@ var FarmaciasCercanasView = (function ($, renderer, TabPanelView, GeorefesFarmac
             options = options || {};
             options.renderer = renderer;
             this.setFiltrosServicio(attributes.filtrosServicio);
+            
+            this.idImagen = 'imagenGeorefes';
+            
             TabPanelView.prototype.initialize.call(this, attributes, options);
             
             this.findTab("panelId", "farmaciasCercanas").filtroConsulta = _.bind(this.getFiltrosServicio, this);

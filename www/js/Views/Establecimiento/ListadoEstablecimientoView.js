@@ -29,6 +29,9 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenEstablecimientos';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();
@@ -59,7 +62,6 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         */
         renderVistaDeDatos: function (data) {
             var establecimientoCollection = new EstablecimientoCollection();
-            //var establecimientoColleccionView = EstablecimientoCollectionView.getInstance();
             var establecimientoColleccionView = new EstablecimientoCollectionView();
             establecimientoColleccionView.setModel({model: establecimientoCollection});
             establecimientoCollection.processData(data);
@@ -77,17 +79,7 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate(this.getViewSelector() + " a#submitConsultaEstablecimiento", "click", _.bind(this.ejecutarConsultaEstablecimiento, this));
-//            $("#afui").delegate(this.getViewSelector() + " select#provinciaEstablecimiento", "change", _.bind(this.actualizarListaDepartamentos, this));
-//            $("#afui").delegate(this.getViewSelector() +" select#departamentoEstablecimiento", "change", _.bind(this.actualizarListaLocalidades, this));
-        },
-        
-//        actualizarListaDepartamentos: function () {
-//            deptos.actualizarDepartamentosDeLaVista(this, "provinciaEstablecimiento", "departamentoEstablecimiento", "localidadEstablecimiento");
-//        },
-//        
-//        actualizarListaLocalidades: function () {
-//            localidades.actualizarLocalidadesDeLaVista(this, "provinciaEstablecimiento", "departamentoEstablecimiento", "localidadEstablecimiento");
-//        }
+        }        
     });
 
     return listadoEstablecimientoView;

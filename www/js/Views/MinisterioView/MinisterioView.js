@@ -15,11 +15,6 @@ var MinisterioView = (function ($, common, MasterView, /*CoordenadasMapaView,*/ 
         * Devuelve true cuando el ministerio no tiene ningún teléfono.
         */
         noHayNingunTelefono: function () {
-            /*var telefono1 = this.getViewByName("telefono1"),
-                telefono2 = this.getViewByName("telefono2"),
-                telefono3 = this.getViewByName("telefono3"),
-                telefono4 = this.getViewByName("telefono4");*/
-            
             return !this.telefonoView1.hayTelefono() 
             && !this.telefonoView2.hayTelefono() 
             && !this.telefonoView3.hayTelefono()
@@ -88,9 +83,6 @@ var MinisterioView = (function ($, common, MasterView, /*CoordenadasMapaView,*/ 
         setModel: function (model) {
             MasterView.prototype.setModel.call(this, model);
             var coordenadasModel, domicilioModel, telefonoModel1, telefonoModel2, telefonoModel3, telefonoModel4;
-            
-            /*coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
-            this.getViewByName("coordenadasDeMapa").setModel(coordenadasModel);*/
             
             domicilioModel = this.getModelOrDefault("domicilio");
             this.getViewByName("domicilio").setModel(domicilioModel);

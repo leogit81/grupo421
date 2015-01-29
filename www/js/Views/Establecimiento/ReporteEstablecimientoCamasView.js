@@ -37,6 +37,9 @@ var ReporteEstablecimientoCamasView = (function ($, renderer, BaseView, ReporteE
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenEstablecimientos';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
 
             this.initializeModelDataSource();
