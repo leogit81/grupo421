@@ -4,7 +4,8 @@ var AppVersion = (function (BaseModel) {
     var appVersion = BaseModel.extend({
         defaults : {
             "nombreAplicacion" : null,
-            "version" : null
+            "version" : null,
+            "idImagen": null
         },
         
         initialize: function (attributes, options) {
@@ -12,6 +13,7 @@ var AppVersion = (function (BaseModel) {
             this.set("nombreAplicacion", "SISA Móvil");
             this.set("version", "0.92");
             this.set("urlImagen", "./img/sisaMobile.png");
+            this.set("idImagen", "sisaMobileLogo2");
         }
     });
     
