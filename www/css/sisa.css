@@ -455,18 +455,17 @@ label#lbl1, label#lbl2{
     vertical-align: middle;
 }
 
-#imagenesProgramasMinisterio{
+#customTitle{
     position: absolute;
     display: block;
     width: 60%;
     left: 20%;
-    padding: 0.2% 0;
     z-index: 1;
     height: 44px;
     font-size: 18px;
     font-weight: bold;
     color: inherit;
-    padding: 10px 0;
+    padding: 3px 0;
     text-shadow: rgba(0,0,0,0.8) 0 -1px 0;
     text-align: center;
     white-space: nowrap;
@@ -474,6 +473,11 @@ label#lbl1, label#lbl2{
     overflow: hidden;
 }
 
-#imagenesProgramasMinisterio img:not(#sisaMobileLogo) {
+#sisaMobileLogo {
+    position: relative;
+}
+
+#customTitle img:not(#sisaMobileLogo){
     position: absolute;
+    padding-bottom: 3px;
 }

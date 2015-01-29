@@ -162,16 +162,15 @@ var app = (function ($, jquery, logger) {
             $.ui.backButtonText = "Atrás"; /*esto cambia el texto del backbutton para todos los paneles de la aplicación*/
             setBackButtonClickHandler();
             $.ui.loadingText = "Cargando...";
-            //$("#home").on("loadpanelcomplete", onLoadHome);
+            $("#home").on("loadpanelcomplete", onHomeLoad);
         });
     }
     
     /**
     * Handler que se ejecuta cuando se carga la home.
     */
-    function onLoadHome () {
-        /*cambiarVisibilidadImagenProgramaMinisterio(false);*/
-        ocultarVisibilidadImagenProgramaMinisterio();
+    function onHomeLoad () {
+        ocultarImagenProgramaMinisterio();
     };
 
     function launchNoticiasSlider () {
@@ -221,7 +220,7 @@ var app = (function ($, jquery, logger) {
     * @param {boolean} mostrar, true: muestra la imagen. false: oculta la imagen.
     */
     function ocultarImagenProgramaMinisterio () {
-        $("#defaultHeader img").each(function (index, el) {
+        $("#customTitle img").each(function (index, el) {
            if (el.id !== 'sisaMobileLogo') { el.style.visibility = 'hidden'}
        } );
     }
@@ -231,7 +230,7 @@ var app = (function ($, jquery, logger) {
     * @param {string} idImagen, id del elemento img donde se muestra la imagen del programa correspondiente.
     */
     function mostrarImagenProgramaMinisterio (idImagen) {
-        $("#defaultHeader img").each(function (index, el) {
+        $("#customTitle img").each(function (index, el) {
            if (el.id === idImagen) { el.style.visibility = 'visible'}
        } );
     }
