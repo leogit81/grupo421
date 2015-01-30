@@ -75,16 +75,7 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
             tabCamas.filtroConsulta = _.bind(this.getCodigoEstablecimiento, this);
             //oculta el tab de camas según el primer dígito del código de establecimiento
             tabCamas.isHidden = (this.getCodigoEstablecimiento().toString().charAt(0) !== "1");
-        },
-
-        /**
-        * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
-        * @param {String} tabName, nombre del tab, a partir de este se obtiene el modelo
-        */
-        /*getModelOrDefault: function (tabName) {
-            var tab = this.findTab("tabName", tabName);
-            return tab.view.model;
-        }*/
+        }
     });
 
     return establecimientoNominalView;

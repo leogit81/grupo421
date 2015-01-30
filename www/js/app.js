@@ -72,6 +72,8 @@ var app = (function ($, jquery, logger) {
             } else { 
                 navigator.app.backHistory();
             }
+        } else {
+            alert("back button click");
         }
     }
 
@@ -117,7 +119,9 @@ var app = (function ($, jquery, logger) {
      * Borra el panel anterior, es el que se deja atrás cuando se hace clic en el back button.
      */
     function removePreviousPanel (e) {
-        $(e.currentTarget).remove();
+        if (e.currentTarget.id !== "acercaDeView") {
+            $(e.currentTarget).remove();
+        }
     }
 
     function googleMapLoadSrc () {

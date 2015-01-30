@@ -369,6 +369,10 @@ div.acercaDe div.row{
     margin-top: 10px;
 }
 
+#acercaDeView div.acercaDe .row label {
+    float: none;
+}
+
 div.acercaDe .logo{
     margin-bottom: 25px;
 	

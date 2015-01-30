@@ -12,7 +12,7 @@ var AcercaDeView = (function ($, BaseView, renderer) {
         
         template: _.template(
             '<div class="acercaDe">' +
-            '<div class="logo"></div>' +
+            '<div class="logo"><img src="<%=urlImagen%>"></div>' +
             '<div><span class="nombreAplicacion"><%=nombreAplicacion%></span></div>' +
             '<div class="row"><label>Versión</label></div><div><span class="version"><%=version%></span>' +
             '</div></div>'),
@@ -21,12 +21,19 @@ var AcercaDeView = (function ($, BaseView, renderer) {
             options = options || {};
             options.renderer = renderer;
 		    BaseView.prototype.initialize.call(this, attributes, options);
-        },
-        
-        render: function () {
-            return BaseView.prototype.render.call(this);
         }
     });
+    
+    acercaDeView.prototype.renderHtml = function () {
+		$("#acercaDeView .nombreAplicacion").html(this.model.get('nombreAplicacion'));
+        $("#acercaDeView .version").html(this.model.get('version'));
+        
+        $.ui.loadContent("acercaDeView", false, false, 'slide');
+        
+        
+        //agrego esta clase para poder aplicar estilos CSS
+        $("#acercaDeView").trigger("orientationchange");
+	};
     
     /**
     * Handler que se ejecuta cuando se terminó de cargar el panel.
@@ -34,13 +41,13 @@ var AcercaDeView = (function ($, BaseView, renderer) {
     acercaDeView.prototype.onLoadPanelComplete = function () {
         BaseView.prototype.onLoadPanelComplete.call(this);
 
-        var idImagen = this.model.get("idImagen");
+        /*var idImagen = this.model.get("idImagen");
             var imagenHtmlEl = document.getElementById(idImagen);
             if (imagenHtmlEl !== undefined || imagenHtmlEl !== null) {
                 var imagenHtmlElCloned = imagenHtmlEl.cloneNode();
                 $(this.getViewSelector()).find(".logo")[0].appendChild(imagenHtmlElCloned);
                 $(this.getViewSelector()).find(".logo img").css("visibility", "visible")
-            }
+            }*/
     };
     
     return acercaDeView;

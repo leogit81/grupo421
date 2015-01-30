@@ -16,16 +16,6 @@ var AppFrameworkRenderer = (function (_, $, logger) {
         $.bind(logger, "showError", _.bind(this.showError,this));
     };
     
-    /*AfRenderer.prototype.preRender = function (view) {
-        //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
-        if ($(view.getViewSelector()).length == 0) {
-            //div panel + contenido
-            $.ui.addContentDiv(view.getViewId(), view.$el[0].outerHTML);
-        }
-        //$(view.getViewSelector()).addClass("consulta-detallada");
-        return this;
-    };*/
-    
     AfRenderer.prototype.render = function (view) {
         //la primera vez agrega el panel con el resultado de la consulta, las siguientes veces actualiza el contenido del panel
         if ($(view.getViewSelector()).length == 0) {
@@ -40,7 +30,6 @@ var AppFrameworkRenderer = (function (_, $, logger) {
         
         
         //agrego esta clase para poder aplicar estilos CSS
-        //$("#" + view.attributes.id).addClass("consulta-detallada");
         $(view.getViewSelector()).trigger("orientationchange");
         return this;
     };    

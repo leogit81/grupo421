@@ -115,17 +115,17 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     * Encapsula la lógica del render de la vista en la página.
     */
 	baseView.prototype.renderFromData = function (data) {
-		this.clearView();
+        this.clearView();
 
-		this.armarHtmlConData(data);
+        this.armarHtmlConData(data);
 
-      if (common.isEmpty(this.parent)) {
+        if (common.isEmpty(this.parent)) {
             this.renderHtml();
         }
 
-		$(this.getViewSelector()).addClass("consulta-detallada");
+        $(this.getViewSelector()).addClass("consulta-detallada");
 
-		this.trigger("viewRendered", this);
+        this.trigger("viewRendered", this);
 	};
 
 	baseView.prototype.clearView = function () {
@@ -163,13 +163,8 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     * Este método se utiliza en el render() y renderEmptyView()
     */
 	baseView.prototype.renderHtml = function () {
-		if (!common.isEmpty(this.parent)) {
-			//el parent debería ser una MasterView que tiene este método
-			//this.parent.updateView(this.renderedHtml);
-		} else {
-			if (!common.isEmpty(this.renderer)) {
-				this.renderer.render(this);
-			}   
+		if (common.isEmpty(this.parent) && !common.isEmpty(this.renderer)) {
+            this.renderer.render(this);
 		}
 	};
 
