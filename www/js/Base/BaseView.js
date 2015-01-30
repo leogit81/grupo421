@@ -41,10 +41,6 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 
 			this.attachEvents();
 
-			//El prerender inserta el elemento HTML vacío de la vista en el DOM
-			//afRenderer.getInstance().preRender(this);
-			//this.insertElementInDom();
-			//$(this.getViewSelector()).addClass("consulta-detallada");
 			this.$el.attr("data-footer", "none");
 		},
 
@@ -195,7 +191,7 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
     * Bindea los handlers para los eventos de la vista.
     */
 	baseView.prototype.attachEvents = function () {
-        $("#afui").delegate(this.getViewSelector(), "loadpanelcomplete", _.bind(this.actualizarTitle, this));
+        $("#afui").delegate(this.getViewSelector(), "loadpanelcomplete", _.bind(this.onLoadPanelComplete, this));
 	};
 
 	baseView.prototype.showLoadingMask = function (loadingMessage) {
@@ -275,9 +271,14 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 		return {};
 	};
     
+    /**
+    * Handler que se ejecuta cuando se terminó de cargar el panel.
+    */
+    baseView.prototype.onLoadPanelComplete = function () {
+        this.actualizarTitle();
+    };
+    
     baseView.prototype.actualizarTitle = function () {
-        /*app.cambiarImagenProgramaMinisterio(this.pathImagen);
-        app.cambiarVisibilidadImagenProgramaMinisterio(true);*/
         app.ocultarImagenProgramaMinisterio();
         app.mostrarImagenProgramaMinisterio(this.idImagen);
     };

@@ -24,19 +24,24 @@ var AcercaDeView = (function ($, BaseView, renderer) {
         },
         
         render: function () {
-            BaseView.prototype.render.call(this);
-            
-            var idImagen = this.model.get("idImagen");
+            return BaseView.prototype.render.call(this);
+        }
+    });
+    
+    /**
+    * Handler que se ejecuta cuando se terminó de cargar el panel.
+    */
+    acercaDeView.prototype.onLoadPanelComplete = function () {
+        BaseView.prototype.onLoadPanelComplete.call(this);
+
+        var idImagen = this.model.get("idImagen");
             var imagenHtmlEl = document.getElementById(idImagen);
             if (imagenHtmlEl !== undefined || imagenHtmlEl !== null) {
                 var imagenHtmlElCloned = imagenHtmlEl.cloneNode();
                 $(this.getViewSelector()).find(".logo")[0].appendChild(imagenHtmlElCloned);
                 $(this.getViewSelector()).find(".logo img").css("visibility", "visible")
             }
-            
-            return this;
-        }
-    });
+    };
     
     return acercaDeView;
 }(af, BaseView, AppFrameworkRenderer));
