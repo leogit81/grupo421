@@ -65,7 +65,6 @@ var AyudaView = (function ($, BaseView, renderer) {
             this.renderedHtml = "";
             _.each(imagenes, this.itemTemplate, this);
             return this.template({renderedHtml: this.renderedHtml});
-//            return this.renderedHtml;
         },
 
         itemTemplate: function (nombreImagen) {
@@ -77,8 +76,17 @@ var AyudaView = (function ($, BaseView, renderer) {
             return this.imagenes;
         },
 
+        /*Fix para WP8, porque no se mostraban correctamente las imágenes
+        En lugar de armar la vista en forma dinámica, ya se encuentra creada en el index.html
+        y lo que se hace es hacerla visible solamente*/
         render: function () {
-            BaseView.prototype.render.call(this);
+            /*BaseView.prototype.render.call(this);*/
+            
+            $.ui.loadContent("ayudaSISA", false, false, 'slide');
+        
+            //agrego esta clase para poder aplicar estilos CSS
+            $("#acercaDeView").trigger("orientationchange");
+            
             this.carousel = jQuery("#ayudaCarousel").owlCarousel({
                 navigation : false, // Show next and prev buttons
                 navigationText: ["anterior", "siguiente"],
@@ -94,7 +102,8 @@ var AyudaView = (function ($, BaseView, renderer) {
             carouselData.removeItem(carouselData.maximumItem);
             jQuery("#ayudaCarousel .owl-item").css("height",(window.innerHeight*0.885));
             jQuery("#ayudaCarousel .owl-controls").css("margin-top","0");
-            $(this.getViewSelector()).on("loadpanelcomplete", function () {$.ui.hideMask();});
+            //$(this.getViewSelector()).on("loadpanelcomplete", function () {$.ui.hideMask();});
+            $("#ayudaSISA").on("loadpanelcomplete", function () {$.ui.hideMask();});
         }
     });
     return ayudaView;

@@ -24,31 +24,18 @@ var AcercaDeView = (function ($, BaseView, renderer) {
         }
     });
     
+    /*Fix para WP8, porque no se mostraban correctamente las imágenes
+    En lugar de armar la vista en forma dinámica, ya se encuentra creada en el index.html
+    y lo que se hace es hacerla visible solamente*/
     acercaDeView.prototype.renderHtml = function () {
 		$("#acercaDeView .nombreAplicacion").html(this.model.get('nombreAplicacion'));
         $("#acercaDeView .version").html(this.model.get('version'));
         
         $.ui.loadContent("acercaDeView", false, false, 'slide');
         
-        
         //agrego esta clase para poder aplicar estilos CSS
         $("#acercaDeView").trigger("orientationchange");
 	};
-    
-    /**
-    * Handler que se ejecuta cuando se terminó de cargar el panel.
-    */
-    acercaDeView.prototype.onLoadPanelComplete = function () {
-        BaseView.prototype.onLoadPanelComplete.call(this);
-
-        /*var idImagen = this.model.get("idImagen");
-            var imagenHtmlEl = document.getElementById(idImagen);
-            if (imagenHtmlEl !== undefined || imagenHtmlEl !== null) {
-                var imagenHtmlElCloned = imagenHtmlEl.cloneNode();
-                $(this.getViewSelector()).find(".logo")[0].appendChild(imagenHtmlElCloned);
-                $(this.getViewSelector()).find(".logo img").css("visibility", "visible")
-            }*/
-    };
     
     return acercaDeView;
 }(af, BaseView, AppFrameworkRenderer));

@@ -485,3 +485,7 @@ label#lbl1, label#lbl2{
     position: absolute;
     padding-bottom: 3px;
 }
+
+#acercaDeView, #ayudaSISA {
+    display: none;
+}

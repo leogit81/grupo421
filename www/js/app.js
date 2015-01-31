@@ -16,6 +16,11 @@ var app = (function ($, jquery, logger) {
     $.ui.useOSThemes = false; /*False para que App Framework no utilice el theme por defecto del dispositivo. Se fuerza un theme en index.html*/
 
     $.ui.autoLaunch = false; /*Deshabilitar el inicio automático de intel app framework*/
+    
+    /**
+    * Lista de paneles estáticos (excepto la home, que nunca se borra) que no quiero borrar al hacer clic en el botón de atrás, ejemplo, acerca de
+    */
+    var panelesQueNoQuieroBorrar = ["acercaDeView", "ayudaSISA"];
 
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
@@ -119,10 +124,27 @@ var app = (function ($, jquery, logger) {
      * Borra el panel anterior, es el que se deja atrás cuando se hace clic en el back button.
      */
     function removePreviousPanel (e) {
-        if (e.currentTarget.id !== "acercaDeView") {
+        if (!esUnPanelQueNoQuieroBorrar(e.currentTarget.id)) {
             $(e.currentTarget).remove();
         }
     }
+    
+    /**
+    * Indica si el panel pasado por parámetro es un panel que no se quiere borrar
+    * @param {string} idPanel, hash del panel que va a ser borrado
+    * @returns {boolean} true, no se debería borrar el panel. false, se puede borrar
+    */
+    function esUnPanelQueNoQuieroBorrar (idPanel) {
+        var i;
+        
+        for (i = 0; i < panelesQueNoQuieroBorrar.length; i++){
+            if (panelesQueNoQuieroBorrar[i] === idPanel){
+                return true;
+            }
+        }
+        
+        return false;
+    };
 
     function googleMapLoadSrc () {
         var script = document.createElement('script');
