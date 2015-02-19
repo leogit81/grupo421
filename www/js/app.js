@@ -59,7 +59,7 @@ var app = (function ($, jquery, logger) {
     *Se valida por os, puesto que el objeto navigator.app sólo existe para android.
     */
     function onDeviceBackButtonClick () {
-        if($.os.android || $.os.androidICS){
+        /*if($.os.android || $.os.androidICS){*/
             if($.ui.history.length == "0"){
                 $("#afui").popup(
                     {
@@ -77,9 +77,9 @@ var app = (function ($, jquery, logger) {
             } else { 
                 navigator.app.backHistory();
             }
-        } else {
+        /*} else {
             alert("back button click");
-        }
+        }*/
     }
 
     function loadApp () {
