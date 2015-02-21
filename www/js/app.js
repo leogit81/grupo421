@@ -118,7 +118,6 @@ var app = (function ($, jquery, logger) {
         e.preventDefault();
         $($.ui.activeDiv).on("unloadpanelcomplete", removePreviousPanel);
         $.ui.goBack();
-        console.log("#" + $.ui.activeDiv.id);
         $("#" + $.ui.activeDiv.id).trigger("resize");
         $.ui.hideMask();
     }
