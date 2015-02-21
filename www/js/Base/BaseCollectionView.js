@@ -67,7 +67,7 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
             /*
             *Si el primer y el último elemento de la lista paginada son iguales, se elimina el último
             */
-            if(listaConFiltro.list.firstChild.innerHTML === listaConFiltro.list.lastChild.innerHTML) {
+            if(listaConFiltro.list && listaConFiltro.list.firstChild.innerHTML === listaConFiltro.list.lastChild.innerHTML) {
                 /*En IE no tenemos la función listaConFiltro.list.lastChild.remove*/
                 if (!listaConFiltro.list.lastChild.remove) {
                     listaConFiltro.list.removeChild(listaConFiltro.list.lastChild);
