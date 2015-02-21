@@ -59,7 +59,7 @@ var app = (function ($, jquery, logger) {
     *Se valida por os, puesto que el objeto navigator.app sólo existe para android.
     */
     function onDeviceBackButtonClick () {
-        /*if($.os.android || $.os.androidICS){*/
+        if($.os.android || $.os.androidICS || $.os.ie){
             if($.ui.history.length == "0"){
                 $("#afui").popup(
                     {
@@ -74,12 +74,14 @@ var app = (function ($, jquery, logger) {
                         cancelOnly: false
                     }
                 );
-            } else { 
+            } else {
+                if ($.os.ie){
+                    $("#header .backButton").click();
+                    return;
+                }
                 navigator.app.backHistory();
             }
-        /*} else {
-            alert("back button click");
-        }*/
+        }
     }
 
     function loadApp () {
