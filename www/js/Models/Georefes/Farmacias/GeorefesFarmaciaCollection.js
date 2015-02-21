@@ -14,7 +14,7 @@ var GeorefesFarmaciaCollection = (function (BaseCollection) {
     
     georefesFarmaciaCollection.prototype.getServiceConfig = function () {
         return {
-            baseUrl: 'https://dev.sisa.msal.gov.ar/sisadev/services/rest',
+//            baseUrl: 'https://dev.sisa.msal.gov.ar/sisadev/services/rest',
             url: 'establecimiento/buscarFarmaciasCercanas'
         };
     };
