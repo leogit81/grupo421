@@ -82,33 +82,29 @@
 	<gap:splash src="res/screen/ios/screen-ipad-landscape.png"     gap:platform="ios"     width="1024" height="768" />
 	<gap:splash src="res/screen/windows-phone/screen-portrait.png" gap:platform="winphone" />
 
-
-<!--
-	<feature id="blackberry.app" required="true" version="1.0.0.0" />
-	<rim:permissions>
-		<rim:permit>read_geolocation</rim:permit>
-		<rim:permit>read_device_identifying_information</rim:permit>
-	</rim:permissions>
--->
-
-	<!--	API UTILIZADA PARA HACER EL LAS LLAMADAS CORS-->
-<!--
-	<access uri="https://cors-anywhere.herokuapp.com" subdomains="true" />
-
-	
-	<access uri="http://127.0.0.1*"/>  
-	<access uri="https://sisa.msal.gov.ar*"/>
-	<access uri="https://qa.sisa.msal.gov.ar*"/>
-	<access uri="*" />
--->
 	<access origin="http://127.0.0.1*"/>  
 	<access origin="https://sisa.msal.gov.ar*"/>
 	<access origin="https://qa.sisa.msal.gov.ar*"/>
 	<access origin="*" />
-	<!--
-		<access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
-		<access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
-		<access origin="http://phonegap.com" browserOnly="true" /> - only allows http://phonegap.com to be opened by the child browser.
-	-->
+    
+<!--    CONFIGURACION PARA PERMITIR LA CONEXION EN DISPOSITIVOS BLACKBERRY          -->
+    <rim:splash src="res/screen/blackberry/screen-225.png"         gap:platform="blackberry" />
+    
+    
+    <feature id="blackberry.app" required="true" version="1.0.0.0" />
+	<rim:permissions>
+		<rim:permit>read_geolocation</rim:permit>
+		<rim:permit>read_device_identifying_information</rim:permit>
+	</rim:permissions>
+
+
+	<access uri="https://maps.gstatic.com"  subdomains="true" />  
+	<access uri="https://maps.googleapis.com"  subdomains="true" />  
+	<access uri="https://sisa.msal.gov.ar"  subdomains="true" />
+	<access uri="https://qa.sisa.msal.gov.ar"  subdomains="true" />
+	<access uri="local:///" subdomains="true" />
+	<access uri="*" subdomains="true" />
+
+<!--    FIN CONGIFUGARACION BLACKBERRY             -->
 
 </widget>
