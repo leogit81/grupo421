@@ -7,8 +7,6 @@ var DrogueriaCollection = (function (common, Backbone, converter, Service) {
             this.service.loadConfig(this.getServiceConfig());
         }
     });
-    
-    //establecimientoCollection.prototype.converter = converter;
 
     drogueriaCollection.prototype.parse = function (parsedData) {
         return parsedData.DrogueriaSearchResponse.droguerias.drogueriaReducida;

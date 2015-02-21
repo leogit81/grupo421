@@ -27,18 +27,6 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
                 viewClass: DrogueriaNominalGeneralView,
                 modelClass: DrogueriaNominal
             },
-//            {
-//                tabName: "Prestaciones",
-//                panelId: "establecimientoPrestaciones",
-//                viewClass: BaseView,
-//                modelClass: BaseModel
-//            },
-//            {
-//                tabName: "Imágenes",
-//                panelId: "establecimientoImagenes",
-//                viewClass: BaseView,
-//                modelClass: BaseModel
-//            },
             {
                 tabName: "<img src='./img/pestanas/accesosA_mapa-24-px.png'>",
                 panelId: "drogueriaMapas",
@@ -67,45 +55,6 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
             this.idImagen = 'imagenDroguerias';
         },
         
-        /*mostrarTabEstablecimientoGeneral: function () {
-            var tabGeneral = this.findTab("panelId", "establecimientoGeneral");
-            tabGeneral.view.model.load(this.codigoEstablecimiento);
-        },*/
-        
-        /**
-        * Setea el modelo para la vista y también actualiza los modelos de las vistas de los tabs.
-        */
-        /*setModel: function (model) {
-            //TabPanelView.prototype.setModel.call(this, model);
-            
-            //var establecimientoModel = this.getModelOrDefault("General");
-            this.getViewByName("General").setModel(model);
-            
-            this.getViewByName("Mapas").setModel(model.get("coordenadasDeMapa"));
-            
-            var coordenadasModel = this.getModelOrDefault("coordenadasDeMapa");
-            this.getViewByName("coordenadasDeMapa").setModel(coordenadasModel);
-            
-            var domicilioModel = this.getModelOrDefault("domicilio");
-            this.getViewByName("domicilio").setModel(domicilioModel);
-            
-            var participacionesModel = this.getModelOrDefault("participaciones");
-            this.getViewByName("participaciones").setModel(participacionesModel);
-            
-            var telefonoModel1 = this.getModelOrDefault("telefono1");
-            this.getViewByName("telefono1").setModel(telefonoModel1);
-            
-            var telefonoModel2 = this.getModelOrDefault("telefono2");
-            this.getViewByName("telefono2").setModel(telefonoModel2);
-            
-            var telefonoModel3 = this.getModelOrDefault("telefono3");
-            this.getViewByName("telefono3").setModel(telefonoModel3);
-            
-            var telefonoModel4 = this.getModelOrDefault("telefono4");
-            this.getViewByName("telefono4").setModel(telefonoModel4);
-        },
-*/
-        
         /**
         * Devuelve el model asociado a la vista, que se muestra en uno de los tabs.
         * @param {String} tabName, nombre del tab, a partir de este se obtiene el modelo
@@ -124,11 +73,6 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
         var tab = this.findTab("tabName", viewName);
         return tab.view;
     };
-    
-    /*establecimientoNominalView.prototype.render = function (viewName) {
-        TabPanelView.prototype.render.call(this);
-        $("#" + this.attributes.id).addClass("consultaNominalEstablecimiento");
-    };*/
     
     drogueriaNominalView.prototype.renderSelectedTab = function (args) {
         //Si se hizo clic en el tab de mapas, se carga el mapa
@@ -154,26 +98,12 @@ var DrogueriaNominalView = (function ($, renderer, BaseView, DrogueriaNominalGen
     };
     
     drogueriaNominalView.prototype.onGoogleMapViewRendered = function () {
-        //Si se hizo clic en el tab de mapas, se carga el mapa de forma diferente, no se muestra dentro del tab
-        /*var selectedTabPanelId = null;
-        
-        if (!common.isEmpty(args) && !common.isEmpty(args.currentTarget)) {
-            selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
-        }*/
 
         if (this.selectedTab.panelId === "drogueriaMapas") {
             var tabMapa = this.findTab("panelId", "drogueriaMapas");
             $.ui.loadContent(tabMapa.view.getViewId(), false, false, "pop");
             return;
-        }/* else if (selectedTabPanelId === "establecimientoPrestaciones") {
-            var tabPrestaciones = this.findTab("panelId", selectedTabPanelId);
-            if (common.isEmpty(tabPrestaciones.isLoaded) || !tabPrestaciones.isLoaded) {
-                this.loadPrestacionesTab(selectedTabPanelId);
-                tabPrestaciones.isLoaded = true;
-            }
-        }*/
-        //Cuando se carga el tab panel view por primera vez, después de inicializar el mapa, viene por este load.
-        //TabPanelView.prototype.onViewRendered.call(this);
+        }
     };
 	
 	return drogueriaNominalView;

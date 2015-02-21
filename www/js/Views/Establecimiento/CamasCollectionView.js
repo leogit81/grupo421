@@ -129,49 +129,9 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 		"<a id='habilitarModCamas' class='button'> Modificar Camas del Establecimiento</a>"+
 		"<a id='submitCamas' class='button' style='display: none;'> Enviar </a>",
 
-//		render: function (){
-//			BaseView.prototype.render.call(this);
-//
-//			var ctx = jQuery(this.parent.getViewSelector() + " #myChart").get(0); //	.getContext("2d");
-//
-//			ctx.width = window.innerWidth;
-//			ctx.height = window.innerHeight * 0.5;
-//
-//			parsedData =  this.model.toJSON();
-//			var data = [];
-//			var i = 0;
-//
-//			_.each(parsedData[0],function(itemValue, itemKey, list){	
-//
-//
-//				if(itemKey != "codigo" && itemKey != "nombre" && itemKey != "resultado" && itemValue !== 0){
-//
-//					if( i >= BaseView.prototype.color.length ){
-//						i = 0;						
-//					};
-//
-//					var temp =({
-//						value: itemValue,
-//						color: BaseView.prototype.color[i],
-//						highlight: "#D6EBFF",
-//						label: itemKey
-//					});
-//
-//					data.push(temp);
-//					i++;
-//				}
-//			}, data);
-//
-//			ctx = jQuery(this.parent.getViewSelector() + " #myChart").get(0).getContext("2d");
-//
-//			var camasChart = new Chart(ctx).Pie(data);
-//
-//			return this;
-//		},
 
 		attachEvents: function(){
 			BaseCollectionView.prototype.attachEvents.call(this);
-
 			//Se agrega el parent porque el div de camas es un subDiv de la consulta gral.
 			$("#afui").undelegate("#habilitarModCamas", "click").delegate("#habilitarModCamas", "click", _.bind(this.ejecutarHabilitarModCamas, this));
 			$("#afui").undelegate("#submitCamas", "click").delegate("#submitCamas", "click", _.bind(this.ejecutarSubmitCamas, this));
@@ -193,9 +153,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 						title: "Error de Autenticación",
 						message: "Para realizar la modificación de camas, debe iniciar sesión.",
 						cancelText: "Aceptar",
-						cancelCallback: function(){},
-						//					doneText: "Aceptar",
-						//					doneCallback: function (json) {},
+						cancelCallback: function(){},						
 						cancelOnly: true
 					}
 				);
@@ -226,8 +184,6 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 						this.parent.findTab("panelId", "establecimientoCamas").isLoaded = false;
 						this.parent.loadSelectedTab();
 					},this),
-					//					doneText: "Aceptar",
-					//					doneCallback: function (json) {},
 					cancelOnly: true
 				}
 			);
@@ -235,10 +191,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 		},
 
 		modelToJsonUpdate: function(){
-			
-			//			jsonForUpdate.credenciales.usuario = ServiceConfig.usuario;
 			jsonForUpdate.credenciales.usuario = "uutn"
-			//			jsonForUpdate.credenciales.clave = ServiceConfig.clave;
 			jsonForUpdate.credenciales.clave = "UJR9KM4R5Q"
 			jsonForUpdate.idEstablecimiento = parsedData[0].codigo;
 

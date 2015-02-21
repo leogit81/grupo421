@@ -14,7 +14,6 @@ var GeorefesEstablecimientoCollection = (function (BaseCollection) {
     
     georefesEstablecimientoCollection.prototype.getServiceConfig = function () {
         return {
-            //baseUrl: 'https://qa.sisa.msal.gov.ar/sisaqa/services/rest',
             url: 'establecimiento/buscarCercanos'
         };
     };

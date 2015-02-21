@@ -13,8 +13,6 @@ var InicioSesion = (function (common, BaseModel) {
         },
 
         processData: function (data) {
-            //            var jsonData = this.converter.convert(data);
-            //            this.setJsonData(jsonData);
 
             /*Parche para cancelar ejecución si el usuario no se autenticó correctamente*/
             if (!BaseModel.prototype.processData.call(this,data)) return;

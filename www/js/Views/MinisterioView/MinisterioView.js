@@ -1,4 +1,4 @@
-var MinisterioView = (function ($, common, MasterView, /*CoordenadasMapaView,*/ DomicilioView, TelefonoView, renderer) {
+var MinisterioView = (function ($, common, MasterView, DomicilioView, TelefonoView, renderer) {
     "use strict";
     
     var ministerioView = MasterView.extend({
@@ -52,10 +52,7 @@ var MinisterioView = (function ($, common, MasterView, /*CoordenadasMapaView,*/ 
             
 		    MasterView.prototype.initialize.call(this, attributes, options);
 		    var coordenadaView, domicilioView, telefonoView1, telefonoView2, telefonoView3, telefonoView4;
-            
-            /*coordenadaView = new CoordenadasMapaView(this.getModelOrDefault("coordenadasDeMapa"));
-            this.addView(coordenadaView, "coordenadasDeMapa", "coordenadasDeMapaMinisterio");*/
-            
+                        
             domicilioView = new DomicilioView(this.getModelOrDefault("domicilio"));
             this.addView(domicilioView, "domicilio", "domicilioMinisterio");
             domicilioView.template = domicilioView.template2;
@@ -116,4 +113,4 @@ var MinisterioView = (function ($, common, MasterView, /*CoordenadasMapaView,*/ 
     };
 	
 	return ministerioView;
-}(af, common, MasterView, /*CoordenadasMapaView, */DomicilioView, TelefonoView, AppFrameworkRenderer));
+}(af, common, MasterView, DomicilioView, TelefonoView, AppFrameworkRenderer));

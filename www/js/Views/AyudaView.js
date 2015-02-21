@@ -102,7 +102,6 @@ var AyudaView = (function ($, BaseView, renderer) {
             carouselData.removeItem(carouselData.maximumItem);
             jQuery("#ayudaCarousel .owl-item").css("height",(window.innerHeight*0.885));
             jQuery("#ayudaCarousel .owl-controls").css("margin-top","0");
-            //$(this.getViewSelector()).on("loadpanelcomplete", function () {$.ui.hideMask();});
             $("#ayudaSISA").on("loadpanelcomplete", function () {$.ui.hideMask();});
         }
     });

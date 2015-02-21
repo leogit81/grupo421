@@ -8,11 +8,11 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
         templateSinDatos: "<span class='coleccionSinDatos'>No hay datos disponibles.</span>",
         
         /**
-        * Template para la colecciÃ³n.
+        * Template para la colección.
         */
         collectionTemplate : _.template("<div id='resultadoCollection'><input class='search' placeholder='Buscar en resultados...'/><ul class='list'><%= renderedHtml %></ul><div class='paginasCollection'><ul class='pagination'></ul></div></div>"),
         /**
-        * Template para un item de la colecciÃ³n.
+        * Template para un item de la colección.
         */
         itemTemplateString: "<li></li>",
 
@@ -62,12 +62,6 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
                 plugins: [ ListPagination({}) ] 
             },
                 selector = this.viewSelector + " #resultadoCollection";
-            
-            /*if (!common.isEmpty(this.parent)){
-                selector = this.parent.getViewSelector() + " #resultadoCollection";
-            } else {
-                selector = this.getViewSelector() + " #resultadoCollection";
-            }*/
             
             var listaConFiltro = new List(selector, options, false, true);
             /*

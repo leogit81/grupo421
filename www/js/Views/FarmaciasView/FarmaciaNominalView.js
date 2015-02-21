@@ -97,13 +97,7 @@ var FarmaciaNominalView = (function ($, renderer, BaseView, FarmaciaNominalGener
     };
     
     farmaciaNominalView.prototype.onGoogleMapViewRendered = function () {
-        //Si se hizo clic en el tab de mapas, se carga el mapa de forma diferente, no se muestra dentro del tab
-        /*var selectedTabPanelId = null;
         
-        if (!common.isEmpty(args) && !common.isEmpty(args.currentTarget)) {
-            selectedTabPanelId = common.trimLeft(args.currentTarget.getAttribute("href"), "#");
-        }*/
-
         if (this.selectedTab.panelId === "farmaciaMapas") {
             var tabMapa = this.findTab("panelId", "farmaciaMapas");
             $.ui.loadContent(tabMapa.view.getViewId(), false, false, "pop");

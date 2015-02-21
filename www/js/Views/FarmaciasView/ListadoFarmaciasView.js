@@ -47,8 +47,6 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
             this.modelDataSource.getModelData(FarmaciaCollection, {
                 "dependencia": dependenciaFarmacia,
                 "provincia": provinciaFarmacia
-                //                "depto": departamentoEstablecimiento,
-                //                "localidad": localidadEstablecimiento
             });
         },
 

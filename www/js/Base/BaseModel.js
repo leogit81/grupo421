@@ -135,7 +135,6 @@ var BaseModel = (function (common, Backbone, _, converter, Service) {
 			return false;
 		}
 		var jsonData = this.converter.convert(data);
-		//this.trigger('beforeChange');
 		this.setJsonData(jsonData);
 		return true;
 	};

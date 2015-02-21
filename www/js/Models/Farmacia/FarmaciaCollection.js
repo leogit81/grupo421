@@ -8,8 +8,6 @@ var FarmaciaCollection = (function (common, Backbone, converter, Service) {
         }
     });
     
-    //establecimientoCollection.prototype.converter = converter;
-
     farmaciaCollection.prototype.parse = function (parsedData) {
         return parsedData.FarmaciaSearchResponse.farmacias.farmaciaReducida;
     };

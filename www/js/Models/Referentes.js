@@ -8,8 +8,6 @@ var Referentes = (function (common, Backbone, converter, Service) {
         }
     });
     
-    //establecimientoCollection.prototype.converter = converter;
-
     referentes.prototype.parse = function (parsedData) {
         return parsedData.ReferenteSearchResponse.Referentes.Referente;
     };

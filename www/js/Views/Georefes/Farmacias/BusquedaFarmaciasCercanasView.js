@@ -31,8 +31,6 @@ var BusquedaFarmaciasCercanasView = (function (jquery, $, renderer, BaseView, Fa
             this.idImagen = 'imagenGeorefes';
             
             BaseView.prototype.initialize.call(this, attributes, options);
-
-            //this.initializeModelDataSource();
         },
         
         render: function () {
