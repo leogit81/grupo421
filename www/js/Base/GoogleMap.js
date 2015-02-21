@@ -19,11 +19,11 @@ function GoogleMap(listaEstablecimiento) {
     * Nivel de zoom que se aplicará sobre el mapa
     */
     var nivelZoom = 14;
-    
+
     this.setNivelZoom = function (zoom) {
         nivelZoom = zoom;
     };
-    
+
     this.getNivelZoom = function (zoom) {
         return nivelZoom;
     };
@@ -35,7 +35,7 @@ function GoogleMap(listaEstablecimiento) {
     * Templata para las infor window que se agregan a los marcadores del mapa.
     */
     var template = _.template("<a id='linkConsultaNominalEstablecimiento'><span class='codigoEstablecimiento' style='display:none;'><%=codigo%></span><span class='znombreMapa'><%=nombre%></span></a>");
-    
+
     /**
     * Obtiene la posición del dispositivo y muestra un mapa centrado en esta.
     * Además le agrega los marcados para las coordenadas de la lista de establecimientos,
@@ -54,15 +54,15 @@ function GoogleMap(listaEstablecimiento) {
         var htmlElement = jQuery("#map_canvas");
         this.loadMap(position, htmlElement, true);
     };
-         
+
     this.addMarkersListaCoordenadasToMap = function () {
         var i;
         for (i = 0; i < listaEstablecimiento.length; i++) {
             this.addMarkerEstablecimientoToMap(listaEstablecimiento[i]);
         }
-        
+
         googleMap.fitBounds(mapBounds);
-        
+
         var listener = google.maps.event.addListenerOnce(googleMap, "idle", function () {
             if (googleMap.getZoom() > 16) {
                 googleMap.setZoom(16);
@@ -79,20 +79,20 @@ function GoogleMap(listaEstablecimiento) {
         //cambiar el ícono y color de marcador
         //http://stackoverflow.com/questions/7095574/google-maps-api-3-custom-marker-color-for-default-dot-marker
         var markerOptions = {
-                position: centerLatLong,
-                map: googleMap,
-                animation: google.maps.Animation.DROP
-            };
-        
+            position: centerLatLong,
+            map: googleMap,
+            animation: google.maps.Animation.DROP
+        };
+
         if (esUbicacionDispositivo){
             var pinColor = "4169e1";
             var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-            new google.maps.Size(21, 34),
-            new google.maps.Point(0,0),
-            new google.maps.Point(10, 34));
+                                                       new google.maps.Size(21, 34),
+                                                       new google.maps.Point(0,0),
+                                                       new google.maps.Point(10, 34));
             markerOptions.icon = pinImage;
         }
-        
+
         var markerOne = new google.maps.Marker(markerOptions);
     };
 
@@ -104,11 +104,11 @@ function GoogleMap(listaEstablecimiento) {
             map: googleMap,
             animation: google.maps.Animation.DROP
         });
-        
+
         mapBounds.extend(latLong);
         this.addInfoWindowToMarker(template(establecimiento), markerOne);
     };
-    
+
     /**
     * Agrega una info window al marcador.
     * @param {string} content, html para el contenido de la info window
@@ -116,15 +116,28 @@ function GoogleMap(listaEstablecimiento) {
     */
     this.addInfoWindowToMarker = function (content, marker) {
         var infowindow = new google.maps.InfoWindow({content: content});
-        
+
         google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(googleMap, marker);
         });
     };
 
     this.ejecutarNominal = function (eventData) {
-        var establecimientoNominal = new EstablecimientoCollectionView();
-        establecimientoNominal.busquedaNominalEstablecimiento(eventData);
+        //Obtener el código para determinar si la consulta nominal es de establecimiento, farmacia o droguería
+        var codigoEstablecimiento = common.trim($(eventData.currentTarget.outerHTML).find("span.codigoEstablecimiento").html());
+
+        if (codigoEstablecimiento.substr(0,1) == '1' || codigoEstablecimiento.substr(0,1) == '5') {
+            var establecimientoNominal = new EstablecimientoCollectionView();
+            establecimientoNominal.busquedaNominalEstablecimiento(eventData);
+        }
+        else if (codigoEstablecimiento.substr(0,2) == '70') {
+            var farmaciaNominal = new FarmaciaCollectionView();
+            farmaciaNominal.busquedaNominalFarmaciaGeorefes(codigoEstablecimiento);
+        }
+        else if (codigoEstablecimiento.substr(0,2) == '71') {
+            var drogueriaNominal = new DrogueriaCollectionView();
+            drogueriaNominal.busquedaNominalDrogueriaGeorefes(codigoEstablecimiento);
+        }
     };
 
     /**
