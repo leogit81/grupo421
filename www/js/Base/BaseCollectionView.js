@@ -63,18 +63,17 @@ var BaseCollectionView = (function ($, common, _, renderer, BaseView) {
             },
                 selector = this.viewSelector + " #resultadoCollection";
             
-            /*if (!common.isEmpty(this.parent)){
-                selector = this.parent.getViewSelector() + " #resultadoCollection";
-            } else {
-                selector = this.getViewSelector() + " #resultadoCollection";
-            }*/
-            
             var listaConFiltro = new List(selector, options, false, true);
             /*
             *Si el primer y el último elemento de la lista paginada son iguales, se elimina el último
             */
             if(listaConFiltro.list.firstChild.innerHTML === listaConFiltro.list.lastChild.innerHTML) {
-                listaConFiltro.list.lastChild.remove();
+                /*En IE no tenemos la función listaConFiltro.list.lastChild.remove*/
+                if (!listaConFiltro.list.lastChild.remove) {
+                    listaConFiltro.list.removeChild(listaConFiltro.list.lastChild);
+                } else {
+                    listaConFiltro.list.lastChild.remove();
+                }
             };
             
             $(this.viewSelector + " #resultadoCollection div.paginasCollection").on("click", _.bind(this.scrollToTop, this));
