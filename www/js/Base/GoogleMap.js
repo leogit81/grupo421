@@ -54,39 +54,7 @@ function GoogleMap(listaEstablecimiento) {
         var htmlElement = jQuery("#map_canvas");
         this.loadMap(position, htmlElement, true);
     };
-        
-    /*this.onSuccessPosicion = function (position, htmlElement) {
-        var mapBounds = new google.maps.LatLngBounds(),
-            //longitud = position.coords.longitude,
-            //latitud = position.coords.latitude,
-            latLong = new google.maps.LatLng(position.latitud, position.longitud),
-            miPosicion = latLong,
-            map = this.showMap(latLong, htmlElement, 14);
-        mapBounds.extend(miPosicion);
-        this.addMarkersToMapMiPosicion(map, miPosicion);
-        var i;
-        for (i = 0; i < listaEstablecimiento.length; i++) {
-            this.addMarkersToMapEstablecimiento(map, mapBounds, listaEstablecimiento[i]);
-            //            mapBounds.extend(latLong);
-        }
-        map.fitBounds(mapBounds);
-        //map.center(miPosicion.B, miPosicion.k);
-        var listener = google.maps.event.addListenerOnce(map, "idle", function () {
-            if (map.getZoom() > 16) {
-                map.setZoom(16);
-            };
-        });
-        //af.trigger(this,"mapa_listo");
-
-        //        setTimeout( function () { 
-        //            google.maps.event.trigger(map, 'resize');
-        //            //            map.setCenter(latLong);
-        //            //            map.setZoom(14);
-        //        }, 2500 );
-        $("#afui").undelegate("#linkConsultaNominalEstablecimiento", "click").delegate("#linkConsultaNominalEstablecimiento", "click", this.ejecutarNominal);
-        return map;
-    };*/
-    
+         
     this.addMarkersListaCoordenadasToMap = function () {
         var i;
         for (i = 0; i < listaEstablecimiento.length; i++) {

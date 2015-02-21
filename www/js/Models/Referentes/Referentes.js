@@ -7,8 +7,6 @@ var Referentes = (function (common, Backbone, converter, Service) {
             this.service.loadConfig(this.getServiceConfig());
         }
     });
-    
-    //establecimientoCollection.prototype.converter = converter;
 
     referentes.prototype.parse = function (parsedData) {
         return parsedData.ReferenteSearchResponse.Referentes.Referente;

@@ -10,8 +10,7 @@ var ModelDataSource = (function (common, Backbone, _, Service) {
         initialize: function (attributes, options) {
             if (!common.isEmpty(attributes) && !common.isEmpty(attributes.view)) {
                 this.view = attributes.view;
-            }
-            
+            }            
             this.service = new Service({
                 success: _.bind(this.processData, this)
             });

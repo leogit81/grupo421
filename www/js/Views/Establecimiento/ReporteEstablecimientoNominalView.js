@@ -14,7 +14,6 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 			"<canvas id='myChart'></canvas>" +
 			"<div><h2>Reporte Nominal</h2></div></br>" +
 			"<div><label>Cantidad total</label><%=cantidadTotal%></div></br>" +
-			//            "<div><label>Porcentaje total</label><%=porcentajeTotal%></div></br>" +
 			"<% if (ItemList) { %><div id='itemList'><h2>Distribución</h2><%=ItemList%><% } %></div>"
 		),
 
@@ -30,7 +29,7 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 		render: function (){
 			BaseView.prototype.render.call(this);
 
-			var ctx = jQuery(this.getViewSelector() + " #myChart").get(0); //	.getContext("2d");
+			var ctx = jQuery(this.getViewSelector() + " #myChart").get(0);
 
 			ctx.width = window.innerWidth;
 			ctx.height = window.innerHeight * 0.5;
@@ -58,10 +57,6 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 
 			ctx = jQuery(this.getViewSelector() + " #myChart").get(0).getContext("2d");
 			var camasChart = new Chart(ctx).Pie(data);
-
-
-
-
 			return this;
 		}
 	});
@@ -108,7 +103,6 @@ var ReporteEstablecimientoNominalView = (function ($, common, _, renderer, BaseV
 			jsonData.ItemList = itemListString;
 		}
 		else {jsonData.ItemList = null};
-
 		return this.template(jsonData);
 	};
 

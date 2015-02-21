@@ -7,8 +7,6 @@ var ProfesionalCollection = (function (common, Backbone, converter, Service) {
             this.service.loadConfig(this.getServiceConfig());
         }
     });
-    
-    //establecimientoCollection.prototype.converter = converter;
 
     profesionalCollection.prototype.parse = function (parsedData) {
         return parsedData.ProfesionalSearchResponse.profesionales.profesional;

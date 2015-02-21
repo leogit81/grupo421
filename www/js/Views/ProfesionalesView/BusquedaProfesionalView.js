@@ -23,14 +23,7 @@ var BusquedaProfesionalView = (function (jquery, $, renderer, BaseView, Profesio
             this.idImagen = 'imagenProfesionales';
             
             BaseView.prototype.initialize.call(this, attributes, options);
-
-            //this.initializeModelDataSource();
         },
-
-        /*initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },*/
 
         ejecutarBusquedaProfesional: function(){
             var codigoProfesional = $("#codigoProfesional").val();

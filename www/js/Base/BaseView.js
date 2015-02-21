@@ -249,9 +249,6 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 		if (common.isEmpty(jsonData)) {
 			jsonData = {};
 		}
-
-        //jsonData = _.extend(_.result(this.getModelDefault()), jsonData);
-
 		return this.template(jsonData);
 	};
 
@@ -262,7 +259,6 @@ var BaseView = (function ($, common, _, jquery, Backbone, afRenderer) {
 		if (!common.isEmpty(this.model) && !common.isEmpty(this.model.defaults)) {
 			return this.model.defaults;
 		}
-
 		return {};
 	};
     

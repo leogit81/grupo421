@@ -20,27 +20,15 @@ var BusquedaDrogueriaView = (function (jquery, $, renderer, BaseView, DrogueriaN
             options = options || {};
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
-
-            //this.initializeModelDataSource();
-            
             this.idImagen = 'imagenDroguerias';
         },
-
-        /*initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },*/
 
         ejecutarBusquedaDrogueria: function(){
             var codigoDrogueria = $("#codigoDrogueria").val();
             var drogueriaNominalModel = new DrogueriaNominal();
             var drogueriaView = new DrogueriaNominalView({codigo: codigoDrogueria});
             drogueriaView.loadDefaultView();
-//            drogueriaView.setModel(drogueriaNominalModel);
-//            drogueriaNominalModel.load(codigoDrogueria);
         },
-
-//        render: function(){},
 
         /**
          * Usado para bindear eventos a los controles del formulario.

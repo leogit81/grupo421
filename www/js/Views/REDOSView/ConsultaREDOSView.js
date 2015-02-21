@@ -82,8 +82,6 @@ var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, E
         attachEvents: function() {
             BaseView.prototype.attachEvents.call(this);
             $("#afui").delegate(this.getViewSelector() + " a#submitConsultaRedos", "click", _.bind(this.ejecutarConsultaRedos, this));
-//            $("#afui").delegate(this.getViewSelector() + " select#pciaRedos", "change", _.bind(this.actualizarListaDepartamentos, this));
-//            $("#afui").delegate(this.getViewSelector() +" select#dptoRedos", "change", _.bind(this.actualizarListaLocalidades, this));
         },
         
         actualizarListaDepartamentos: function () {

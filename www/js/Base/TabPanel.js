@@ -48,18 +48,6 @@ var TabPanel = (function ($, common) {
             if (common.isEmpty(config)) {
                 return;
             }
-
-            /*self.view = config.view;
-            self.viewClass = config.viewClass;
-            self.tabName = config.tabName;
-            self.panelId = config.panelId;
-            self.modelClass = config.modelClass;
-            self.titleCSSClass = config.titleCSSClass;
-            self.insertElID = config.insertElID;
-            self.tabIndex = config.tabIndex;
-            self.isLoaded = config.isLoaded;
-            self.tabPanelView = config.tabPanelView;
-            self.customLoadView = config.customLoadView;*/
             _.extend(self, config);
         }
         
@@ -120,17 +108,6 @@ var TabPanel = (function ($, common) {
                     }
                 }
             }
-			
-//            if (common.isEmpty(self.isLoaded) || !self.isLoaded) {
-//                //Si el tab no esta cargado, realiza la consulta y hace el render.
-//				self.view.model.load(_.result(self, "filtroConsulta"));
-//                self.isLoaded = true;
-//            } else {
-//				//Si el tab ya tiene el model caragado, solo realiza el render y lo muestra.
-//                self.tabPanelView.showPanel(self.view);
-//				self.view.render();
-//            }
-//            self.isLoaded = true;
         }
         
         self.loadConfig = loadConfig;

@@ -31,8 +31,6 @@ var BusquedaEstablecimientosCercanosView = (function (jquery, $, renderer, BaseV
             this.idImagen = 'imagenGeorefes';
             
             BaseView.prototype.initialize.call(this, attributes, options);
-
-            //this.initializeModelDataSource();
         },
         
         render: function () {

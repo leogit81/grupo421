@@ -20,18 +20,10 @@ var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, Esta
             options = options || {};
             options.renderer = renderer;
             BaseView.prototype.initialize.call(this, attributes, options);
-
-            //this.initializeModelDataSource();
-            
             this.idImagen = 'imagenEstablecimientos';
         },
 
-        /*initializeModelDataSource: function () {
-            this.modelDataSource = new ModelDataSource ({view: this});
-            this.modelDataSource.on('dataFetched', this.renderVistaDeDatos, this);
-        },*/
-
-        ejecutarBusquedaEstablecimiento: function(){
+       ejecutarBusquedaEstablecimiento: function(){
             var codigoEstablecimiento = $("#codigoEstablecimiento").val();
             //var establecimientoNominalModel = new EstablecimientoNominal();
             var establecimientoView = new EstablecimientoNominalView({codigo: codigoEstablecimiento});
