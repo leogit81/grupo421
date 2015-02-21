@@ -95,7 +95,6 @@ var app = (function ($, jquery, logger) {
         consultasView.render();
 
         //es para ocultar la máscara de Cargando... cuando se hace click en el botón "Atrás"
-        //$("#afui").delegate("a.backButton", "click", onClickBackButtonHandler);
         $("#afui").delegate("a.button.icon.close", "click", onClickCloseButtonHandler);
         $("#afui").delegate("#loginButton", "click", onClickLoginButtonHandler);
         $("#afui").delegate("#logoutButton", "click", onClickLogoutButtonHandler);
@@ -178,9 +177,6 @@ var app = (function ($, jquery, logger) {
 
     function launchAppFramework() {
         resolverConflictos();
-        //        $.ui.scrollingDivs.menu_scroller.disable();
-        //$.ui.disableNativeScrolling();
-
         $.ui.launch();
         $.ui.ready( function () {
             $.ui.slideMenuXThreshold = 10; /*Umbral en px para hacer abrir/cerrar el menú lateral*/
