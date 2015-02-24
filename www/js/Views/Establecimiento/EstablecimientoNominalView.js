@@ -52,10 +52,8 @@ var EstablecimientoNominalView = (function ($, renderer, TabPanelView, Estableci
                 tabName: "<img src='./img/pestanas/accesosA_camas-24-px.png'>",
                 panelId: "establecimientoCamas",
                 viewClass: CamasCollectionView,
-
                 modelClass: CamasCollection,
                 titleCSSClass: "camasTabViewClass"
-
             }
         ],
 

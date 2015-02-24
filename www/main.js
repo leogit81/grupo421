@@ -2,5 +2,5 @@
     "use strict";
     
     $(document).ready(app.initialize);
-}(af, app));
-//}(af, app_debug));
+//}(af, app));
+}(af, app_debug));

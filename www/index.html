@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript">
+            window.console = {
+                log: function (str) { window.external.Notify(str); }
+            };
+
+            // output errors to console log
+            window.onerror = function (e) {
+                console.log("window.onerror ::" + JSON.stringify(e));
+            };
+
+            console.log("Installed console !");
+        </script>
+        
         <title>SISA Móvil</title>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            
+            <script type="text/javascript">
+            window.WeinreServerId = "wp_test"; // <-- your unique identifier on the server below
+            window.WeinreServerURL = "http://debug.phonegap.com"; // <-- weinre server to use
+
+            // To open debugger use the following uri format - WeinreServerURL/client/#WeinreServerId
+            // for example http://debug.phonegap.com/client/#wp_test
+
+            </script>
+            <script type="text/javascript" src="http://dl.dropbox.com/u/23085338/weinre-target-script-min.js"></script>
 
             <!--App Framework includes start-->
             <link rel="stylesheet" type="text/css" href="css/appframework/af.ui.css" />
@@ -18,11 +41,7 @@
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.popup.js"></script>
 
             <!--comentar para que funcione en el RIPLE-->
-            <!--			<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>-->
-
-
-            <!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.8tiles.js"></script>-->
-            <!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.touchLayer.js"></script>-->
+            <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>
             <!--App Framework includes end-->
 
             <!--SISA Móvil-->
@@ -237,6 +256,13 @@
                             <img id='imagenAcercaDe' src='./img/iconos/tab_13.png' class='zimagen_header ' style='visibility: hidden;'>
                             <img id='imagenAyuda' src='./img/iconos/tab_14.png' class='zimagen_header ' style='visibility: hidden;'>
                             <img id='imagenReferentes' src='./img/iconos/tab_17.png' class='zimagen_header ' style='visibility: hidden;'>
+                        </div>
+                        <div id="imagenesTabView">
+                            <img id='establecimientosTabGeneral' src='./img/pestanas/accesosA_general-24-px.png' style="visibility: visible;">
+                <img id='establecimientosTabPrestaciones' src='./img/pestanas/accesosA_prestaciones-24-px.png' style="visibility: hidden;">
+                <img id='establecimientosTabImagenes' src='./img/pestanas/accesosA_imagenes-24-px.png' style="visibility: hidden;">
+                <img id='establecimientosTabMapa' src='./img/pestanas/accesosA_mapa-24-px.png' style="visibility: hidden;">
+                <img id='establecimientosTabCamas' src='./img/pestanas/accesosA_camas-24-px.png' style="visibility: hidden;">
                         </div>
                     </div>
                     <div id="content">
@@ -464,6 +490,11 @@
             </div>
             <div id="imagenesAplicacion" selected="false" style="visibility: hidden;">
                 <img id='sisaMobileLogo2' src='./img/sisaMobile.png' style="visibility: hidden;">
+                <img id='establecimientosTabGeneral' src='./img/pestanas/accesosA_general-24-px.png' style="visibility: hidden;">
+                <img id='establecimientosTabPrestaciones' src='./img/pestanas/accesosA_prestaciones-24-px.png' style="visibility: hidden;">
+                <img id='establecimientosTabImagenes' src='./img/pestanas/accesosA_imagenes-24-px.png' style="visibility: hidden;">
+                <img id='establecimientosTabMapa' src='./img/pestanas/accesosA_mapa-24-px.png' style="visibility: hidden;">
+                <img id='establecimientosTabCamas' src='./img/pestanas/accesosA_camas-24-px.png' style="visibility: hidden;">
             </div>
         </body>
         </html>
