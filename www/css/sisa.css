@@ -478,3 +478,18 @@ label#lbl1, label#lbl2{
 #acercaDeView, #ayudaSISA {
     display: none;
 }
+
+
+/*FIX PARA LA MASCARA DE CARGANDO PARA WP8*/
+.spin  {
+    -ms-transform: rotate(360deg);
+    -ms-animation-name: spin-ie10;
+    -ms-animation-duration: 1s;
+    -ms-animation-iteration-count:  infinite;
+
+}
+
+@keyframes spin-ie10 {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
