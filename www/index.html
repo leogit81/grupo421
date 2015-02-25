@@ -7,8 +7,11 @@
             };
 
             // output errors to console log
-            window.onerror = function (e) {
-                console.log("window.onerror ::" + JSON.stringify(e));
+            window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
+                //console.log("window.onerror ::" + JSON.stringify(e));
+
+                alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber
+                                      + ' Column: ' + column + ' StackTrace: ' +  errorObj);
             };
 
             console.log("Installed console !");
@@ -41,7 +44,7 @@
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.popup.js"></script>
 
             <!--comentar para que funcione en el RIPLE-->
-            <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>
+            <!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>-->
             <!--App Framework includes end-->
 
             <!--SISA Móvil-->
@@ -219,14 +222,6 @@
             <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
             <script type="text/javascript" charset="utf-8" src="js/app-debug.js"></script>
             <script type="text/javascript" charset="utf-8" src="main.js"></script>
-<!--
-            <script>
-                window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
-                    alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber
-                          + ' Column: ' + column + ' StackTrace: ' +  errorObj);
-                }
-            </script>
--->
             </head>
         <body>
             <div class="app">
