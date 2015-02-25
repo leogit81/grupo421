@@ -154,6 +154,18 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
         this.setElement($(this.getViewSelector())[0]);
     };
     
+    tabPanelView.prototype.render = function () {
+		var renderedHtml = BaseView.prototype.render.call(this);
+        if ($.os.ie) {
+            //refresco de la imágenes para WP8
+            $(".tabs ul li img").each(function(index, item){
+                item.src = window.location.protocol + "/www/" + $(item).attr("src");
+            });
+            console.log("refresco imagenes");
+        }
+        return renderedHtml;
+	};
+    
     tabPanelView.prototype.selectedTabEl = function () {
         return $(this.getViewSelector() + " div#selectedTab");
     };
