@@ -12,6 +12,12 @@ var app = (function ($, jquery, logger) {
     * Indica si la aplicación tiene disponible conexión a Internet o no.
     */
     var appStatus = null;
+    
+    /**
+    * Flag que indica que la primera vez que se carga el popup de inicio de sesión se tiene que ejecutar una función
+    * que corrije un error en la visualización del Popup para WP8 (IE10)
+    */
+    var ajustarPopupInicioSesionIE = true;
 
     $.ui.useOSThemes = false; /*False para que App Framework no utilice el theme por defecto del dispositivo. Se fuerza un theme en index.html*/
 
@@ -20,7 +26,7 @@ var app = (function ($, jquery, logger) {
     /**
     * Lista de paneles estáticos (excepto la home, que nunca se borra) que no quiero borrar al hacer clic en el botón de atrás, ejemplo, acerca de
     */
-    var panelesQueNoQuieroBorrar = ["acercaDeView", "ayudaSISA"];
+    var panelesQueNoQuieroBorrar = ["acercaDeView", "ayudaSISA", "home"];
 
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
@@ -132,6 +138,18 @@ var app = (function ($, jquery, logger) {
     }
     
     /**
+    * Refresca las imágenes de los tabs.
+    */
+    function refrescarImagenesTabs () {
+        if ($.os.ie) {
+            //refresco de la imágenes para WP8
+            $("#" + $.ui.activeDiv.id).find(".tabs ul li img").each(function(index, item){
+                item.src = window.location.protocol + "/www/" + item.src.substring(item.src.indexOf("."));
+            });
+        }
+    }
+    
+    /**
     * Indica si el panel pasado por parámetro es un panel que no se quiere borrar
     * @param {string} idPanel, hash del panel que va a ser borrado
     * @returns {boolean} true, no se debería borrar el panel. false, se puede borrar
@@ -162,8 +180,26 @@ var app = (function ($, jquery, logger) {
      */
     function onClickLoginButtonHandler () {
         var iniciarSesion = new InicioSesionView();
+        /*Este es un fix para WP8 para que se acomode el popup*/
+        if ($.os.ie && ajustarPopupInicioSesionIE) {
+            $("#afui").delegate(".afPopup.show input", "click", showPopupInicioSesion);
+            ajustarPopupInicioSesionIE = false;
+        }
     };
 
+    function showPopupInicioSesion () {
+        setTimeout(function () {
+            $(".afPopup #login_user").blur()
+            $(".afPopup #login_pass").blur();
+        }, 400);
+        
+        setTimeout(function () {
+            $(".afPopup #login_user").focus();
+        }, 750);
+        
+        $("#afui").undelegate(".afPopup.show input", "click", showPopupInicioSesion);
+    }
+        
     function onClickLogoutButtonHandler () {
         var cerrarSesion = new CierreSesionView();
     }
@@ -251,6 +287,7 @@ var app = (function ($, jquery, logger) {
         onDeviceReady: onDeviceReady,
         initialize: initialize,
         mostrarImagenProgramaMinisterio: mostrarImagenProgramaMinisterio,
-        ocultarImagenProgramaMinisterio: ocultarImagenProgramaMinisterio
+        ocultarImagenProgramaMinisterio: ocultarImagenProgramaMinisterio,
+        refrescarImagenesTabs: refrescarImagenesTabs
     };
 })(af, jQuery, Logger);

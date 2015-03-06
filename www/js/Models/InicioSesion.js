@@ -53,7 +53,7 @@ var InicioSesion = (function (common, BaseModel) {
 
     inicioSesion.prototype.getServiceConfig = function () {
         return {
-            baseUrl: 'https://qa.sisa.msal.gov.ar/sisaqa/services/rest',
+            /*baseUrl: 'https://qa.sisa.msal.gov.ar/sisaqa/services/rest',*/
             url: 'seguridad/autenticar'
         };
     };

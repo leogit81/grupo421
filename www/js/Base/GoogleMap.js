@@ -7,6 +7,8 @@
 function GoogleMap(listaEstablecimiento) {
     'use strict';
 
+    var last_click_time = new Date().getTime();
+    
     /**
     * Instancia de google.maps.LatLng con la latitud y longitud donde se centra el mapa.
     */
@@ -123,6 +125,11 @@ function GoogleMap(listaEstablecimiento) {
     };
 
     this.ejecutarNominal = function (eventData) {
+        var preventSecondClick = this.preventDoubleClickOnLinks(eventData);
+        if (preventSecondClick) {
+            return;
+        }
+        
         //Obtener el código para determinar si la consulta nominal es de establecimiento, farmacia o droguería
         var codigoEstablecimiento = common.trim($(eventData.currentTarget.outerHTML).find("span.codigoEstablecimiento").html());
 
@@ -138,6 +145,22 @@ function GoogleMap(listaEstablecimiento) {
             var drogueriaNominal = new DrogueriaCollectionView();
             drogueriaNominal.busquedaNominalDrogueriaGeorefes(codigoEstablecimiento);
         }
+    };
+    
+    /**
+    * Devuelve true cuando tiene que frenar la ejecución del segundo clic sobre el link. False, caso contrario.
+    * Esto es porque para IE se produce un segundo click inesperado sobre los tags <a></a>
+    */
+    this.preventDoubleClickOnLinks = function(e) {
+        var click_time = e['timeStamp'];
+        if (click_time && (click_time - last_click_time) < 1000) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            last_click_time = click_time;
+            return true;
+        }
+        last_click_time = click_time;
+        return false;
     };
 
     /**
@@ -171,7 +194,8 @@ function GoogleMap(listaEstablecimiento) {
         mapBounds.extend(centerLatLong);
         this.addMarkerCenterPositionToMap(esUbicacionDispositivo);
         this.addMarkersListaCoordenadasToMap();
-        $("#afui").undelegate("#linkConsultaNominalEstablecimiento", "click").delegate("#linkConsultaNominalEstablecimiento", "click", this.ejecutarNominal);
+        $("#afui").undelegate("#linkConsultaNominalEstablecimiento", "click").delegate("#linkConsultaNominalEstablecimiento", "click", _.bind(this.ejecutarNominal, this));
+        
         return googleMap;
     };
 }

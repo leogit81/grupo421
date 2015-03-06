@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--<script type="text/javascript">
+            window.console = {
+                log: function (str) { window.external.Notify(str); }
+            };
+
+            // output errors to console log
+            window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
+                //console.log("window.onerror ::" + JSON.stringify(e));
+
+                alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber
+                                      + ' Column: ' + column + ' StackTrace: ' +  errorObj);
+            };
+
+            console.log("Installed console !");
+        </script>-->
+        
         <title>SISA Móvil</title>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
@@ -8,6 +24,16 @@
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             
+            <!--<script type="text/javascript">
+            window.WeinreServerId = "wp_test"; //your unique identifier on the server below
+            window.WeinreServerURL = "http://debug.phonegap.com"; //weinre server to use
+
+            // To open debugger use the following uri format - WeinreServerURL/client/#WeinreServerId
+            // for example http://debug.phonegap.com/client/#wp_test
+
+            </script>
+            <script type="text/javascript" src="http://dl.dropbox.com/u/23085338/weinre-target-script-min.js"></script>-->
+
             <!--App Framework includes start-->
             <link rel="stylesheet" type="text/css" href="css/appframework/af.ui.css" />
             <link rel="stylesheet" type="text/css" href="css/appframework/icons.css" />
@@ -16,7 +42,12 @@
             <script type="text/javascript" charset="utf-8" src="libraries/ui/appframework.ui.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.slidemenu.js"></script>
             <script type="text/javascript" charset="utf-8" src="libraries/plugins/af.popup.js"></script>
+
+            <!--comentar para que funcione en el RIPLE-->
+            <!--<script type="text/javascript" charset="utf-8" src="libraries/plugins/af.desktopBrowsers.js"></script>-->
             <!--App Framework includes end-->
+            
+            <!--<script src="http://192.168.0.4:8080/target/target-script-min.js#anonymous"></script>-->
 
             <!--SISA Móvil-->
             <link rel="stylesheet" type="text/css" href="css/sisa.css" />

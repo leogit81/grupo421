@@ -156,13 +156,7 @@ var TabPanelView = (function ($, Backbone, common, _, BaseView, TabPanel) {
     
     tabPanelView.prototype.render = function () {
 		var renderedHtml = BaseView.prototype.render.call(this);
-        if ($.os.ie) {
-            //refresco de la imágenes para WP8
-            $(".tabs ul li img").each(function(index, item){
-                item.src = window.location.protocol + "/www/" + $(item).attr("src");
-            });
-            console.log("refresco imagenes");
-        }
+        app.refrescarImagenesTabs();
         return renderedHtml;
 	};
     
