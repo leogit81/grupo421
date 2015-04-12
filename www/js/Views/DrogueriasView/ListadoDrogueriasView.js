@@ -11,7 +11,7 @@ var ListadoDrogueriasView = (function (jquery, $, renderer, BaseView, DrogueriaC
         },
 
         template : _.template(
-            '<div class="formGroupHead">Complete uno o varios filtros para buscar droguerías.</div>' +
+            '<div class="formGroupHead">Complete uno o varios campos para filtrar su búsqueda de droguerías.</div>' +
             '<select id="dependenciaDrogueria" name="dependenciaDrogueria"></select>' +
             '<select id="provinciaDrogueria" name="provinciaDrogueria"></select>' +                
             '<a id="submitConsultaListadoDroguerias" class="button">Buscar</a>'

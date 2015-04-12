@@ -153,7 +153,7 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 						title: "Error de Autenticación",
 						message: "Para realizar la modificación de camas, debe iniciar sesión.",
 						cancelText: "Aceptar",
-						cancelCallback: function(){},						
+						cancelCallback: function(){new InicioSesionView();},						
 						cancelOnly: true
 					}
 				);

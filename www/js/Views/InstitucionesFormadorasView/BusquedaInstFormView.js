@@ -34,6 +34,22 @@ var BusquedaInstFormView = (function (jquery, $, renderer, BaseView, InstFormNom
 
         ejecutarBusquedaInstForm: function(){
             var codigoInstForm = $("#codigoInstForm").val();
+            
+            /*Si el código es vacío muestra un mensaje de error y cancela la consulta*/
+            if (codigoInstForm === "" || codigoInstForm === null || codigoInstForm === undefined) {
+                $("#afui").popup(
+                    {
+                        title: "SISA Móvil",
+                        message: "Debe ingresar un código para realizar la búsqueda solicitada.",
+                        cancelText: "Aceptar",
+                        cancelCallback: function(){},						
+                        cancelOnly: true
+                    }
+                );
+
+                return;
+            }
+            
             var instFormNominalModel = new InstFormNominal();
             var instFormView = new InstFormNominalView({codigo: codigoInstForm});
             instFormView.loadDefaultView();

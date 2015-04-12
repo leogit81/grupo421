@@ -21,7 +21,7 @@ var Logger = (function ($, common) {
     logger.log = function (errorData) {
         errorData = errorData || {};
         errorData.titulo = errorData.titulo || "SISA Móvil";
-        errorData.mensajeDeError = errorData.mensajeDeError || "Error desconocido";
+        errorData.mensajeDeError = errorData.mensajeDeError || logger.errores['ERROR_DESCONOCIDO'];
         console.log(errorData.mensajeDeError);
         $.trigger(logger, "showError", [errorData]);
     };
@@ -71,10 +71,11 @@ var Logger = (function ($, common) {
         if (logger.errores.hasOwnProperty(codigoDeError)) {
             return logger.errores[codigoDeError];
         }
-        return "Error desconocido";
+        return logger.errores['ERROR_DESCONOCIDO'];
     }
     
     logger.errores = {
+        ERROR_DESCONOCIDO: "No se obtuvieron datos acerca de la búsqueda realizada. Comunicarse con Soporte Técnico: soporte@sisa.msal.gov.ar",
         ERROR_INESPERADO: "Se produjo un error inesperado durante la invocación del servicio Web.",
         LIMITE_EXCEDIDO: "Se ha excedido la cantidad máxima de registros que puede devolver la consulta. Por favor, pruebe nuevamente incluyendo otros filtros.",
         REGISTRO_NO_ENCONTRADO: "No se ha encontrado ningún registro para los filtros proporcionados. Por favor, verifique que los mismos sean correctos.",

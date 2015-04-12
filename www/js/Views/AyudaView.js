@@ -55,6 +55,9 @@ var AyudaView = (function ($, BaseView, renderer) {
         initialize: function (attributes, options) {
             options = options || {};
             options.renderer = renderer;
+            
+            this.idImagen = 'imagenAyuda';
+            
             BaseView.prototype.initialize.call(this, attributes, options);
         },
 
@@ -102,7 +105,10 @@ var AyudaView = (function ($, BaseView, renderer) {
             carouselData.removeItem(carouselData.maximumItem);
             jQuery("#ayudaCarousel .owl-item").css("height",(window.innerHeight*0.885));
             jQuery("#ayudaCarousel .owl-controls").css("margin-top","0");
-            $("#ayudaSISA").on("loadpanelcomplete", function () {$.ui.hideMask();});
+            $("#ayudaSISA").on("loadpanelcomplete", _.bind(function () {
+                $.ui.hideMask();
+                this.onLoadPanelComplete();
+            }, this));
         }
     });
     return ayudaView;

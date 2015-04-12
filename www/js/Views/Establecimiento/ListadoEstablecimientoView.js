@@ -11,7 +11,7 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
         },
 
         template : _.template(
-            '<div class="formGroupHead">Complete uno o varios filtros para buscar establecimientos.</div>' +
+            '<div class="formGroupHead">Complete uno o varios campos para filtrar su búsqueda de establecimientos.</div>' +
             '<input id="nombreEstablecimiento" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="provinciaEstablecimiento" name="provinciaEstablecimiento" onchange="deptos.actualizar(provinciaEstablecimiento, departamentoEstablecimiento, localidadEstablecimiento)"></select>' +
             '<select id="departamentoEstablecimiento" name="departamentoEstablecimiento" onchange="localidades.actualizar(provinciaEstablecimiento, departamentoEstablecimiento, localidadEstablecimiento)"></select>' +
@@ -24,6 +24,8 @@ var ListadoEstablecimientoView = (function ($, renderer, BaseView, Establecimien
             $(this.getViewSelector() + " select#provinciaEstablecimiento")[0].innerHTML = listaCompletaProvincias;
             $(this.getViewSelector() + " select#departamentoEstablecimiento")[0].innerHTML = "<option value =''>Seleccione un departamento...</option>";
             $(this.getViewSelector() + " select#localidadEstablecimiento")[0].innerHTML = "<option value =''>Seleccione una localidad...</option>";
+            
+            
         },
 
         initialize: function (attributes, options) {

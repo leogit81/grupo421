@@ -25,7 +25,22 @@ var BusquedaEstablecimientoView = (function (jquery, $, renderer, BaseView, Esta
 
        ejecutarBusquedaEstablecimiento: function(){
             var codigoEstablecimiento = $("#codigoEstablecimiento").val();
-            //var establecimientoNominalModel = new EstablecimientoNominal();
+           
+            /*Si el código es vacío muestra un mensaje de error y cancela la consulta*/
+            if (codigoEstablecimiento === "" || codigoEstablecimiento === null || codigoEstablecimiento === undefined) {
+                $("#afui").popup(
+                    {
+                        title: "SISA Móvil",
+                        message: "Debe ingresar un código para realizar la búsqueda solicitada.",
+                        cancelText: "Aceptar",
+                        cancelCallback: function(){},						
+                        cancelOnly: true
+                    }
+                );
+
+                return;
+            }
+           
             var establecimientoView = new EstablecimientoNominalView({codigo: codigoEstablecimiento});
             af.ui.showMask("Cargando...");
             establecimientoView.loadDefaultView();

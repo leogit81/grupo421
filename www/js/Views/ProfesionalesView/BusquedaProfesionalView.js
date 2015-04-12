@@ -27,6 +27,22 @@ var BusquedaProfesionalView = (function (jquery, $, renderer, BaseView, Profesio
 
         ejecutarBusquedaProfesional: function(){
             var codigoProfesional = $("#codigoProfesional").val();
+            
+            /*Si el código es vacío muestra un mensaje de error y cancela la consulta*/
+            if (codigoProfesional === "" || codigoProfesional === null || codigoProfesional === undefined) {
+                $("#afui").popup(
+					{
+						title: "SISA Móvil",
+						message: "Debe ingresar un código para realizar la búsqueda solicitada.",
+						cancelText: "Aceptar",
+						cancelCallback: function(){},						
+						cancelOnly: true
+					}
+				);
+                
+                return;
+            }
+            
             var profesionalNominalModel = new ProfesionalNominal();
             var profesionalView = new ProfesionalNominalView({usuario: ServiceConfig.usuario, 
                                                               clave: ServiceConfig.clave, 

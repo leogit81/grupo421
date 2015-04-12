@@ -203,7 +203,7 @@
                     </div>
                     <div id="header">
                         <a id='loginButton' class='icon key'><span class='ztexto-iniciarSesion'>(Iniciar sesión)</span></a>
-                        <a id='logoutButton' class='icon user'><span class='ztexto-iniciarSesion'>(Cerrar sesión)</span></a>
+                        <a id='logoutButton' class='icon user'><span class='ztexto-iniciarSesion'></span></a>
                         <a id='menubadge' class='menuButton'></a>
                         
                         <div id='customTitle'>
@@ -227,14 +227,14 @@
                     <div id="content">
 
                         <!--Paneles usados para navegar por la aplicación-->
-                        <div id="home" class="panel" selected="true" data-nav="consultas_nav" data-footer="zfooter_noticias" data-load="common.homeLoad" data-unload="common.homeUnload">
+                        <div id="home" class="panel" selected="true" data-footer="zfooter_noticias" data-load="common.homeLoad" data-unload="common.homeUnload">
                             <ul class="list">
                                 <li>
                                     <a id="linkConsultaGeorefes" class="item_menu" href="#">                                        
                                         <div class="ztexto-lista">
                                             <img class="list-image" src="./img/iconos/tab_11.png">
                                             <h3>GEOREFES</h3>
-                                            <p>Localizar establecimientos más cercanos</p>
+                                            <p>Localizar Establecimientos más cercanos</p>
                                         </div>
                                     </a>
                                 </li>
@@ -261,8 +261,8 @@
                                     <a id="linkConsultaNomivac" class="item_menu" href="#">                                        
                                         <div class="ztexto-lista">
                                             <img src="./img/iconos/tab_4.png">
-                                            <h3>NomiVac</h3>
-                                            <p>Centros de vacunación</p>
+                                            <h3>NOMIVAC</h3>
+                                            <p>Centros de Vacunación</p>
                                         </div>
                                     </a>
                                 </li>
@@ -298,11 +298,12 @@
                                         <div class="ztexto-lista">
                                             <img src="./img/iconos/tab_8.png">
                                             <h3>REDOS</h3>
-                                            <p>Registro nacional de Donantes de Sangre</p>
+                                            <p>Registro Nacional de Donantes de Sangre</p>
                                         </div>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="home divider"></li>
+                                <li class="ministerioLi">
                                     <a id="linkConsultaMinisterio" class="item_menu" href="#">
                                         <div class="ztexto-lista">
                                             <img src="./img/iconos/tab_9.png">
@@ -315,8 +316,8 @@
                                     <a id="linkConsultaInstForm" class="item_menu" href="#">
                                         <div class="ztexto-lista">
                                             <img src="./img/iconos/tab_10.png">
-                                            <h3>Formación</h3>
-                                            <p>Registro federal de instituciones formadoras</p>
+                                            <h3>FORMACIÓN</h3>
+                                            <p>Registro Federal de Instituciones Formadoras</p>
                                         </div>
                                     </a>
                                 </li>
@@ -324,7 +325,7 @@
                                     <a id="linkConsultaReferentes" class="item_menu" href="#">
                                         <div class="ztexto-lista">
                                             <img src="./img/iconos/tab_17.png">
-                                            <h3>Referentes</h3>
+                                            <h3>REFERENTES</h3>
                                             <p>Referentes, Autoridades y Soporte Técnico</p>
                                         </div>
                                     </a>
@@ -376,6 +377,19 @@
                             </div>
                         </div>
                         <div id="ayudaSISA" selected="false" data-nav="consultas_nav">
+                            <div>
+                                <ul>
+                                    <li>
+                                        <a class="item_menu">
+                                            <div class="ztexto-lista ayuda">
+                                                <b>AYUDA EN LÍNEA</b>
+                                                </br>Tutorial
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="ayudaDivider"></li>
+                                </ul>
+                            </div>
                             <div id="ayudaCarousel" class="owl-carousel owl-theme">
                                 <div class='owl-item'><img class='zimgAyuda' src='./img/ayuda/01.png'></div>
                                 <div class='owl-item'><img class='zimgAyuda' src='./img/ayuda/02.png'></div>

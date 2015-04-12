@@ -11,7 +11,7 @@ var ListadoInstFormView = (function (jquery, $, renderer, BaseView, InstFormColl
         },
 
         template : _.template(
-            '<div class="formGroupHead">Complete uno o varios filtros para buscar instituciones formadoras.</div>' +
+            '<div class="formGroupHead">Complete uno o varios campos para filtrar su búsqueda de instituciones formadoras.</div>' +
             '<input id="nombreInstForm" type="text" placeholder="Nombre de Institución Formadora"/>' +
             '<select id="dependenciaInstForm" name="dependenciaInstForm"></select>' +
             '<select id="pciaInstForm" name="pciaInstForm" onchange="deptos.actualizar(pciaInstForm, dptoInstForm, locInstForm)"></select>' +

@@ -11,7 +11,7 @@ var ConsultaRedosView = (function ($, renderer, BaseView, ProgramasCollection, E
         },
 
         template : _.template(
-            '<div class="formGroupHead">Complete uno o varios filtros para buscar establecimientos en el registro REDOS.</div>' +
+            '<div class="formGroupHead">Complete uno o varios campos para filtrar su búsqueda de establecimientos en el registro REDOS.</div>' +
             '<input id="nombreRedos" type="text" placeholder="Nombre de Establecimiento"/>' +
             '<select id="pciaRedos" name="pciaRedos" onchange="deptos.actualizar(pciaRedos, dptoRedos, locRedos)"></select>' +
             '<select id="dptoRedos" name="dptoRedos" onchange="localidades.actualizar(pciaRedos, dptoRedos, locRedos)"></select>' +

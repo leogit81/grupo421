@@ -29,11 +29,41 @@ var ConsultaProfesionalesView = (function (jquery, $, renderer, BaseView, Listad
         },
         
         ejecutarBuscarProfesional: function(){
+            if(ServiceConfig.usuario === null ){
+				//La persona no esta inicializada
+				$("#afui").popup(
+					{
+						title: "Error de Autenticación",
+						message: "Para realizar esta operación debe iniciar sesión en el sistema",
+						cancelText: "Aceptar",
+						cancelCallback: function(){new InicioSesionView();},						
+						cancelOnly: true
+					}
+				);
+                
+                return;
+			}
+            
             var busquedaProfesionalView = new BusquedaProfesionalView();
             busquedaProfesionalView.render();
         },
 
         ejecutarListadoProfesionales: function(){
+            if(ServiceConfig.usuario === null ){
+				//La persona no esta inicializada
+				$("#afui").popup(
+					{
+						title: "Error de Autenticación",
+						message: "Para realizar esta operación debe iniciar sesión en el sistema",
+						cancelText: "Aceptar",
+						cancelCallback: function(){new InicioSesionView();},						
+						cancelOnly: true
+					}
+				);
+                
+                return;
+			}
+            
             var listadoProfesionalesView = new ListadoProfesionalesView();
             listadoProfesionalesView.render();
         },

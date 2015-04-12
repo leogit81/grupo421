@@ -493,3 +493,27 @@ label#lbl1, label#lbl2{
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
 }
+
+input, select, textarea {
+    outline-size: 2px;
+    outline-color: red;
+}
+
+#afui.bb .list .home,
+.ayudaDivider{
+    background: rgba(0,0,0,0.09);
+    border-top: none !important;
+    border-bottom: none !important;
+    height: 15px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+}
+
+.ztexto-lista.ayuda{
+    color: cornflowerblue;
+    font-size: 12pt;
+    text-align: center;
+    padding-top: 10px !important;
+}

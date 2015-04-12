@@ -25,6 +25,22 @@ var BusquedaDrogueriaView = (function (jquery, $, renderer, BaseView, DrogueriaN
 
         ejecutarBusquedaDrogueria: function(){
             var codigoDrogueria = $("#codigoDrogueria").val();
+            
+            /*Si el código es vacío muestra un mensaje de error y cancela la consulta*/
+            if (codigoDrogueria === "" || codigoDrogueria === null || codigoDrogueria === undefined) {
+                $("#afui").popup(
+                    {
+                        title: "SISA Móvil",
+                        message: "Debe ingresar un código para realizar la búsqueda solicitada.",
+                        cancelText: "Aceptar",
+                        cancelCallback: function(){},						
+                        cancelOnly: true
+                    }
+                );
+
+                return;
+            }
+            
             var drogueriaNominalModel = new DrogueriaNominal();
             var drogueriaView = new DrogueriaNominalView({codigo: codigoDrogueria});
             drogueriaView.loadDefaultView();

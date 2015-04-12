@@ -27,6 +27,22 @@ var BusquedaFarmaciaView = (function (jquery, $, renderer, BaseView, FarmaciaNom
 
         ejecutarBusquedaFarmacia: function(){
             var codigoFarmacia = $("#codigoFarmacia").val();
+            
+            /*Si el código es vacío muestra un mensaje de error y cancela la consulta*/
+            if (codigoFarmacia === "" || codigoFarmacia === null || codigoFarmacia === undefined) {
+                $("#afui").popup(
+                    {
+                        title: "SISA Móvil",
+                        message: "Debe ingresar un código para realizar la búsqueda solicitada.",
+                        cancelText: "Aceptar",
+                        cancelCallback: function(){},						
+                        cancelOnly: true
+                    }
+                );
+
+                return;
+            }
+            
             var farmaciaNominalModel = new FarmaciaNominal();
             var farmaciaView = new FarmaciaNominalView({codigo: codigoFarmacia});
             farmaciaView.loadDefaultView();

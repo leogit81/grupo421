@@ -11,7 +11,7 @@ var ListadoFarmaciasView = (function (jquery, $, renderer, BaseView, FarmaciaCol
         },
 
         template : _.template(
-            '<div class="formGroupHead">Complete uno o varios filtros para buscar farmacias.</div>' +
+            '<div class="formGroupHead">Complete uno o varios campos para filtrar su búsqueda de farmacias.</div>' +
             '<select id="dependenciaFarmacia" name="dependenciaFarmacia"></select>' +
             '<select id="provinciaFarmacia" name="provinciaFarmacia"></select>' +                
             '<a id="submitConsultaListadoFarmacias" class="button">Buscar</a>'

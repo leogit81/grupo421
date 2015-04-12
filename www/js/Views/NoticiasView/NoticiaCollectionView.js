@@ -18,7 +18,7 @@ var NoticiaCollectionView = (function ($, common, Backbone, _, renderer, BaseVie
         },
 
         itemTemplate: function (noticia) {
-            var temp = "<div class='owl-item'><div class='zslider-item'><h3><%=titulo%></h3><span class='zmas'><i>[más...]</i></span></br>" + 
+            var temp = "<div class='owl-item'><div class='zslider-item'><h3><%=titulo%></h3><span class='zmas'><i>[Seguir leyendo...]</i></span></br>" + 
                 "<div id='idNoticia' style='display: none;'><%=idNoticia%></div></div></div>";
             this.renderedHtml += _.template(temp, noticia);
         },

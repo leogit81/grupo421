@@ -24,18 +24,23 @@ var common = (function (_) {
 	common.homeLoad = function () {
 		common.showLogin();
 		document.getElementById("zfooter_noticias").style.display="block";
+        /*Ocultamos el boton del menu*/
+        document.getElementById("menubadge").style.display="none";
 	};
 
 	common.homeUnload = function () {
 		common.hideLogin();
 		document.getElementById("zfooter_noticias").style.display="none";
 		document.getElementById("navbar").style.display="none";
+        /*Mostramos el boton del menu*/
+        document.getElementById("menubadge").style.display="block";
 	};
 
 	common.showLogin = function () {
 		if (ServiceConfig.usuario) {
 			document.getElementById("loginButton").style.display="none";
 			document.getElementById("logoutButton").style.display="block";
+            $("#logoutButton span").html(ServiceConfig.usuario + " (Salir)");
 		}
 		else {
 			document.getElementById("loginButton").style.display="block";

@@ -67,16 +67,18 @@ var app = (function ($, jquery, logger) {
     function onDeviceBackButtonClick () {
         if($.os.android || $.os.androidICS || $.os.ie){
             if($.ui.history.length == "0"){
+                /*Se invierte el orden de las funciones de cancelar y de aceptar
+        para que queden los positivos a la izquiera y los negativos a la derecha*/
                 $("#afui").popup(
                     {
                         title: "Cerrar aplicación",
                         message: "¿Desea abandonar la aplicación?",
-                        cancelText: "No",
-                        cancelCallback: function () {},
-                        doneText: "Sí",
-                        doneCallback: function () {
+                        cancelText: "Sí",
+                        cancelCallback: function () {
                             navigator.app.exitApp();
                         },
+                        doneText: "No",
+                        doneCallback: function () {},
                         cancelOnly: false
                     }
                 );
