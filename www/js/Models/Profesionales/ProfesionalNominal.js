@@ -49,7 +49,7 @@ var ProfesionalNominal = (function (common, BaseModel) {
     
     profesionalNominal.prototype.getServiceConfig = function () {
         return {
-            baseUrl: 'https://qa.sisa.msal.gov.ar/sisaqa/services/rest',
+            /*baseUrl: 'https://qa.sisa.msal.gov.ar/sisaqa/services/rest',*/
             url: 'profesional/obtener'
         };
     };

@@ -161,10 +161,12 @@ var CamasCollectionView = (function ($, common, _, renderer, BaseCollectionView,
 		},
 
 		ejecutarSubmitCamas:function(){
-
+            /*var urlServicio = "https://dev.sisa.msal.gov.ar/sisadev/services/rest/establecimiento/modificarCamas";*/
+            var urlServicio = "https://sisa.msal.gov.ar/sisa/services/rest/establecimiento/modificarCamas";
+            
 			this.modelToJsonUpdate();
 
-			this.model.update(jsonForUpdate,"https://dev.sisa.msal.gov.ar/sisadev/services/rest/establecimiento/modificarCamas");
+			this.model.update(jsonForUpdate,urlServicio);
 		},
 
 		updateOk: function(){

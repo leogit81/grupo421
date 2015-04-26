@@ -14,7 +14,7 @@ var ProfesionalCollection = (function (common, Backbone, converter, Service) {
     
     profesionalCollection.prototype.getServiceConfig = function () {
         return {
-            baseUrl: 'https://qa.sisa.msal.gov.ar/sisaqa/services/rest',
+            /*baseUrl: 'https://qa.sisa.msal.gov.ar/sisaqa/services/rest',*/
             url: 'profesional/buscar'
         };
     };
