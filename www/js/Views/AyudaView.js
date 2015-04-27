@@ -85,6 +85,8 @@ var AyudaView = (function ($, BaseView, renderer) {
         render: function () {
             /*BaseView.prototype.render.call(this);*/
             
+            $("#ayudaSISA").attr('class', 'panel');
+            
             $.ui.loadContent("ayudaSISA", false, false, 'slide');
         
             //agrego esta clase para poder aplicar estilos CSS
