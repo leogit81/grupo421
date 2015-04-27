@@ -85,10 +85,6 @@ var AyudaView = (function ($, BaseView, renderer) {
         render: function () {
             /*BaseView.prototype.render.call(this);*/
             
-            $("#ayudaSISA").attr('class', 'panel');
-            
-            $.ui.loadContent("ayudaSISA", false, false, 'slide');
-        
             //agrego esta clase para poder aplicar estilos CSS
             $("#acercaDeView").trigger("orientationchange");
             
@@ -111,6 +107,11 @@ var AyudaView = (function ($, BaseView, renderer) {
                 $.ui.hideMask();
                 this.onLoadPanelComplete();
             }, this));
+            
+            $("#ayudaSISA").attr('class', 'panel y-scroll');
+            $("#ayudaSISA").attr('js-scrolling', 'true');
+            
+            $.ui.loadContent("ayudaSISA", false, false, 'slide');
         }
     });
     return ayudaView;
